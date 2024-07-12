@@ -1,0 +1,5 @@
+package com.sweetHome.svc;
+
+public class UserServiceImpl {
+
+}

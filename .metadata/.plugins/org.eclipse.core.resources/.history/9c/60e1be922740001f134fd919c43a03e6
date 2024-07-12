@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.sweetHome.mapper.UserMapper">
+
+    <resultMap id="userResultMap" type="com.sweetHome.vo.UserVO">
+        <id property="userSeq" column="user_seq" />
+        <result property="userEmail" column="user_email" />
+        <result property="userPw" column="user_pw" />
+        <result property="userNickname" column="user_nickname" />
+        <result property="phoneNumber" column="phone_number" />
+        <result property="userName" column="user_name" />
+        <result property="address" column="address" />
+        <result property="addressDetail" column="address_detail" />
+        <result property="provider" column="provider" />
+        <result property="createdDate" column="created_date" />
+        <result property="updatedDate" column="updated_date" />
+        <result property="userRole" column="user_role" />
+    </resultMap>
+
+    <insert id="insertUsers" parameterType="com.sweetHome.vo.UserVO">
+        INSERT INTO Users (user_seq, user_email, user_pw, user_nickname, phone_number, user_name, address, address_detail, provider)
+VALUES (users_seq.NEXTVAL, #{userEmail}, #{userPw},#{userNickname}, #{phoneNumber}, #{userName}, #{address}, #{addressDetail}, #{provider})
+    </insert>
+
+
+
+    <select id="selectUser" parameterType="int" resultMap="userResultMap">
+        SELECT * FROM Users WHERE user_seq = #{userSeq}
+    </select>
+
+    <select id="selectAllUsers" resultMap="userResultMap">
+        SELECT * FROM Users
+    </select>
+	
+	<select id="selectUsersByEmail" parameterType="String" resultMap="userResultMap">
+        SELECT * FROM Users WHERE user_email = #{userEmail}
+    </select>
+    
+    <update id="updateUser" parameterType="com.sweetHome.vo.UserVO">
+        UPDATE Users SET
+            user_email = #{userEmail},
+            user_pw = #{userPw},
+            user_nickname = #{userNickname},
+            phone_number = #{phoneNumber},
+            user_name = #{userName},
+            address = #{address},
+            address_detail = #{addressDetail},
+            provider = #{provider},
+            created_date = #{createdDate},
+            updated_date = #{updatedDate},
+            user_role = #{userRole}
+        WHERE user_seq = #{userSeq}
+    </update>
+
+    <delete id="deleteUser" parameterType="int">
+        DELETE FROM Users WHERE user_seq = #{userSeq}
+    </delete>
+</mapper>
+
+
+
+
+  

@@ -1,0 +1,4 @@
+lec.driver=oracle.jdbc.driver.OracleDriver
+lec.url=jdbc:oracle:thin:@localhost:1521:XE
+lec.username=it2
+lec.userpw=0000
