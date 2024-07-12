@@ -1,51 +1,25 @@
 # STS specific files
 .springBeans
+.sts4-cache/
 .apt_generated
 .factorypath
+
+# General IDE specific files
 .classpath
 .project
 .settings/
 bin/
-target/
 .temp/
-mvn-eclipse/
-.sts4-cache/
-.versionsBackup/
-
-# Maven specific files
-log/
-logs/
-mvnw
-mvnw.cmd
-.settings/
-target/
-!target/.gitkeep
-dependency-reduced-pom.xml
-buildNumber.properties
 .mvn/
-src/main/resources/static/bower_components
-
-# Windows specific files
-Thumbs.db
-ehthumbs.db
-Desktop.ini
-$RECYCLE.BIN/
-
-# IntelliJ IDEA specific files
+mvn-eclipse/
 .idea/
-*.iws
 *.iml
+*.iws
 *.ipr
 out/
-
-# Eclipse specific files
-.classpath
-.project
-.settings/
-bin/
-
-# STS specific files
-.springBeans
+.vscode/
+*.code-workspace
+.metadata/   # 추가된 메타데이터 폴더
 
 # OS specific files
 .DS_Store
@@ -53,12 +27,26 @@ bin/
 ._*
 .Spotlight-V100
 .Trashes
-*.swp
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 
-# Logs
-logs
+# Log files
+logs/
 *.log
 *.out
+
+# Maven specific files
+log/
+logs/
+mvnw
+mvnw.cmd
+target/
+!target/.gitkeep
+dependency-reduced-pom.xml
+buildNumber.properties
+src/main/resources/static/bower_components
 
 # Generated files
 *.class
@@ -92,21 +80,6 @@ spring-boot-loader/
 
 # Configuration files
 local.properties
-.idea/
-
-# IDE specific files
-.vscode/
-*.code-workspace
-
-# Ignore IDE project files
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# Ignore build directories
-/build/
-out/
 
 # Node modules
 node_modules/
@@ -115,3 +88,7 @@ bower_components/
 # Ignore package lock files
 package-lock.json
 yarn.lock
+
+# Ignore build directories
+/build/
+out/
