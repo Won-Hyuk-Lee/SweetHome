@@ -1,17 +1,15 @@
-# STS specific files
+# STS 및 Eclipse 관련 파일
 .springBeans
 .sts4-cache/
 .apt_generated
 .factorypath
-
-# General IDE specific files
 .classpath
 .project
 .settings/
 bin/
-.temp/
-.mvn/
-mvn-eclipse/
+.metadata/
+
+# IDE 관련 파일
 .idea/
 *.iml
 *.iws
@@ -19,9 +17,8 @@ mvn-eclipse/
 out/
 .vscode/
 *.code-workspace
-.metadata/   # 추가된 메타데이터 폴더
 
-# OS specific files
+# 운영체제 관련 파일
 .DS_Store
 .DS_Store?
 ._*
@@ -32,63 +29,62 @@ ehthumbs.db
 Desktop.ini
 $RECYCLE.BIN/
 
-# Log files
+# 로그 파일
 logs/
 *.log
 *.out
 
-# Maven specific files
+# Maven 관련 파일
 log/
-logs/
-mvnw
-mvnw.cmd
 target/
 !target/.gitkeep
+mvnw
+mvnw.cmd
+.mvn/
 dependency-reduced-pom.xml
 buildNumber.properties
-src/main/resources/static/bower_components
 
-# Generated files
+# 컴파일된 파일
 *.class
 *.jar
 *.war
 *.ear
-*.iml
 
-# Dependency directory
+# 의존성 디렉토리
 lib/
 
-# Temporary files
+# 임시 파일
 *.tmp
 *.bak
 *.swp
 *.swo
+.temp/
+
+# 애플리케이션 관련 파일
 *.pid
 *.seed
 
-# Application files
-*.pid
-*.seed
-
-# Tomcat specific files
+# Tomcat 관련 파일
 tomcat/
 work/
 *.keystore
 
-# Spring Boot specific files
+# Spring Boot 관련 파일
 spring-boot-loader/
 
-# Configuration files
+# 설정 파일
 local.properties
 
-# Node modules
+# 프론트엔드 관련 파일
 node_modules/
 bower_components/
-
-# Ignore package lock files
+src/main/resources/static/bower_components
 package-lock.json
 yarn.lock
 
-# Ignore build directories
+# 빌드 디렉토리
 /build/
 out/
+
+# 기타 생성 파일
+mvn-eclipse/
