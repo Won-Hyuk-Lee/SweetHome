@@ -68,6 +68,8 @@ lib/
 tomcat/
 work/
 *.keystore
+Servers/
+servers/
 
 # Spring Boot 관련 파일
 spring-boot-loader/
