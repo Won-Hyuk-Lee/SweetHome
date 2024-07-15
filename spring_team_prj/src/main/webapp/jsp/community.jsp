@@ -5,6 +5,17 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .card {
+            cursor: pointer; /* 마우스 포인터를 손가락 모양으로 변경 */
+        }
+    </style>
+
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -334,30 +345,34 @@
 		<section class="section section-lg line-bottom-light">
 			<div class="container mt-n8 mt-md-n9 mt-lg-n12 z-2">
 				<div class="row">
-				
+<!-- 리스트 시작~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	 -->
 					<div class="col-lg-12 mb-5"></div>
 					<div id="communityList" class="row">
-        <c:forEach items="${communities}" var="community">
-            <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-5">
-                <div class="card bg-white border-light p-3 rounded">
-                    <c:choose>
-                        <c:when test="${not empty community.images}">
-                            <a href="./blog-post.html"><img src="${community.images[0].fpath}${community.images[0].sname}" class="card-img-top rounded" alt="community image"></a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="./blog-post.html"><img src="../resources/spaces/assets/img/blog/image-2.jpg" class="card-img-top rounded" alt="default image"></a>
-                        </c:otherwise>
-                    </c:choose>
-                    <div class="card-body p-0 pt-4">
-                        <a href="./blog-post.html" class="h4">${community.communityName}</a>
-                        <div class="d-flex align-items-center my-4">
-                            <img class="avatar avatar-sm rounded-circle" src="../resources/spaces/assets/img/team/profile-picture-2.jpg" alt="Neil avatar">
-                        </div>
-                        <p class="mb-0">${community.communityDescription}</p>
+         <c:forEach items="${KEY_COMMUNITYLIST}" var="community">
+        <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-5">
+            <div class="card bg-white border-light p-3 rounded" data-community-seq="${community.communitySeq}">
+                <c:choose>
+                    <c:when test="${not empty community.image}">
+
+                            <img src="${community.image.fpath}${community.image.sname}" class="card-img-top rounded" alt="community image">
+
+                    </c:when>
+                    <c:otherwise>
+                        <a href="./blog-post.html">
+                            <img src="../resources/spaces/assets/img/blog/image-2.jpg" class="card-img-top rounded" alt="default image">
+                        </a>
+                    </c:otherwise>
+                </c:choose>
+                <div class="card-body p-0 pt-4">
+                    <a class="h4">${community.communityName}</a>
+                    <div class="d-flex align-items-center my-4">
+                        <img class="avatar avatar-sm rounded-circle" src="../resources/spaces/assets/img/team/profile-picture-2.jpg" alt="Neil avatar">
                     </div>
+                    <p class="mb-0">${community.communityDescription}</p>
                 </div>
             </div>
-        </c:forEach>
+        </div>
+    </c:forEach>
     </div>
 					
 					<div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-5">
@@ -542,6 +557,19 @@
 			</div>
 		</div>
 	</footer>
+	
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+    $(document).ready(function() {
+        $('#communityList').on('click', '.card', function() {
+            var communitySeq = $(this).data('community-seq');
+            if (communitySeq) {
+                window.location.href = '/board/board.jsp?communitySeq=' + communitySeq;
+            }
+        });
+    });
+</script>
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>

@@ -19,7 +19,7 @@ public class CommunityController {
     @RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
     public String getCommunityList(Model model) {
         List<CommunityVO> communities = communityService.svcCommunitySelect();
-        model.addAttribute("communities", communities);
+        model.addAttribute("KEY_COMMUNITYLIST", communities);
         return "jsp/community";
     }
 }

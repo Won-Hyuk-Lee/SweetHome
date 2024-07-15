@@ -8,7 +8,7 @@
         <result property="createdDate" column="created_date" />
     </resultMap>
     
-    <resultMap id="communityImageResultMap" type="com.sweetHome.vo.CommunityImageVO">
+    <resultMap id="communityImageResultMap" type="com.sweetHome.vo.CommunityImagesVO">
         <id property="communityImageSeq" column="community_image_seq" />
         <result property="oname" column="oname" />
         <result property="sname" column="sname" />
