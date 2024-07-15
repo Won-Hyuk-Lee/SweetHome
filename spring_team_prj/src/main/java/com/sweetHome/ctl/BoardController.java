@@ -1,5 +1,7 @@
 package com.sweetHome.ctl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,14 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
+	@RequestMapping(value = "/board_list", method=RequestMethod.POST)
+	public ResponseEntity<ArrayList<BoardVO>> ctlBoardList(@RequestParam("communitySeq") int communitySeq, Model model){
+		ArrayList<BoardVO> boardList = boardService.svcBoardList(communitySeq);
+		model.addAttribute("KEY_BOARDLIST", boardList);
+		
+		return new ResponseEntity<ArrayList<BoardVO>> (boardList, HttpStatus.OK);
+	} 
+	
 	@RequestMapping(value = "/board_detail", method=RequestMethod.POST)
 	public ResponseEntity<BoardVO> ctlBoardDetail(@RequestParam("boardSeq") int boardSeq, Model model) {
 		BoardVO bvo = boardService.svcBoardDetail(boardSeq);
@@ -29,6 +39,8 @@ public class BoardController {
 //	ctlBoardInsert (게시글 +이미지 추가)
 //	ctlBoardUpdate (게시글 수정)
 //	ctlBoardDelete (게시글 삭제)
+	
+	@RequestMapping(value="board_recommend", method=RequestMethod.POST)
 	public void ctlBoardRecommend(@RequestParam("boardSeq") int boardSeq, @RequestParam("userSeq") int userSeq) {
 		boardService.svcBoardRecommend(boardSeq, userSeq);
 	} //(게시글 추천)

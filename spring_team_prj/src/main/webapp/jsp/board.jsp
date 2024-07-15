@@ -548,7 +548,23 @@
 					</div>
 				</div>	
 	 -->
-	 
+	
+	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+	<script>
+    $(document).ready(function() {
+        $.ajax({
+            method: "POST",
+            url: "${pageContext.request.contextPath}/board/board_list",
+            data: "communitySeq=1",
+            error: function(xhr, status, error) {
+                console.log("에러:" + error);
+            },
+            success: function(myval) {
+                console.log(myval)
+            }
+        });
+    });
+    </script>
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
 	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>

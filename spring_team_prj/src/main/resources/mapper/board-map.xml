@@ -45,6 +45,15 @@
         </collection>
     </resultMap>
 
+	<select id="boardList" resultMap="boardResultMap" parameterType="int">
+		select b.board_seq, b.board_title, u.user_nickname, b.updated_date, count(r.board_seq) as recommend
+		from board b, recommend r, users u
+		where b.board_seq = r.board_seq
+		and b.user_seq = u.user_seq
+		group by b.board_seq, b.board_title, u.user_nickname, b.updated_date
+		order by b.board_seq desc
+	</select>
+
     <select id="boardDetail" resultMap="boardResultMap" parameterType="int">
         select b.board_seq, b.board_title, b.board_contents, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_name, u.user_nickname, count(r.board_seq) as recommend
 		from board b, board_images i, recommend r, community c, users u

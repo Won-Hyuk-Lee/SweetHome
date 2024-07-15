@@ -1,9 +1,12 @@
 package com.sweetHome.mapper;
 
+import java.util.ArrayList;
+
 import com.sweetHome.vo.BoardVO;
 
 public interface BoardMapper {
 	
+	ArrayList<BoardVO> boardList(int CommunitySeq);
 	BoardVO boardDetail(int boardSeq); //(게시글 상세 정보조회)
 //	boardInsert (게시글 +이미지 추가)
 //	boardUpdate (게시글 수정)
