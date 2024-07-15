@@ -1,6 +1,9 @@
 package com.sweetHome.vo;
 
+
 import java.util.List;
+import java.util.Date;
+
 
 import org.springframework.stereotype.Component;
 
@@ -12,7 +15,5 @@ public class CommunityVO {
 	private int communitySeq;
 	private String communityName;
 	private String communityDescription;
-	private String createdDate;
 	private List<CommunityImageVO> images;
-
-}
+	private Date createdDate;
