@@ -17,7 +17,7 @@ public class UserVO {
     private String address;
     private String addressDetail;
     private String provider = "LOCAL";
-    private Date createdDate;
+    private Date createdDate; //이거 데이트타입으로 할거임? 아니면 String할거임
     private Date updatedDate;
     private char userRole = 'U';
 }
