@@ -1,7 +1,6 @@
 package com.sweetHome.vo;
 
 
-import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -15,6 +14,6 @@ public class CommunityVO {
 	private int communitySeq;
 	private String communityName;
 	private String communityDescription;
-	private ArrayList<CommunityImageVO> images;
+	private CommunityImagesVO image;
 	private Date createdDate;
 }

@@ -7,7 +7,7 @@ import lombok.Data;
 @Component
 @Data
 public class CommunityImagesVO {
-	private int commuityImageSeq;
+	private int communityImageSeq;
 	private String oname;
 	private String sname;
 	private int fsize;
