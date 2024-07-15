@@ -1,5 +1,6 @@
 package com.sweetHome.svc;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +17,7 @@ public class CommunityServiceImpl implements CommunityService {
     public List<CommunityVO> svcCommunitySelect() {
         List<CommunityVO> communities = communityMapper.selectCommunity();
         for (CommunityVO community : communities) {
-            community.setImages(communityMapper.selectCommunityImages(community.getCommunitySeq()));
+            community.setImages((ArrayList)communityMapper.selectCommunityImages(community.getCommunitySeq()));
         }
         return communities;
     }
