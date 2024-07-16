@@ -40,10 +40,15 @@ public class UserController {
 
 	//str --- str
 	//dataType : "텍스트...., data는 쿼리스트링(?key=v&ke=vv)
-	@RequestMapping(value = "/join", method = RequestMethod.POST)
-	public String ctlUserJoin(@ModelAttribute UserVO UserVO) {
-		//UserService.svcUserJoin(UserVO);
-		System.out.println(UserVO.toString());
+	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	public String ctlUserJoin(@ModelAttribute UserVO userVO) {
+		System.out.println(userVO.getAddress());
+		System.out.println(userVO.getAddressDetail());
+		System.out.println(userVO.getUserEmail());
+		System.out.println(userVO.getUserPw());
+		System.out.println(userVO.getUserNickname());
+		System.out.println(userVO.getPhoneNumber());
+		UserService.svcUserJoin(userVO);
 		return "텍스트 리턴";
 	}
 
