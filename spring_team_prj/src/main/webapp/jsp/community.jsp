@@ -565,7 +565,7 @@
         $('#communityList').on('click', '.card', function() {
             var communitySeq = $(this).data('community-seq');
             if (communitySeq) {
-                window.location.href = '/board/board.jsp?communitySeq=' + communitySeq;
+                window.location.href = '/board/board_list?communitySeq=' + communitySeq;
             }
         });
     });

@@ -46,30 +46,39 @@
     </resultMap>
 
 	<select id="boardList" resultMap="boardResultMap" parameterType="int">
-		select b.board_seq, b.board_title, u.user_nickname, b.updated_date, count(r.board_seq) as recommend
-		from board b, recommend r, users u
+		select b.board_seq, b.board_title, u.user_nickname, b.updated_date, c.community_seq, c.community_name, count(r.board_seq) as recommend
+		from board b, recommend r, users u, community c
 		where b.board_seq = r.board_seq
 		and b.user_seq = u.user_seq
-		group by b.board_seq, b.board_title, u.user_nickname, b.updated_date
+		and b.community_seq = c.community_seq
+		group by b.board_seq, b.board_title, u.user_nickname, b.updated_date, c.community_seq, c.community_name
 		order by b.board_seq desc
 	</select>
 
     <select id="boardDetail" resultMap="boardResultMap" parameterType="int">
-        select b.board_seq, b.board_title, b.board_contents, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_name, u.user_nickname, count(r.board_seq) as recommend
+        select b.board_seq, b.board_title, b.board_contents, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname, count(r.board_seq) as recommend
 		from board b, board_images i, recommend r, community c, users u
 		where b.board_seq = i.board_seq
 		and b.board_seq = r.board_seq(+)
 		and b.community_seq = c.community_seq
 		and b.user_seq = u.user_seq
 		and b.board_seq = #{boardSeq}
-		group by b.board_seq, b.board_title, b.board_contents, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_name, u.user_nickname
+		group by b.board_seq, b.board_title, b.board_contents, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname
     </select>
 	
 	<insert id="boardRecommend" parameterType="int">
-		insert into recommend values (#{boardSeq}, #{userSeq});
+		insert into recommend values (#{boardSeq}, #{userSeq})
+	</insert>
+	
+	<insert id="boardInsert" parameterType="com.sweetHome.vo.BoardVO">
+		insert into board values
+		(board_seq.nextval, #{boardTitle}, #{boardContents}, sysdate, sysdate, #{userSeq}, #{communitySeq}
 	</insert>
 
-
+	<insert id="boardImagesInsert" parameterType="com.sweetHome.vo.BoardImagesVO">
+		insert into board_images
+		values (board_images_seq.nextval, #{boardSeq}, #{oname}, #{sname}, #{fsize}, #{fpath})
+	</insert>
 
 
 

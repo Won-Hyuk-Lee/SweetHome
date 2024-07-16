@@ -11,6 +11,6 @@ public class BoardImagesVO {
 	private int boardSeq;
 	private String oname;
 	private String sname;
-	private int fsize;
+	private long fsize;
 	private String fpath;
 }

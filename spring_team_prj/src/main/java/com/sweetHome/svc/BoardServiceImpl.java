@@ -1,11 +1,12 @@
 package com.sweetHome.svc;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.sweetHome.mapper.BoardMapper;
+import com.sweetHome.vo.BoardImagesVO;
 import com.sweetHome.vo.BoardVO;
 
 @Service
@@ -14,14 +15,23 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	public ArrayList<BoardVO> svcBoardList(int communitySeq){
+	public List<BoardVO> svcBoardList(int communitySeq){
 		return boardMapper.boardList(communitySeq);
 	}
 	
 	public BoardVO svcBoardDetail(int boardSeq){
 		return boardMapper.boardDetail(boardSeq);
 	} // (게시글 상세 정보조회)
-//	svcBoardInsert (게시글 +이미지 추가)
+	
+	public void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> files) {
+		boardMapper.boardInsert(bvo);
+		if (files.isEmpty() == true) {
+			for(BoardImagesVO file : files) {
+				file.setBoardSeq(bvo.getBoardSeq());
+				boardMapper.boardImagesInsert(file);
+			}
+		}
+	} //(게시글 +이미지 추가)
 //	svcBoardUpdate (게시글 수정)
 //	svcBoardDelete (게시글 삭제)
 	public void svcBoardRecommend(int boardSeq, int userSeq){

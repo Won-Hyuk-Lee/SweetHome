@@ -1,13 +1,14 @@
 package com.sweetHome.svc;
 
-import java.util.ArrayList;
+import java.util.List;
 
+import com.sweetHome.vo.BoardImagesVO;
 import com.sweetHome.vo.BoardVO;
 
 public interface BoardService {
-	ArrayList<BoardVO> svcBoardList(int communitySeq);
+	List<BoardVO> svcBoardList(int communitySeq);
 	BoardVO svcBoardDetail(int boardSeq); //(게시글 상세 정보조회)
-//	svcBoardInsert (게시글 +이미지 추가)
+	void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> flist);// (게시글 +이미지 추가)
 //	svcBoardUpdate (게시글 수정)
 //	svcBoardDelete (게시글 삭제)
 	void svcBoardRecommend(int boardSeq, int userSeq); //(게시글 추천)

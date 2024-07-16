@@ -373,25 +373,25 @@
 		
 <!-- 내용 섹션~!~!~!~!~!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!@!!@!@!@~~~~~~~!!!!!!!!!!!!!!!!!!!~!~!~!~!~!~!~~!~!~!~!~!~!~ -->
 		
-		<div class="section section-sm bg-white pt-6">
-			<div class="container">
-				<div id="communityName"></div>
-		        <h1 id="boardTitle"></h1>
-		        <p id="userInfo"></p>
-		        <div class="divider"></div>
-		        <div id="boardContents"></div>
-		        <div class="recommend-container">
-		            <div class="recommend-box">
-		                <span id="recommendCount"></span>
-		                <div class="recommend-button">추천</div>
-	            	</div>
-	            </div>
-	        <div class="action-container">
-	                <div class="action-button list-button">목록</div>
-	                <div class="action-button delete-button">삭제</div>
-	                <div class="action-button edit-button">수정</div>
-	        </div>
-        	</div>
+    <div class="section section-sm bg-white pt-6">
+        <div class="container">
+            <div id="communityName">${KEY_BOARDVO.community.communityName}</div>
+            <h1 id="boardTitle">${KEY_BOARDVO.boardTitle}</h1>
+            <p id="userInfo">${KEY_BOARDVO.user.userNickname} | ${KEY_BOARDVO.updatedDate}</p>
+            <div class="divider"></div>
+            <div id="boardContents">${KEY_BOARDVO.boardContents}</div>
+            <div class="recommend-container">
+                <div class="recommend-box">
+                    <span id="recommendCount">추천수: ${KEY_BOARDVO.recommend.size()}</span>
+                    <div class="recommend-button">추천</div>
+                </div>
+            </div>
+            <div class="action-container">
+                <div class="action-button list-button">목록</div>
+                <div class="action-button delete-button">삭제</div>
+                <div class="action-button edit-button">수정</div>
+            </div>
+        </div>
 	        
 			<div class="container">
 				<div class="row justify-content-center">
@@ -440,6 +440,7 @@
 				</div>
 			</div>
         </div>
+    </div>
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
 		<div class="container">
@@ -513,23 +514,6 @@
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
-    $(document).ready(function() {
-        $.ajax({
-            method: "POST",
-            url: "${pageContext.request.contextPath}/board/board_detail",
-            data: "boardSeq=1",
-            error: function(xhr, status, error) {
-                console.log("에러:" + error);
-            },
-            success: function(myval) {
-                $("#communityName").text(myval.community.communityName);
-                $("#boardTitle").text(myval.boardTitle);
-                $("#userInfo").text(myval.user.userNickname + " | " + myval.updatedDate);
-                $("#boardContents").html(myval.boardContents);
-                $("#recommendCount").text("추천수: " + myval.recommend.length);
-            }
-        });
-
         $(".recommend-button").click(function() {
             // 여기에 추천 기능을 구현할 수 있습니다.
             console.log("추천 버튼이 클릭되었습니다.");
@@ -548,174 +532,10 @@
         });
 
         $(".list-button").click(function() {
-            console.log("목록 버튼이 클릭되었습니다.");
+        	 window.location.href = "${pageContext.request.contextPath}/board/board_list?communitySeq="+${KEY_BOARDVO.community.communitySeq};
             // 여기에 목록 페이지로 이동하는 기능 구현
-            // 예: window.location.href = "게시글 목록 URL";
         });
-    });
     </script>   
-    <script>
-		/*
-		$(function() {
-			//---------------------------------------------------------
-			// <form> 제어하기
-			//---------------------------------------------------------
-			//$(".btn.btn-primary.btn-block").click()~~
-			
-			$("#uptButton").click(  function(){
-				alert("수정");
-				$("#boardForm").attr("method","post");
-				$("#boardForm").attr("action","${pageContext.request.contextPath}/board_update");
-				$("#boardForm").submit();
-				return true;
-			});
-			$("#delButton").click(  function(){
-				alert("삭제");
-				$("#boardForm").attr("method","post");
-				$("#boardForm").attr("action","${pageContext.request.contextPath}/board_delete");
-				$("#boardForm").submit();
-				return true;
-			});
-			$("#listButton").click(  function(){
-				location.href = "${pageContext.request.contextPath}/board_list";
-			});
-			
-			//------------------------------------------------------------
-			
-		});
- */
-/* 
-		function makeTable(){			
-			$.ajax({
-				method      : "POST",
-		        url         : "${pageContext.request.contextPath}/reply_list",
-		        data 		: "seq="+${KEY_BOARDVO.seq},
-		  		error 	    : function(myval){ console.log("에러:" + myval);   },
-		  		success     : function(myval){
-		  										var htmlStr = "<table border=1 width=100%>";
-		  										$.map( myval, function( MYval, MYidx ) {
-		  											htmlStr += "<tr><td><a href='${pageContext.request.contextPath}/reply_delete?seq=" + MYval.seq + "&rseq=" + MYval.rseq + "'>[X]</a>"+MYval.reply+"</td></tr>"
-		  										});
-		  										htmlStr += "</table>";
-		  										$("#replyListDiv").empty();
-		  										$("#replyListDiv").html(htmlStr);
-		  									 }
-			});
-		 }
-		 */
-		
-		 
-		 
-		 /* 
-		 $(document).ready(function() {
-			    $.ajax({
-			        method: "POST",
-			        url: "${pageContext.request.contextPath}/board/board_detail",
-			        data: "boardSeq=1",
-			        error: function(myval) {
-			            console.log("에러:" + myval);
-			        },
-			        success: function(myval) {
-			            // Assuming myval is a BoardVO object in JSON format
-			            var boardTitleStr = "<div class='board-title'>";
-			            boardTitleStr += "<h2>" + myval.boardTitle + "</h2>";
-			            boardTitleStr += "<p>작성자 : " + myval.user.userNickname + "</p>";
-			            boardTitleStr += "<p>수정일 : " + myval.updatedDate + "</p>";
-			            boardTitleStr += "<p>Recommendations: " + myval.recommend.length + "</p>";
-			            boardTitleStr += "<p>Community: " + myval.community.communityName + "</p>";
-			            boardTitleStr += "</div>";
-
-			            
-			            var boardContentStr = "<div class='board-contents'>";
-			            boardContentStr += "<h2>" + myval.boardContents + "</h2>";
-			            
-			            $.map(myval.boardImages, function(image, idx) {
-			            	boardContentStr += "<div class='image'>";
-			            	boardContentStr += "<p>Image: " + image.oname + " (" + image.fsize + " Byte)</p>";
-			            	boardContentStr += "<img src='" + image.fpath + "/" + image.sname + "' alt='" + image.oname + "' />";
-			            	boardContentStr += "</div>";
-			            });
-			            boardContentStr += "<p>Community: " + myval.community.communityName + "</p>";
-			            boardContentStr += "</div>";
-			            
-			            var repliesHtmlStr = "<div class='replies'>";
-			            $.map(myval.replyList, function(reply, idx) {
-			                repliesHtmlStr += "<div class='reply'>";
-			                repliesHtmlStr += "<input type='button' id='" + reply.replySeq + "' data-rseq='" + reply.replySeq + "' class='replyDeleteButton' value='[X]'>";
-			                repliesHtmlStr += "<p>" + reply.reply + " (" + reply.createdDate + ")</p>";
-			                repliesHtmlStr += "</div>";
-			            });
-			            repliesHtmlStr += "</div>";
-
-			            var imagesHtmlStr = "<div class='board-images'>";
-			            $.map(myval.boardImages, function(image, idx) {
-			                imagesHtmlStr += "<div class='image'>";
-			                imagesHtmlStr += "<p>Image: " + image.oname + " (" + image.fsize + " Byte)</p>";
-			                imagesHtmlStr += "<img src='" + image.fpath + "/" + image.sname + "' alt='" + image.oname + "' />";
-			                imagesHtmlStr += "</div>";
-			            });
-			            imagesHtmlStr += "</div>";
-
-
-			            $("#titleSectionDiv").empty();
-			            $("#titleSectionDiv").html(boardTitleStr);
-			            $("#contentSectionDiv").empty();
-			            $("#contentSectionDiv").html(boardContentStr);
-			        }
-			    });
-			});
-
-		  */
-		
-		 
-		 /*
-		 <h1 class="display-3 mb-4 px-lg-5">90% of content gets no
-							traffic from Google. How to improve it ?</h1>
-						<div class="post-meta">
-							<span class="font-weight-bold mr-3">James Curran</span> <span
-								class="post-date mr-3">January 31, 2020</span> <span
-								class="font-weight-bold">7 min read</span>
-						</div>
-		 */
-		 
-		 
-		 
-		 
-
-/*
-		$("#replyInsertButton").click(  function(){
-			var formData = $("#replyForm").serialize();
-			$.ajax({
-				method      : "POST",
-		        url         : "${pageContext.request.contextPath}/reply_insert",
-		        data 		: formData,
-		  		error 	    : function(myval){ console.log("에러:" + myval);   },
-		  		success     : function(myval){  
-		  										makeTable();
-		  									 }
-			});
-		});	
-		
-		
-		
-		$(document).on("click", ".replyDeleteButton", function(){
-			var rseq = $(this).attr("id");
-			rseq = $(this).attr("data-rseq");
-			rseq = $(this).data("rseq");
-			$.ajax({
-				method      : "POST",
-		        url         : "${pageContext.request.contextPath}/reply_delete",
-		        data 		: "rseq="+rseq,
-		  		error 	    : function(myval){ console.log("에러:" + myval);   },
-		  		success     : function(myval){ 
-		  										makeTable();
-		  									 }
-			});
-		});
-		
-		*/
-	</script>
-	
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
 	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
