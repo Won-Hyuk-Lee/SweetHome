@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweetHome.mapper.CommunityMapper">
+    <resultMap id="communityResultMap" type="com.sweetHome.vo.CommunityVO">
+        <id property="communitySeq" column="community_seq" />
+        <result property="communityName" column="community_name" />
+        <result property="communityDescription" column="community_description" />
+        <result property="createdDate" column="created_date" />
+    </resultMap>
+    
+    <resultMap id="communityImageResultMap" type="com.sweetHome.vo.CommunityImagesVO">
+        <id property="communityImageSeq" column="community_image_seq" />
+        <result property="oname" column="oname" />
+        <result property="sname" column="sname" />
+        <result property="fsize" column="fsize" />
+        <result property="fpath" column="fpath" />
+        <result property="communitySeq" column="community_seq" />
+    </resultMap>
+    
+    <select id="selectCommunity" resultMap="communityResultMap">
+        SELECT * FROM Community
+    </select>
+    
+    <select id="selectCommunityImages" parameterType="int" resultMap="communityImageResultMap">
+        SELECT * FROM community_images WHERE community_seq = #{communitySeq}
+    </select>
+</mapper>
