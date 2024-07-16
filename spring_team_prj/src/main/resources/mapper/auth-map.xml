@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sweetHome.mapper.AuthMapper">
+
+    <resultMap id="userResultMap" type="com.sweetHome.vo.UserVO">
+        <id property="userSeq" column="user_seq" />
+        <result property="userEmail" column="user_email" />
+        <result property="userPw" column="user_pw" />
+        <result property="userNickname" column="user_nickname" />
+        <result property="phoneNumber" column="phone_number" />
+        <result property="userName" column="user_name" />
+        <result property="address" column="address" />
+        <result property="addressDetail" column="address_detail" />
+        <result property="provider" column="provider" />
+        <result property="createdDate" column="created_date" />
+        <result property="updatedDate" column="updated_date" />
+        <result property="userRole" column="user_role" />
+    </resultMap>
+
+	 <select id="nicknameCheck" parameterType="String" resultType="int"> 
+		SELECT COUNT(*) FROM users WHERE user_nickname = #{userNinkname}
+    </select>
+  
+
+</mapper>

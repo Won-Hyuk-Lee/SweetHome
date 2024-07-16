@@ -9,7 +9,7 @@ public interface AuthService {
 	void svcLogOut ();
 	void svcRegister ();
 	void svcEmailCheck ();
-	void svcNicknameCheck();
+	int svcNicknameCheck(String userNinkname);
 	void svcFindPassword();
 	void svcPasswordUpdate();
 }
