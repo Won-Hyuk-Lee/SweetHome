@@ -21,13 +21,41 @@ MyBatis 매퍼인터페이스.java가 놓일 패키지 생성 : com.kosta.semi.m
 </bean>
 <!--  ################################################################################   -->
 <!--  =============================== datasource : 프로퍼티 파일을 사용한 형태  -->
-<context:property-placeholder location="classpath:oracle.properties"/>
+<context:property-placeholder location="classpath:email.properties, classpath:oracle.properties"/>
+
 <bean id="MY_tomcat_ds" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 <property name="driverClassName" value="${lec.driver}"/>
 <property name="url" value="${lec.url}"/>
 <property name="username" value="${lec.username}"/>
 <property name="password" value="${lec.userpw}"/>
 </bean>
+
+<!-- JavaMailSender 설정 -->
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="${mail.host}" />
+        <property name="port" value="${mail.port}" />
+        <property name="username" value="${mail.username}" />
+        <property name="password" value="${mail.password}" />
+        <property name="javaMailProperties">
+            <props>
+				<prop key="mail.transport.protocol">${mail.transport.protocol}</prop>
+				<prop key="mail.smtp.host">${mail.smtp.host}</prop>
+				<prop key="mail.smt.port">${mail.smt.port}</prop>
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+				<prop key="mail.smtp.ssl.enable">$mail.smtp.ssl.enable}</prop>
+				<prop key="mail.smtp.ssl.trust">${mail.smtp.ssl.trust}</prop>
+				<prop key="mail.smtp.starttls.required">${mail.smtp.starttls.required}</prop>
+				<prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+				<prop key="mail.smtp.ssl.protocols">${mail.smtp.ssl.protocols}</prop>
+				<prop key="mail.smtp.quit-wait">${mail.smtp.quit-wait}</prop>
+				<prop key="mail.smtp.socketFactory.port">${mail.smtp.socketFactory.port}</prop>
+				<prop key="mail.smtp.socketFactory.class">${mail.smtp.socketFactory.class}</prop>
+				<prop key="mail.smtp.socketFactory.fallback">${mail.smtp.socketFactory.fallback}</prop>
+            </props>
+        </property>
+    </bean>
+
+
 <!--  ===================================================
 	   트랜잭션 관련 설정
 	   - annotation-driven :: txManager(Datasource) - @Transactional
