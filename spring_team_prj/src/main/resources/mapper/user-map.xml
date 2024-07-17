@@ -18,9 +18,9 @@
         <result property="userRole" column="user_role" />
     </resultMap>
 
-    <insert id="insertUsers" parameterType="com.sweetHome.vo.UserVO">
-        INSERT INTO Users (user_seq, user_email, user_pw, user_nickname, phone_number, user_name, address, address_detail, provider)
-        VALUES (users_seq.NEXTVAL, #{userEmail}, #{userPw}, #{userNickname}, #{phoneNumber}, #{userName}, #{address}, #{addressDetail}, #{provider})
+    <insert id="insertUser" parameterType="com.sweetHome.vo.UserVO">
+        INSERT INTO Users (user_seq, user_email, user_pw, user_nickname, phone_number, user_name, address, address_detail)
+        VALUES (users_seq.NEXTVAL, #{userEmail}, #{userPw}, #{userNickname}, #{phoneNumber}, #{userName}, #{address}, #{addressDetail})
     </insert>
 
     <select id="selectUser" parameterType="int" resultMap="userResultMap">
