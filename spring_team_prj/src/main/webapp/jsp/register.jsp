@@ -73,7 +73,139 @@
 		f.parentNode.insertBefore(j, f);
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
 </script>
+<!-- 상단 탭 시작 -->
+	<style>
+        .btn-primary {
+            color: #fff; /* 텍스트 색상: 흰색 */
+            background-color: yellowgreen; /* 배경색: yellowgreen */
+            border-color: black; /* 테두리 색상: yellowgreen */
+            box-shadow: 0 0 24px rgba(154, 205, 50, .04), 0 44px 74px rgba(154, 205, 50, .06); /* 그림자 색상 변경 */
+        }
+    </style>
+	<header class="header-global">
+		<nav id="navbar-main"
+			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
+			<div class="container">
+				<a class="navbar-brand @@logo_classes" href="/jsp/index.jsp"><img
+					class="navbar-brand-dark common"
+					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
+					<img class="navbar-brand-light common"
+					src="../resources/spaces/assets/img/brand/dark.svg" height="35" alt="Logo dark"></a>
+				<div class="navbar-collapse collapse" id="navbar_global">
+					<div class="navbar-collapse-header">
+						<div class="row">
+							<div class="col-6 collapse-brand">
+								<a href="/jsp/index.jsp"><img
+									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
+									alt="Logo Impact"></a>
+							</div>
+							<div class="col-6 collapse-close">
+								<a href="#navbar_global" role="button" class="fas fa-times"
+									data-toggle="collapse" data-target="#navbar_global"
+									aria-controls="navbar_global" aria-expanded="false"
+									aria-label="Toggle navigation"></a>
+							</div>
+						</div>
+					</div>
+					<ul class="navbar-nav navbar-nav-hover justify-content-center">
+						<li class="nav-item dropdown"><a href="#"
+							id="mainPagesDropdown" class="nav-link dropdown-toggle"
+							aria-expanded="false" data-toggle="dropdown"><span
+								class="nav-link-inner-text mr-1">지도</span> 
+						
+						<li class="nav-item dropdown"><a href="/community/list"
+							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
+							aria-expanded="false" data-toggle="dropdown"><span
+								class="nav-link-inner-text mr-1">커뮤니티</span> <i
+								class="fas fa-angle-down nav-link-arrow"></i></a>
+						<div class="dropdown-menu dropdown-megamenu-sm p-3 p-lg-4"
+								aria-labelledby="dashboardPagesDropdown">
+								<div class="row">
+									<div class="col-6">
+										<h6 class="d-block mb-3 text-primary">User dashboard</h6>
+										<ul class="list-style-none mb-4">
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/account.html">My account</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/settings.html">Settings</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/security.html">Security</a></li>
+										</ul>
+										<h6 class="d-block mb-3 text-primary">Items</h6>
+										<ul class="list-style-none">
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/my-items.html">My items</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/edit-item.html">Edit item</a></li>
+										</ul>
+									</div>
+									<div class="col-6">
+										<h6 class="d-block mb-3 text-primary">Messaging</h6>
+										<ul class="list-style-none mb-4">
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/messages.html">Messages</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/single-message.html">Chat</a></li>
+										</ul>
+										<h6 class="d-block mb-3 text-primary">Billing</h6>
+										<ul class="list-style-none mb-4">
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/billing.html">Billing details</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/invoice.html">Invoice</a></li>
+										</ul>
+									</div>
+								</div>
+							</div></li>
+						<li class="nav-item dropdown"><a href="#"
+							id="mainPagesDropdown" class="nav-link dropdown-toggle"
+							aria-expanded="false" data-toggle="dropdown"><span
+								class="nav-link-inner-text mr-1">내 정보</span> 
+					</ul>
+				</div>
+				<div class="d-none d-lg-block @@cta_button_classes">
+				<c:choose>
+            <c:when test="${not empty userSeq}">
+                <!-- userSeq가 존재하는 경우 로그아웃 버튼 생성 -->
+                <a href="/common/logout"
+                   target="_blank" class="btn btn-md btn-secondary animate-up-2">
+                    <i class="fas fa-shopping-bag mr-2"></i> 로그아웃
+                </a>
+            </c:when>
+            <c:otherwise>
+                <!-- userSeq가 존재하지 않는 경우 로그인 버튼 생성 -->
+                <a href="/jsp/login.jsp"
+                   target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3">
+                    <i class="fas fa-book mr-1"></i>
+                    <span class="d-xl-none">Docs</span>
+                    <span class="d-none d-xl-inline">로그인</span>
+                </a>
+            </c:otherwise>
+        </c:choose>
+				</div>
+				<div class="d-flex d-lg-none align-items-center">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbar_global" aria-controls="navbar_global"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+	<!-- 상단 탭 끝 -->
 </head>
+ <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <style>
+    .wrong_text{font-size:1rem;color:#f44e38;letter-spacing:-.2px;font-weight:300;margin:8px 0 2px;line-height:1em;display:none}
+  </style>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <!-- jquery -->
+    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+    <script src="/javascript/popup_2.js"></script>
+  </head>
 <body>
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
@@ -93,7 +225,7 @@
 		<!-- 회원 가입 폼 시작 -->
 		<section
 			class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark py-5 py-lg-0"
-			data-background="../resources/spaces/assets/img/form-image.jpg">
+			>
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-12">
@@ -244,11 +376,17 @@
 														class="fas fa-map-marker-alt"></span></span>
 												</div>
 												<!-- 주소 입력 필드 -->
-												<input class="form-control form-control-lg" id="address"
-													name="address" placeholder="주소" type="text"
+												<input class="form-control form-control-lg" id="sample6_address"
+													name="sample6_address" placeholder="주소" type="text"
 													aria-label="Address" maxlength="66" required readonly>
 
 											</div>
+												<input class="form-control form-control-lg" id="sample6_extraAddress"
+													name="sample6_extraAddress" placeholder="" type="text"
+													aria-label="Address" maxlength="66" required readonly>
+												<input class="form-control form-control-lg" id="sample6_postcode"
+													name="sample6_extraAddress" placeholder="" type="text"
+													aria-label="Address" maxlength="66" required readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -268,8 +406,8 @@
 											<span class="input-group-text"><span
 												class="fas fa-home"></span></span>
 										</div>
-										<input class="form-control" id="address_detail"
-											name="address_detail" placeholder="상세주소" type="text"
+										<input class="form-control" id="sample6_detailAddress"
+											name="sample6_detailAddress" placeholder="상세주소" type="text"
 											aria-label="Detailed address" maxlength="50">
 									</div>
 								</div>
@@ -304,7 +442,6 @@
 									href="./sign-in.html" class="font-weight-bold">로그인 하기</a>
 								</span>
 							</div>
-							<!-- 회원 가입 폼 끝 -->
 	</main>
 	<script>
 		// 폼 유효성 검사
@@ -340,6 +477,10 @@
 
     // 닉네임 중복 체크 여부 확인
     var userNickname = document.getElementById('nickname').value;
+    if (!userNickname || userNickname.trim() === "" || userNickname === "닉네임") {
+        alert('닉네임을 적어주세요');
+        return false;
+    }
     if (!nicknameChecked) {
         alert('닉네임 중복체크를 진행해주세요');
         return false;
@@ -359,27 +500,27 @@
     }
 
     // 주소 유효성 검사
-    var address = document.getElementById('address').value;
-   /* if (address == "주소") {
+    var sample6_address = document.getElementById('address').value;
+   if (address == "주소") {
         alert('주소를 입력해주세요.');
         return false;
-    }*/
+    }
     // 상세주소 유효성 검사
-    var addressDetail = document.getElementById('address_detail').value;
-    if (addressDetail == "상세주소") {
-        alert('상세주소를 입력해주세요.'+addressDetail);
+    var sample6_detailAddress = document.getElementById('address_detail').value;
+    if (sample6_detailAddress == "상세주소"||!sample6_detailAddress || sample6_detailAddress.trim() === "" ) {
+        alert('상세주소를 입력해주세요.'+sample6_detailAddress);
         return false;
     }
 
     // FormData 객체 생성
     var formData = new FormData();
-    address = "이딴게주소";
+    sample6_address = "이딴게주소";
     formData.append('userEmail', userEmail);
     formData.append('userPw', userPw);
     formData.append('userName', userName);
     formData.append('phoneNumber', phoneNumber);
-    formData.append('address', address);
-    formData.append('addressDetail', addressDetail);
+    formData.append('address', sample6_address);
+    formData.append('addressDetail', sample6_detailAddress);
     formData.append('userNickname', userNickname);
 
     // AJAX를 이용한 서버 전송
@@ -408,10 +549,35 @@
 
 		// 닉네임 중복 확인 함수
 		function checkNickname() {
-			// 실제 구현에서는 서버로 중복 체크 요청을 보내야 합니다.
-			// 여기서는 간단히 처리합니다.
-			nicknameChecked = true;
-			alert('닉네임 중복 체크가 완료되었습니다.');
+			 // 닉네임 중복 체크 여부 확인
+			userNickname = document.getElementById('nickname').value;
+		    if (!userNickname || userNickname.trim() === "" || userNickname === "닉네임") {
+		        alert('닉네임을 적어주세요');
+		        return false;
+		    }
+			alert(userNickname);
+			$.ajax({
+        method: "POST",
+        url: "${pageContext.request.contextPath}/auth/nick_check",
+        data: {
+        	userNickname: userNickname,
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("에러:", textStatus, errorThrown);
+			alert('닉네임 체크 에러');
+        },
+        success: function(response) {
+            console.log("RestController Spring 응답:", response);
+            if(response==0){
+					alert('닉네임 중복 체크가 완료되었습니다.');
+		            nicknameChecked = true;
+            	}
+            else{
+        	    	alert('이미 존재하는 닉네임입니다.');
+        	    	nicknameChecked = false;
+            }
+        }
+    });
 		}
 
 		// 이메일 인증번호 전송 함수
@@ -468,10 +634,51 @@
 
 		// 주소 검색 함수 (카카오 API 등으로 실제 구현 필요)
 		function searchAddress() {
-			// 카카오 우편번호 서비스 구현
-			// 실제 구현에서는 카카오 API를 사용해야 합니다.
-			address = "우편검색한 주소";
-			alert('카카오 우편번호 서비스를 통해 주소를 검색합니다.');
+			 new daum.Postcode({
+			        oncomplete: function(data) {
+			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+			            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+			            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+			            var addr = ''; // 주소 변수
+			            var extraAddr = ''; // 참고항목 변수
+
+			            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+			            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+			                addr = data.roadAddress;
+			            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+			                addr = data.jibunAddress;
+			            }
+
+			            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+			            if(data.userSelectedType === 'R'){
+			                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+			                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+			                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+			                    extraAddr += data.bname;
+			                }
+			                // 건물명이 있고, 공동주택일 경우 추가한다.
+			                if(data.buildingName !== '' && data.apartment === 'Y'){
+			                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+			                }
+			                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+			                if(extraAddr !== ''){
+			                    extraAddr = ' (' + extraAddr + ')';
+			                }
+			                // 조합된 참고항목을 해당 필드에 넣는다.
+			                document.getElementById("sample6_extraAddress").value = extraAddr;
+			            
+			            } else {
+			                document.getElementById("sample6_extraAddress").value = '';
+			            }
+
+			            // 우편번호와 주소 정보를 해당 필드에 넣는다.
+			            document.getElementById('sample6_postcode').value = data.zonecode;
+			            document.getElementById("sample6_address").value = addr;
+			            // 커서를 상세주소 필드로 이동한다.
+			            document.getElementById("sample6_detailAddress").focus();
+			        }
+			    }).open();
 		}
 	</script>
 	<style>
