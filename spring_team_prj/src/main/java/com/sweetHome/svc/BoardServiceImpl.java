@@ -16,11 +16,18 @@ public class BoardServiceImpl implements BoardService {
 	BoardMapper boardMapper;
 	
 	public List<BoardVO> svcBoardList(int communitySeq){
-		return boardMapper.boardList(communitySeq);
+		List<BoardVO> blist = boardMapper.boardList(communitySeq);
+		for (BoardVO bvo : blist) {
+			bvo.setRecommend(boardMapper.boardRecommend(bvo.getBoardSeq()));
+		}
+		return blist;
 	}
 	
 	public BoardVO svcBoardDetail(int boardSeq){
-		return boardMapper.boardDetail(boardSeq);
+		BoardVO bvo = boardMapper.boardDetail(boardSeq);		// recommend 제외 detail 가져오기
+		bvo.setRecommend(boardMapper.boardRecommend(boardSeq));	// recommend 수 뽑아와서 vo에 넣기
+		return bvo;
+				
 	} // (게시글 상세 정보조회)
 	
 //	public void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> files) {
@@ -43,8 +50,14 @@ public class BoardServiceImpl implements BoardService {
 	public void svcBoardDelete(BoardVO bvo) {
 		boardMapper.boardDelete(bvo);
 	} //(게시글 삭제)
-	public void svcBoardRecommend(int boardSeq, int userSeq){
-		boardMapper.boardRecommend(boardSeq, userSeq);
+	
+	public int svcBoardRecommendInsert(BoardVO bvo){
+		int check = boardMapper.boardRecommendCheck(bvo);
+		if (check == 0) {
+			boardMapper.boardRecommendInsert(bvo);
+		}
+		return check;
+		
 	} //(게시글 추천)
 //	svcBoardSearch (게시글 제목 검색)
 //	svcBoardSearch (게시글 내용 검색)

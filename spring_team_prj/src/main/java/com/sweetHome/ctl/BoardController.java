@@ -1,22 +1,18 @@
 package com.sweetHome.ctl;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sweetHome.svc.BoardService;
-import com.sweetHome.vo.BoardImagesVO;
 import com.sweetHome.vo.BoardVO;
 
 
@@ -32,7 +28,7 @@ public class BoardController {
 		List<BoardVO> boardList = boardService.svcBoardList(communitySeq);
 		model.addAttribute("KEY_BOARDLIST", boardList);
 		return "jsp/board";
-	} // (°Ô½Ã±Û ÀüÃ¼ Á¶È¸)
+	} // (ê²Œì‹œê¸€ ì „ì²´ ì¡°íšŒ)
 	
 	@RequestMapping(value = "/board_detail", method=RequestMethod.GET)
 	public String ctlBoardDetail(@RequestParam("boardSeq") int boardSeq, Model model) {
@@ -40,7 +36,7 @@ public class BoardController {
 		model.addAttribute("KEY_BOARDVO", bvo);
 		
 		return "jsp/board_detail";
-	} //(°Ô½Ã±Û »ó¼¼ Á¤º¸Á¶È¸)
+	} //(ê²Œì‹œê¸€ ìƒì„¸ ì •ë³´ì¡°íšŒ)
 	
 	@RequestMapping(value="/board_insert", method=RequestMethod.POST)
 	public String ctlBoardInsert(@ModelAttribute BoardVO bvo) {
@@ -81,7 +77,7 @@ public class BoardController {
 //			}
 //		boardService.svcBoardInsert(bvo, flist);
 //		return "redirect:/board/board_list";
-//	} // (°Ô½Ã±Û +ÀÌ¹ÌÁö Ãß°¡)
+//	} // (ê²Œì‹œê¸€ +ì´ë¯¸ì§€ ì¶”ê°€)
 	
 	@RequestMapping(value="board_update_move", method=RequestMethod.GET)
 	public String ctlBoardUpdateMove(@RequestParam("boardSeq") int boardSeq, Model model) {
@@ -96,22 +92,25 @@ public class BoardController {
 		boardService.svcBoardUpdate(bvo);
 		
 		return "redirect:/board/board_detail?boardSeq="+bvo.getBoardSeq();
-	} //(°Ô½Ã±Û ¼öÁ¤)
+	} //(ê²Œì‹œê¸€ ìˆ˜ì •)
 
 	@RequestMapping(value="/board_delete", method=RequestMethod.GET)
 	public String ctlBoardDelete(@ModelAttribute BoardVO bvo) {
 		boardService.svcBoardDelete(bvo);
 		
 		return "redirect:/board/board_list?communitySeq="+bvo.getCommunitySeq();
-	} //(°Ô½Ã±Û »èÁ¦)
+	} //(ê²Œì‹œê¸€ ì‚­ì œ)
 	
 	
-	@RequestMapping(value="board_recommend", method=RequestMethod.POST)
-	public void ctlBoardRecommend(@RequestParam("boardSeq") int boardSeq, @RequestParam("userSeq") int userSeq) {
-		boardService.svcBoardRecommend(boardSeq, userSeq);
-	} //(°Ô½Ã±Û ÃßÃµ)
-//	ctlBoardSearch (°Ô½Ã±Û Á¦¸ñ °Ë»ö)
-//	ctlBoardSearch (°Ô½Ã±Û ³»¿ë °Ë»ö)
-//	ctlBoardSearch (°Ô½Ã±Û Á¦¸ñ+³»¿ë °Ë»ö)
-//	ctlBoardSearch (Æ¯Á¤ À¯Àú °Ô½Ã±Û °Ë»ö)
+	@RequestMapping(value="board_recommend_insert", method=RequestMethod.POST)
+	@ResponseBody
+	public String ctlBoardRecommend(@RequestBody BoardVO bvo) {
+		System.out.println(bvo.getBoardSeq()+bvo.getUserSeq()+"----------------------------------------------------");
+		int check = boardService.svcBoardRecommendInsert(bvo);
+		return Integer.toString(check);
+	} //(ê²Œì‹œê¸€ ì¶”ì²œ)
+//	ctlBoardSearch (ê²Œì‹œê¸€ ì œëª© ê²€ìƒ‰)
+//	ctlBoardSearch (ê²Œì‹œê¸€ ë‚´ìš© ê²€ìƒ‰)
+//	ctlBoardSearch (ê²Œì‹œê¸€ ì œëª©+ë‚´ìš© ê²€ìƒ‰)
+//	ctlBoardSearch (íŠ¹ì • ìœ ì € ê²Œì‹œê¸€ ê²€ìƒ‰)
 }

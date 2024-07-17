@@ -39,35 +39,40 @@
         	<result property="fsize" column="fsize" />
         	<result property="fpath" column="fpath" />
         </collection>
-        <collection property="recommend" ofType="com.sweetHome.vo.RecommendVO">
-        	<id property="boardSeq" column="board_seq" />
-        	<result property="userSeq" column="user_seq" />
-        </collection>
     </resultMap>
 
 	<select id="boardList" resultMap="boardResultMap" parameterType="int">
-		select b.board_seq, b.board_title, u.user_nickname, b.updated_date, c.community_seq, c.community_name, count(r.board_seq) as recommend
-		from board b, recommend r, users u, community c
-		where b.board_seq = r.board_seq(+)
-		and b.user_seq = u.user_seq
+		select b.board_seq, b.board_title, u.user_nickname, b.updated_date, c.community_seq, c.community_name
+		from board b, users u, community c
+		where b.user_seq = u.user_seq
 		and b.community_seq = c.community_seq
 		and b.community_seq = #{communitySeq}
-		group by b.board_seq, b.board_title, u.user_nickname, b.updated_date, c.community_seq, c.community_name
 		order by b.board_seq desc
 	</select>
 
     <select id="boardDetail" resultMap="boardResultMap" parameterType="int">
-        select b.board_seq, b.board_title, b.board_contents, b.updated_date, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname, count(r.board_seq) as recommend
-		from board b, board_images i, recommend r, community c, users u
+        select b.board_seq, b.board_title, b.board_contents, b.updated_date, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname
+		from board b, board_images i, community c, users u
 		where b.board_seq = i.board_seq(+)
-		and b.board_seq = r.board_seq(+)
 		and b.community_seq = c.community_seq
 		and b.user_seq = u.user_seq
 		and b.board_seq = #{boardSeq}
-		group by b.board_seq, b.board_title, b.board_contents, b.updated_date, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname
-    </select>
+	</select>
 	
-	<insert id="boardRecommend" parameterType="int">
+	<select id="boardRecommend" resultType="int" parameterType="com.sweetHome.vo.RecommendVO">
+		select count(user_seq)
+		from recommend
+		where board_seq = #{boardSeq}
+	</select>
+	 
+	 <select id="boardRecommendCheck" resultType="int" parameterType="com.sweetHome.vo.RecommendVO">
+	 	select count(user_seq)
+	 	from recommend
+	 	where board_seq = #{boardSeq}
+	 	and user_seq = #{userSeq}
+	 </select>
+	 
+	<insert id="boardRecommendInsert" parameterType="int">
 		insert into recommend values (#{boardSeq}, #{userSeq})
 	</insert>
 	

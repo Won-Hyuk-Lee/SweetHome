@@ -415,7 +415,7 @@
                         <td class="updated-date">
 			            	<fmt:formatDate value="${board.updatedDate}" pattern="MM-dd HH:MM"/>
 						</td>
-                        <td>${board.recommend.size()}</td>
+                        <td>${board.recommend}</td>
                     </tr>
                 </c:forEach>
             </tbody>

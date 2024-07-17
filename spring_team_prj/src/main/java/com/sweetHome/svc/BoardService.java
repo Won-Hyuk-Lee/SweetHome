@@ -12,7 +12,7 @@ public interface BoardService {
 	void svcBoardInsert(BoardVO bvo);
 	void svcBoardUpdate(BoardVO bvo); //(게시글 수정)
 	void svcBoardDelete(BoardVO bvo); //(게시글 삭제)
-	void svcBoardRecommend(int boardSeq, int userSeq); //(게시글 추천)
+	int svcBoardRecommendInsert(BoardVO bvo); //(게시글 추천)
 //	svcBoardSearch (게시글 제목 검색)
 //	svcBoardSearch (게시글 내용 검색)
 //	svcBoardSearch (게시글 제목+내용 검색)
