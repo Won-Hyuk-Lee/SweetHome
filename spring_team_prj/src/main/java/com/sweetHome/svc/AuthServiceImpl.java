@@ -79,8 +79,8 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public int svcNicknameCheck(String userNinkname) {
-		return authMapper.nicknameCheck(userNinkname);
+	public int svcNicknameCheck(String userNickname) {
+		return authMapper.nicknameCheck(userNickname);
 	}
 
 	@Override
