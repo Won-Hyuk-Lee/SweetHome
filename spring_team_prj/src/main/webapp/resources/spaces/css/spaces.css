@@ -17414,7 +17414,7 @@ a.text-github:focus, a.text-github:hover {
 }
 
 .headroom--not-top.navbar-theme-primary {
-	background-color: #0d1b48
+	background-color: yellowgreen
 }
 
 .headroom--not-top.navbar-theme-primary .navbar-brand-light {
@@ -20261,7 +20261,7 @@ a.bg-gray-dark:focus, a.bg-gray-dark:hover, button.bg-gray-dark:focus,
 .overlay-soft-dark:before {
 	position: absolute;
 	content: "";
-	background: #0d1b48;
+	//background: #0d1b48;
 	width: 100%;
 	height: 100%;
 	top: 0;
@@ -27516,7 +27516,7 @@ to {
 }
 
 .navbar-transparent {
-	background-color: transparent;
+	background-color: yellowgreen;
 	border: 0;
 	box-shadow: none
 }

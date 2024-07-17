@@ -73,6 +73,128 @@
 		f.parentNode.insertBefore(j, f);
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
 </script>
+<!-- 상단 탭 시작 -->
+	<style>
+        .btn-primary {
+            color: #fff; /* 텍스트 색상: 흰색 */
+            background-color: yellowgreen; /* 배경색: yellowgreen */
+            border-color: black; /* 테두리 색상: yellowgreen */
+            box-shadow: 0 0 24px rgba(154, 205, 50, .04), 0 44px 74px rgba(154, 205, 50, .06); /* 그림자 색상 변경 */
+        }
+    </style>
+	<header class="header-global">
+		<nav id="navbar-main"
+			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
+			<div class="container">
+				<a class="navbar-brand @@logo_classes" href="/jsp/index.jsp"><img
+					class="navbar-brand-dark common"
+					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
+					<img class="navbar-brand-light common"
+					src="../resources/spaces/assets/img/brand/dark.svg" height="35" alt="Logo dark"></a>
+				<div class="navbar-collapse collapse" id="navbar_global">
+					<div class="navbar-collapse-header">
+						<div class="row">
+							<div class="col-6 collapse-brand">
+								<a href="/jsp/index.jsp"><img
+									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
+									alt="Logo Impact"></a>
+							</div>
+							<div class="col-6 collapse-close">
+								<a href="#navbar_global" role="button" class="fas fa-times"
+									data-toggle="collapse" data-target="#navbar_global"
+									aria-controls="navbar_global" aria-expanded="false"
+									aria-label="Toggle navigation"></a>
+							</div>
+						</div>
+					</div>
+					<ul class="navbar-nav navbar-nav-hover justify-content-center">
+						<li class="nav-item dropdown"><a href="#"
+							id="mainPagesDropdown" class="nav-link dropdown-toggle"
+							aria-expanded="false" data-toggle="dropdown"><span
+								class="nav-link-inner-text mr-1">지도</span> 
+						
+						<li class="nav-item dropdown"><a href="/community/list"
+							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
+							aria-expanded="false" data-toggle="dropdown"><span
+								class="nav-link-inner-text mr-1">커뮤니티</span> <i
+								class="fas fa-angle-down nav-link-arrow"></i></a>
+						<div class="dropdown-menu dropdown-megamenu-sm p-3 p-lg-4"
+								aria-labelledby="dashboardPagesDropdown">
+								<div class="row">
+									<div class="col-6">
+										<h6 class="d-block mb-3 text-primary">User dashboard</h6>
+										<ul class="list-style-none mb-4">
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/account.html">My account</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/settings.html">Settings</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/security.html">Security</a></li>
+										</ul>
+										<h6 class="d-block mb-3 text-primary">Items</h6>
+										<ul class="list-style-none">
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/my-items.html">My items</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/edit-item.html">Edit item</a></li>
+										</ul>
+									</div>
+									<div class="col-6">
+										<h6 class="d-block mb-3 text-primary">Messaging</h6>
+										<ul class="list-style-none mb-4">
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/messages.html">Messages</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/single-message.html">Chat</a></li>
+										</ul>
+										<h6 class="d-block mb-3 text-primary">Billing</h6>
+										<ul class="list-style-none mb-4">
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/billing.html">Billing details</a></li>
+											<li class="mb-2 megamenu-item"><a class="megamenu-link"
+												href="../resources/spaces/html/dashboard/invoice.html">Invoice</a></li>
+										</ul>
+									</div>
+								</div>
+							</div></li>
+						<li class="nav-item dropdown"><a href="#"
+							id="mainPagesDropdown" class="nav-link dropdown-toggle"
+							aria-expanded="false" data-toggle="dropdown"><span
+								class="nav-link-inner-text mr-1">내 정보</span> 
+					</ul>
+				</div>
+				<div class="d-none d-lg-block @@cta_button_classes">
+				<c:choose>
+            <c:when test="${not empty userSeq}">
+                <!-- userSeq가 존재하는 경우 로그아웃 버튼 생성 -->
+                <a href="/common/logout"
+                   target="_blank" class="btn btn-md btn-secondary animate-up-2">
+                    <i class="fas fa-shopping-bag mr-2"></i> 로그아웃
+                </a>
+            </c:when>
+            <c:otherwise>
+                <!-- userSeq가 존재하지 않는 경우 로그인 버튼 생성 -->
+                <a href="/jsp/login.jsp"
+                   target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3">
+                    <i class="fas fa-book mr-1"></i>
+                    <span class="d-xl-none">Docs</span>
+                    <span class="d-none d-xl-inline">로그인</span>
+                </a>
+            </c:otherwise>
+        </c:choose>
+				</div>
+				<div class="d-flex d-lg-none align-items-center">
+					<button class="navbar-toggler" type="button" data-toggle="collapse"
+						data-target="#navbar_global" aria-controls="navbar_global"
+						aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+	<!-- 상단 탭 끝 -->
 </head>
  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <style>

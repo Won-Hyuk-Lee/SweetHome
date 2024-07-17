@@ -6,12 +6,28 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <html lang="en">
-	<!-- 상단 탭 시작 -->
-<header class="header-global">
+<style>
+.navbar-transparent {
+    background-color: transparent; /* 배경색을 투명하게 설정 */
+    border: 0;
+    box-shadow: none;
+}
+</style>
+
+<!-- 상단 탭 시작 -->
+	<style>
+        .btn-primary {
+            color: #fff; /* 텍스트 색상: 흰색 */
+            background-color: yellowgreen; /* 배경색: yellowgreen */
+            border-color: black; /* 테두리 색상: yellowgreen */
+            box-shadow: 0 0 24px rgba(154, 205, 50, .04), 0 44px 74px rgba(154, 205, 50, .06); /* 그림자 색상 변경 */
+        }
+    </style>
+	<header class="header-global">
 		<nav id="navbar-main"
 			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
 			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="../index.html"><img
+				<a class="navbar-brand @@logo_classes" href="/jsp/index.jsp"><img
 					class="navbar-brand-dark common"
 					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
 					<img class="navbar-brand-light common"
@@ -20,7 +36,7 @@
 					<div class="navbar-collapse-header">
 						<div class="row">
 							<div class="col-6 collapse-brand">
-								<a href="../index.html"><img
+								<a href="/jsp/index.jsp"><img
 									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
 									alt="Logo Impact"></a>
 							</div>
@@ -38,7 +54,7 @@
 							aria-expanded="false" data-toggle="dropdown"><span
 								class="nav-link-inner-text mr-1">지도</span> 
 						
-						<li class="nav-item dropdown"><a href="#"
+						<li class="nav-item dropdown"><a href="/community/list"
 							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
 								class="nav-link-inner-text mr-1">커뮤니티</span> <i
@@ -83,46 +99,30 @@
 								</div>
 							</div></li>
 						<li class="nav-item dropdown"><a href="#"
-							id="supportDropdown" class="nav-link dropdown-toggle"
+							id="mainPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">내 정보</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-menu-lg"
-								aria-labelledby="supportDropdown">
-								<div class="col-auto px-0">
-									<div class="list-group list-group-flush">
-										<a
-											href="https://themesberg.com/docs/spaces/getting-started/quick-start/"
-											target="_blank"
-											class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4"><span
-											class="icon icon-md icon-secondary"><i
-												class="fas fa-file-alt"></i></span>
-										<div class="ml-4">
-												<span class="text-dark d-block">Documentation<span
-													class="badge badge-sm badge-secondary ml-2">v3.0</span></span> <span
-													class="small">Examples and guides</span>
-											</div></a><a href="https://themesberg.com/contact" target="_blank"
-											class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4"><span
-											class="icon icon-md icon-primary"><i
-												class="fas fa-microphone-alt"></i></span>
-										<div class="ml-4">
-												<span class="text-dark d-block">Support</span> <span
-													class="small">Looking for answers?</span>
-											</div></a>
-									</div>
-								</div>
-							</div></li>
+								class="nav-link-inner-text mr-1">내 정보</span> 
 					</ul>
 				</div>
 				<div class="d-none d-lg-block @@cta_button_classes">
-					<a href="https://themesberg.com/docs/spaces/components/buttons/"
-						target="_blank"
-						class="btn btn-md btn-outline-white animate-up-2 mr-3"><i
-						class="fas fa-book mr-1"></i> <span class="d-xl-none">Docs</span>
-						<span class="d-none d-xl-inline">로그인</span></a>
-					<!--  	 <a href="https://themes.getbootstrap.com/product/spaces/"
-						target="_blank" class="btn btn-md btn-secondary animate-up-2"><i
-						class="fas fa-shopping-bag mr-2"></i> 로그아웃</a>-->
+				<c:choose>
+            <c:when test="${not empty userSeq}">
+                <!-- userSeq가 존재하는 경우 로그아웃 버튼 생성 -->
+                <a href="/common/logout"
+                   target="_blank" class="btn btn-md btn-secondary animate-up-2">
+                    <i class="fas fa-shopping-bag mr-2"></i> 로그아웃
+                </a>
+            </c:when>
+            <c:otherwise>
+                <!-- userSeq가 존재하지 않는 경우 로그인 버튼 생성 -->
+                <a href="/jsp/login.jsp"
+                   target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3">
+                    <i class="fas fa-book mr-1"></i>
+                    <span class="d-xl-none">Docs</span>
+                    <span class="d-none d-xl-inline">로그인</span>
+                </a>
+            </c:otherwise>
+        </c:choose>
 				</div>
 				<div class="d-flex d-lg-none align-items-center">
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -256,6 +256,7 @@
 					class="rotate-letter" alt="Letter loader">
 			</div>
 		</div>
+		<br><br><br>
 		<section
 			class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark py-5 py-lg-0"
 			data-background="../resources/spaces/assets/img/form-image.jpg">
@@ -336,7 +337,7 @@
 							<div
 								class="d-block d-sm-flex justify-content-center align-items-center mt-4">
 								<span class="font-weight-normal">회원정보가 없으신가요? <a
-									href="./sign-up.html" class="font-weight-bold">회원가입</a></span>
+									href="/jsp/register.jsp" class="font-weight-bold">회원가입</a></span>
 							</div>
 						</div>
 					</div>
