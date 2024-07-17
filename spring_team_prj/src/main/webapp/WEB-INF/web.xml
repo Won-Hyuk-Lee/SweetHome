@@ -13,25 +13,6 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-
-<!-- 한글 필터 설정 -->
-	<filter>
-		<filter-name>encodingFilter</filter-name>
-		<filter-class>org.springframework.web.filter.CharacterEncodingFilter
-		</filter-class>
-		<init-param>
-			<param-name>encoding</param-name>
-			<param-value>UTF-8</param-value>
-		</init-param>
-		<init-param>
-			<param-name>forceEncoding</param-name>
-			<param-value>true</param-value>
-		</init-param>
-	</filter>
-	<filter-mapping>
-		<filter-name>encodingFilter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
 	
 	<!-- Processes application requests -->
 	<servlet>
@@ -68,13 +49,5 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	  	<!-- 파일 업로드 관련 스프링 설정 -->
-	<filter>
-	  	<filter-name>multipartFilter</filter-name>
-	  	<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>multipartFilter</filter-name>
-		<servlet-name>appServlet</servlet-name>
-	</filter-mapping>
+	
 </web-app>

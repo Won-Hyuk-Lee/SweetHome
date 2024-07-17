@@ -500,13 +500,13 @@
     }
 
     // 주소 유효성 검사
-    var sample6_address = document.getElementById('address').value;
-   if (address == "주소") {
+    var sample6_address = document.getElementById('sample6_address').value;
+   if (sample6_address == "주소") {
         alert('주소를 입력해주세요.');
         return false;
     }
     // 상세주소 유효성 검사
-    var sample6_detailAddress = document.getElementById('address_detail').value;
+    var sample6_detailAddress = document.getElementById('sample6_detailAddress').value;
     if (sample6_detailAddress == "상세주소"||!sample6_detailAddress || sample6_detailAddress.trim() === "" ) {
         alert('상세주소를 입력해주세요.'+sample6_detailAddress);
         return false;
@@ -514,7 +514,6 @@
 
     // FormData 객체 생성
     var formData = new FormData();
-    sample6_address = "이딴게주소";
     formData.append('userEmail', userEmail);
     formData.append('userPw', userPw);
     formData.append('userName', userName);
