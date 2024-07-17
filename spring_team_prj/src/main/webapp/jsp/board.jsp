@@ -17,9 +17,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Board List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .mb-3 {
+            margin-bottom: 1rem !important;
+        }
+        .card-body {
+            padding: 1.5rem !important;
+        }
+        .shadow-soft {
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+        .avatar-lg {
+            width: 50px;
+            height: 50px;
+        }
+        .avatar-lg img {
+            width: 100%;
+            height: 100%;
+        }
+        .text-gray {
+            color: #6c757d !important;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .search-input {
+            width: 50%;
+        }
+        .table-header {
+            background-color: #f8f9fa;
+            font-weight: bold;
+        }
+        /* 추가된 스타일 */
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            text-align: center;
+            vertical-align: middle;
+            border: none;
+            padding: 10px;
+        }
+        td.updated-date {
+            font-size: 14px;
+        }
+    </style>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -94,7 +147,7 @@
 		<nav id="navbar-main"
 			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
 			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="../resources/spaces/index.html"><img
+				<a class="navbar-brand @@logo_classes" href="${pageContext.request.contextPath}/community/list"><img
 					class="navbar-brand-dark common"
 					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
 					<img class="navbar-brand-light common"
@@ -324,37 +377,80 @@
 -->
 
 
-
+<!-- board list 시작~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
 		<section class="section section-md bg-white">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-10 mb-3">
-						<h5>Getting Started</h5>
+						<h5>${KEY_BOARDLIST[0].community.communityName}</h5>
 					</div>
-					<div class="col-lg-10 mb-3">
-						<a href="./support-topic.html"
-							class="card border-light animate-up-3 shadow-soft p-0 p-lg-4"><div
-								class="card-body">
-								<h4>Account Settings, Language &amp; Dark Mode</h4>
-								<p class="lead text-gray mb-4">How to edit account settings
-									such as email addresss, user name, language and switch to dark
-									mode</p>
-								<div class="d-flex align-items-center">
-									<div class="avatar-lg">
-										<img class="rounded-circle"
-											src="../resources/spaces/assets/img/team/profile-picture-1.jpg" alt="avatar">
-									</div>
-									<div class="small text-gray ml-3">
-										<div>
-											<span>Updated 2 days ago</span>
-										</div>
-										<div>
-											Written by&nbsp;<strong>Richard Thomas</strong>
-										</div>
-									</div>
-								</div>
-							</div></a>
-					</div>
+			
+			
+					
+ <div class="container mt-5">
+        <!-- 리스트 상단의 열 제목 -->
+        <table class="table table-bordered mb-2">
+            <thead class="table-header">
+                <tr>
+                    <th scope="col" style="width: 10%;">게시글 번호</th>
+                    <th scope="col" style="width: 40%;">글 내용</th>
+                    <th scope="col" style="width: 20%;">작성자</th>
+                    <th scope="col" style="width: 10%;">수정일</th>
+                    <th scope="col" style="width: 10%;">추천</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- forEach 구문을 통해 게시글 목록을 출력 -->
+                <c:forEach var="board" items="${KEY_BOARDLIST}">
+                    <tr>
+                        <td>${board.boardSeq}</td>
+                        <td>
+                            <a href="/board/board_detail?boardSeq=${board.boardSeq}">
+                                <h4>${board.boardTitle}</h4>
+                            </a>
+                            <p class="lead text-gray mb-4">${board.boardContents}</p>
+                        </td>
+                        <td>${board.user.userNickname}</td>
+                        <!-- 수정일 셀 -->
+                        <td class="updated-date">
+			            	<fmt:formatDate value="${board.updatedDate}" pattern="MM-dd HH:MM"/>
+						</td>
+                        <td>${board.recommend.size()}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+        <div class="row mt-5">
+            <div class="col-lg-6 text-left">
+                <button class="btn btn-primary">전체 글</button>
+                <button class="btn btn-secondary">개념 글</button>
+            </div>
+            <div class="col-lg-6 text-right">
+                <button id="writeButton" class="btn btn-success" data-community-seq="${KEY_BOARDLIST[0].communitySeq}" data-community-name="${KEY_BOARDLIST[0].community.communityName}">글 쓰기</button>
+            </div>
+        </div>
+		<div class="row mt-3 search-container justify-content-center">
+		    <form action="/board/search" method="get" class="form-inline my-2 my-lg-0 w-100">
+		        <div class="col-lg-6 pr-lg-2 order-lg-2">
+		            <div class="input-group">
+		                <input class="form-control" type="search" placeholder="검색어를 입력하세요" aria-label="검색어 입력" name="query">
+		                <div class="input-group-append">
+		                    <button class="btn btn-outline-success" type="submit">검색</button>
+		                </div>
+		            </div>
+		        </div>
+		        <div class="col-lg-3 pl-lg-2 order-lg-1">
+		            <select class="form-control w-50" name="searchType">
+		                <option value="all">제목 + 내용</option>
+		                <option value="title">제목</option>
+		                <option value="content">내용</option>
+		            </select>
+		        </div>
+		    </form>
+		</div>
+    </div>
+<!-- 한 구역 끝 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->					
+					
 					<div class="col-lg-10 mb-3">
 						<a href="./support-topic.html"
 							class="card border-light animate-up-3 shadow-soft p-0 p-lg-4"><div
@@ -551,11 +647,28 @@
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+		    var writeButton = document.getElementById('writeButton');
+		    if (writeButton) {
+		        writeButton.addEventListener('click', function() {
+		            var communitySeq = this.getAttribute('data-community-seq');
+		            var communityName = this.getAttribute('data-community-name');
+		            goToBoardInsert(communitySeq, communityName);
+		        });
+		    }
+		});
+	
+		function goToBoardInsert(communitySeq, communityName) {
+		    window.location.href = '/jsp/board_insert.jsp?communitySeq=' + communitySeq + '&communityName=' + communityName;
+		}
+</script>
+<!-- 	
+	<script>
     $(document).ready(function() {
         $.ajax({
             method: "POST",
             url: "${pageContext.request.contextPath}/board/board_list",
-            data: "communitySeq=1",
+            data: "communitySeq=",
             error: function(xhr, status, error) {
                 console.log("에러:" + error);
             },
@@ -565,6 +678,7 @@
         });
     });
     </script>
+     -->
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
 	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -587,10 +701,10 @@
 	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
-	<script defer
+<!-- <script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
 		data-cf-beacon='{"rayId":"89fe6da49a557c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script> -->
 </body>
 </html>

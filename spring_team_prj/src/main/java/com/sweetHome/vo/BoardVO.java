@@ -1,7 +1,7 @@
 package com.sweetHome.vo;
 
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Component;
 
@@ -19,7 +19,7 @@ public class BoardVO {
 	private int communitySeq;
 	private UserVO user;							// userNickname ¹Þ´Â join À§ÇØ¼­
 	private CommunityVO community;					// community name ¹Þ´Â join À§ÇØ¼­
-	private ArrayList<ReplyVO> reply;				// board ¶û reply ¶û 1:n °ü°è¶ó¼­ arrayList·Î ¹ÞÀ½
-	private ArrayList<BoardImagesVO> boardImages;	// board ¶û boardImages¶û 1:n °ü°è¶ó¼­ arrayList·Î ¹ÞÀ½
-	private ArrayList<RecommendVO> recommend;		// board ¶û recommend¶û 1:n °ü°è¶ó¼­ arrayList·Î ¹ÞÀ½
+	private List<ReplyVO> reply;				// board ¶û reply ¶û 1:n °ü°è¶ó¼­ arrayList·Î ¹ÞÀ½
+	private List<BoardImagesVO> boardImages;	// board ¶û boardImages¶û 1:n °ü°è¶ó¼­ arrayList·Î ¹ÞÀ½
+	private List<RecommendVO> recommend;		// board ¶û recommend¶û 1:n °ü°è¶ó¼­ arrayList·Î ¹ÞÀ½
 }

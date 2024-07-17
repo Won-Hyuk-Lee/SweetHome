@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 
 <html lang="zxx">
@@ -40,7 +42,7 @@
             background-color: #0056b3; /* 호버 시 색상 변경 */
         }
         /* 각 버튼별 고유 색상 */
-        .edit-button { background-color: #6A94D4; }
+        .update-button { background-color: #6A94D4; }
         .delete-button { background-color: #4A90E2; }
         .list-button { background-color: #7B9EBF; }
         .reply-input { width: 100%; margin-top: 20px; }
@@ -72,8 +74,8 @@
         .reply-input { width: 100%; margin-top: 20px; }
     </style>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Spaces - Blog post</title>
 <meta name="viewport"
@@ -373,25 +375,26 @@
 		
 <!-- 내용 섹션~!~!~!~!~!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!@!!@!@!@~~~~~~~!!!!!!!!!!!!!!!!!!!~!~!~!~!~!~!~~!~!~!~!~!~!~ -->
 		
-		<div class="section section-sm bg-white pt-6">
-			<div class="container">
-				<div id="communityName"></div>
-		        <h1 id="boardTitle"></h1>
-		        <p id="userInfo"></p>
-		        <div class="divider"></div>
-		        <div id="boardContents"></div>
-		        <div class="recommend-container">
-		            <div class="recommend-box">
-		                <span id="recommendCount"></span>
-		                <div class="recommend-button">추천</div>
-	            	</div>
-	            </div>
-	        <div class="action-container">
-	                <div class="action-button list-button">목록</div>
-	                <div class="action-button delete-button">삭제</div>
-	                <div class="action-button edit-button">수정</div>
-	        </div>
-        	</div>
+    <div class="section section-sm bg-white pt-6">
+        <div class="container">
+            <div id="communityName">${KEY_BOARDVO.community.communityName}</div>
+            <h1 id="boardTitle">${KEY_BOARDVO.boardTitle}</h1>
+            <p id="userInfo">${KEY_BOARDVO.user.userNickname} | <fmt:formatDate value="${KEY_BOARDVO.updatedDate}" pattern="YYYY-MM-dd HH:MM"/></p>
+            
+            <div class="divider"></div>
+            <div id="boardContents">${KEY_BOARDVO.boardContents}</div>
+            <div class="recommend-container">
+                <div class="recommend-box">
+                    <span id="recommendCount">추천수: ${KEY_BOARDVO.recommend.size()}</span>
+                    <div class="recommend-button">추천</div>
+                </div>
+            </div>
+            <div class="action-container">
+                <div class="action-button list-button">목록</div>
+                <div class="action-button delete-button">삭제</div>
+                <div class="action-button update-button">수정</div>
+            </div>
+        </div>
 	        
 			<div class="container">
 				<div class="row justify-content-center">
@@ -440,6 +443,7 @@
 				</div>
 			</div>
         </div>
+    </div>
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
 		<div class="container">
@@ -513,209 +517,33 @@
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
-    $(document).ready(function() {
-        $.ajax({
-            method: "POST",
-            url: "${pageContext.request.contextPath}/board/board_detail",
-            data: "boardSeq=1",
-            error: function(xhr, status, error) {
-                console.log("에러:" + error);
-            },
-            success: function(myval) {
-                $("#communityName").text(myval.community.communityName);
-                $("#boardTitle").text(myval.boardTitle);
-                $("#userInfo").text(myval.user.userNickname + " | " + myval.updatedDate);
-                $("#boardContents").html(myval.boardContents);
-                $("#recommendCount").text("추천수: " + myval.recommend.length);
-            }
-        });
-
         $(".recommend-button").click(function() {
             // 여기에 추천 기능을 구현할 수 있습니다.
             console.log("추천 버튼이 클릭되었습니다.");
         });
 
-        $(".edit-button").click(function() {
-            console.log("수정 버튼이 클릭되었습니다.");
-            // 여기에 수정 기능 구현
+        
+        
+        $(document).ready(function() {
+	        $(".update-button").click(function() {
+	        	window.location.href = "${pageContext.request.contextPath}/board/board_update_move?boardSeq=" + ${KEY_BOARDVO.boardSeq};
+	        });
         });
 
-        $(".delete-button").click(function() {
-            if(confirm("정말로 삭제하시겠습니까?")) {
-                console.log("삭제 버튼이 클릭되었습니다.");
-                // 여기에 삭제 기능 구현
-            }
+        $(document).ready(function() {
+	        $(".delete-button").click(function() {
+	            if(confirm("정말로 삭제하시겠습니까?")) {
+	            	window.location.href = "${pageContext.request.contextPath}/board/board_delete?communitySeq=" + ${KEY_BOARDVO.community.communitySeq} + "&boardSeq=" + ${KEY_BOARDVO.boardSeq};
+	            }
+	        });
         });
-
-        $(".list-button").click(function() {
-            console.log("목록 버튼이 클릭되었습니다.");
-            // 여기에 목록 페이지로 이동하는 기능 구현
-            // 예: window.location.href = "게시글 목록 URL";
+        
+        $(document).ready(function() {
+            $(".list-button").click(function() {
+                window.location.href = "${pageContext.request.contextPath}/board/board_list?communitySeq=" + ${KEY_BOARDVO.community.communitySeq};
+            });
         });
-    });
     </script>   
-    <script>
-		/*
-		$(function() {
-			//---------------------------------------------------------
-			// <form> 제어하기
-			//---------------------------------------------------------
-			//$(".btn.btn-primary.btn-block").click()~~
-			
-			$("#uptButton").click(  function(){
-				alert("수정");
-				$("#boardForm").attr("method","post");
-				$("#boardForm").attr("action","${pageContext.request.contextPath}/board_update");
-				$("#boardForm").submit();
-				return true;
-			});
-			$("#delButton").click(  function(){
-				alert("삭제");
-				$("#boardForm").attr("method","post");
-				$("#boardForm").attr("action","${pageContext.request.contextPath}/board_delete");
-				$("#boardForm").submit();
-				return true;
-			});
-			$("#listButton").click(  function(){
-				location.href = "${pageContext.request.contextPath}/board_list";
-			});
-			
-			//------------------------------------------------------------
-			
-		});
- */
-/* 
-		function makeTable(){			
-			$.ajax({
-				method      : "POST",
-		        url         : "${pageContext.request.contextPath}/reply_list",
-		        data 		: "seq="+${KEY_BOARDVO.seq},
-		  		error 	    : function(myval){ console.log("에러:" + myval);   },
-		  		success     : function(myval){
-		  										var htmlStr = "<table border=1 width=100%>";
-		  										$.map( myval, function( MYval, MYidx ) {
-		  											htmlStr += "<tr><td><a href='${pageContext.request.contextPath}/reply_delete?seq=" + MYval.seq + "&rseq=" + MYval.rseq + "'>[X]</a>"+MYval.reply+"</td></tr>"
-		  										});
-		  										htmlStr += "</table>";
-		  										$("#replyListDiv").empty();
-		  										$("#replyListDiv").html(htmlStr);
-		  									 }
-			});
-		 }
-		 */
-		
-		 
-		 
-		 /* 
-		 $(document).ready(function() {
-			    $.ajax({
-			        method: "POST",
-			        url: "${pageContext.request.contextPath}/board/board_detail",
-			        data: "boardSeq=1",
-			        error: function(myval) {
-			            console.log("에러:" + myval);
-			        },
-			        success: function(myval) {
-			            // Assuming myval is a BoardVO object in JSON format
-			            var boardTitleStr = "<div class='board-title'>";
-			            boardTitleStr += "<h2>" + myval.boardTitle + "</h2>";
-			            boardTitleStr += "<p>작성자 : " + myval.user.userNickname + "</p>";
-			            boardTitleStr += "<p>수정일 : " + myval.updatedDate + "</p>";
-			            boardTitleStr += "<p>Recommendations: " + myval.recommend.length + "</p>";
-			            boardTitleStr += "<p>Community: " + myval.community.communityName + "</p>";
-			            boardTitleStr += "</div>";
-
-			            
-			            var boardContentStr = "<div class='board-contents'>";
-			            boardContentStr += "<h2>" + myval.boardContents + "</h2>";
-			            
-			            $.map(myval.boardImages, function(image, idx) {
-			            	boardContentStr += "<div class='image'>";
-			            	boardContentStr += "<p>Image: " + image.oname + " (" + image.fsize + " Byte)</p>";
-			            	boardContentStr += "<img src='" + image.fpath + "/" + image.sname + "' alt='" + image.oname + "' />";
-			            	boardContentStr += "</div>";
-			            });
-			            boardContentStr += "<p>Community: " + myval.community.communityName + "</p>";
-			            boardContentStr += "</div>";
-			            
-			            var repliesHtmlStr = "<div class='replies'>";
-			            $.map(myval.replyList, function(reply, idx) {
-			                repliesHtmlStr += "<div class='reply'>";
-			                repliesHtmlStr += "<input type='button' id='" + reply.replySeq + "' data-rseq='" + reply.replySeq + "' class='replyDeleteButton' value='[X]'>";
-			                repliesHtmlStr += "<p>" + reply.reply + " (" + reply.createdDate + ")</p>";
-			                repliesHtmlStr += "</div>";
-			            });
-			            repliesHtmlStr += "</div>";
-
-			            var imagesHtmlStr = "<div class='board-images'>";
-			            $.map(myval.boardImages, function(image, idx) {
-			                imagesHtmlStr += "<div class='image'>";
-			                imagesHtmlStr += "<p>Image: " + image.oname + " (" + image.fsize + " Byte)</p>";
-			                imagesHtmlStr += "<img src='" + image.fpath + "/" + image.sname + "' alt='" + image.oname + "' />";
-			                imagesHtmlStr += "</div>";
-			            });
-			            imagesHtmlStr += "</div>";
-
-
-			            $("#titleSectionDiv").empty();
-			            $("#titleSectionDiv").html(boardTitleStr);
-			            $("#contentSectionDiv").empty();
-			            $("#contentSectionDiv").html(boardContentStr);
-			        }
-			    });
-			});
-
-		  */
-		
-		 
-		 /*
-		 <h1 class="display-3 mb-4 px-lg-5">90% of content gets no
-							traffic from Google. How to improve it ?</h1>
-						<div class="post-meta">
-							<span class="font-weight-bold mr-3">James Curran</span> <span
-								class="post-date mr-3">January 31, 2020</span> <span
-								class="font-weight-bold">7 min read</span>
-						</div>
-		 */
-		 
-		 
-		 
-		 
-
-/*
-		$("#replyInsertButton").click(  function(){
-			var formData = $("#replyForm").serialize();
-			$.ajax({
-				method      : "POST",
-		        url         : "${pageContext.request.contextPath}/reply_insert",
-		        data 		: formData,
-		  		error 	    : function(myval){ console.log("에러:" + myval);   },
-		  		success     : function(myval){  
-		  										makeTable();
-		  									 }
-			});
-		});	
-		
-		
-		
-		$(document).on("click", ".replyDeleteButton", function(){
-			var rseq = $(this).attr("id");
-			rseq = $(this).attr("data-rseq");
-			rseq = $(this).data("rseq");
-			$.ajax({
-				method      : "POST",
-		        url         : "${pageContext.request.contextPath}/reply_delete",
-		        data 		: "rseq="+rseq,
-		  		error 	    : function(myval){ console.log("에러:" + myval);   },
-		  		success     : function(myval){ 
-		  										makeTable();
-		  									 }
-			});
-		});
-		
-		*/
-	</script>
-	
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
 	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -754,11 +582,11 @@
             }, 1500);
         });
 	</script>
-	<script defer
+	<!-- <script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
 		data-cf-beacon='{"rayId":"89fe6da8ddf07c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
 		crossorigin="anonymous">
-	</script>
+	</script> -->
 </body>
 </html>

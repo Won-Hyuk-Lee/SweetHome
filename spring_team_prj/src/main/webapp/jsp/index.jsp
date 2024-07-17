@@ -54,6 +54,8 @@
 <link rel="stylesheet"
 	href="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link type="text/css" href="../resources/spaces/css/spaces.css" rel="stylesheet">
 <script>
 	(function(w, d, s, l, i) {
@@ -570,6 +572,5 @@
 	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
-
 </body>
 </html>

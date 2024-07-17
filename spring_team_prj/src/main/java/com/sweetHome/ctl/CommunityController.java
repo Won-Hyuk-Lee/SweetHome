@@ -22,4 +22,6 @@ public class CommunityController {
         model.addAttribute("KEY_COMMUNITYLIST", communities);
         return "jsp/community";
     }
+    
+    
 }
