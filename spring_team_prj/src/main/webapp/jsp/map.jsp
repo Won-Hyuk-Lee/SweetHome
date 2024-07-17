@@ -160,21 +160,18 @@
     //url 이동 함수들이 조금더 안전하게 전달 되도록 encodeURIComponent 사용
 // 네이버 부동산 URL 함수
 function openNaver(lat, lng) {
-    console.log("네이버 부동산으로 이동 - 위도: " + lat + ", 경도: " + lng);
     var url = 'https://new.land.naver.com/rooms?ms=' + encodeURIComponent(lat) + ',' + encodeURIComponent(lng) + ',16&a=APT:OPST:ABYG:OBYG:GM:OR:VL:DDDGG:JWJT:SGJT:HOJT&e=RETAIL&aa=SMALLSPCRENT';
     window.open(url, '_blank');
 }
 
 //다음 부동산 URL 함수
 function openDaum(lat, lng) {
-    console.log("다음 부동산으로 이동 - 위도: " + lat + ", 경도: " + lng);
     var url = 'https://realty.daum.net/home/oneroom/map?latitude=' + encodeURIComponent(lat) + '&longitude=' + encodeURIComponent(lng) + '&zoom=3';
     window.open(url, '_blank');
 }
 
 // 직방 URL 함수
 function openZigbang(lat, lng) {
-    console.log("직방으로 이동 - 위도: " + lat + ", 경도: " + lng);
     var url = 'https://www.zigbang.com/home/oneroom/map?latitude=' + encodeURIComponent(lat) + '&longitude=' + encodeURIComponent(lng) + '&zoom=3';
     window.open(url, '_blank');
 }
