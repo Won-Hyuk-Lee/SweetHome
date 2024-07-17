@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 
 <html lang="zxx">
@@ -40,7 +42,7 @@
             background-color: #0056b3; /* 호버 시 색상 변경 */
         }
         /* 각 버튼별 고유 색상 */
-        .edit-button { background-color: #6A94D4; }
+        .update-button { background-color: #6A94D4; }
         .delete-button { background-color: #4A90E2; }
         .list-button { background-color: #7B9EBF; }
         .reply-input { width: 100%; margin-top: 20px; }
@@ -72,8 +74,8 @@
         .reply-input { width: 100%; margin-top: 20px; }
     </style>
 
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Spaces - Blog post</title>
 <meta name="viewport"
@@ -377,7 +379,8 @@
         <div class="container">
             <div id="communityName">${KEY_BOARDVO.community.communityName}</div>
             <h1 id="boardTitle">${KEY_BOARDVO.boardTitle}</h1>
-            <p id="userInfo">${KEY_BOARDVO.user.userNickname} | ${KEY_BOARDVO.updatedDate}</p>
+            <p id="userInfo">${KEY_BOARDVO.user.userNickname} | <fmt:formatDate value="${KEY_BOARDVO.updatedDate}" pattern="YYYY-MM-dd HH:MM"/></p>
+            
             <div class="divider"></div>
             <div id="boardContents">${KEY_BOARDVO.boardContents}</div>
             <div class="recommend-container">
@@ -389,7 +392,7 @@
             <div class="action-container">
                 <div class="action-button list-button">목록</div>
                 <div class="action-button delete-button">삭제</div>
-                <div class="action-button edit-button">수정</div>
+                <div class="action-button update-button">수정</div>
             </div>
         </div>
 	        
@@ -519,21 +522,26 @@
             console.log("추천 버튼이 클릭되었습니다.");
         });
 
-        $(".edit-button").click(function() {
-            console.log("수정 버튼이 클릭되었습니다.");
-            // 여기에 수정 기능 구현
+        
+        
+        $(document).ready(function() {
+	        $(".update-button").click(function() {
+	        	window.location.href = "${pageContext.request.contextPath}/board/board_update_move?boardSeq=" + ${KEY_BOARDVO.boardSeq};
+	        });
         });
 
-        $(".delete-button").click(function() {
-            if(confirm("정말로 삭제하시겠습니까?")) {
-                console.log("삭제 버튼이 클릭되었습니다.");
-                // 여기에 삭제 기능 구현
-            }
+        $(document).ready(function() {
+	        $(".delete-button").click(function() {
+	            if(confirm("정말로 삭제하시겠습니까?")) {
+	            	window.location.href = "${pageContext.request.contextPath}/board/board_delete?communitySeq=" + ${KEY_BOARDVO.community.communitySeq} + "&boardSeq=" + ${KEY_BOARDVO.boardSeq};
+	            }
+	        });
         });
-
-        $(".list-button").click(function() {
-        	 window.location.href = "${pageContext.request.contextPath}/board/board_list?communitySeq="+${KEY_BOARDVO.community.communitySeq};
-            // 여기에 목록 페이지로 이동하는 기능 구현
+        
+        $(document).ready(function() {
+            $(".list-button").click(function() {
+                window.location.href = "${pageContext.request.contextPath}/board/board_list?communitySeq=" + ${KEY_BOARDVO.community.communitySeq};
+            });
         });
     </script>   
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
@@ -574,11 +582,11 @@
             }, 1500);
         });
 	</script>
-	<script defer
+	<!-- <script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
 		data-cf-beacon='{"rayId":"89fe6da8ddf07c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
 		crossorigin="anonymous">
-	</script>
+	</script> -->
 </body>
 </html>

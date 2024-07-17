@@ -23,17 +23,26 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.boardDetail(boardSeq);
 	} // (게시글 상세 정보조회)
 	
-	public void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> files) {
+//	public void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> files) {
+//		boardMapper.boardInsert(bvo);
+//		if (files.isEmpty() == true) {
+//			for(BoardImagesVO file : files) {
+//				file.setBoardSeq(bvo.getBoardSeq());
+//				boardMapper.boardImagesInsert(file);
+//			}
+//		}
+//	} //(게시글 +이미지 추가)
+	public void svcBoardInsert(BoardVO bvo) {
 		boardMapper.boardInsert(bvo);
-		if (files.isEmpty() == true) {
-			for(BoardImagesVO file : files) {
-				file.setBoardSeq(bvo.getBoardSeq());
-				boardMapper.boardImagesInsert(file);
-			}
-		}
-	} //(게시글 +이미지 추가)
-//	svcBoardUpdate (게시글 수정)
-//	svcBoardDelete (게시글 삭제)
+	}
+	
+	public void svcBoardUpdate(BoardVO bvo) {
+		boardMapper.boardUpdate(bvo);
+	} //(게시글 수정)
+	
+	public void svcBoardDelete(BoardVO bvo) {
+		boardMapper.boardDelete(bvo);
+	} //(게시글 삭제)
 	public void svcBoardRecommend(int boardSeq, int userSeq){
 		boardMapper.boardRecommend(boardSeq, userSeq);
 	} //(게시글 추천)

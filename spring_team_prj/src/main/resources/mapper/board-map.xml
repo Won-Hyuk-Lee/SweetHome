@@ -48,22 +48,23 @@
 	<select id="boardList" resultMap="boardResultMap" parameterType="int">
 		select b.board_seq, b.board_title, u.user_nickname, b.updated_date, c.community_seq, c.community_name, count(r.board_seq) as recommend
 		from board b, recommend r, users u, community c
-		where b.board_seq = r.board_seq
+		where b.board_seq = r.board_seq(+)
 		and b.user_seq = u.user_seq
 		and b.community_seq = c.community_seq
+		and b.community_seq = #{communitySeq}
 		group by b.board_seq, b.board_title, u.user_nickname, b.updated_date, c.community_seq, c.community_name
 		order by b.board_seq desc
 	</select>
 
     <select id="boardDetail" resultMap="boardResultMap" parameterType="int">
-        select b.board_seq, b.board_title, b.board_contents, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname, count(r.board_seq) as recommend
+        select b.board_seq, b.board_title, b.board_contents, b.updated_date, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname, count(r.board_seq) as recommend
 		from board b, board_images i, recommend r, community c, users u
-		where b.board_seq = i.board_seq
+		where b.board_seq = i.board_seq(+)
 		and b.board_seq = r.board_seq(+)
 		and b.community_seq = c.community_seq
 		and b.user_seq = u.user_seq
 		and b.board_seq = #{boardSeq}
-		group by b.board_seq, b.board_title, b.board_contents, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname
+		group by b.board_seq, b.board_title, b.board_contents, b.updated_date, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname
     </select>
 	
 	<insert id="boardRecommend" parameterType="int">
@@ -72,7 +73,7 @@
 	
 	<insert id="boardInsert" parameterType="com.sweetHome.vo.BoardVO">
 		insert into board values
-		(board_seq.nextval, #{boardTitle}, #{boardContents}, sysdate, sysdate, #{userSeq}, #{communitySeq}
+		(board_seq.nextval, #{boardTitle}, #{boardContents}, sysdate, sysdate, 1, #{communitySeq})
 	</insert>
 
 	<insert id="boardImagesInsert" parameterType="com.sweetHome.vo.BoardImagesVO">
@@ -80,7 +81,17 @@
 		values (board_images_seq.nextval, #{boardSeq}, #{oname}, #{sname}, #{fsize}, #{fpath})
 	</insert>
 
-
+	<delete id="boardDelete" parameterType="com.sweetHome.vo.BoardVO">
+		delete from board where board_seq = #{boardSeq}
+	</delete>
+	
+	<update id="boardUpdate" parameterType="com.sweetHome.vo.BoardVO">
+		update board set
+		board_title = #{boardTitle},
+		board_contents = #{boardContents},
+		updated_date = sysdate
+		where board_seq = #{boardSeq}
+	</update>
 
 
 

@@ -147,7 +147,7 @@
 		<nav id="navbar-main"
 			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
 			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="../resources/spaces/index.html"><img
+				<a class="navbar-brand @@logo_classes" href="${pageContext.request.contextPath}/community/list"><img
 					class="navbar-brand-dark common"
 					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
 					<img class="navbar-brand-light common"
@@ -413,15 +413,7 @@
                         <td>${board.user.userNickname}</td>
                         <!-- 수정일 셀 -->
                         <td class="updated-date">
-						    <!-- 현재일과 비교하여 HH:mm 또는 MM-dd 형식으로 표시 -->
-						    <c:choose>
-						        <c:when test="${board.updatedDate == today}">
-						            <fmt:formatDate value="${board.updatedDate}" pattern="HH:mm"/>
-						        </c:when>
-						        <c:otherwise>
-						            <fmt:formatDate value="${board.updatedDate}" pattern="MM-dd"/>
-						        </c:otherwise>
-						    </c:choose>
+			            	<fmt:formatDate value="${board.updatedDate}" pattern="MM-dd HH:MM"/>
 						</td>
                         <td>${board.recommend.size()}</td>
                     </tr>
@@ -709,10 +701,10 @@
 	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
-	<script defer
+<!-- <script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
 		data-cf-beacon='{"rayId":"89fe6da49a557c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script> -->
 </body>
 </html>

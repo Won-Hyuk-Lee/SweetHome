@@ -8,9 +8,10 @@ import com.sweetHome.vo.BoardVO;
 public interface BoardService {
 	List<BoardVO> svcBoardList(int communitySeq);
 	BoardVO svcBoardDetail(int boardSeq); //(게시글 상세 정보조회)
-	void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> flist);// (게시글 +이미지 추가)
-//	svcBoardUpdate (게시글 수정)
-//	svcBoardDelete (게시글 삭제)
+//	void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> flist);// (게시글 +이미지 추가)
+	void svcBoardInsert(BoardVO bvo);
+	void svcBoardUpdate(BoardVO bvo); //(게시글 수정)
+	void svcBoardDelete(BoardVO bvo); //(게시글 삭제)
 	void svcBoardRecommend(int boardSeq, int userSeq); //(게시글 추천)
 //	svcBoardSearch (게시글 제목 검색)
 //	svcBoardSearch (게시글 내용 검색)

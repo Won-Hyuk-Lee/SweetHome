@@ -5,7 +5,7 @@
 <html lang="zxx">
 <head>
     <meta charset="UTF-8">
-    <title>${KEY_COMMUNITYVO.communityName} 갤러리</title>
+    <title>${KEY_COMMUNITYVO.communityName} 게시판</title>
     <style>
         .container { width: 80%; margin: 0 auto; }
         .tabs { /* 탭 스타일 */ }
@@ -32,8 +32,8 @@
         .cancel-button { background-color: #4A90E2; }
     </style>
     
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<!-- <link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Spaces - Blog post</title>
 <meta name="viewport"
@@ -329,33 +329,34 @@
 		<section class="section-header pb-7 bg-primary text-white">
 		</section>
 		
-		    <div class="container">
+    <div class="container">
         
         <h1 class="gallery-name">${param.communityName} 게시판</h1>
         
-        <form id="boardForm" action="/board/board_insert" method="post" enctype="multipart/form-data">
+        <form id="boardForm" action="${pageContext.request.contextPath}/board/board_insert" method="post">
             <input type="hidden" name="communitySeq" value="${param.communitySeq}">
             
             <div class="form-group">
                 <p>제목</p>
-                <input type="text" id="boardTitle" name="boardTitle" required>
+                <input type="text" name="boardTitle" required>
             </div>
             
             <div class="form-group">
                 <p>본문 내용</p>
-                <textarea id="boardContent" name="boardContent" rows="10" required></textarea>
+                <textarea name="boardContents" rows="10" required></textarea>
             </div>
-            
+<!--             
             <div class="form-group">
                 <p>첨부 파일</p>
-                <input type="file" id="boardImages" name="boardImages" multiple>
+                <input type="file" name="boardImages" multiple>
             </div>
-            
-            <div class="button-group">
-                <button type="button" id="cnacel-button" class="action-button cancel-button" onclick="history.back()">취소</button>
-                <input type="button" id="insert-button" class="action-button insert-button" values="등록">
-            </div>
+-->
+			<div class="button-group">
+			    <button type="button" id="cancel-button" class="action-button cancel-button" onclick="history.back()">취소</button>
+			    <button type="submit" form="boardForm" id="insert-button" class="action-button insert-button">등록</button>
+			</div>
         </form>
+        
     </div>
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
@@ -428,14 +429,7 @@
 		</div>
 	</footer>
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-	<script>
-		$(document).ready(function() {
-			  $('#insert-button').click(function(e) {
-				e.preventDefault();
-			    $("#boardForm").submit();
-			  });
-		});
-	</script>
+
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
 	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -473,11 +467,22 @@
 				$allLoaded.show();
 			}, 1500);
 		});
+		document.getElementById('insert-button').addEventListener('click', function(event) {
+			console.log('버튼 클릭');
+		    // 이벤트 리스너가 폼 제출을 방지하지 않는지 확인하세요
+		    var form = document.getElementById('boardForm');
+		    if (form.checkValidity()) {
+		        form.submit();
+		    } else {
+		        event.preventDefault();
+		        alert('모든 필드를 올바르게 입력해 주세요.');
+		    }
+		});
 	</script>
-	<script defer
+	<!-- <script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
 		data-cf-beacon='{"rayId":"89fe6da8ddf07c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
-		crossorigin="anonymous"></script>
+		crossorigin="anonymous"></script> -->
 </body>
 </html>
