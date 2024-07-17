@@ -21,6 +21,9 @@
 	 <select id="nicknameCheck" parameterType="String" resultType="int"> 
 		SELECT COUNT(*) FROM users WHERE user_nickname = #{userNinkname}
     </select>
+	 <select id="login" parameterType="String" resultType="java.lang.Integer"> 
+    select user_seq from users where user_email = #{userEmail} AND user_pw = #{userPw}
+</select>
   
 
 </mapper>

@@ -191,20 +191,53 @@
 	href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
 <link type="text/css" href="../resources/spaces/css/spaces.css"
 	rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-	(function(w, d, s, l, i) {
-		w[l] = w[l] || [];
-		w[l].push({
-			'gtm.start' : new Date().getTime(),
-			event : 'gtm.js'
-		});
-		var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l='
-				+ l
-				: '';
-		j.async = true;
-		j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-		f.parentNode.insertBefore(j, f);
-	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
+    (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({
+            'gtm.start' : new Date().getTime(),
+            event : 'gtm.js'
+        });
+        var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer' ? '&l='
+                + l
+                : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
+    
+    // 로그인 함수
+    function login() {
+        var userEmail = document.getElementById('email').value;
+        var userPw = document.getElementById('password').value;
+        
+        $.ajax({
+            method: "POST",
+            url: "/auth/login", // 수정: ${pageContext.request.contextPath} 대신 실제 URL을 사용
+            data: {
+                userEmail: userEmail,
+                userPw: userPw
+            },
+            dataType: "text", // 응답을 text로 받음
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("에러:", textStatus, errorThrown);
+                alert('로그인 에러');
+            },
+            success: function(response) {
+                console.log("RestController Spring 응답:", response);
+                if(response!="로그인 실패"){                	
+                alert('로그인 성공');
+                window.location.href = "${pageContext.request.contextPath}/common/index?seq="+response; 
+                }
+                else {
+                	
+                alert('로그인 실패');
+                }
+                // 로그인 성공 후 추가적으로 할 작업을 여기에 작성
+            }
+        });
+    }
 </script>
 </head>
 <body>
@@ -276,7 +309,7 @@
 										</div>
 									</div>
 								</div>
-								<button type="submit" class="btn btn-block btn-primary">로그인</button>
+								<button type="submit" class="btn btn-block btn-primary" onclick="login()">로그인</button>
 							</form>
 							<div class="mt-3 mb-4 text-center">
 								<span class="font-weight-normal">소셜 로그인</span>

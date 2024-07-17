@@ -4,11 +4,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Spaces - Directory Listing Landing Page</title>
+<title>Spaces - Directory Listing Landing page 2</title>
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name="title" content="Spaces - Directory Listing Landing Page">
+<meta name="title" content="Spaces - Directory Listing Landing page 2">
 <meta name="author" content="Themesberg">
 <meta name="description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
@@ -19,7 +21,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://demo.themesberg.com/pixel-pro">
 <meta property="og:title"
-	content="Spaces - Directory Listing Landing Page">
+	content="Spaces - Directory Listing Landing page 2">
 <meta property="og:description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
 <meta property="og:image"
@@ -28,7 +30,7 @@
 <meta property="twitter:url"
 	content="https://demo.themesberg.com/pixel-pro">
 <meta property="twitter:title"
-	content="Spaces - Directory Listing Landing Page">
+	content="Spaces - Directory Listing Landing page 2">
 <meta property="twitter:description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
 <meta property="twitter:image"
@@ -52,8 +54,6 @@
 <link rel="stylesheet"
 	href="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link type="text/css" href="../resources/spaces/css/spaces.css" rel="stylesheet">
 <script>
 	(function(w, d, s, l, i) {
@@ -76,6 +76,7 @@
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
+	<!-- 상단 탭 시작 -->
 	<header class="header-global">
 		<nav id="navbar-main"
 			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
@@ -105,99 +106,12 @@
 						<li class="nav-item dropdown"><a href="#"
 							id="mainPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Front pages</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-megamenu p-3 p-lg-4"
-								aria-labelledby="mainPagesDropdown">
-								<div class="row">
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">Main pages</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index.html">Landing</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index-2.html">Landing 2</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index-3.html">Landing 3</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/about.html">About</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/pricing.html">Pricing</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/team.html">Team</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/contact.html">Contact</a></li>
-										</ul>
-										<h6 class="d-block text-primary">Legal</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/legal.html">Legal center</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/terms.html">Terms & agreement</a></li>
-										</ul>
-									</div>
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">Listing</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces.html">All spaces</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces-map.html">Map view</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces-sidebar.html">All spaces
-													sidebar</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/single-space.html">Space details</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/profile.html">Profile</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Support</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/support.html">Support center</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/support-topic.html">Support topic</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Blog</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blog.html">Blog</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blog-post.html">Blog post</a></li>
-										</ul>
-									</div>
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">User</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/sign-in.html">Sign in</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/sign-up.html">Sign up</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/forgot-password.html">Forgot password</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/reset-password.html">Reset password</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Special</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/404.html">404 Not Found</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/500.html">500 Server Error</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/maintenance.html">Maintenance</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/coming-soon.html">Coming soon</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blank.html">Blank page</a></li>
-										</ul>
-									</div>
-								</div>
-							</div></li>
+								class="nav-link-inner-text mr-1">지도</span> 
+						
 						<li class="nav-item dropdown"><a href="#"
 							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Dashboard</span> <i
+								class="nav-link-inner-text mr-1">커뮤니티</span> <i
 								class="fas fa-angle-down nav-link-arrow"></i></a>
 						<div class="dropdown-menu dropdown-megamenu-sm p-3 p-lg-4"
 								aria-labelledby="dashboardPagesDropdown">
@@ -241,7 +155,7 @@
 						<li class="nav-item dropdown"><a href="#"
 							id="supportDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Support</span> <i
+								class="nav-link-inner-text mr-1">내 정보</span> <i
 								class="fas fa-angle-down nav-link-arrow"></i></a>
 						<div class="dropdown-menu dropdown-menu-lg"
 								aria-labelledby="supportDropdown">
@@ -275,10 +189,10 @@
 						target="_blank"
 						class="btn btn-md btn-outline-white animate-up-2 mr-3"><i
 						class="fas fa-book mr-1"></i> <span class="d-xl-none">Docs</span>
-						<span class="d-none d-xl-inline">Components</span></a> <a
-						href="https://themes.getbootstrap.com/product/spaces/"
+						<span class="d-none d-xl-inline">로그인</span></a>
+					<!--  	 <a href="https://themes.getbootstrap.com/product/spaces/"
 						target="_blank" class="btn btn-md btn-secondary animate-up-2"><i
-						class="fas fa-shopping-bag mr-2"></i> Buy now</a>
+						class="fas fa-shopping-bag mr-2"></i> 로그아웃</a>-->
 				</div>
 				<div class="d-flex d-lg-none align-items-center">
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -290,6 +204,8 @@
 			</div>
 		</nav>
 	</header>
+	
+	<!-- 상단 탭 끝 -->
 	<main>
 		<div
 			class="preloader bg-dark flex-column justify-content-center align-items-center">
@@ -299,217 +215,252 @@
 					class="rotate-letter" alt="Letter loader">
 			</div>
 		</div>
-		<section
-			class="section section-header section-image bg-primary overlay-primary text-white pb-4 pb-md-7"
-			data-background="../resources/spaces/assets/img/hero-1.jpg">
+		<section class="section section-header bg-soft pb-12">
 			<div class="container">
-				<div class="row justify-content-center mb-4 mb-xl-5">
-					<div class="col-12 col-xl-10 text-center">
-						<h1 class="display-2">Find your space.</h1>
-						<p class="lead text-muted mt-4 px-md-6">
+				<div class="row justify-content-between align-items-center">
+					<div class="col-12 col-md-5 order-lg-1">
+						<h1 class="display-3 lh-100 font-weight-bold mb-0">Flexible
+							Office. Fast.</h1>
+						<p class="lead my-4">
 							<span class="font-weight-bold">12,000+</span> coworking spaces
-							with desks, offices & meeting rooms in <span
-								class="font-weight-bold">165+</span> countries. Discover and
-							reserve space today.
+							with offices & meeting rooms in <span class="font-weight-bold">165+</span>
+							countries.Discover and reserve space today.
 						</p>
-					</div>
-				</div>
-				<div class="row mb-5">
-					<div class="col-12">
-						<div class="card p-md-2">
-							<div class="card-body p-2 p-md-0">
-								<form autocomplete="off" class="row" method="get"
-									action="./all-spaces.html">
-									<div class="col-12 col-lg-5">
-										<div class="form-group form-group-lg mb-lg-0">
-											<div class="input-group">
-												<div class="input-group-prepend">
-													<span class="input-group-text"><span
-														class="fas fa-map-marker-alt"></span></span>
-												</div>
-												<input id="search-location" type="text"
-													class="form-control autocomplete"
-													placeholder="Search location" required>
-											</div>
+						<form autocomplete="off" class="row" method="get"
+							action="./all-spaces.html">
+							<div class="col-12 mb-3 mb-lg-4">
+								<div class="form-group form-group-lg mb-0">
+									<div class="input-group">
+										<div class="input-group-prepend">
+											<span class="input-group-text"><span
+												class="fas fa-map-marker-alt"></span></span>
 										</div>
+										<input id="search-location" type="text"
+											class="form-control autocomplete"
+											placeholder="Search location" required>
 									</div>
-									<div class="col-12 col-lg-4">
-										<div class="input-group input-group-lg mb-3 mb-lg-0">
-											<div class="input-group-prepend">
-												<span class="input-group-text"><i
-													class="far fa-calendar-alt"></i></span>
-											</div>
-											<input class="form-control datepicker"
-												placeholder="Select date" type="text" required>
-										</div>
-									</div>
-									<div class="col-12 col-lg-3">
-										<button class="btn btn-lg btn-primary btn-block animate-up-2"
-											type="submit">Find a desk</button>
-									</div>
-								</form>
+								</div>
 							</div>
-						</div>
+							<div class="col-12 col-lg-6 mb-3 mb-lg-4">
+								<div class="input-group input-group-lg">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><span
+											class="fas fa-sliders-h"></span></span>
+									</div>
+									<select class="custom-select" id="exampleFormControlSelect1"><option>Type</option>
+										<option>On-Demand Meeting Spaces</option>
+										<option>Office Space</option></select>
+								</div>
+							</div>
+							<div class="col-12 col-lg-6">
+								<div class="input-group input-group-lg">
+									<div class="input-group-prepend">
+										<span class="input-group-text"><span
+											class="far fa-user-circle"></span></span>
+									</div>
+									<select class="custom-select" id="exampleFormControlSelect3"><option>Team
+											Size</option>
+										<option>Any</option>
+										<option>1-20</option>
+										<option>21-50</option>
+										<option>51-100</option></select>
+								</div>
+							</div>
+							<div class="col-12 mt-4">
+								<button class="btn btn-lg btn-primary btn-block animate-up-2"
+									type="submit">Find a desk</button>
+							</div>
+						</form>
 					</div>
-				</div>
-				<div class="row justify-content-center">
-					<div class="col">
-						<ul
-							class="d-flex flex-wrap justify-content-center list-unstyled mb-0">
-							<li class="mx-xl-4 mx-2 mb-5 mb-md-0"><img
-								class="img-fluid image-xs"
-								src="../resources/spaces/assets/img/clients/northwestern.svg"
-								alt="northwestern logo"></li>
-							<li class="mx-xl-4 mx-2 mb-5 mb-md-0"><img
-								class="img-fluid image-xs"
-								src="../resources/spaces/assets/img/clients/google.svg" alt="google logo"></li>
-							<li class="mx-xl-4 mx-2 mb-5 mb-md-0"><img
-								class="img-fluid image-xs"
-								src="../resources/spaces/assets/img/clients/university-of-chicago.svg"
-								alt="university logo"></li>
-							<li class="mx-xl-4 mx-2 mb-5 mb-md-0"><img
-								class="img-fluid image-xs"
-								src="../resources/spaces/assets/img/clients/corsair.svg" alt="corsair logo"></li>
-						</ul>
+					<div class="col-12 col-md-7 order-lg-2 d-none d-md-block">
+						<img src="../resources/spaces/assets/img/illustrations/hero.svg" class="img-fluid"
+							alt="Forest Illustration">
 					</div>
 				</div>
 			</div>
 		</section>
-		<section class="section section-lg pb-lg-6 pb-5">
-			<div class="container">
+		<div class="section section-lg pt-0">
+			<div class="container mt-n10">
 				<div class="row">
-					<div
-						class="col-12 col-sm-6 col-md-4 text-center mb-4 mb-md-0 px-lg-4">
-						<img class="img-fluid image-lg mb-4"
-							src="../resources/spaces/assets/img/illustrations/easy-transaction.svg"
-							alt="northwestern logo">
-						<h2 class="h4">Extraordinarily easy</h2>
-						<p>Our search makes it verry simple to find your space. And
-							from office match, we are here to help you.</p>
-					</div>
-					<div
-						class="col-12 col-sm-6 col-md-4 text-center mb-4 mb-md-0 px-lg-4">
-						<img class="img-fluid image-lg mb-4"
-							src="../resources/spaces/assets/img/illustrations/support.svg"
-							alt="northwestern logo">
-						<h2 class="h4">Truly transparent</h2>
-						<p>We give you all this info, lifting the lid on actual
-							offices, real availability, and accurate pricing.</p>
-					</div>
-					<div
-						class="col-12 col-sm-6 col-md-4 text-center mb-4 mb-md-0 px-lg-4">
-						<img class="img-fluid image-lg mb-4"
-							src="../resources/spaces/assets/img/illustrations/payment.svg"
-							alt="northwestern logo">
-						<h2 class="h4">Best prices</h2>
-						<p>Choose Spaces and our experts will save you around 15% off
-							the list price. What are you waiting for?</p>
-					</div>
-				</div>
-				<div class="row mt-6">
-					<div class="col-12">
-						<div class="card rounded border border-light">
-							<div class="card-body p-3 p-md-5">
-								<div class="progress-wrapper mb-3 mb-md-5">
-									<div class="progress-info info-xl d-block d-md-flex">
-										<div class="progress-label">
-											<h2 class="h4 text-dark">Space occupancy level</h2>
+					<div class="col-md-12">
+						<div class="basic-carousel owl-carousel owl-theme">
+							<div class="item">
+								<div class="card border-light mb-4 animate-up-5">
+									<a href="./single-space.html" class="position-relative"><img
+										src="../resources/spaces/assets/img/image-office.jpg"
+										class="card-img-top p-2 rounded-xl" alt="themesberg office"></a>
+									<div class="card-body">
+										<a href="./single-space.html"><h4 class="h5">Collaborative
+												Workspace</h4></a>
+										<div class="d-flex my-4">
+											<span class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="badge badge-pill badge-primary ml-2">5.0</span>
 										</div>
-										<div>
-											<span class="text-gray h4">85%</span>
-										</div>
+										<ul class="list-group mb-3">
+											<li class="list-group-item small p-0"><span
+												class="fas fa-map-marker-alt mr-2"></span>New York,
+												Manhattan, USA</li>
+											<li class="list-group-item small p-0"><span
+												class="fas fa-bullseye mr-2"></span>Old Street (2 mins walk)</li>
+											<li class="list-group-item small p-0"><span
+												class="fas fa-bullseye mr-2"></span>Shoreditch High Street
+												(10 mins walk)</li>
+										</ul>
 									</div>
-									<div class="progress progress-lg my-4 my-md-0">
-										<div class="progress-bar bg-primary" role="progressbar"
-											aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"
-											style="width: 85%;"></div>
+									<div class="card-footer bg-soft border-top">
+										<div class="d-flex justify-content-between">
+											<div class="col pl-0">
+												<span class="text-muted font-small d-block mb-2">Monthly</span>
+												<span class="h5 text-dark font-weight-bold">2100$</span>
+											</div>
+											<div class="col">
+												<span class="text-muted font-small d-block mb-2">People</span>
+												<span class="h5 text-dark font-weight-bold">12</span>
+											</div>
+											<div class="col pr-0">
+												<span class="text-muted font-small d-block mb-2">Sq.Ft</span>
+												<span class="h5 text-dark font-weight-bold">1200</span>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div
-									class="d-block d-lg-flex flex-column flex-lg-row justify-content-between align-items-center">
-									<div class="mb-5 mb-lg-0">
-										<h4 class="font-weight-normal">Book your tour experience
-											today!</h4>
-										<p class="lead mb-0">
-											Schedule a tour, make an appointment to rent space<br
-												class="d-none d-lg-inline">at Themesberg, or ask for
-											more information.
-										</p>
+							</div>
+							<div class="item">
+								<div class="card border-light mb-4 animate-up-5">
+									<a href="./single-space.html" class="position-relative"><img
+										src="../resources/spaces/assets/img/cowork-office.jpg"
+										class="card-img-top p-2 rounded-xl" alt="developer desk"></a>
+									<div class="card-body">
+										<a href="./single-space.html"><h4 class="h5">Coworking
+												Workspace</h4></a>
+										<div class="d-flex my-4">
+											<span class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-light"></span> <span
+												class="star fas fa-star text-light"></span> <span
+												class="badge badge-pill badge-primary ml-2">3.0</span>
+										</div>
+										<ul class="list-group mb-3">
+											<li class="list-group-item small p-0"><span
+												class="fas fa-map-marker-alt mr-2"></span>California, USA</li>
+											<li class="list-group-item small p-0"><span
+												class="fas fa-bullseye mr-2"></span>Penny Market Street (15
+												mins walk)</li>
+											<li class="list-group-item small p-0"><span
+												class="fas fa-bullseye mr-2"></span>Museum Street (20 mins
+												walk)</li>
+										</ul>
 									</div>
-									<div class="align-content-end">
-										<button type="button" class="btn btn-primary animate-up-2"
-											data-toggle="modal" data-target="#modal-form">Schedule
-											a tour</button>
+									<div class="card-footer bg-soft border-top">
+										<div class="d-flex justify-content-between">
+											<div class="col pl-0">
+												<span class="text-muted font-small d-block mb-2">Monthly</span>
+												<span class="h5 text-dark font-weight-bold">300$</span>
+											</div>
+											<div class="col">
+												<span class="text-muted font-small d-block mb-2">People</span>
+												<span class="h5 text-dark font-weight-bold">24</span>
+											</div>
+											<div class="col pr-0">
+												<span class="text-muted font-small d-block mb-2">Sq.Ft</span>
+												<span class="h5 text-dark font-weight-bold">2000</span>
+											</div>
+										</div>
 									</div>
-									<div class="modal fade" id="modal-form" tabindex="-1"
-										role="dialog" aria-labelledby="modal-form" aria-hidden="true">
-										<div class="modal-dialog modal-dialog-centered modal-md"
-											role="document">
-											<div class="modal-content">
-												<div class="modal-body p-0">
-													<div class="card bg-soft shadow-md border-0">
-														<div class="card-header bg-white py-4">
-															<button type="button" class="close" data-dismiss="modal"
-																aria-label="Close">
-																<span aria-hidden="true">Ã</span>
-															</button>
-															<div class="text-muted text-center mb-3">
-																<h3>Interested?</h3>
-																<p>We would love to show you Spaces. Please let us
-																	know when you are available and we will make our best
-																	to receive you on that date and time.</p>
-															</div>
-														</div>
-														<div class="card-body">
-															<form class="mt-3">
-																<div class="form-group">
-																	<div class="input-group mb-4">
-																		<div class="input-group-prepend">
-																			<span class="input-group-text"><span
-																				class="far fa-user"></span></span>
-																		</div>
-																		<input class="form-control" placeholder="Name"
-																			type="text" required>
-																	</div>
-																</div>
-																<div class="form-group">
-																	<div class="input-group mb-4">
-																		<div class="input-group-prepend">
-																			<span class="input-group-text"><span
-																				class="far fa-envelope"></span></span>
-																		</div>
-																		<input class="form-control" placeholder="Email"
-																			type="email" required>
-																	</div>
-																</div>
-																<div class="form-group">
-																	<div class="input-group mb-4">
-																		<div class="input-group-prepend">
-																			<span class="input-group-text"><span
-																				class="fas fa-mobile"></span></span>
-																		</div>
-																		<input class="form-control" placeholder="Phone"
-																			type="number" required>
-																	</div>
-																</div>
-																<div class="input-group mb-lg-0">
-																	<div class="input-group-prepend">
-																		<span class="input-group-text"><span
-																			class="far fa-calendar-alt"></span></span>
-																	</div>
-																	<input class="form-control datepicker"
-																		placeholder="Select date" type="text"
-																		data-position="top">
-																</div>
-																<div class="text-center">
-																	<button type="submit"
-																		class="btn btn-block btn-primary mt-4">Send
-																		Request Quote</button>
-																</div>
-															</form>
-														</div>
-													</div>
-												</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="card border-light mb-4 animate-up-5">
+									<a href="./single-space.html" class="position-relative"><img
+										src="../resources/spaces/assets/img/meeting-office.jpg"
+										class="card-img-top p-2 rounded-xl" alt="wood office"></a>
+									<div class="card-body">
+										<a href="./single-space.html"><h4 class="h5">Meeting
+												Office Space</h4></a>
+										<div class="d-flex my-4">
+											<span class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-light"></span> <span
+												class="badge badge-pill badge-primary ml-2">4.0</span>
+										</div>
+										<ul class="list-group mb-3">
+											<li class="list-group-item small p-0"><span
+												class="fas fa-map-marker-alt mr-2"></span>London, Canary
+												Wharf, UK</li>
+											<li class="list-group-item small p-0"><span
+												class="fas fa-bullseye mr-2"></span>Stamford Bridge Stadium
+												(5 mins walk)</li>
+											<li class="list-group-item small p-0"><span
+												class="fas fa-bullseye mr-2"></span>Bluebird Chelsea
+												Restaurant (15 mins walk)</li>
+										</ul>
+									</div>
+									<div class="card-footer bg-soft border-top">
+										<div class="d-flex justify-content-between">
+											<div class="col pl-0">
+												<span class="text-muted font-small d-block mb-2">Monthly</span>
+												<span class="h5 text-dark font-weight-bold">50$</span>
+											</div>
+											<div class="col">
+												<span class="text-muted font-small d-block mb-2">People</span>
+												<span class="h5 text-dark font-weight-bold">2-4</span>
+											</div>
+											<div class="col pr-0">
+												<span class="text-muted font-small d-block mb-2">Sq.Ft</span>
+												<span class="h5 text-dark font-weight-bold">400</span>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="item">
+								<div class="card border-light mb-4 animate-up-5">
+									<a href="./single-space.html" class="position-relative"><img
+										src="../resources/spaces/assets/img/conference-office.jpg"
+										class="card-img-top p-2 rounded-xl" alt="pixel room"></a>
+									<div class="card-body">
+										<a href="./single-space.html"><h4 class="h5">Conference
+												Room</h4></a>
+										<div class="d-flex my-4">
+											<span class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="fas fa-star-half text-warning"></span> <span
+												class="badge badge-pill badge-primary ml-2">4.7</span>
+										</div>
+										<ul class="list-group mb-3">
+											<li class="list-group-item small p-0"><span
+												class="fas fa-map-marker-alt mr-2"></span>Paris,
+												Ãle-de-France, France</li>
+											<li class="list-group-item small p-0"><span
+												class="fas fa-bullseye mr-2"></span>LE BHV MARAIS (5 mins
+												walk)</li>
+											<li class="list-group-item small p-0"><span
+												class="fas fa-bullseye mr-2"></span>Shakespeare & Company
+												(15 mins walk)</li>
+										</ul>
+									</div>
+									<div class="card-footer bg-soft border-top">
+										<div class="d-flex justify-content-between">
+											<div class="col pl-0">
+												<span class="text-muted font-small d-block mb-2">Monthly</span>
+												<span class="h5 text-dark font-weight-bold">150$</span>
+											</div>
+											<div class="col">
+												<span class="text-muted font-small d-block mb-2">People</span>
+												<span class="h5 text-dark font-weight-bold">2-10</span>
+											</div>
+											<div class="col pr-0">
+												<span class="text-muted font-small d-block mb-2">Sq.Ft</span>
+												<span class="h5 text-dark font-weight-bold">200</span>
 											</div>
 										</div>
 									</div>
@@ -518,10 +469,104 @@
 						</div>
 					</div>
 				</div>
-				<div class="row mt-6">
+			</div>
+		</div>
+		<section class="section section-lg pt-0">
+			<div class="container">
+				<div class="row">
 					<div class="col-12">
-						<h3 class="h4 mb-5">Top Cities</h3>
+						<h3 class="h4 mb-5">Top Coworking Cities</h3>
 					</div>
+				</div>
+				<div class="row d-none d-lg-block">
+					<div class="col-12">
+						<div class="form-row">
+							<div class="col-4">
+								<a href="./all-spaces.html"
+									class="card img-card fh-400 border-0 outer-bg"
+									data-background-inner="../resources/spaces/assets/img/newyork.jpg"><div
+										class="inner-bg overlay-dark"></div>
+									<div class="card-img-overlay d-flex align-items-center">
+										<div class="card-body text-white p-3">
+											<h5 class="text-uppercase text-center">United States</h5>
+										</div>
+									</div></a>
+							</div>
+							<div class="col-3">
+								<a href="./all-spaces.html"
+									class="card img-card fh-220 border-0 outer-bg mb-2"
+									data-background-inner="../resources/spaces/assets/img/paris.jpg"><div
+										class="inner-bg overlay-dark"></div>
+									<div class="card-img-overlay d-flex align-items-center">
+										<div class="card-body text-white p-3">
+											<h5 class="text-uppercase text-center">France</h5>
+										</div>
+									</div></a> <a href="./all-spaces.html"
+									class="card img-card fh-170 border-0 outer-bg"
+									data-background-inner="../resources/spaces/assets/img/paris.jpg"><div
+										class="inner-bg overlay-dark"></div>
+									<div class="card-img-overlay d-flex align-items-center">
+										<div class="card-body text-white p-3">
+											<h5 class="text-uppercase text-center">Italy</h5>
+										</div>
+									</div></a>
+							</div>
+							<div class="col-5">
+								<div class="form-row mb-2">
+									<div class="col-5">
+										<a href="./all-spaces.html"
+											class="card img-card fh-400 border-0 outer-bg"
+											data-background-inner="../resources/spaces/assets/img/tokyo.jpg"><div
+												class="inner-bg overlay-dark"></div>
+											<div class="card-img-overlay d-flex align-items-center">
+												<div class="card-body text-white p-3">
+													<h5 class="font-weight-normal text-uppercase text-center">Japan</h5>
+												</div>
+											</div></a>
+									</div>
+									<div class="col-7">
+										<a href="./all-spaces.html"
+											class="card img-card fh-400 border-0 outer-bg"
+											data-background-inner="../resources/spaces/assets/img/london.jpg"><div
+												class="inner-bg overlay-dark"></div>
+											<div class="card-img-overlay d-flex align-items-center">
+												<div class="card-body text-white p-3">
+													<h5 class="text-uppercase text-center">UK</h5>
+												</div>
+											</div></a>
+									</div>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="form-row">
+									<div class="col">
+										<a href="./all-spaces.html"
+											class="card img-card fh-240 border-0 outer-bg"
+											data-background-inner="../resources/spaces/assets/img/tokyo.jpg"><div
+												class="inner-bg overlay-dark"></div>
+											<div class="card-img-overlay d-flex align-items-center">
+												<div class="card-body text-white p-3">
+													<h5 class="font-weight-normal text-uppercase text-center">Japan</h5>
+												</div>
+											</div></a>
+									</div>
+									<div class="col">
+										<a href="./all-spaces.html"
+											class="card img-card fh-240 border-0 outer-bg"
+											data-background-inner="../resources/spaces/assets/img/london.jpg"><div
+												class="inner-bg overlay-dark"></div>
+											<div class="card-img-overlay d-flex align-items-center">
+												<div class="card-body text-white p-3">
+													<h5 class="text-uppercase text-center">UK</h5>
+												</div>
+											</div></a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row d-lg-none">
 					<div class="col-12 col-sm-6 col-lg-3 mb-4 mb-lg-0">
 						<a href="./all-spaces.html"
 							class="card img-card fh-400 border-0 outer-bg"
@@ -567,9 +612,9 @@
 							</div></a>
 					</div>
 				</div>
-				<div class="row mt-6">
+				<div class="row mt-7">
 					<div class="col-12">
-						<h3 class="h4 mb-5">Trending Spaces</h3>
+						<h3 class="h4 mb-5">Most Reviewed Shared Office Spaces</h3>
 					</div>
 					<div class="col-12 col-md-6 col-lg-4">
 						<div class="card border-light mb-4 animate-up-5">
@@ -628,9 +673,9 @@
 									<span class="star fas fa-star text-warning"></span> <span
 										class="star fas fa-star text-warning"></span> <span
 										class="star fas fa-star text-warning"></span> <span
-										class="star fas fa-star text-light"></span> <span
-										class="star fas fa-star text-light"></span> <span
-										class="badge badge-pill badge-primary ml-2">3.0</span>
+										class="star fas fa-star text-warning"></span> <span
+										class="star fas fa-star text-warning"></span> <span
+										class="badge badge-pill badge-primary ml-2">5.0</span>
 								</div>
 								<ul class="list-group mb-3">
 									<li class="list-group-item small p-0"><span
@@ -685,8 +730,8 @@
 										class="fas fa-bullseye mr-2"></span>Stamford Bridge Stadium (5
 										mins walk)</li>
 									<li class="list-group-item small p-0"><span
-										class="fas fa-bullseye mr-2"></span>Bluebird Chelsea Pub (15
-										mins walk)</li>
+										class="fas fa-bullseye mr-2"></span>Bluebird Chelsea
+										Restaurant (15 mins walk)</li>
 								</ul>
 							</div>
 							<div class="card-footer bg-soft border-top">
@@ -848,12 +893,206 @@
 							<a href="./all-spaces.html"
 								class="btn btn-primary animate-up-2 mb-2">Browse All</a>
 						</div>
-						<span class="small">1422 spaces in 34 countries</span>
+						<span class="font-xs">142 spaces in 6 countries</span>
 					</div>
 				</div>
 			</div>
 		</section>
-		<section class="section section-lg bg-soft">
+		<section class="section section-lg bg-soft pb-11">
+			<div class="container">
+				<div class="row justify-content-center mb-4 mb-lg-6">
+					<div class="col-12 col-md-8 text-center">
+						<h2 class="h1">Why remote workers use Spaces</h2>
+						<p class="lead mt-3">All youâll need are the details of the
+							building and location, the types of space, pricing and some good
+							quality photographs.</p>
+					</div>
+				</div>
+				<div class="row align-items-center justify-content-between">
+					<div class="col-md-6 col-lg-7 mb-5">
+						<img class="img-fluid d-none d-md-block"
+							src="../resources/spaces/assets/img/illustrations/why-us.svg"
+							alt="Laptop illustration">
+					</div>
+					<div class="col-md-6 col-lg-4">
+						<div class="card mb-2 bg-soft">
+							<div class="card-body p-0">
+								<div class="d-flex p-2">
+									<div>
+										<div class="icon icon-secondary">
+											<span class="fas fa-chair"></span>
+										</div>
+									</div>
+									<div class="pl-4">
+										<h3 class="h5 icon-box-title">Thousands of seats</h3>
+										<p>Find a space nearby to meet, work, & focus on your
+											projects</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card mb-2 bg-soft">
+							<div class="card-body p-0">
+								<div class="d-flex p-2">
+									<div>
+										<div class="icon icon-secondary">
+											<span class="fas fa-mobile-alt"></span>
+										</div>
+									</div>
+									<div class="pl-4">
+										<h3 class="h5 icon-box-title">Check in with the app</h3>
+										<p>Drop by when you need the space and check in for
+											instant access.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="card mb-2 bg-soft">
+							<div class="card-body p-0">
+								<div class="d-flex p-2">
+									<div>
+										<div class="icon icon-secondary">
+											<span class="fas fa-shield-alt"></span>
+										</div>
+									</div>
+									<div class="pl-4">
+										<h3 class="h5 icon-box-title">Verified venues</h3>
+										<p>Search for the perfect space from our 4500+ verified
+											venues.</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<div class="section section-lg pt-0">
+			<div class="container mt-n10">
+				<div class="row">
+					<div class="col">
+						<div
+							class="testimonial-carousel owl-carousel owl-theme mt-4 mt-sm-0">
+							<div class="item p-3">
+								<div class="card border-light text-center mb-4">
+									<div class="card-body py-5">
+										<img src="../resources/spaces/assets/img/clients/airbnb.svg"
+											class="img-fluid image-sm" alt="airbnb logo">
+										<p class="blockquote font-base py-5 mb-0">
+											"A big thank to Spaces team for your valuable help and
+											expertise. " <span class="d-block mt-3"><span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star far fa-star text-gray"></span></span>
+										</p>
+										<a href="#" class="btn btn-outline-primary"><span
+											class="fas fa-book-open mr-2"></span> See story</a>
+									</div>
+								</div>
+							</div>
+							<div class="item p-3">
+								<div class="card border-light text-center mb-4">
+									<div class="card-body py-5">
+										<img src="../resources/spaces/assets/img/clients/paypal.svg"
+											class="img-fluid image-sm" alt="paypal logo">
+										<p class="blockquote font-base py-5 mb-0">
+											" A big thank to Spaces team for your valuable help and
+											expertise. " <span class="d-block mt-3"><span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span></span>
+										</p>
+										<a href="#" class="btn btn-outline-primary"><span
+											class="fas fa-book-open mr-2"></span> See story</a>
+									</div>
+								</div>
+							</div>
+							<div class="item p-3">
+								<div class="card border-light text-center mb-4">
+									<div class="card-body py-5">
+										<img src="../resources/spaces/assets/img/clients/ebay.svg"
+											class="img-fluid image-sm" alt="ebay logo">
+										<p class="blockquote font-base py-5 mb-0">
+											" A big thank to Spaces team for your valuable help and
+											expertise. " <span class="d-block mt-3"><span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span></span>
+										</p>
+										<a href="#" class="btn btn-outline-primary"><span
+											class="fas fa-book-open mr-2"></span> See story</a>
+									</div>
+								</div>
+							</div>
+							<div class="item p-3">
+								<div class="card border-light text-center mb-4">
+									<div class="card-body py-5">
+										<img src="../resources/spaces/assets/img/clients/forbes.svg"
+											class="img-fluid image-sm" alt="forbes logo">
+										<p class="blockquote font-base py-5 mb-0">
+											" A big thank to Spaces team for your valuable help and
+											expertise. " <span class="d-block mt-3"><span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span></span>
+										</p>
+										<a href="#" class="btn btn-outline-primary"><span
+											class="fas fa-book-open mr-2"></span> See story</a>
+									</div>
+								</div>
+							</div>
+							<div class="item p-3">
+								<div class="card border-light text-center mb-4">
+									<div class="card-body py-5">
+										<img src="../resources/spaces/assets/img/clients/corsair.svg"
+											class="img-fluid image-sm" alt="corsair logo">
+										<p class="blockquote font-base py-5 mb-0">
+											" A big thank to Spaces team for your valuable help and
+											expertise. " <span class="d-block mt-3"><span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span></span>
+										</p>
+										<a href="#" class="btn btn-outline-primary"><span
+											class="fas fa-book-open mr-2"></span> See story</a>
+									</div>
+								</div>
+							</div>
+							<div class="item p-3">
+								<div class="card border-light text-center mb-4">
+									<div class="card-body py-5">
+										<img src="../resources/spaces/assets/img/clients/pinterest.svg"
+											class="img-fluid image-sm" alt="pinterest logo">
+										<p class="blockquote font-base py-5 mb-0">
+											" " A big thank to Spaces team for your valuable help and
+											expertise. " <span class="d-block mt-3"><span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span> <span
+												class="star fas fa-star text-warning"></span></span>
+										</p>
+										<a href="#" class="btn btn-outline-primary"><span
+											class="fas fa-book-open mr-2"></span> See story</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<section class="section section-lg pt-0">
 			<div class="container">
 				<div class="row justify-content-center mb-4 mb-lg-5">
 					<div class="col-12 col-md-8 text-center">
@@ -873,24 +1112,26 @@
 								id="tab-32" role="tablist">
 								<li class="nav-item mr-0 mr-sm-2 mr-md-0 mb-3 mb-lg-0"><a
 									class="nav-link flex-sm-fill text-sm-center active"
-									id="tab-find-space" data-toggle="tab" href="#find-space"
-									role="tab" aria-controls="find-space" aria-selected="true"><span
+									id="tab-link-example-7" data-toggle="tab"
+									href="#link-example-7" role="tab"
+									aria-controls="link-example-7" aria-selected="true"><span
 										class="far fa-building mr-2"></span>Find your Space</a></li>
 								<li class="nav-item"><a
 									class="nav-link flex-sm-fill text-sm-center"
-									id="tab-submit-space" data-toggle="tab" href="#submit-space"
-									role="tab" aria-controls="submit-space" aria-selected="false"><span
+									id="tab-link-example-8" data-toggle="tab"
+									href="#link-example-8" role="tab"
+									aria-controls="link-example-8" aria-selected="false"><span
 										class="far fa-money-bill-alt mr-2"></span>Submit your Space</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-12">
 						<div class="tab-content mt-lg-5" id="tabcontentexample-3">
-							<div class="tab-pane fade show active" id="find-space"
-								role="tabpanel" aria-labelledby="tab-find-space">
+							<div class="tab-pane fade show active" id="link-example-7"
+								role="tabpanel" aria-labelledby="tab-link-example-7">
 								<div class="row">
 									<div class="col-12 col-md-6 col-lg-4">
-										<div class="card border-light mb-4 mb-lg-0 text-center">
+										<div class="card border-0 mb-4 mb-lg-0 text-center">
 											<div class="card-body p-4 px-xl-4 py-xl-6">
 												<div
 													class="icon icon-shape icon-lg icon-shape-primary mb-4 rounded-circle">
@@ -903,7 +1144,7 @@
 										</div>
 									</div>
 									<div class="col-12 col-md-6 col-lg-4">
-										<div class="card border-light mb-4 mb-lg-0 text-center">
+										<div class="card border-0 mb-4 mb-lg-0 text-center">
 											<div class="card-body p-4 px-xl-4 py-xl-6">
 												<div
 													class="icon icon-shape icon-lg icon-shape-primary mb-4 rounded-circle">
@@ -916,7 +1157,7 @@
 										</div>
 									</div>
 									<div class="col-12 col-md-6 col-lg-4">
-										<div class="card border-light mb-4 mb-lg-0 text-center">
+										<div class="card border-0 mb-4 mb-lg-0 text-center">
 											<div class="card-body p-4 px-xl-4 py-xl-6">
 												<div
 													class="icon icon-shape icon-lg icon-shape-primary mb-4 rounded-circle">
@@ -929,17 +1170,17 @@
 										</div>
 									</div>
 								</div>
-								<div class="col mt-lg-6 mt-3 text-center">
+								<div class="col text-center">
 									<a href="./all-spaces.html"
 										class="btn btn-primary animate-up-2"><i
 										class="fas fa-search-location mr-2"></i>Find a Location</a>
 								</div>
 							</div>
-							<div class="tab-pane fade" id="submit-space" role="tabpanel"
-								aria-labelledby="tab-submit-space">
+							<div class="tab-pane fade" id="link-example-8" role="tabpanel"
+								aria-labelledby="tab-link-example-8">
 								<div class="row">
 									<div class="col-12 col-lg-4">
-										<div class="card border-light mb-4 mb-lg-0 text-center">
+										<div class="card border-0 mb-4 mb-lg-0 text-center">
 											<div class="card-body p-3 px-xl-4 py-xl-6">
 												<div
 													class="icon icon-shape icon-lg icon-shape-secondary mb-4 rounded-circle">
@@ -952,7 +1193,7 @@
 										</div>
 									</div>
 									<div class="col-12 col-lg-4">
-										<div class="card border-light mb-4 mb-lg-0 text-center">
+										<div class="card border-0 mb-4 mb-lg-0 text-center">
 											<div class="card-body p-3 px-xl-4 py-xl-6">
 												<div
 													class="icon icon-shape icon-lg icon-shape-secondary mb-4 rounded-circle">
@@ -965,7 +1206,7 @@
 										</div>
 									</div>
 									<div class="col-12 col-lg-4">
-										<div class="card border-light mb-4 mb-lg-0 text-center">
+										<div class="card border-0 mb-4 mb-lg-0 text-center">
 											<div class="card-body p-3 px-xl-4 py-xl-6">
 												<div
 													class="icon icon-shape icon-lg icon-shape-secondary mb-4 rounded-circle">
@@ -978,8 +1219,8 @@
 										</div>
 									</div>
 								</div>
-								<div class="col mt-6 text-center">
-									<a href="./submit-item.html"
+								<div class="col text-center">
+									<a href="./html/pages/submit-item.html"
 										class="btn btn-secondary animate-up-2"><i
 										class="fas fa-plus mr-2"></i>List a Space</a>
 								</div>
@@ -989,100 +1230,6 @@
 				</div>
 			</div>
 		</section>
-		<div class="section bg-white">
-			<div class="container">
-				<div class="row align-items-center justify-content-center">
-					<div class="col-12 col-lg-9 text-center">
-						<div class="nav-wrapper">
-							<ul
-								class="nav nav-pills nav-pill-circle flex-sm-row justify-content-center"
-								id="tab-34" role="tablist">
-								<li class="nav-item"><a
-									class="nav-link bg-white text-sm-center avatar-link active"
-									id="tab-link-example-13" data-toggle="tab"
-									href="#link-example-13" role="tab"
-									aria-controls="link-example-13" aria-selected="true"><img
-										class="rounded-circle"
-										src="../resources/spaces/assets/img/team/profile-picture-3.jpg"
-										alt="Bonnie avatar"></a></li>
-								<li class="nav-item"><a
-									class="nav-link bg-white text-sm-center avatar-link"
-									id="tab-link-example-14" data-toggle="tab"
-									href="#link-example-14" role="tab"
-									aria-controls="link-example-14" aria-selected="false"><img
-										class="rounded-circle"
-										src="../resources/spaces/assets/img/team/profile-picture-1.jpg"
-										alt="Neil avatar"></a></li>
-								<li class="nav-item"><a
-									class="nav-link bg-white text-sm-center avatar-link"
-									id="tab-link-example-15" data-toggle="tab"
-									href="#link-example-15" role="tab"
-									aria-controls="link-example-15" aria-selected="false"><img
-										class="rounded-circle"
-										src="../resources/spaces/assets/img/team/profile-picture-4.jpg"
-										alt="Christopher avatar"></a></li>
-							</ul>
-						</div>
-						<div class="card">
-							<div class="card-body p-0">
-								<div class="tab-content" id="tabcontentexample-5">
-									<div class="tab-pane fade show active" id="link-example-13"
-										role="tabpanel" aria-labelledby="tab-link-example-13">
-										<span class="d-block my-3"><span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span></span>
-										<blockquote class="blockquote bg-white p-0 p-md-4">
-											I used Themesberg's logo creation services along with their
-											website development services. They have been a pleasure to
-											work with and have been responsive to all questions asked.
-											<footer class="blockquote-footer mt-3 text-primary">Bonnie
-												Green</footer>
-										</blockquote>
-									</div>
-									<div class="tab-pane fade" id="link-example-14" role="tabpanel"
-										aria-labelledby="tab-link-example-14">
-										<span class="d-block my-3"><span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span></span>
-										<blockquote class="blockquote bg-white p-0 p-md-4">
-											I have worked with Themesberg over the years on a number of
-											projects. I've always found them to be responsive, friendly
-											and up-to-date with all the technology - which everyone knows
-											is constantly changing.
-											<footer class="blockquote-footer mt-3 text-primary">Neil
-												Sims</footer>
-										</blockquote>
-									</div>
-									<div class="tab-pane fade" id="link-example-15" role="tabpanel"
-										aria-labelledby="tab-link-example-15">
-										<span class="d-block my-3"><span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span> <span
-											class="star fas fa-star text-warning"></span></span>
-										<blockquote class="blockquote bg-white p-0 p-md-4">
-											Themesberg are the best in the business for website design
-											and building. They worked hard to give us exactly what we
-											wanted and more for our website and delivered on time. We
-											would definitely use them again.
-											<footer class="blockquote-footer mt-3 text-primary">Christopher
-												Wood</footer>
-										</blockquote>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</main>
 	<div class="section py-0">
 		<div class="container z-2">
@@ -1236,10 +1383,6 @@
 	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
-	<script defer
-		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-		data-cf-beacon='{"rayId":"89fe6d9049b77c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
-		crossorigin="anonymous"></script>
+
 </body>
 </html>

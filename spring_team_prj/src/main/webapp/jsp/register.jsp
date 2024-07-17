@@ -262,9 +262,9 @@
 												<input class="form-control form-control-lg" id="sample6_extraAddress"
 													name="sample6_extraAddress" placeholder="" type="text"
 													aria-label="Address" maxlength="66" required readonly>
-													
-
-							
+												<input class="form-control form-control-lg" id="sample6_postcode"
+													name="sample6_extraAddress" placeholder="" type="text"
+													aria-label="Address" maxlength="66" required readonly>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -287,7 +287,6 @@
 										<input class="form-control" id="sample6_detailAddress"
 											name="sample6_detailAddress" placeholder="상세주소" type="text"
 											aria-label="Detailed address" maxlength="50">
-											<input type="hidden" id="sample6_postcode"">
 									</div>
 								</div>
 								<button type="submit" class="btn btn-block btn-primary"

@@ -49,8 +49,8 @@ public class AuthServiceImpl implements AuthService {
 
 	}
 	@Override
-	public void svcLogin() {
-		// TODO Auto-generated method stub
+	public Integer svcLogin(String userEmail,String userPw) {
+		return authMapper.login(userEmail, userPw);
 		
 	}
 

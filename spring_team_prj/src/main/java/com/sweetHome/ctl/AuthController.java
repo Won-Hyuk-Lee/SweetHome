@@ -26,6 +26,19 @@ public class AuthController {
 		System.out.println("받은닉네임값"+userNinkname);
 		return Integer.toString( AuthService.svcNicknameCheck(userNinkname));
 	}
+	@RequestMapping(value = "/login", method = RequestMethod.POST,produces="application/json; charset=utf8")
+	public String ctlLogin (@RequestParam("userEmail") String userEmail,@RequestParam("userPw") String userPw) {
+		System.out.println("받은이메일값"+userEmail+"받은비밀번호"+userPw);
+		Integer seq = AuthService.svcLogin(userEmail, userPw);
+		System.out.println(seq);
+		if(seq==null) {
+			return "로그인 실패";
+		}
+		else {
+			return Integer.toString(seq);
+		}
+		
+	}
 
 
 }

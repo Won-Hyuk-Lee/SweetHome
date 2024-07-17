@@ -2,9 +2,9 @@ package com.sweetHome.svc;
 
 public interface AuthService {
 
-	    void sendEmail(String to,String num);
+    void sendEmail(String to,String num);
 	
-	void svcLogin ();
+	Integer svcLogin(String userEmail,String userPw);
 	void svcLoginOauth ();
 	void svcLogOut ();
 	void svcRegister ();
