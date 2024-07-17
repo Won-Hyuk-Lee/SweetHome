@@ -40,6 +40,12 @@
         <button type="submit" id="searchButton">검색</button>
     </form>
 
+    <h2>목적지를 입력하세요</h2>
+    <form id="destinationForm" action="${pageContext.request.contextPath}/map/view" method="GET">
+        <input type="text" id="destination" name="destination" placeholder="목적지 입력">
+        <button type="submit">검색</button>
+    </form>
+
     <script>
         $(document).ready(function() {
             $("#districtForm").on('submit', function(e) {
