@@ -9,12 +9,17 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.sweetHome.mapper.AuthMapper;
+
 @Service
 public class AuthServiceImpl implements AuthService {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
+	
+	@Autowired
+    private AuthMapper authMapper;
+	
 	@Value("${mail.username}")
 	private String emailUsername;
 
@@ -44,8 +49,8 @@ public class AuthServiceImpl implements AuthService {
 
 	}
 	@Override
-	public void svcLogin() {
-		// TODO Auto-generated method stub
+	public Integer svcLogin(String userEmail,String userPw) {
+		return authMapper.login(userEmail, userPw);
 		
 	}
 
@@ -74,9 +79,8 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public void svcNicknameCheck() {
-		// TODO Auto-generated method stub
-		
+	public int svcNicknameCheck(String userNickname) {
+		return authMapper.nicknameCheck(userNickname);
 	}
 
 	@Override

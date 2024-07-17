@@ -90,3 +90,6 @@ out/
 
 # 기타 생성 파일
 mvn-eclipse/
+
+# API키 프로퍼티 관리
+src/main/resources/api/
