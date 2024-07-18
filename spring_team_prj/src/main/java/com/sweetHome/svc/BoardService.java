@@ -22,7 +22,7 @@ public interface BoardService {
     void svcBoardDelete(BoardVO bvo);                
 
     // 게시글 추천을 삽입하는 메서드
-    int svcBoardRecommendInsert(BoardVO bvo);    
+    String svcBoardRecommendInsert(BoardVO bvo);    
 //	svcBoardSearch 제목
 //	svcBoardSearch 내용
 //	svcBoardSearch 제목+내용

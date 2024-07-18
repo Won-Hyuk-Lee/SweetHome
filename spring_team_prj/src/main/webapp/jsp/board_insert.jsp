@@ -335,6 +335,7 @@
         
         <form id="boardForm" action="${pageContext.request.contextPath}/board/board_insert" method="post">
             <input type="hidden" name="communitySeq" value="${param.communitySeq}">
+            <input type="hidden" name="userSeq" value="${sessionScope.userSeq}">
             
             <div class="form-group">
                 <p>제목</p>

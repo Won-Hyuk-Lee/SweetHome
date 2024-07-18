@@ -47,12 +47,14 @@ public class BoardServiceImpl implements BoardService {
     } // (게시글 삭제)
     
     // 게시글 추천을 삽입하는 메서드
-    public int svcBoardRecommendInsert(BoardVO bvo){
+    public String svcBoardRecommendInsert(BoardVO bvo){
         int check = boardMapper.boardRecommendCheck(bvo);
         if (check == 0) {
             boardMapper.boardRecommendInsert(bvo);
+            int recommend = boardMapper.boardRecommend(bvo.getBoardSeq());
+            return Integer.toString(recommend);
         }
-        return check;
+        else return "check";
     } // (게시글 추천 삽입)
     
 //	svcBoardSearch 제목

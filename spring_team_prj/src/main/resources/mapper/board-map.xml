@@ -78,7 +78,7 @@
 	
 	<insert id="boardInsert" parameterType="com.sweetHome.vo.BoardVO">
 		insert into board values
-		(board_seq.nextval, #{boardTitle}, #{boardContents}, sysdate, sysdate, 1, #{communitySeq})
+		(board_seq.nextval, #{boardTitle}, #{boardContents}, sysdate, sysdate, #{userSeq}, #{communitySeq})
 	</insert>
 
 	<insert id="boardImagesInsert" parameterType="com.sweetHome.vo.BoardImagesVO">
