@@ -111,8 +111,8 @@ public class BoardController {
 	@RequestMapping(value="board_recommend_insert", method=RequestMethod.POST)
 	@ResponseBody
 	public String ctlBoardRecommend(@RequestBody BoardVO bvo) {
-	    int check = boardService.svcBoardRecommendInsert(bvo);
-	    return Integer.toString(check);
+	    String check = boardService.svcBoardRecommendInsert(bvo);
+	    return check;
 	}
 //	ctlBoardSearch (게시글 제목 검색)
 //	ctlBoardSearch (게시글 내용 검색)

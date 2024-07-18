@@ -385,7 +385,9 @@
             <div id="boardContents">${KEY_BOARDVO.boardContents}</div>
             <div class="recommend-container">
                 <div class="recommend-box">
-                    <span id="recommendCount">추천수: ${KEY_BOARDVO.recommend}</span>
+                	<div id="recommendCountDiv">
+                   		<span id="recommendCount">추천수: ${KEY_BOARDVO.recommend}</span>
+                    </div>
                     <div class="recommend-button">추천</div>
                     <input type="hidden" id="boardSeq" value="${KEY_BOARDVO.boardSeq}">
 					<input type="hidden" id="userSeq" value="${sessionScope.userSeq}">
@@ -503,10 +505,14 @@
 		            contentType: "application/json",
 		            data: JSON.stringify(recommendationData),
 		            success:function(response) {
-		            	if(response == '0'){
-							alert('추천 되었습니다~!~!');
-		            	} else {
+		            	if(response == 'check'){
 		            		alert('이미 추천 하셨습니다~!~!')
+		            	} else {
+		            		alert('추천 되었습니다~!~!');
+		                    var recommendCount = parseInt(response); // response 값은 추천 수
+		                    var htmlStr = "추천수: <span id='recommendCount'>"+response+"</span>";
+		                    
+		                    $("#recommendCountDiv").empty().append(htmlStr);
 		            	}
 		            },
 		            error: function(jqXHR, textStatus, errorThrown) {
