@@ -23,7 +23,7 @@
     </select>
 	 <select id="login" parameterType="String" resultType="java.lang.Integer"> 
     select user_seq from users where user_email = #{userEmail} AND user_pw = #{userPw}
+    
 </select>
-  
 
 </mapper>

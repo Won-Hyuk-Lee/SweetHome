@@ -31,7 +31,7 @@
         SELECT * FROM Users
     </select>
 
-    <select id="selectUsersByEmail" parameterType="String" resultMap="userResultMap">
+    <select id="selectUserByEmail" parameterType="String" resultMap="userResultMap">
         SELECT * FROM Users WHERE user_email = #{userEmail}
     </select>
     
@@ -54,5 +54,20 @@
     <delete id="deleteUser" parameterType="int">
         DELETE FROM Users WHERE user_seq = #{userSeq}
     </delete>
+      <!-- OAuth :: 신규회원 토큰저장  -->
+    <insert id="insertUsersOauthTbl" parameterType="com.sweetHome.vo.UsersOauthVO">
+        INSERT INTO users_oauth (
+            user_seq, picture, access_token, refresh_token
+        ) VALUES (
+            #{userSeq}, #{picture}, #{accessToken}, #{refreshToken}
+        )
+    </insert>
+     
+    <!-- OAuth :: 기존회원:토큰갱신  -->
+	<update id="updateUserOauthTbl" parameterType="com.sweetHome.vo.UsersOauthVO">
+		UPDATE users_oauth 
+		SET IMAGE_URL=#{imageUrl}, access_token = #{accessToken}, refresh_token = #{refreshToken} 
+		WHERE user_seq = #{userSeq} 
+	</update>
 
 </mapper>
