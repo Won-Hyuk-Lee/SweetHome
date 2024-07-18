@@ -385,8 +385,10 @@
             <div id="boardContents">${KEY_BOARDVO.boardContents}</div>
             <div class="recommend-container">
                 <div class="recommend-box">
-                    <span id="recommendCount">추천수: ${KEY_BOARDVO.recommend.size()}</span>
+                    <span id="recommendCount">추천수: ${KEY_BOARDVO.recommend}</span>
                     <div class="recommend-button">추천</div>
+                    <input type="hidden" id="boardSeq" value="${KEY_BOARDVO.boardSeq}">
+					<input type="hidden" id="userSeq" value="${sessionScope.userSeq}">
                 </div>
             </div>
             <div class="action-container">
@@ -395,38 +397,6 @@
                 <div class="action-button update-button">수정</div>
             </div>
         </div>
-	        
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-12 col-lg-8">
-						<div>
-							<label class="h5 mb-4" for="exampleFormControlTextarea1"><span
-								class="badge badge-md badge-primary text-uppercase mr-2">23</span>
-								Comments</label>
-							<textarea class="form-control border border-light-gray"
-								id="exampleFormControlTextarea1" placeholder="Add your comment"
-								rows="6" data-bind-characters-target="#charactersRemaining"
-								maxlength="1000"></textarea>
-							<div class="d-flex justify-content-between mt-3">
-								<small class="font-weight-light text-dark"><span
-									id="charactersRemaining"></span> characters remaining</small>
-								<button class="btn btn-primary animate-up-2">Send</button>
-							</div>
-							<div class="mt-5">
-								<div class="card bg-soft border-light rounded p-4 mb-4">
-									<div class="d-flex justify-content-between mb-4">
-										<span class="font-small"><a href="#"><img
-												class="avatar-sm img-fluid rounded-circle mr-2"
-												src="../resources/spaces/assets/img/team/profile-picture-1.jpg" alt="avatar">
-												<span class="font-weight-bold">John Doe</span></a></span>
-									</div>
-									<p class="m-0">
-										I really like that the Pixel uses a lot of Bootstrap 4's
-										classes to position elements across the website. I also like
-										the fact that we can get a version of the code without Sass if
-										needed.<br>
-										<br>When is the next product coming? :)
-									</p>
 								<div class="mt-5 text-center">
 									<button id="loadOnClick"
 										class="btn btn-primary btn-loading-overlay mr-2 mb-2">
@@ -517,11 +487,37 @@
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
-        $(".recommend-button").click(function() {
-            // 여기에 추천 기능을 구현할 수 있습니다.
-            console.log("추천 버튼이 클릭되었습니다.");
+	
+        $(document).ready(function() {
+	        $(".recommend-button").click(function() {
+	            var boardSeq = $("#boardSeq").val();
+	            var userSeq = $("#userSeq").val();
+	            var recommendationData = {
+	                    boardSeq: boardSeq,
+	                    userSeq: userSeq
+	                };
+		        // AJAX를 이용한 서버 전송
+		        $.ajax({
+		            method: "POST",
+		            url: "${pageContext.request.contextPath}/board/board_recommend_insert",
+		            contentType: "application/json",
+		            data: JSON.stringify(recommendationData),
+		            success:function(response) {
+		            	if(response == '0'){
+							alert('추천 되었습니다~!~!');
+		            	} else {
+		            		alert('이미 추천 하셨습니다~!~!')
+		            	}
+		            },
+		            error: function(jqXHR, textStatus, errorThrown) {
+		                console.log("Error:", jqXHR.responseText);
+		            }
+		        });
+        
+        
+	        });
         });
-
+        
         
         
         $(document).ready(function() {

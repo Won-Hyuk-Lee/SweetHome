@@ -17,9 +17,9 @@ public class BoardVO {
 	private Date updatedDate;
 	private int userSeq;
 	private int communitySeq;
-	private UserVO user;							// userNickname 받는 join 위해서
-	private CommunityVO community;					// community name 받는 join 위해서
-	private List<ReplyVO> reply;				// board 랑 reply 랑 1:n 관계라서 arrayList로 받음
-	private List<BoardImagesVO> boardImages;	// board 랑 boardImages랑 1:n 관계라서 arrayList로 받음
-	private List<RecommendVO> recommend;		// board 랑 recommend랑 1:n 관계라서 arrayList로 받음
+	private UserVO user;	
+	private CommunityVO community;
+	private List<ReplyVO> reply;	
+	private List<BoardImagesVO> boardImages;
+	private int recommend;
 }
