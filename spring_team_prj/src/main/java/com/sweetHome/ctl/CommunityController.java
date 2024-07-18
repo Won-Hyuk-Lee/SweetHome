@@ -16,6 +16,7 @@ public class CommunityController {
     @Autowired
     private CommunityService communityService;
     
+    // 게시판 목록 조회
     @RequestMapping(value = "/list", method = {RequestMethod.GET, RequestMethod.POST})
     public String getCommunityList(Model model) {
         List<CommunityVO> communities = communityService.svcCommunitySelect();

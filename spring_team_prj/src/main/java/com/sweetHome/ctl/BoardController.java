@@ -23,26 +23,29 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
+	// 게시글 전체 조회
 	@RequestMapping(value = "/board_list", method=RequestMethod.GET)
 	public String ctlBoardList(@RequestParam("communitySeq") int communitySeq, Model model){
-		List<BoardVO> boardList = boardService.svcBoardList(communitySeq);
-		model.addAttribute("KEY_BOARDLIST", boardList);
-		return "jsp/board";
-	} // (게시글 전체 조회)
-	
+	    List<BoardVO> boardList = boardService.svcBoardList(communitySeq);
+	    model.addAttribute("KEY_BOARDLIST", boardList);
+	    return "jsp/board";
+	}
+
+	// 게시글 상세 정보 조회
 	@RequestMapping(value = "/board_detail", method=RequestMethod.GET)
 	public String ctlBoardDetail(@RequestParam("boardSeq") int boardSeq, Model model) {
-		BoardVO bvo = boardService.svcBoardDetail(boardSeq);
-		model.addAttribute("KEY_BOARDVO", bvo);
-		
-		return "jsp/board_detail";
-	} //(게시글 상세 정보조회)
-	
+	    BoardVO bvo = boardService.svcBoardDetail(boardSeq);
+	    model.addAttribute("KEY_BOARDVO", bvo);
+	    
+	    return "jsp/board_detail";
+	}
+
+	// 게시글 추가
 	@RequestMapping(value="/board_insert", method=RequestMethod.POST)
 	public String ctlBoardInsert(@ModelAttribute BoardVO bvo) {
-		boardService.svcBoardInsert(bvo);
-		
-		return "redirect:/board/board_list?communitySeq="+bvo.getCommunitySeq();
+	    boardService.svcBoardInsert(bvo);
+	    
+	    return "redirect:/board/board_list?communitySeq="+bvo.getCommunitySeq();
 	}
 
 //	@RequestMapping(value = "/board_insert", method=RequestMethod.POST)
@@ -79,36 +82,38 @@ public class BoardController {
 //		return "redirect:/board/board_list";
 //	} // (게시글 +이미지 추가)
 	
+	// 게시글 수정 페이지로 이동
 	@RequestMapping(value="board_update_move", method=RequestMethod.GET)
 	public String ctlBoardUpdateMove(@RequestParam("boardSeq") int boardSeq, Model model) {
-		BoardVO bvo = boardService.svcBoardDetail(boardSeq);
-		model.addAttribute("KEY_UPDATE_DATA", bvo);
-		
-		return "jsp/board_update";
+	    BoardVO bvo = boardService.svcBoardDetail(boardSeq);
+	    model.addAttribute("KEY_UPDATE_DATA", bvo);
+	    
+	    return "jsp/board_update";
 	}
-	
+
+	// 게시글 수정 처리
 	@RequestMapping(value="board_update", method=RequestMethod.POST)
 	public String ctlBoardUpdate(@ModelAttribute BoardVO bvo){
-		boardService.svcBoardUpdate(bvo);
-		
-		return "redirect:/board/board_detail?boardSeq="+bvo.getBoardSeq();
-	} //(게시글 수정)
+	    boardService.svcBoardUpdate(bvo);
+	    
+	    return "redirect:/board/board_detail?boardSeq="+bvo.getBoardSeq();
+	}
 
+	// 게시글 삭제 처리
 	@RequestMapping(value="/board_delete", method=RequestMethod.GET)
 	public String ctlBoardDelete(@ModelAttribute BoardVO bvo) {
-		boardService.svcBoardDelete(bvo);
-		
-		return "redirect:/board/board_list?communitySeq="+bvo.getCommunitySeq();
-	} //(게시글 삭제)
-	
-	
+	    boardService.svcBoardDelete(bvo);
+	    
+	    return "redirect:/board/board_list?communitySeq="+bvo.getCommunitySeq();
+	}
+
+	// 게시글 추천 처리
 	@RequestMapping(value="board_recommend_insert", method=RequestMethod.POST)
 	@ResponseBody
 	public String ctlBoardRecommend(@RequestBody BoardVO bvo) {
-		System.out.println(bvo.getBoardSeq()+bvo.getUserSeq()+"----------------------------------------------------");
-		int check = boardService.svcBoardRecommendInsert(bvo);
-		return Integer.toString(check);
-	} //(게시글 추천)
+	    int check = boardService.svcBoardRecommendInsert(bvo);
+	    return Integer.toString(check);
+	}
 //	ctlBoardSearch (게시글 제목 검색)
 //	ctlBoardSearch (게시글 내용 검색)
 //	ctlBoardSearch (게시글 제목+내용 검색)

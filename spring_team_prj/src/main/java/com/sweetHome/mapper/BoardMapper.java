@@ -7,17 +7,42 @@ import com.sweetHome.vo.BoardVO;
 
 public interface BoardMapper {
 	
+	// ê²Œì‹œê¸€ ëª©ë¡ ì¡°íšŒ
 	List<BoardVO> boardList(int CommunitySeq);
-	BoardVO boardDetail(int boardSeq); 					//(°Ô½Ã±Û »ó¼¼ Á¤º¸Á¶È¸)
-	int boardRecommend(int boardSeq);					//(ÃßÃµ¼ö °¡Á®¿À±â) ÀÌ°Å »õ·Î»ı±è ¼³°èÇÒ¶§ ¾ø´ø°Å
-	void boardInsert(BoardVO bvo); 						//(°Ô½Ã±Û Ãß°¡)
-	void boardImagesInsert(BoardImagesVO files); 		//(ÀÌ¹ÌÁö Ãß°¡) ÀÌ°Å »õ·Î»ı±è ¼³°èÇÒ¶§ ¾ø´ø°Å
-	void boardUpdate(BoardVO bvo);						//(°Ô½Ã±Û ¼öÁ¤)
-	void boardDelete(BoardVO bvo);						//(°Ô½Ã±Û »èÁ¦)
-	void boardRecommendInsert(BoardVO bvo); 			//(°Ô½Ã±Û ÃßÃµ)
-	int boardRecommendCheck(BoardVO bvo);				//(ÃßÃµ Áßº¹ ¹æÁö)
-//	boardSearch (°Ô½Ã±Û Á¦¸ñ °Ë»ö)
-//	boardSearch (°Ô½Ã±Û ³»¿ë °Ë»ö)
-//	boardSearch (°Ô½Ã±Û Á¦¸ñ+³»¿ë °Ë»ö)
-//	boardSearch (Æ¯Á¤ À¯Àú °Ô½Ã±Û °Ë»ö)
+
+	// ê²Œì‹œê¸€ ìƒì„¸ ì •ë³´ì¡°íšŒ
+	BoardVO boardDetail(int boardSeq);
+
+	// ê²Œì‹œê¸€ ì¶”ì²œ ì¡°íšŒ(ê°œìˆ˜ ê°€ì ¸ì˜¤ëŠ”ê±°)
+	int boardRecommend(int boardSeq);
+
+	// ê²Œì‹œê¸€ ì¶”ê°€
+	void boardInsert(BoardVO bvo);
+
+	// ì´ë¯¸ì§€ ì¶”ê°€ (ìƒˆë¡œ ìƒì„±ë¨)
+	void boardImagesInsert(BoardImagesVO files);
+
+	// ê²Œì‹œê¸€ ìˆ˜ì •
+	void boardUpdate(BoardVO bvo);
+
+	// ê²Œì‹œê¸€ ì‚­ì œ
+	void boardDelete(BoardVO bvo);
+
+	// ê²Œì‹œê¸€ ì¶”ì²œ ì¶”ê°€
+	void boardRecommendInsert(BoardVO bvo);
+
+	// ê²Œì‹œê¸€ ì¶”ì²œ ì¤‘ë³µ í™•ì¸
+	int boardRecommendCheck(BoardVO bvo);
+
+	// ê²Œì‹œê¸€ ì œëª© ê²€ìƒ‰
+	// boardSearch
+
+	// ê²Œì‹œê¸€ ë‚´ìš© ê²€ìƒ‰
+	// boardSearch
+
+	// ê²Œì‹œê¸€ ì œëª©+ë‚´ìš© ê²€ìƒ‰
+	// boardSearch
+
+	// íŠ¹ì • ìœ ì € ê²Œì‹œê¸€ ê²€ìƒ‰
+	// boardSearch
 }
