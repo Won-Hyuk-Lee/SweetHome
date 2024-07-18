@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweetHome.mapper.ExternalDataMapper">
+    <update id="updateStoredData">
+        UPDATE external_data
+        SET 
+            cctv_count = #{data.cctvCount},
+            crime_rate = #{data.crimeRate},
+            updated_at = CURRENT_TIMESTAMP
+        WHERE district = #{district}
+    </update>
+
+    <select id="getStoredData" resultType="java.util.HashMap">
+        SELECT * FROM external_data WHERE district = #{district}
+    </select>
+</mapper>

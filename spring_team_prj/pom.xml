@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sweethome</groupId>
@@ -23,46 +24,47 @@
 		</repository>
 	</repositories>
 	<dependencies>
-	<!-- 이메일 발송을 위한 디펜더시-->
-	 <!-- java mail -->
-        <dependency>
-            <groupId>javax.mail</groupId>
-            <artifactId>mail</artifactId>
-            <version>1.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context-support</artifactId>
-            <version>${org.springframework-version}</version>
-        </dependency>
+		<!-- 이메일 발송을 위한 디펜더시 -->
+		<!-- java mail -->
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 
-	<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 
-<dependency>
+		<dependency>
 
-    <groupId>commons-fileupload</groupId>
+			<groupId>commons-fileupload</groupId>
 
-    <artifactId>commons-fileupload</artifactId>
+			<artifactId>commons-fileupload</artifactId>
 
-    <version>1.3.3</version>
+			<version>1.3.3</version>
 
-</dependency>
-	<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 
-<dependency>
+		<dependency>
 
-    <groupId>commons-io</groupId>
+			<groupId>commons-io</groupId>
 
-    <artifactId>commons-io</artifactId>
+			<artifactId>commons-io</artifactId>
 
-    <version>2.16.1</version>
+			<version>2.16.1</version>
 
-</dependency>
+		</dependency>
 		<!-- REST : json vo.set -->
+		<!-- 잭슨바인드 버전내림-> spring 4.0에 더 잘맞는버전임 기존의 2.12가 더 높은버전 -->
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<version>2.12.5</version>
+			<version>2.4.6</version>
 		</dependency>
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
@@ -88,6 +90,7 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+
 		<!-- Spring AOP + AspectJ : v1.8.13 -->
 		<!-- spring AOP는 spring-context에서 설치 -->
 		<!-- <dependency> <groupId>org.springframework</groupId> <artifactId>spring-aop</artifactId> 
@@ -114,15 +117,15 @@
 			<artifactId>gson</artifactId>
 			<version>2.10.1</version>
 		</dependency>
-		
+
 		<!-- 아파치클라이언트 라이브러리 외부API테스트할때 사용 -->
 		<dependency>
-    <groupId>org.apache.httpcomponents</groupId>
-    <artifactId>httpclient</artifactId>
-    <version>4.5.13</version>
-</dependency>
-		
-		
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.13</version>
+		</dependency>
+
+
 		<!-- DBCP -->
 		<!-- https://mvnrepository.com/artifact/commons-dbcp/commons-dbcp -->
 		<dependency>
@@ -278,18 +281,18 @@
 					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
-<plugin>
-    <groupId>org.apache.maven.plugins</groupId>
-    <artifactId>maven-compiler-plugin</artifactId>
-    <version>3.8.1</version>
-    <configuration>
-        <source>1.8</source>
-        <target>1.8</target>
-        <compilerArgument>-Xlint:all</compilerArgument>
-        <showWarnings>true</showWarnings>
-        <showDeprecation>true</showDeprecation>
-    </configuration>
-</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<compilerArgument>-Xlint:all</compilerArgument>
+					<showWarnings>true</showWarnings>
+					<showDeprecation>true</showDeprecation>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
