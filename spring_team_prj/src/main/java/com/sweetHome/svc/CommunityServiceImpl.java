@@ -12,6 +12,7 @@ public class CommunityServiceImpl implements CommunityService {
     @Autowired
     private CommunityMapper communityMapper;
     
+    // 모든 커뮤니티와 해당 이미지를 조회
     @Override
     public List<CommunityVO> svcCommunitySelect() {
         List<CommunityVO> communities = communityMapper.selectCommunity();
@@ -21,6 +22,7 @@ public class CommunityServiceImpl implements CommunityService {
         return communities;
     }
 
+    // 커뮤니티 시퀀스로 이미지를 조회
     @Override
     public CommunityImagesVO svcCommunityImageSelect(int communitySeq) {
         return communityMapper.selectCommunityImages(communitySeq);

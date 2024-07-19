@@ -15,39 +15,56 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 	
-	public List<BoardVO> svcBoardList(int communitySeq){
-		return boardMapper.boardList(communitySeq);
+	
+	public int svcBoardCount(int communitySeq) {
+		return boardMapper.boardCount(communitySeq);
 	}
 	
-	public BoardVO svcBoardDetail(int boardSeq){
-		return boardMapper.boardDetail(boardSeq);
-	} // (�Խñ� �� ������ȸ)
 	
-//	public void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> files) {
-//		boardMapper.boardInsert(bvo);
-//		if (files.isEmpty() == true) {
-//			for(BoardImagesVO file : files) {
-//				file.setBoardSeq(bvo.getBoardSeq());
-//				boardMapper.boardImagesInsert(file);
-//			}
-//		}
-//	} //(�Խñ� +�̹��� �߰�)
-	public void svcBoardInsert(BoardVO bvo) {
-		boardMapper.boardInsert(bvo);
-	}
-	
-	public void svcBoardUpdate(BoardVO bvo) {
-		boardMapper.boardUpdate(bvo);
-	} //(�Խñ� ����)
-	
-	public void svcBoardDelete(BoardVO bvo) {
-		boardMapper.boardDelete(bvo);
-	} //(�Խñ� ����)
-	public void svcBoardRecommend(int boardSeq, int userSeq){
-		boardMapper.boardRecommend(boardSeq, userSeq);
-	} //(�Խñ� ��õ)
-//	svcBoardSearch (�Խñ� ���� �˻�)
-//	svcBoardSearch (�Խñ� ���� �˻�)
-//	svcBoardSearch (�Խñ� ����+���� �˻�)
-//	svcBoardSearch (Ư�� ���� �Խñ� �˻�)
+	// 커뮤니티 시퀀스를 기반으로 게시글 목록을 가져오는 메서드
+    public List<BoardVO> svcBoardList(BoardVO boardVO){
+        List<BoardVO> blist = boardMapper.boardList(boardVO);
+        for (BoardVO bvo : blist) {
+            bvo.setRecommend(boardMapper.boardRecommend(bvo.getBoardSeq()));
+        }
+        return blist;
+    }
+    
+    // 게시글 시퀀스를 기반으로 게시글 세부 정보를 가져오는 메서드
+    public BoardVO svcBoardDetail(int boardSeq){
+        BoardVO bvo = boardMapper.boardDetail(boardSeq);       // 추천 수를 포함한 게시글 상세 정보를 가져옴
+        bvo.setRecommend(boardMapper.boardRecommend(boardSeq));  // 추천 수를 BoardVO 객체에 설정
+        return bvo;
+    } // (게시글 상세 조회)
+    
+    // 게시글을 삽입하는 메서드
+    public void svcBoardInsert(BoardVO bvo) {
+        boardMapper.boardInsert(bvo);
+    }
+    
+    // 게시글을 업데이트하는 메서드
+    public void svcBoardUpdate(BoardVO bvo) {
+        boardMapper.boardUpdate(bvo);
+    } // (게시글 수정)
+    
+    // 게시글을 삭제하는 메서드
+    public void svcBoardDelete(BoardVO bvo) {
+        boardMapper.boardDelete(bvo);
+    } // (게시글 삭제)
+    
+    // 게시글 추천을 삽입하는 메서드
+    public String svcBoardRecommendInsert(BoardVO bvo){
+        int check = boardMapper.boardRecommendCheck(bvo);
+        if (check == 0) {
+            boardMapper.boardRecommendInsert(bvo);
+            int recommend = boardMapper.boardRecommend(bvo.getBoardSeq());
+            return Integer.toString(recommend);
+        }
+        else return "check";
+    } // (게시글 추천 삽입)
+    
+	public List<BoardVO> svcBoardSearchByTitle(BoardVO bvo){
+		
+		return boardMapper.boardSearchByTitle(bvo);
+	} // 제목
 }

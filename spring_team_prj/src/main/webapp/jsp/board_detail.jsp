@@ -11,7 +11,7 @@
     <title>게시글 상세</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <style>
-        .container {
+        .container2 {
         	width: 60%; /* 너비를 줄임 */
             margin: 0 auto; 
             background-color: white; /* 컨테이너 배경색 */
@@ -72,15 +72,22 @@
             background-color: #0056b3;
         }
         .reply-input { width: 100%; margin-top: 20px; }
+        .reply-delete-button {
+	      background: none;
+	      border: none;
+	      color: #dc3545; /* Bootstrap danger color */
+	      cursor: pointer;
+	      font-size: 1em;
+	    }
     </style>
 
-<!-- <link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Spaces - Blog post</title>
+<title>Spaces - Directory Listing Landing page 2</title>
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name="title" content="Spaces - Blog post">
+<meta name="title" content="Spaces - Directory Listing Landing page 2">
 <meta name="author" content="Themesberg">
 <meta name="description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
@@ -90,7 +97,8 @@
 	href="https://themesberg.com/product/bootstrap/spaces-bootstrap-directory-listing-template">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://demo.themesberg.com/pixel-pro">
-<meta property="og:title" content="Spaces - Blog post">
+<meta property="og:title"
+	content="Spaces - Directory Listing Landing page 2">
 <meta property="og:description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
 <meta property="og:image"
@@ -98,7 +106,8 @@
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url"
 	content="https://demo.themesberg.com/pixel-pro">
-<meta property="twitter:title" content="Spaces - Blog post">
+<meta property="twitter:title"
+	content="Spaces - Directory Listing Landing page 2">
 <meta property="twitter:description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
 <meta property="twitter:image"
@@ -122,6 +131,8 @@
 <link rel="stylesheet"
 	href="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link type="text/css" href="../resources/spaces/css/spaces.css" rel="stylesheet">
 <script>
 	(function(w, d, s, l, i) {
@@ -144,11 +155,25 @@
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
+	<style>
+	.bg-primary {
+    background-color: yellowgreen !important;
+	}
+ </style>
+	<!-- 상단 탭 시작 -->
+	<style>
+        .btn-primary {
+            color: #fff; /* 텍스트 색상: 흰색 */
+            background-color: yellowgreen; /* 배경색: yellowgreen */
+            border-color: black; /* 테두리 색상: yellowgreen */
+            box-shadow: 0 0 24px rgba(154, 205, 50, .04), 0 44px 74px rgba(154, 205, 50, .06); /* 그림자 색상 변경 */
+        }
+    </style>
 	<header class="header-global">
 		<nav id="navbar-main"
-			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-theme-primary">
+			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
 			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="../resources/spaces/index.html"><img
+				<a class="navbar-brand @@logo_classes" href="/jsp/index.jsp"><img
 					class="navbar-brand-dark common"
 					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
 					<img class="navbar-brand-light common"
@@ -157,7 +182,7 @@
 					<div class="navbar-collapse-header">
 						<div class="row">
 							<div class="col-6 collapse-brand">
-								<a href="../resources/spaces/index.html"><img
+								<a href="/jsp/index.jsp"><img
 									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
 									alt="Logo Impact"></a>
 							</div>
@@ -173,180 +198,37 @@
 						<li class="nav-item dropdown"><a href="#"
 							id="mainPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Front pages</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-megamenu p-3 p-lg-4"
-								aria-labelledby="mainPagesDropdown">
-								<div class="row">
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">Main pages</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index.html">Landing</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index-2.html">Landing 2</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index-3.html">Landing 3</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/about.html">About</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/pricing.html">Pricing</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/team.html">Team</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/contact.html">Contact</a></li>
-										</ul>
-										<h6 class="d-block text-primary">Legal</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/legal.html">Legal center</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/terms.html">Terms & agreement</a></li>
-										</ul>
-									</div>
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">Listing</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces.html">All spaces</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces-map.html">Map view</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces-sidebar.html">All spaces
-													sidebar</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/single-space.html">Space details</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/profile.html">Profile</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Support</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/support.html">Support center</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/support-topic.html">Support topic</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Blog</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blog.html">Blog</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blog-post.html">Blog post</a></li>
-										</ul>
-									</div>
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">User</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/sign-in.html">Sign in</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/sign-up.html">Sign up</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/forgot-password.html">Forgot password</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/reset-password.html">Reset password</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Special</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/404.html">404 Not Found</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/500.html">500 Server Error</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/maintenance.html">Maintenance</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/coming-soon.html">Coming soon</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blank.html">Blank page</a></li>
-										</ul>
-									</div>
-								</div>
-							</div></li>
+								class="nav-link-inner-text mr-1">지도</span></a></li>
+						<li class="nav-item">
+							<a href="/community/list" class="nav-link">
+						    	<span class="nav-link-inner-text mr-1">커뮤니티</span>
+							</a>
+						</li>
 						<li class="nav-item dropdown"><a href="#"
-							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
+							id="mainPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Dashboard</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-megamenu-sm p-3 p-lg-4"
-								aria-labelledby="dashboardPagesDropdown">
-								<div class="row">
-									<div class="col-6">
-										<h6 class="d-block mb-3 text-primary">User dashboard</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/account.html">My account</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/settings.html">Settings</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/security.html">Security</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Items</h6>
-										<ul class="list-style-none">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/my-items.html">My items</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/edit-item.html">Edit item</a></li>
-										</ul>
-									</div>
-									<div class="col-6">
-										<h6 class="d-block mb-3 text-primary">Messaging</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/messages.html">Messages</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/single-message.html">Chat</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Billing</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/billing.html">Billing details</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/invoice.html">Invoice</a></li>
-										</ul>
-									</div>
-								</div>
-							</div></li>
-						<li class="nav-item dropdown"><a href="#"
-							id="supportDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Support</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-menu-lg"
-								aria-labelledby="supportDropdown">
-								<div class="col-auto px-0">
-									<div class="list-group list-group-flush">
-										<a
-											href="https://themesberg.com/docs/spaces/getting-started/quick-start/"
-											target="_blank"
-											class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4"><span
-											class="icon icon-md icon-secondary"><i
-												class="fas fa-file-alt"></i></span>
-										<div class="ml-4">
-												<span class="text-dark d-block">Documentation<span
-													class="badge badge-sm badge-secondary ml-2">v3.0</span></span> <span
-													class="small">Examples and guides</span>
-											</div></a><a href="https://themesberg.com/contact" target="_blank"
-											class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4"><span
-											class="icon icon-md icon-primary"><i
-												class="fas fa-microphone-alt"></i></span>
-										<div class="ml-4">
-												<span class="text-dark d-block">Support</span> <span
-													class="small">Looking for answers?</span>
-											</div></a>
-									</div>
-								</div>
-							</div></li>
+								class="nav-link-inner-text mr-1">내 정보</span></a></li>
 					</ul>
 				</div>
 				<div class="d-none d-lg-block @@cta_button_classes">
-					<a href="https://themesberg.com/docs/spaces/components/buttons/"
-						target="_blank"
-						class="btn btn-md btn-outline-white animate-up-2 mr-3"><i
-						class="fas fa-book mr-1"></i> <span class="d-xl-none">Docs</span>
-						<span class="d-none d-xl-inline">Components</span></a> <a
-						href="https://themes.getbootstrap.com/product/spaces/"
-						target="_blank" class="btn btn-md btn-secondary animate-up-2"><i
-						class="fas fa-shopping-bag mr-2"></i> Buy now</a>
+				<c:choose>
+            <c:when test="${not empty userSeq}">
+                <!-- userSeq가 존재하는 경우 로그아웃 버튼 생성 -->
+                <a href="/common/logout"
+                   target="_blank" class="btn btn-md btn-secondary animate-up-2">
+                    <i class="fas fa-shopping-bag mr-2"></i> 로그아웃
+                </a>
+            </c:when>
+            <c:otherwise>
+                <!-- userSeq가 존재하지 않는 경우 로그인 버튼 생성 -->
+                <a href="/jsp/login.jsp"
+                   target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3">
+                    <i class="fas fa-book mr-1"></i>
+                    <span class="d-xl-none">Docs</span>
+                    <span class="d-none d-xl-inline">로그인</span>
+                </a>
+            </c:otherwise>
+        </c:choose>
 				</div>
 				<div class="d-flex d-lg-none align-items-center">
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -358,6 +240,8 @@
 			</div>
 		</nav>
 	</header>
+	
+	<!-- 상단 탭 끝 -->
 	<main>
 		<div
 			class="preloader bg-dark flex-column justify-content-center align-items-center">
@@ -370,13 +254,13 @@
 		
 		
 <!-- 제목 섹 셔어어어언!!!!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!~!~!~!~!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!~!~!~ -->
-		<section class="section-header pb-7 bg-primary text-white">
+		<section class="section-header pb-3 bg-primary text-white">
 		</section>
 		
 <!-- 내용 섹션~!~!~!~!~!~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~!@!!@!@!@~~~~~~~!!!!!!!!!!!!!!!!!!!~!~!~!~!~!~!~~!~!~!~!~!~!~ -->
 		
     <div class="section section-sm bg-white pt-6">
-        <div class="container">
+        <div class="container2">
             <div id="communityName">${KEY_BOARDVO.community.communityName}</div>
             <h1 id="boardTitle">${KEY_BOARDVO.boardTitle}</h1>
             <p id="userInfo">${KEY_BOARDVO.user.userNickname} | <fmt:formatDate value="${KEY_BOARDVO.updatedDate}" pattern="YYYY-MM-dd HH:MM"/></p>
@@ -385,8 +269,12 @@
             <div id="boardContents">${KEY_BOARDVO.boardContents}</div>
             <div class="recommend-container">
                 <div class="recommend-box">
-                    <span id="recommendCount">추천수: ${KEY_BOARDVO.recommend.size()}</span>
+                	<div id="recommendCountDiv">
+                   		<span id="recommendCount">추천수: ${KEY_BOARDVO.recommend}</span>
+                    </div>
                     <div class="recommend-button">추천</div>
+                    <input type="hidden" id="boardSeq" value="${KEY_BOARDVO.boardSeq}">
+					<input type="hidden" id="userSeq" value="${sessionScope.userSeq}">
                 </div>
             </div>
             <div class="action-container">
@@ -395,55 +283,38 @@
                 <div class="action-button update-button">수정</div>
             </div>
         </div>
-	        
-			<div class="container">
+        <div
+			class="section section-md bg-white text-black pt-0 line-bottom-light">
+			<div class="container2">
 				<div class="row justify-content-center">
 					<div class="col-12 col-lg-8">
-						<div>
-							<label class="h5 mb-4" for="exampleFormControlTextarea1"><span
-								class="badge badge-md badge-primary text-uppercase mr-2">23</span>
-								Comments</label>
+						<div class="card bg-soft border-light rounded p-4 mb-4">
+						<form name="replyForm" id="replyForm" action="${pageContext.request.contextPath}/reply/reply_insert" method="post">
+							<label class="h5 mb-4" for="exampleFormControlTextarea1">댓글</label>
 							<textarea class="form-control border border-light-gray"
-								id="exampleFormControlTextarea1" placeholder="Add your comment"
+								id="reply" name="reply" placeholder="댓글을 입력하세요."
 								rows="6" data-bind-characters-target="#charactersRemaining"
 								maxlength="1000"></textarea>
+							<input type="hidden" name="boardSeq" value="${KEY_BOARDVO.boardSeq}">
+							<input type="hidden" name="userSeq" value="${sessionScope.userSeq}">
 							<div class="d-flex justify-content-between mt-3">
 								<small class="font-weight-light text-dark"><span
 									id="charactersRemaining"></span> characters remaining</small>
-								<button class="btn btn-primary animate-up-2">Send</button>
+								<button type="button" id="reply-insert-button" class="btn btn-primary animate-up-2">Send</button>
 							</div>
+						</form>
+							
+							
 							<div class="mt-5">
-								<div class="card bg-soft border-light rounded p-4 mb-4">
-									<div class="d-flex justify-content-between mb-4">
-										<span class="font-small"><a href="#"><img
-												class="avatar-sm img-fluid rounded-circle mr-2"
-												src="../resources/spaces/assets/img/team/profile-picture-1.jpg" alt="avatar">
-												<span class="font-weight-bold">John Doe</span></a></span>
-									</div>
-									<p class="m-0">
-										I really like that the Pixel uses a lot of Bootstrap 4's
-										classes to position elements across the website. I also like
-										the fact that we can get a version of the code without Sass if
-										needed.<br>
-										<br>When is the next product coming? :)
-									</p>
-								<div class="mt-5 text-center">
-									<button id="loadOnClick"
-										class="btn btn-primary btn-loading-overlay mr-2 mb-2">
-										<span class="spinner"><span
-											class="spinner-border spinner-border-sm" role="status"
-											aria-hidden="true"></span> </span><span class="ml-1 btn-inner-text">Load
-											more comments</span>
-									</button>
-									<p id="allLoadedText" style="display: none;">더 이상 불러올 댓글이 없습니다!!</p>
-								</div>
+							
+								<div id="replyListDiv"></div>
+								
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-        </div>
-    </div>
+		</div>
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
 		<div class="container">
@@ -517,19 +388,51 @@
 	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
-        $(".recommend-button").click(function() {
-            // 여기에 추천 기능을 구현할 수 있습니다.
-            console.log("추천 버튼이 클릭되었습니다.");
+	
+		// 추천 버튼
+		        $(document).ready(function() {
+			        $(".recommend-button").click(function() {
+			            var boardSeq = $("#boardSeq").val();
+			            var userSeq = $("#userSeq").val();
+			            var recommendationData = {
+			                    boardSeq: boardSeq,
+			                    userSeq: userSeq
+	                };
+		        // AJAX를 이용한 서버 전송
+		        $.ajax({
+		            method: "POST",
+		            url: "${pageContext.request.contextPath}/board/board_recommend_insert",
+		            contentType: "application/json",
+		            data: JSON.stringify(recommendationData),
+		            success:function(response) {
+		            	if(response == 'check'){
+		            		alert('이미 추천 하셨습니다~!~!')
+		            	} else {
+		            		alert('추천 되었습니다~!~!');
+		                    var recommendCount = parseInt(response); // response 값은 추천 수
+		                    var htmlStr = "추천수: <span id='recommendCount'>"+response+"</span>";
+		                    
+		                    $("#recommendCountDiv").empty().append(htmlStr);
+		            	}
+		            },
+		            error: function(jqXHR, textStatus, errorThrown) {
+		                console.log("Error:", jqXHR.responseText);
+		            }
+		        });
+        
+        
+	        });
         });
-
         
         
+        // 수정 버튼
         $(document).ready(function() {
 	        $(".update-button").click(function() {
 	        	window.location.href = "${pageContext.request.contextPath}/board/board_update_move?boardSeq=" + ${KEY_BOARDVO.boardSeq};
 	        });
         });
 
+        // 삭제 버튼
         $(document).ready(function() {
 	        $(".delete-button").click(function() {
 	            if(confirm("정말로 삭제하시겠습니까?")) {
@@ -537,12 +440,94 @@
 	            }
 	        });
         });
-        
+        // 목록 버튼
         $(document).ready(function() {
             $(".list-button").click(function() {
                 window.location.href = "${pageContext.request.contextPath}/board/board_list?communitySeq=" + ${KEY_BOARDVO.community.communitySeq};
             });
         });
+        
+        
+        // 댓글 관련
+        $(document).ready(function() {
+            // 댓글 리스트 생성
+            makeReplyList();
+
+            // 댓글 추가 버튼 클릭 이벤트
+            $("#reply-insert-button").click(function(event) {
+                event.preventDefault(); // 폼 제출 방지
+                var form = $("#replyForm")[0]; // Get the form element
+                if (form.checkValidity()) { // 폼 유효성 검사
+                    var formData = $("#replyForm").serialize();
+                    $.ajax({
+                        method: "POST",
+                        url: "${pageContext.request.contextPath}/reply/reply_insert",
+                        data: formData,
+                        error: function(myval) {
+                            console.log("에러:" + myval);
+                        },
+                        success: function(myval) {
+                        	if (myval=="success"){
+	                            makeReplyList();
+	                        	$("#reply").val(''); // 댓글 입력 창 비우기                        		
+                        	} else {
+                        		alert("댓글을 입력해 주세요!");
+                        	}
+                        }
+                    });
+                } else {
+                    alert('모든 필드를 올바르게 입력해 주세요.');
+                }
+            });
+            
+            // 댓글 삭제 버튼
+            // Delete Button Click Event
+	        $(document).on('click', '.reply-delete-button', function() {
+	            var replyCard = $(this).closest('.card');
+	            var replySeq = replyCard.data('reply-seq'); // 댓글 ID 추출
+	
+	            $.ajax({
+	                method: "POST",
+	                url: "${pageContext.request.contextPath}/reply/reply_delete", // 서버의 댓글 삭제 URL
+	                data: {replySeq:replySeq},
+	                error: function(myval) {
+	                    console.log("에러:" + myval);
+	                },
+	                success: function(myval) {
+	                    makeReplyList(); // 댓글 리스트 갱신
+	                }
+	            });
+	        });
+            
+        });
+
+        // 댓글 리스트 생성 함수
+        function makeReplyList() {
+            $.ajax({
+                method: "POST",
+                url: "${pageContext.request.contextPath}/reply/reply_list",
+                data: { boardSeq: '${KEY_BOARDVO.boardSeq}' },
+                error: function(myval) {
+                    console.log("에러:" + myval);
+                },
+                success: function(myval) {
+                    let htmlStr = ""; // HTML 문자열 초기화
+                    $.each(myval, function(MYidx, MYval) {
+                        htmlStr += "<div class='card bg-soft border-light rounded p-4 mb-4' data-reply-seq='" + MYval.replySeq + "'>";
+                        htmlStr += "<div class='d-flex justify-content-between mb-4'>";
+                        htmlStr += "<span class='font-small'><span class='font-weight-bold'>" + MYval.user.userNickname + "</span>";
+                        htmlStr += "<span class='ml-2'>" + MYval.createdDate + "</span></span>";
+                        htmlStr += "<div><button class='reply-delete-button' aria-label='delete button'>[X]</button></div></div>";
+                        htmlStr += "<p class='m-0'>" + MYval.reply + "</p></div>";
+                    });
+                    $("#replyListDiv").empty();
+                    $("#replyListDiv").html(htmlStr);
+                }
+            });
+        }
+
+        
+
     </script>   
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
@@ -565,23 +550,7 @@
 	<script src="../resources/spaces/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
 	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
-	<script src="../resources/spaces/assets/js/spaces.js"></script>
-	<script>// here you should load content from an Ajax request and when it
-        // loads you can disable the button from loading
-        $('#loadOnClick').click(function() {
-            $button = $(this);
-            $loadContent = $('#extraContent');
-            $allLoaded = $('#allLoadedText');
-            $button.addClass('btn-loading');
-            $button.attr('disabled', true);
-
-            setTimeout(function() {
-                $loadContent.show();
-                $button.hide();
-                $allLoaded.show();
-            }, 1500);
-        });
-	</script>
+	<script src="../resources/spaces/assets/js/spaces.js"></script>S
 	<!-- <script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="

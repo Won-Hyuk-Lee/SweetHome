@@ -79,7 +79,7 @@
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
 	<style>
-	.bg-primary {
+	.bg-primary2 {
     background-color: yellowgreen !important;
 	}
  </style>
@@ -121,56 +121,16 @@
 						<li class="nav-item dropdown"><a href="#"
 							id="mainPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">지도</span> 
-						
-						<li class="nav-item dropdown"><a href="/community/list"
-							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">커뮤니티</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-megamenu-sm p-3 p-lg-4"
-								aria-labelledby="dashboardPagesDropdown">
-								<div class="row">
-									<div class="col-6">
-										<h6 class="d-block mb-3 text-primary">User dashboard</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/account.html">My account</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/settings.html">Settings</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/security.html">Security</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Items</h6>
-										<ul class="list-style-none">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/my-items.html">My items</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/edit-item.html">Edit item</a></li>
-										</ul>
-									</div>
-									<div class="col-6">
-										<h6 class="d-block mb-3 text-primary">Messaging</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/messages.html">Messages</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/single-message.html">Chat</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Billing</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/billing.html">Billing details</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/invoice.html">Invoice</a></li>
-										</ul>
-									</div>
-								</div>
-							</div></li>
+								class="nav-link-inner-text mr-1">지도</span></a></li>
+						<li class="nav-item">
+							<a href="/community/list" class="nav-link">
+						    	<span class="nav-link-inner-text mr-1">커뮤니티</span>
+							</a>
+						</li>
 						<li class="nav-item dropdown"><a href="#"
 							id="mainPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">내 정보</span> 
+								class="nav-link-inner-text mr-1">내 정보</span></a></li>
 					</ul>
 				</div>
 				<div class="d-none d-lg-block @@cta_button_classes">
