@@ -12,6 +12,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -75,20 +77,40 @@ public class NaverOauth implements Oauth {
 	@Override
 	public Map<String, String> getUserInfo(String accessToken) {
 		
-		 //필수 헤더 정보
+		// 헤더 정보 설정
 		HttpHeaders headers = new HttpHeaders();
-		headers.set("Authorization", "Bearer " + this.ACCESS_TOKEN);
-		HttpEntity<Map<String, String>> entity = new HttpEntity<>(headers);
+		headers.set("Authorization", "Bearer " + accessToken);
+
+		// 요청 엔티티 설정
+		HttpEntity<String> entity = new HttpEntity<>(headers);
+
+		// RestTemplate 객체 생성
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<Map<String, String>> responseEntity = restTemplate.exchange(
-				ENDPOINT_URL_USERINFO,
-			    HttpMethod.GET,
-			    entity,
-			    new ParameterizedTypeReference<Map<String, String>>() {}
-			);		
-		System.out.println("4.유저정보 응답:" +responseEntity.getBody().toString());    
-		
-		return responseEntity.getBody();
+
+		// 사용자 정보 요청
+		ResponseEntity<Map> userinfoResponse = restTemplate.exchange(
+		        ENDPOINT_URL_USERINFO,
+		        HttpMethod.GET,
+		        entity,
+		        Map.class
+		);
+
+		// 응답에서 사용자 정보 추출
+		Map<String, Object> responseBody = (Map<String, Object>) userinfoResponse.getBody().get("response");
+
+		// 필요한 정보만 추출하여 반환할 맵 생성
+		Map<String, String> result = new HashMap<>();
+		result.put("access_token", accessToken);
+		result.put("email", (String) responseBody.get("email"));
+		result.put("name", (String) responseBody.get("name"));
+		result.put("nickname", (String) responseBody.get("nickname"));
+		result.put("picture", (String) responseBody.get("profile_image"));
+		result.put("phone", (String) responseBody.get("mobile"));
+
+		// 결과 출력
+		System.out.println(result.toString());
+
+		    return result;
 	}
 
 
@@ -119,50 +141,36 @@ public class NaverOauth implements Oauth {
 
 
 	@Override
-	public Map<String, String> requestAccessToken(String code) {
-		Map<String, String> bodys = new HashMap<String, String>();
-		bodys.put("code"			, code);
-		bodys.put("client_id"		, CLIENT_ID);
-		bodys.put("client_secret"	, CLIENT_PW);
-		bodys.put("redirect_uri"	, CALLBACK_URL);
-		bodys.put("grant_type"		, "authorization_code");
-
-		//--------------------------------------------------			
-		//방법1) RestTemplate Map 바인딩 + 키로 토큰만 꺼내기
-		//--------------------------------------------------
-		HttpEntity<Map<String, String>> entity = new HttpEntity<>(bodys);
+	public Map<String, String> requestAccessToken(String code,String state) {
+		//필수 헤더 정보
+    	HttpHeaders headers = new HttpHeaders();
+        headers.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+        //필수 바디 정보
+        MultiValueMap<String, String> bodys = new LinkedMultiValueMap<>();
+        bodys.add("code"			, code);
+        bodys.add("client_id"		, CLIENT_ID);
+        bodys.add("client_secret"	, CLIENT_PW);
+        bodys.add("grant_type"		, "authorization_code");
+        bodys.add("redirect_uri"	, CALLBACK_URL);
+        bodys.add("state"			, state);
+        System.out.println(code);
+        System.out.println(CLIENT_ID);
+        System.out.println(CLIENT_PW);
+        System.out.println(CALLBACK_URL);
+        System.out.println(state);
+    	// HttpEntity (헤더+바디) 생성
+        HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(bodys, headers);
+        
 		RestTemplate restTemplate = new RestTemplate();
-		ResponseEntity<Map<String, String>> responseEntity = restTemplate.exchange(
-		    ENDPOINT_URL_TOKEN,
-		    HttpMethod.POST,
-		    entity,
-		    new ParameterizedTypeReference<Map<String, String>>() {}
-		);		
-		this.ACCESS_TOKEN = (String)responseEntity.getBody().get("access_token");
-		System.out.println("GoogleOauth.requestAccessToken() accessToken:"+ this.ACCESS_TOKEN);
-		if (responseEntity.getStatusCode() == HttpStatus.OK) 
-			System.out.println(responseEntity.getBody().toString());
-		
-		//			--------------------------------------------------			
-		//			방법2) GoogleRequestVo  Builder + Entity에 담아서 꺼내기
-		//			--------------------------------------------------			
-		//			RestTemplate restTemplate = new RestTemplate();
-		//			GoogleRequest googleRequest = GoogleRequest
-		//					.builder()
-		//					.clientId(CLIENT_ID)
-		//					.clientSecret(CLIENT_PW)
-		//					.code(code)
-		//					.redirectUri(CALLBACK_URL)
-		//					.grantType("authorization_code").build();
-		//			System.out.println(googleRequest.toString());
-		//			ResponseEntity<GoogleResponse> googleResponse = restTemplate.postForEntity("https://oauth2.googleapis.com/token", googleRequest, GoogleResponse.class);
-		//			System.out.println(googleResponse.toString());
-
-		//			--------------------------------------------------
-		//			방법3) commonBuildQueryString() 쿼리스트링 만들기
-		//			--------------------------------------------------
-		//			LOGIN_FORM_URL + "?" + parameterString;
-		return responseEntity.getBody();
+		ResponseEntity<Map> tokenResponse = restTemplate.exchange(ENDPOINT_URL_TOKEN, HttpMethod.POST, entity, Map.class);
+		Map<String, String> bodyMap = tokenResponse.getBody();
+		String accessToken = (String) bodyMap.get("access_token");
+		System.out.println("2.토큰 응답(body): "  + bodyMap.toString());
+		System.out.println("2.토큰 응답(token): " + accessToken);
+		   
+        
+		return bodyMap;
 	}
+
 
 }

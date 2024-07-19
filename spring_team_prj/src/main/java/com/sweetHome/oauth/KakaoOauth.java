@@ -132,7 +132,7 @@ public class KakaoOauth implements Oauth {
 	}
 
 	@Override
-	public Map<String, String> requestAccessToken(String code) {
+	public Map<String, String> requestAccessToken(String code,String state) {
 	    // 필수 헤더 정보
 	    HttpHeaders headers = new HttpHeaders();
 	    headers.set("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
@@ -157,6 +157,7 @@ public class KakaoOauth implements Oauth {
 	    System.out.println("2.토큰 응답(token): " + accessToken);
 	    return bodyMap;
 	}
+
 
 	
 

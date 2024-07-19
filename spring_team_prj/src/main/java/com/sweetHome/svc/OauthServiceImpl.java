@@ -39,9 +39,9 @@ public class OauthServiceImpl {
 	}
 
 	//OAuth :: 콜백URL을 통한 엑세스 토근 발급
-	public Map<String, String> svcRequestAccessToken(SocialType socialType, String code) {
-		Oauth socialOauth = getSocialInstance(socialType);
-		return socialOauth.requestAccessToken(code);
+	public Map<String, String> svcRequestAccessToken(SocialType socialType, String code, String state) {
+	Oauth socialOauth = getSocialInstance(socialType);
+	return socialOauth.requestAccessToken(code,state);
 	}
 
 	//OAuth :: 엑세스 토근을 사용한 구글서비스(profile) 가져오기

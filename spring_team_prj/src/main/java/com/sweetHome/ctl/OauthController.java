@@ -105,15 +105,16 @@ public class OauthController {
 	 */
 	//http://localhost:8089/oauth2callback/GOOGLE
 	@RequestMapping(value="/oauth2callback/{socialType}", method = RequestMethod.GET)
-	public String ctlCallback(Model model, @PathVariable("socialType") SocialType socialType, 
-			@RequestParam("code") String code,
-			HttpServletRequest request) {
+	public String ctlCallback(Model model, @PathVariable("socialType") SocialType socialType,
+	@RequestParam("code") String code,
+	@RequestParam(value="state", required = false) String state,
+	HttpServletRequest request) {
 		//??????
         socialType = (SocialType) request.getSession().getAttribute("SESS_SOCIALTYPE");
         System.out.println(socialType +"----" + code);
         
 		//CODE를 사용해 ACCESS TOKEN 받기
-		Map<String, String> responseMap = oauthService.svcRequestAccessToken(socialType, code);
+		Map<String, String> responseMap = oauthService.svcRequestAccessToken(socialType, code,state);
 		String accessToken  = (String) responseMap.get("access_token");
 		String refreshToken = (String) responseMap.get("refresh_token");
 		System.out.println("OauthController.ctlCallback() access_token:"+accessToken);

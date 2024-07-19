@@ -81,7 +81,7 @@ public class GoogleOauth implements Oauth {
 	 * AccessToken 받기
 	 */
 	@Override
-	public Map<String, String> requestAccessToken(String code) {
+	public Map<String, String> requestAccessToken(String code,String state) {
 		Map<String, String> bodys = new HashMap<String, String>();
 		bodys.put("code"			, code);
 		bodys.put("client_id"		, CLIENT_ID);

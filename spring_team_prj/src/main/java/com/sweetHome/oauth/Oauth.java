@@ -6,7 +6,7 @@ public interface Oauth {
     
 	
 	public String getLoginFormURL();
-    public Map<String, String> requestAccessToken(String code);
+    public Map<String, String> requestAccessToken(String code,String state);
     public Map<String, String> getUserInfo(String accessToken);
     public boolean isTokenExpired(String accessToken);
 	public String getAccessTokenByRefreshToken(String refreshToken);
