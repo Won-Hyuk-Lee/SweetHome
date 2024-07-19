@@ -31,7 +31,6 @@ public class ReplyController {
 	@ResponseBody
 	public ResponseEntity<List<ReplyVO>> ctlReplyDetail(@RequestParam("boardSeq") int boardSeq){
 			List<ReplyVO> rlist = replyService.svcReplyList(boardSeq);
-				
 			return new ResponseEntity<List<ReplyVO>> (rlist, HttpStatus.OK);
 	}// (댓글 정보 조회 REST)
 	

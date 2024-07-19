@@ -47,7 +47,6 @@ public class BoardController {
 		boardVO.setEndSeq(page.getEndSeq());
 		
 		List<BoardVO> list = boardService.svcBoardList(boardVO);
-		System.out.println(list.toString());
 		model.addAttribute("KEY_BOARDLIST", list);
 		model.addAttribute("KEY_PAGEING_HTML", pageHtmlStr);
 		return "jsp/board";     				//   /  lec05_board/board_list  .jsp  
