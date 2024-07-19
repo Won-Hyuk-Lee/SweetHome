@@ -8,7 +8,7 @@ import com.sweetHome.vo.BoardVO;
 public interface BoardMapper {
 	
 	// 게시글 목록 조회
-	List<BoardVO> boardList(BoardVO boardVO);
+	List<BoardVO> boardList(BoardVO bvo);
 
 	int boardCount(int communitySeq); //총게시물수
 	
@@ -37,14 +37,5 @@ public interface BoardMapper {
 	int boardRecommendCheck(BoardVO bvo);
 
 	// 게시글 제목 검색
-	// boardSearch
-
-	// 게시글 내용 검색
-	// boardSearch
-
-	// 게시글 제목+내용 검색
-	// boardSearch
-
-	// 특정 유저 게시글 검색
-	// boardSearch
+	 List<BoardVO> boardSearchByTitle(BoardVO bvo);
 }

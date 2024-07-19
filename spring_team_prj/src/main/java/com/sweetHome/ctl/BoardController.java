@@ -133,10 +133,16 @@ public class BoardController {
 	@ResponseBody
 	public String ctlBoardRecommend(@RequestBody BoardVO bvo) {
 	    String check = boardService.svcBoardRecommendInsert(bvo);
+	    
 	    return check;
 	}
-//	ctlBoardSearch (게시글 제목 검색)
-//	ctlBoardSearch (게시글 내용 검색)
-//	ctlBoardSearch (게시글 제목+내용 검색)
-//	ctlBoardSearch (특정 유저 게시글 검색)
+	
+	@RequestMapping(value="/board_searchByTitle", method=RequestMethod.GET)
+	public String ctlBoardSearch(@ModelAttribute BoardVO bvo, Model model){
+		bvo.setSearchStr("%"+bvo.getSearchStr()+"%");
+		List<BoardVO> list = boardService.svcBoardSearchByTitle(bvo);
+		model.addAttribute("KEY_BOARDLIST", list);
+
+		return "jsp/board";
+	}// (게시글 제목 검색)
 }

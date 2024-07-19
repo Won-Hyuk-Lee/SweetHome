@@ -20,6 +20,7 @@ public class BoardServiceImpl implements BoardService {
 		return boardMapper.boardCount(communitySeq);
 	}
 	
+	
 	// 커뮤니티 시퀀스를 기반으로 게시글 목록을 가져오는 메서드
     public List<BoardVO> svcBoardList(BoardVO boardVO){
         List<BoardVO> blist = boardMapper.boardList(boardVO);
@@ -62,7 +63,8 @@ public class BoardServiceImpl implements BoardService {
         else return "check";
     } // (게시글 추천 삽입)
     
-//	svcBoardSearch 제목
-//	svcBoardSearch 내용
-//	svcBoardSearch 제목+내용
+	public List<BoardVO> svcBoardSearchByTitle(BoardVO bvo){
+		
+		return boardMapper.boardSearchByTitle(bvo);
+	} // 제목
 }

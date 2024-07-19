@@ -28,7 +28,6 @@ public interface BoardService {
 
     // 게시글 추천을 삽입하는 메서드
     String svcBoardRecommendInsert(BoardVO bvo);    
-//	svcBoardSearch 제목
-//	svcBoardSearch 내용
-//	svcBoardSearch 제목+내용
+    
+	List<BoardVO> svcBoardSearchByTitle(BoardVO bvo); // 제목
 }

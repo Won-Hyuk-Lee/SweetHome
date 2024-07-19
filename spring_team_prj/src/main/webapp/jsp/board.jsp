@@ -72,6 +72,12 @@
         td.updated-date {
             font-size: 14px;
         }
+        
+        .form-inline {
+		    display: flex;
+		    justify-content: center; /* 수평 가운데 정렬 */
+		    width: 100%;
+		}
     </style>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -262,7 +268,7 @@
             <thead class="table-header">
                 <tr>
                     <th scope="col" style="width: 10%;">게시글 번호</th>
-                    <th scope="col" style="width: 40%;">글 내용</th>
+                    <th scope="col" style="width: 40%;">글 제목</th>
                     <th scope="col" style="width: 20%;">작성자</th>
                     <th scope="col" style="width: 10%;">수정일</th>
                     <th scope="col" style="width: 10%;">추천</th>
@@ -294,22 +300,25 @@
         <div class="row mt-5">
             <div class="col-lg-6 text-left">
                 <button class="btn btn-primary">전체 글</button>
-                <button class="btn btn-secondary">개념 글</button>
+                <button class="btn btn-secondary">인기 글</button>
             </div>
             <div class="col-lg-6 text-right">
                 <button id="writeButton" class="btn btn-success" data-community-seq="${KEY_BOARDLIST[0].communitySeq}" data-community-name="${KEY_BOARDLIST[0].community.communityName}">글 쓰기</button>
             </div>
         </div>
 		<div class="row mt-3 search-container justify-content-center">
-		    <form action="/board/search" method="get" class="form-inline my-2 my-lg-0 w-100">
+		    <form id="searchForm" action="/board/board_searchByTitle" method="get" class="form-inline my-2 my-lg-0 w-100">
 		        <div class="col-lg-6 pr-lg-2 order-lg-2">
 		            <div class="input-group">
-		                <input class="form-control" type="search" placeholder="검색어를 입력하세요" aria-label="검색어 입력" name="query">
+		                <input class="form-control" type="search" placeholder="검색어를 입력하세요" aria-label="검색어 입력" name="searchStr">
+		                <input type="hidden" name="communitySeq" value="${KEY_BOARDLIST[0].communitySeq}">
 		                <div class="input-group-append">
-		                    <button class="btn btn-outline-success" type="submit">검색</button>
+		                    <button id="search-button" class="btn btn-outline-success" type="submit">검색</button>
 		                </div>
 		            </div>
 		        </div>
+		        
+		       <!--  
 		        <div class="col-lg-3 pl-lg-2 order-lg-1">
 		            <select class="form-control w-50" name="searchType">
 		                <option value="all">제목 + 내용</option>
@@ -317,6 +326,8 @@
 		                <option value="content">내용</option>
 		            </select>
 		        </div>
+		         -->
+		         
 		    </form>
 		</div>
     </div>
@@ -460,6 +471,19 @@
 		function goToBoardInsert(communitySeq, communityName) {
 		    window.location.href = '/jsp/board_insert.jsp?communitySeq=' + communitySeq + '&communityName=' + communityName;
 		}
+		
+		
+		document.getElementById('search-button').addEventListener('click', function(event) {
+			console.log('버튼 클릭');
+		    // 이벤트 리스너가 폼 제출을 방지하지 않는지 확인하세요
+		    var form = document.getElementById('searchForm');
+		    if (form.checkValidity()) {
+		        form.submit();
+		    } else {
+		        event.preventDefault();
+		        alert('모든 필드를 올바르게 입력해 주세요.');
+		    }
+		});
 </script>
 <!-- 	
 	<script>

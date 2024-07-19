@@ -55,6 +55,19 @@
 		where rnum between #{startSeq} and #{endSeq}
 	</select>
 	
+	<select id="boardSearchByTitle"  parameterType="com.sweetHome.vo.BoardVO" resultMap="boardResultMap">
+		select s.*
+		from  (
+				select b.board_seq, b.board_title, u.user_nickname, b.updated_date, c.community_seq, c.community_name, (ROW_NUMBER() OVER(order by b.board_seq desc)) rnum
+				from board b, users u, community c
+				where b.user_seq = u.user_seq
+				and b.community_seq = c.community_seq
+				and b.community_seq = #{communitySeq}
+				order by b.board_seq desc
+		      )  s
+		where board_title like #{searchStr}
+	</select>
+	
 	<select id="boardCount" parameterType="int" resultType="int">
 		select count(1) as cnt
 		from board
