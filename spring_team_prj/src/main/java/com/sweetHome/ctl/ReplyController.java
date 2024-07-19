@@ -38,7 +38,6 @@ public class ReplyController {
 	@RequestMapping(value = "/reply_insert", method=RequestMethod.POST)
 	@ResponseBody
 	public String ctlReplyInsert(@ModelAttribute ReplyVO replyVO){
-		System.out.println(replyVO.toString());
 		String result = replyService.svcReplyInsert(replyVO);
 		return result;
 	}// (댓글 추가 REST)

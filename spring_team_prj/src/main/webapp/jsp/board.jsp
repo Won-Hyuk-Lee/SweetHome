@@ -420,6 +420,7 @@
                 </c:forEach>
             </tbody>
         </table>
+        ${KEY_PAGEING_HTML}
         <div class="row mt-5">
             <div class="col-lg-6 text-left">
                 <button class="btn btn-primary">전체 글</button>
