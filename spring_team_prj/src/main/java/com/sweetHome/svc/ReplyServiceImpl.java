@@ -21,8 +21,13 @@ public class ReplyServiceImpl implements ReplyService {
     public List<ReplyVO> svcReplyList(int boardSeq){
         return replyMapper.replyList(boardSeq);
     }
-    public void svcReplyInsert(ReplyVO replyVO) {
-    	replyMapper.replyInsert(replyVO);
+    public String svcReplyInsert(ReplyVO replyVO) {
+    	if (replyVO.getReply().isEmpty()) {
+    		return "error";
+    	} else {
+    		replyMapper.replyInsert(replyVO);
+    		return "success";
+    	}
     }
     
     public void svcReplyDelete(int replySeq) {

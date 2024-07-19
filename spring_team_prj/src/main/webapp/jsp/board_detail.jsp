@@ -599,7 +599,13 @@
                             console.log("에러:" + myval);
                         },
                         success: function(myval) {
-                            makeReplyList();
+                        	if (myval=="success"){
+	                            makeReplyList();
+	                        	$("#reply").val(''); // 댓글 입력 창 비우기                        		
+                        	} else {
+                        		alert("댓글을 입력해 주세요!");
+                        	}
+                        	
                         }
                     });
                 } else {

@@ -37,8 +37,10 @@ public class ReplyController {
 	
 	@RequestMapping(value = "/reply_insert", method=RequestMethod.POST)
 	@ResponseBody
-	public void ctlReplyInsert(@ModelAttribute ReplyVO replyVO){
-		replyService.svcReplyInsert(replyVO);
+	public String ctlReplyInsert(@ModelAttribute ReplyVO replyVO){
+		System.out.println(replyVO.toString());
+		String result = replyService.svcReplyInsert(replyVO);
+		return result;
 	}// (댓글 추가 REST)
 	
 	@RequestMapping(value = "/reply_delete", method=RequestMethod.POST)

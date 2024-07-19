@@ -8,6 +8,6 @@ import com.sweetHome.vo.ReplyVO;
 
 public interface ReplyService {
     List<ReplyVO> svcReplyList(int boardSeq);
-    void svcReplyInsert(ReplyVO replyVO);
+    String svcReplyInsert(ReplyVO replyVO);
     void svcReplyDelete(int replySeq);
 }
