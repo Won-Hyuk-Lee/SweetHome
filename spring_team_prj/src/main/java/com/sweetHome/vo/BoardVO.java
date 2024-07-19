@@ -26,4 +26,5 @@ public class BoardVO {
 	private int endSeq = 1;
 	private int currentPage = 1;
 	private int rnum;
+	private String searchStr;
 }

@@ -50,44 +50,50 @@ public class PagingUtil {
 		}
 
 		//################## HTML 만들기 ###################
-		// [이전] HTML
 		pagingHtml = new StringBuffer();
+		pagingHtml.append("<div class='d-flex justify-content-center w-100 mt-5'>\r\n"
+				+ "			<nav aria-label='Page navigation example'>\r\n"
+				+ "				<ul class='pagination'>");
+		
+		// [이전] HTML
 		if (currentPage > blockPage) {
-			pagingHtml.append("<a href='"+ url +"&currentPage="  + (startPage - 1) + "'>");
+			pagingHtml.append("<li class='page-item'><a class='page-link' href='"+ url +"&currentPage="  + (startPage - 1) + "'>");
 			pagingHtml.append("이전");
-			pagingHtml.append("</a>");
+			pagingHtml.append("</a></li>");
 		}
 
-		pagingHtml.append(" | ");
 		// |1|2|3|4|5|  HTML (현재 페이지는 빨간색으로 강조하고 링크 제거)
 		for (int i = startPage; i <= endPage; i++) {
 			if (i > maxPage) {
 				break;
 			}
 			if (i == currentPage) {
-				pagingHtml.append(" <b><font color='red'>");
+				pagingHtml.append("<li class='page-item active'><a class='page-link'>");
 				pagingHtml.append(i);
-				pagingHtml.append("</font></b>");
+				pagingHtml.append("</a></li>");
 			} else {
-				pagingHtml.append(" <a href='" + url +"&currentPage=");
+				pagingHtml.append("<li class='page-item'><a class='page-link' href='" + url +"&currentPage=");
 				pagingHtml.append(i);
 				pagingHtml.append("'>");
 				pagingHtml.append(i);
-				pagingHtml.append("</a>");
+				pagingHtml.append("</a></li>");
 			}
 
-			pagingHtml.append("  ");
 		}
-		pagingHtml.append("  |  ");
 
 		// [다음] HTML
 		if (maxPage - startPage >= blockPage) {
-			pagingHtml.append("<a href='" + url +"&currentPage="  + (endPage + 1) + "'>");
+			pagingHtml.append("<li class='page-item'><a class='page-link' href='" + url +"&currentPage="  + (endPage + 1) + "'>");
 			pagingHtml.append("다음");
-			pagingHtml.append("</a>");
+			pagingHtml.append("</a></li>");
 		}
+		
+		pagingHtml.append("				</ul>\r\n"
+				+ "			</nav>\r\n"
+				+ "		</div>");
 	}
-
+	
+	
 	public StringBuffer getPagingHtml() {
 		return pagingHtml;
 	}
