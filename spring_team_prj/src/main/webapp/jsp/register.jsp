@@ -86,7 +86,7 @@
 		<nav id="navbar-main"
 			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
 			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="/jsp/index.jsp"><img
+				<a class="navbar-brand @@logo_classes" href="/common/logout"><img
 					class="navbar-brand-dark common"
 					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
 					<img class="navbar-brand-light common"
@@ -95,7 +95,7 @@
 					<div class="navbar-collapse-header">
 						<div class="row">
 							<div class="col-6 collapse-brand">
-								<a href="/jsp/index.jsp"><img
+								<a href="/common/logout"><img
 									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
 									alt="Logo Impact"></a>
 							</div>
@@ -168,14 +168,14 @@
             <c:when test="${not empty userSeq}">
                 <!-- userSeq가 존재하는 경우 로그아웃 버튼 생성 -->
                 <a href="/common/logout"
-                   target="_blank" class="btn btn-md btn-secondary animate-up-2">
+                    class="btn btn-md btn-secondary animate-up-2">
                     <i class="fas fa-shopping-bag mr-2"></i> 로그아웃
                 </a>
             </c:when>
             <c:otherwise>
                 <!-- userSeq가 존재하지 않는 경우 로그인 버튼 생성 -->
                 <a href="/jsp/login.jsp"
-                   target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3">
+                    class="btn btn-md btn-outline-white animate-up-2 mr-3">
                     <i class="fas fa-book mr-1"></i>
                     <span class="d-xl-none">Docs</span>
                     <span class="d-none d-xl-inline">로그인</span>
@@ -252,7 +252,7 @@
 													name="email" placeholder="example@naver.com" type="email"
 													aria-label="email address" maxlength="50" required>
 												<div class="input-group-append">
-													<button type="button" class="btn btn-secondary btn-sm"
+													<button type="button" id = "btn321"class="btn btn-secondary btn-sm"
 														onclick="sendVerificationEmail()">인증</button>
 												</div>
 											</div>
@@ -417,25 +417,19 @@
 							<div class="mt-3 mb-4 text-center">
 								<span class="font-weight-normal">or</span>
 							</div>
-							<div class="btn-wrapper my-4 text-center">
-								<button
-									class="btn btn-icon-only btn-pill btn-outline-light text-facebook mr-2"
-									type="button" aria-label="facebook button"
-									title="facebook button">
-									<span aria-hidden="true" class="fab fa-facebook-f"></span>
-								</button>
-								<button
-									class="btn btn-icon-only btn-pill btn-outline-light text-twitter mr-2"
-									type="button" aria-label="twitter button"
-									title="twitter button">
-									<span aria-hidden="true" class="fab fa-twitter"></span>
-								</button>
-								<button
-									class="btn btn-icon-only btn-pill btn-outline-light text-facebook"
-									type="button" aria-label="github button" title="github button">
-									<span aria-hidden="true" class="fab fa-github"></span>
-								</button>
-							</div>
+								<a href="/login/GOOGLE">
+    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/logo/Google.png" 
+         style="border: 1px solid #bbbbbb; border-radius: 15%; width: 36px; height: auto; margin-left: 380px;">
+</a>
+<a href="/login/KAKAO">
+    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Kakao.png" 
+         width="36" height="auto" style="margin-left: 10px;">
+</a>
+<a href="/login/NAVER">
+    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Naver.png" 
+         width="36" height="auto" style="margin-left: 10px;">
+</a>
+<br><p>
 							<div
 								class="d-block d-sm-flex justify-content-center align-items-center mt-4">
 								<span class="font-weight-normal">회원정보가 있으신가요? <a
@@ -443,7 +437,37 @@
 								</span>
 							</div>
 	</main>
+	
+<input type="hidden" id="uuserEmail"name="uuserEmail" value="${sessionScope.SESS_USERVO.userEmail}">
+<input type="hidden" id="uuserName"name="uuserName" value="${sessionScope.SESS_USERVO.userName}">
+<input type="hidden" id="uuserNickName"name="uuserNickName" value="${sessionScope.SESS_USERVO.userNickname}">
+<input type="hidden" id="pphoneNumber"name="pphoneNumber" value="${sessionScope.SESS_USERVO.phoneNumber}">
+<input type="hidden" id="pprovider"name="pprovider" value="${sessionScope.SESS_USERVO.provider}">
+<input type="hidden" id="iimageUrl"name="iimageUrl" value="${sessionScope.SESS_USERVO.usersOauthVO.imageUrl}">
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
+	
+	//오쓰 로그인시 기본회원 정보 적기
+	$(document).ready(function() {
+	var uuserEmail = $('#uuserEmail').val();
+	if(uuserEmail!='')
+		{
+	var uuserName = $('#uuserName').val();
+	var pprovider = $('#pprovider').val();
+	var iimageUrl = $('#iimageUrl').val();
+	console.log('User Email:', uuserEmail);
+    console.log('User Name:', uuserName);
+    console.log('Provider:', pprovider);
+    console.log('Image URL:', iimageUrl);
+	$('#email').val(uuserEmail);
+	if(uuserEmail!=null) verificationCodeSent=true;//인증 불리언 트루
+	$('#btn321').remove();//인증버튼삭제
+    
+    $('#name').val(uuserName);
+    $('#email').val(uuserEmail).prop('readonly', true);
+    $('#name').val(uuserName).prop('readonly', true);
+		}
+	});
 		// 폼 유효성 검사
 	function validateForm() {
     var userEmail = document.getElementById('email').value;
@@ -536,7 +560,8 @@
         success: function(response) {
             console.log("RestController Spring 응답:", response);
             alert('회원 가입 성공');
-            // 추가적인 처리 로직을 여기에 추가할 수 있습니다.
+            window.location.href = '/jsp/index.jsp'; // 또는 원하는 페이지 URL로 변경
+           
         }
     });
 

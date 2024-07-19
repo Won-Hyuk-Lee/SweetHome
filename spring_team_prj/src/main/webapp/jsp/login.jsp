@@ -27,7 +27,7 @@
 		<nav id="navbar-main"
 			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
 			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="/jsp/index.jsp"><img
+				<a class="navbar-brand @@logo_classes" href="/common/logout"><img
 					class="navbar-brand-dark common"
 					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
 					<img class="navbar-brand-light common"
@@ -36,7 +36,7 @@
 					<div class="navbar-collapse-header">
 						<div class="row">
 							<div class="col-6 collapse-brand">
-								<a href="/jsp/index.jsp"><img
+								<a href="/common/logout"><img
 									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
 									alt="Logo Impact"></a>
 							</div>
@@ -315,29 +315,23 @@
 							<div class="mt-3 mb-4 text-center">
 								<span class="font-weight-normal">소셜 로그인</span>
 							</div>
-							<div class="btn-wrapper my-4 text-center">
-								<button
-									class="btn btn-icon-only btn-pill btn-outline-light text-facebook mr-2"
-									type="button" aria-label="facebook button"
-									title="facebook button">
-									<span aria-hidden="true" class="fab fa-facebook-f"></span>
-								</button>
-								<button
-									class="btn btn-icon-only btn-pill btn-outline-light text-twitter mr-2"
-									type="button" aria-label="twitter button"
-									title="twitter button">
-									<span aria-hidden="true" class="fab fa-twitter"></span>
-								</button>
-								<button
-									class="btn btn-icon-only btn-pill btn-outline-light text-facebook"
-									type="button" aria-label="github button" title="github button">
-									<span aria-hidden="true" class="fab fa-github"></span>
-								</button>
-							</div>
+	<a href="/login/GOOGLE">
+    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/logo/Google.png" 
+         style="border: 1px solid #bbbbbb; border-radius: 15%; width: 36px; height: auto; margin-left: 125px;">
+</a>
+<a href="/login/KAKAO">
+    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Kakao.png" 
+         width="36" height="auto" style="margin-left: 10px;">
+</a>
+<a href="/login/NAVER">
+    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Naver.png" 
+         width="36" height="auto" style="margin-left: 10px;">
+</a>
+<br><p>
 							<div
 								class="d-block d-sm-flex justify-content-center align-items-center mt-4">
 								<span class="font-weight-normal">회원정보가 없으신가요? <a
-									href="/jsp/register.jsp" class="font-weight-bold">회원가입</a></span>
+									href="/common/register" class="font-weight-bold">회원가입</a></span>
 							</div>
 						</div>
 					</div>

@@ -9,8 +9,6 @@ import lombok.Getter;
 import lombok.Setter;
 @Component
 @Data
-@Getter
-@Setter
 public class UserVO {
 	private int userSeq;
     private String userEmail;
@@ -24,4 +22,5 @@ public class UserVO {
     private Date createdDate; //이거 데이트타입으로 할거임? 아니면 String할거임
     private Date updatedDate;
     private char userRole = 'U';
+    private UsersOauthVO usersOauthVO; // 1:1 or 1:0 관계 매핑
 }

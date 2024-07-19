@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.sweetHome.vo.UserVO;
+import com.sweetHome.vo.UsersOauthVO;
 @Repository
 @Mapper
 public interface UserMapper {
@@ -15,4 +16,6 @@ public interface UserMapper {
     void updateUser(UserVO userVO);
     void deleteUser(int userSeq);
     UserVO selectUserByEmail(String userEmail);
+    public void insertUsersOauthTbl(UsersOauthVO userVO);
+    public void updateUserOauthTbl(UsersOauthVO userVO);
 }

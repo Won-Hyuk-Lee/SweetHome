@@ -138,14 +138,14 @@
             <c:when test="${not empty userSeq}">
                 <!-- userSeq가 존재하는 경우 로그아웃 버튼 생성 -->
                 <a href="/common/logout"
-                   target="_blank" class="btn btn-md btn-secondary animate-up-2">
+                    class="btn btn-md btn-secondary animate-up-2">
                     <i class="fas fa-shopping-bag mr-2"></i> 로그아웃
                 </a>
             </c:when>
             <c:otherwise>
                 <!-- userSeq가 존재하지 않는 경우 로그인 버튼 생성 -->
                 <a href="/jsp/login.jsp"
-                   target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3">
+                   class="btn btn-md btn-outline-white animate-up-2 mr-3">
                     <i class="fas fa-book mr-1"></i>
                     <span class="d-xl-none">Docs</span>
                     <span class="d-none d-xl-inline">로그인</span>
