@@ -72,6 +72,13 @@
             background-color: #0056b3;
         }
         .reply-input { width: 100%; margin-top: 20px; }
+        .reply-delete-button {
+	      background: none;
+	      border: none;
+	      color: #dc3545; /* Bootstrap danger color */
+	      cursor: pointer;
+	      font-size: 1em;
+	    }
     </style>
 
 <!-- <link rel="stylesheet"
@@ -399,23 +406,47 @@
                 <div class="action-button update-button">수정</div>
             </div>
         </div>
+        <div
+			class="section section-md bg-white text-black pt-0 line-bottom-light">
+			<div class="container">
+				<div class="row justify-content-center">
+					<div class="col-12 col-lg-8">
+						<div class="card bg-soft border-light rounded p-4 mb-4">
+						<form name="replyForm" id="replyForm" action="${pageContext.request.contextPath}/reply/reply_insert" method="post">
+							<label class="h5 mb-4" for="exampleFormControlTextarea1">댓글</label>
+							<textarea class="form-control border border-light-gray"
+								id="reply" name="reply" placeholder="댓글을 입력하세요."
+								rows="6" data-bind-characters-target="#charactersRemaining"
+								maxlength="1000"></textarea>
+							<input type="hidden" name="boardSeq" value="${KEY_BOARDVO.boardSeq}">
+							<input type="hidden" name="userSeq" value="${sessionScope.userSeq}">
+							<div class="d-flex justify-content-between mt-3">
+								<small class="font-weight-light text-dark"><span
+									id="charactersRemaining"></span> characters remaining</small>
+								<button type="button" id="reply-insert-button" class="btn btn-primary animate-up-2">Send</button>
+							</div>
+						</form>
+							
+							
+							<div class="mt-5">
+							
+								<div id="replyListDiv"></div>
+								
 								<div class="mt-5 text-center">
 									<button id="loadOnClick"
 										class="btn btn-primary btn-loading-overlay mr-2 mb-2">
 										<span class="spinner"><span
 											class="spinner-border spinner-border-sm" role="status"
-											aria-hidden="true"></span> </span><span class="ml-1 btn-inner-text">Load
-											more comments</span>
+											aria-hidden="true"></span> </span><span class="ml-1 btn-inner-text">댓글 더보기</span>
 									</button>
-									<p id="allLoadedText" style="display: none;">더 이상 불러올 댓글이 없습니다!!</p>
+									<p id="allLoadedText" style="display: none;">더 이상 불러올 댓글이 없습니다!</p>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-        </div>
-    </div>
+		</div>
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
 		<div class="container">
@@ -490,13 +521,14 @@
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
 	
-        $(document).ready(function() {
-	        $(".recommend-button").click(function() {
-	            var boardSeq = $("#boardSeq").val();
-	            var userSeq = $("#userSeq").val();
-	            var recommendationData = {
-	                    boardSeq: boardSeq,
-	                    userSeq: userSeq
+		// 추천 버튼
+		        $(document).ready(function() {
+			        $(".recommend-button").click(function() {
+			            var boardSeq = $("#boardSeq").val();
+			            var userSeq = $("#userSeq").val();
+			            var recommendationData = {
+			                    boardSeq: boardSeq,
+			                    userSeq: userSeq
 	                };
 		        // AJAX를 이용한 서버 전송
 		        $.ajax({
@@ -525,13 +557,14 @@
         });
         
         
-        
+        // 수정 버튼
         $(document).ready(function() {
 	        $(".update-button").click(function() {
 	        	window.location.href = "${pageContext.request.contextPath}/board/board_update_move?boardSeq=" + ${KEY_BOARDVO.boardSeq};
 	        });
         });
 
+        // 삭제 버튼
         $(document).ready(function() {
 	        $(".delete-button").click(function() {
 	            if(confirm("정말로 삭제하시겠습니까?")) {
@@ -539,12 +572,89 @@
 	            }
 	        });
         });
-        
+        // 목록 버튼
         $(document).ready(function() {
             $(".list-button").click(function() {
                 window.location.href = "${pageContext.request.contextPath}/board/board_list?communitySeq=" + ${KEY_BOARDVO.community.communitySeq};
             });
         });
+        
+        
+        // 댓글 관련
+        $(document).ready(function() {
+            // 댓글 리스트 생성
+            makeReplyList();
+
+            // 댓글 추가 버튼 클릭 이벤트
+            $("#reply-insert-button").click(function(event) {
+                event.preventDefault(); // 폼 제출 방지
+                var form = $("#replyForm")[0]; // Get the form element
+                if (form.checkValidity()) { // 폼 유효성 검사
+                    var formData = $("#replyForm").serialize();
+                    $.ajax({
+                        method: "POST",
+                        url: "${pageContext.request.contextPath}/reply/reply_insert",
+                        data: formData,
+                        error: function(myval) {
+                            console.log("에러:" + myval);
+                        },
+                        success: function(myval) {
+                            makeReplyList();
+                        }
+                    });
+                } else {
+                    alert('모든 필드를 올바르게 입력해 주세요.');
+                }
+            });
+            
+            // 댓글 삭제 버튼
+            // Delete Button Click Event
+	        $(document).on('click', '.reply-delete-button', function() {
+	            var replyCard = $(this).closest('.card');
+	            var replySeq = replyCard.data('reply-seq'); // 댓글 ID 추출
+	
+	            $.ajax({
+	                method: "POST",
+	                url: "${pageContext.request.contextPath}/reply/reply_delete", // 서버의 댓글 삭제 URL
+	                data: {replySeq:replySeq},
+	                error: function(myval) {
+	                    console.log("에러:" + myval);
+	                },
+	                success: function(myval) {
+	                    makeReplyList(); // 댓글 리스트 갱신
+	                }
+	            });
+	        });
+            
+        });
+
+        // 댓글 리스트 생성 함수
+        function makeReplyList() {
+            $.ajax({
+                method: "POST",
+                url: "${pageContext.request.contextPath}/reply/reply_list",
+                data: { boardSeq: '${KEY_BOARDVO.boardSeq}' },
+                error: function(myval) {
+                    console.log("에러:" + myval);
+                },
+                success: function(myval) {
+                    let htmlStr = ""; // HTML 문자열 초기화
+                    $.each(myval, function(MYidx, MYval) {
+                        htmlStr += "<div class='card bg-soft border-light rounded p-4 mb-4' data-reply-seq='" + MYval.replySeq + "'>";
+                        htmlStr += "<div class='d-flex justify-content-between mb-4'>";
+                        htmlStr += "<span class='font-small'><span class='font-weight-bold'>" + MYval.user.userNickname + "</span>";
+                        htmlStr += "<span class='ml-2'>" + MYval.createdDate + "</span></span>";
+                        htmlStr += "<div><button class='reply-delete-button' aria-label='delete button'>[X]</button></div></div>";
+                        htmlStr += "<p class='m-0'>" + MYval.reply + "</p></div>";
+                    });
+                    $("#replyListDiv").empty();
+                    $("#replyListDiv").html(htmlStr);
+                }
+            });
+        }
+
+        
+
     </script>   
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>

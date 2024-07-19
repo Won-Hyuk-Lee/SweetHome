@@ -6,8 +6,8 @@ import com.sweetHome.vo.CommunityImagesVO;
 
 public interface CommunityMapper {
 	// 커뮤니티 목록 조회
-	public List<CommunityVO> selectCommunity();
+	List<CommunityVO> selectCommunity();
 
 	// 커뮤니티 이미지 조회
-	public CommunityImagesVO selectCommunityImages(int communitySeq);
+	CommunityImagesVO selectCommunityImages(int communitySeq);
 }

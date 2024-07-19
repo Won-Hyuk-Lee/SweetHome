@@ -382,7 +382,7 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-10 mb-3">
-						<h5>${KEY_BOARDLIST[0].community.communityName}</h5>
+						<h5><br><br>${KEY_BOARDLIST[0].community.communityName}</h5>
 					</div>
 			
 			
@@ -449,80 +449,8 @@
 		    </form>
 		</div>
     </div>
-<!-- 한 구역 끝 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->					
-					
-					<div class="col-lg-10 mb-3">
-						<a href="./support-topic.html"
-							class="card border-light animate-up-3 shadow-soft p-0 p-lg-4"><div
-								class="card-body">
-								<h4>Creating and managing projects: Project Dashboard</h4>
-								<p class="lead text-gray mb-4">Hot to create a new project
-									and manage its settings on the project dashboard</p>
-								<div class="d-flex align-items-center">
-									<div class="avatar-lg">
-										<img class="rounded-circle"
-											src="../resources/spaces/assets/img/team/profile-picture-2.jpg" alt="avatar">
-									</div>
-									<div class="small text-gray ml-3">
-										<div>
-											<span>Updated over a week ago</span>
-										</div>
-										<div>
-											Written by&nbsp;<strong>Richard Thomas</strong>
-										</div>
-									</div>
-								</div>
-							</div></a>
-					</div>
-					<div class="col-md-10 mt-5 mb-3">
-						<h5>Adding & Styling Elements</h5>
-					</div>
-					<div class="col-lg-10 mb-3">
-						<a href="./support-topic.html"
-							class="card border-light animate-up-3 shadow-soft p-0 p-lg-4"><div
-								class="card-body">
-								<h4>Add & style boxes &amp; other elements</h4>
-								<p class="lead text-gray mb-4">Hot to create a new project
-									and manage its settings on the project dashboard</p>
-								<div class="d-flex align-items-center">
-									<div class="avatar-lg">
-										<img class="rounded-circle"
-											src="../resources/spaces/assets/img/team/profile-picture-3.jpg" alt="avatar">
-									</div>
-									<div class="small text-gray ml-3">
-										<div>
-											<span>Updated over a week ago</span>
-										</div>
-										<div>
-											Written by&nbsp;<strong>Richard Thomas</strong>
-										</div>
-									</div>
-								</div>
-							</div></a>
-					</div>
-					<div class="col-lg-10 mb-3">
-						<a href="./support-topic.html"
-							class="card border-light animate-up-3 shadow-soft p-0 p-lg-4"><div
-								class="card-body">
-								<h4>Add &amp; style images</h4>
-								<p class="lead text-gray mb-4">Hot to create a new project
-									and manage its settings on the project dashboard</p>
-								<div class="d-flex align-items-center">
-									<div class="avatar-lg">
-										<img class="rounded-circle"
-											src="../resources/spaces/assets/img/team/profile-picture-4.jpg" alt="avatar">
-									</div>
-									<div class="small text-gray ml-3">
-										<div>
-											<span>Updated over a week ago</span>
-										</div>
-										<div>
-											Written by&nbsp;<strong>Richard Thomas</strong>
-										</div>
-									</div>
-								</div>
-							</div></a>
-					</div>
+    
+    					
 				</div>
 			</div>
 		</section>
