@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.sweetHome.oauth.SocialType;
 import com.sweetHome.svc.AuthService;
 import com.sweetHome.svc.OauthServiceImpl;
+import com.sweetHome.svc.UserService;
 import com.sweetHome.vo.UserVO;
 import com.sweetHome.vo.UsersOauthVO;
 
@@ -26,45 +27,47 @@ public class OauthController {
 	private OauthServiceImpl oauthService;
 	@Autowired
 	private AuthService authService;
+	@Autowired
+	private UserService userService;
 		 
-	//로그인 폼 : 일반 로그인
-	@RequestMapping(value="/form_login_process", method = RequestMethod.POST)
-	public String ctlFormLoginProcess(Model model, HttpServletRequest request,
-			@RequestParam("userEmail") String userEmail,
-			@RequestParam("userPW")   String userPw) {
-		
-		UserVO paramVO = new UserVO();
-		paramVO.setUserEmail(userEmail);
-		paramVO.setUserPw(userPw);
-		authService.svcLogin(userEmail, userPw);
-		
-		String viewPage = "lec14_auth/login_page";
-		//로그인성공
-		if(paramVO != null) {
-			request.getSession().setAttribute("SESS_EMAIL"		, paramVO.getUserEmail());
-			request.getSession().setAttribute("SESS_ROLE"		, paramVO.getUserRole());
-			request.getSession().setAttribute("SESS_USERNAME"	, paramVO.getUserName());
-			request.getSession().setAttribute("SESS_PROVIDER"	, "local");
-			request.getSession().setAttribute("SESS_PICTURE"	, "https://icons.veryicon.com/png/o/miscellaneous/youyinzhibo/guest.png");  //게스트기본이미지
-			//mypage.jsp로 이동
-			model.addAttribute("MY_USERSVO", paramVO);
-			viewPage = "redirect: /mypage";
-		//로그인 실패
-		} else {
-			viewPage = "redirect: /login_page";
-		}
-		
-		return viewPage;
-	}
+//	//로그인 폼 : 일반 로그인
+//	@RequestMapping(value="/form_login_process", method = RequestMethod.POST)
+//	public String ctlFormLoginProcess(Model model, HttpServletRequest request,
+//			@RequestParam("userEmail") String userEmail,
+//			@RequestParam("userPW")   String userPw) {
+//		
+//		UserVO paramVO = new UserVO();
+//		paramVO.setUserEmail(userEmail);
+//		paramVO.setUserPw(userPw);
+//		authService.svcLogin(userEmail, userPw);
+//		
+//		String viewPage = "lec14_auth/login_page";
+//		//로그인성공
+//		if(paramVO != null) {
+//			request.getSession().setAttribute("SESS_EMAIL"		, paramVO.getUserEmail());
+//			request.getSession().setAttribute("SESS_ROLE"		, paramVO.getUserRole());
+//			request.getSession().setAttribute("SESS_USERNAME"	, paramVO.getUserName());
+//			request.getSession().setAttribute("SESS_PROVIDER"	, "local");
+//			request.getSession().setAttribute("SESS_PICTURE"	, "https://icons.veryicon.com/png/o/miscellaneous/youyinzhibo/guest.png");  //게스트기본이미지
+//			//mypage.jsp로 이동
+//			model.addAttribute("MY_USERSVO", paramVO);
+//			viewPage = "redirect: /mypage";
+//		//로그인 실패
+//		} else {
+//			viewPage = "redirect: /login_page";
+//		}
+//		
+//		return viewPage;
+//	}
 	
-	//로그아웃
-	@RequestMapping(value="/form_logout_process", method = RequestMethod.POST)
-	public String ctlFormLoginProcess(Model model, HttpServletRequest request) {
-		request.getSession().invalidate();
-		request.getSession().setMaxInactiveInterval(0);
-		return "redirect: /login_page";
-	}
-	
+//	//로그아웃
+//	@RequestMapping(value="/form_logout_process", method = RequestMethod.POST)
+//	public String ctlFormLoginProcess(Model model, HttpServletRequest request) {
+//		request.getSession().invalidate();
+//		request.getSession().setMaxInactiveInterval(0);
+//		return "redirect: /login_page";
+//	}
+//	
 	//http://localhost:8089/mypage/GOOGLE
 	@RequestMapping(value="/mypage", method = RequestMethod.GET)
 	public String ctlViewMypage(Model model, HttpServletRequest request) {
@@ -75,15 +78,16 @@ public class OauthController {
 		String accessToken = userVO.getUsersOauthVO().getAccessToken();
 		Map<String, String> userInfo = oauthService.svcRequestUserInfo(socialType, accessToken);
 		model.addAttribute("MY_USERVO", userInfo);		
+		System.out.println("마이페이지");
 		return "lec14_auth/mypage";
 	}
 	
 	
-	@RequestMapping(value="/login_page", method = RequestMethod.GET)
-	public String ctlViewLoginPage(Model model, HttpServletRequest request) {
-		return "lec14_auth/login_page";
-	}
-		
+//	@RequestMapping(value="/login_page", method = RequestMethod.GET)
+//	public String ctlViewLoginPage(Model model, HttpServletRequest request) {
+//		return "lec14_auth/login_page";
+//	}
+//		
 	/**
 	 * 구글/네이버/카카오로 로그인 시 로그인창 이동 --> 회원 동의 후 /oauth2callback 자동 호출
 	 * @param socialType (GOOGLE, NAVER, KAKAO)
@@ -137,8 +141,8 @@ public class OauthController {
 		System.out.println("OauthController.ctlCallback():" + userInfo.toString());
 		//userinfo :: {id=111108297176061140644, email=opencv.korea@gmail.com, verified_email=true, name=OPENCV KOREA, given_name=OPENCV, family_name=KOREA, picture=https://lh3.googleusercontent.com/a/ACg8ocI1r5lwhcKMlKu4FmZQYTsh5Se3b56jPD0WFmn3XrvMWLJ2_pY=s96-c}
 		
-		
-		String viewPage = "lec14_auth/login_page";
+		String viewPage = "jsp/login";
+		System.out.println(viewPage+" 어디고");
 		if (userInfo != null) {
 			//------------------------------------------------------------
 			//userInfo.get("email")을 사용해 DB조회(기존회원 & 신규회원)
@@ -146,41 +150,54 @@ public class OauthController {
 			UserVO  existingUserVO = oauthService.svcCheckExistUser(userInfo.get("email"));
 			if (existingUserVO == null) {
 				//OAuth :: 신규 회원일 경우 -- accessToken : 세션에 담고 추가 회원가입페이지로 이동
-				request.getSession().setAttribute("SESS_EMAIL"			, userInfo.get("email"));
-				request.getSession().setAttribute("SESS_PROVIDER"		, socialType);
-				request.getSession().setAttribute("SESS_PICTURE"		, userInfo.get("picture"));
+				existingUserVO=new UserVO();
+				existingUserVO.setProvider(socialType.toString());
+				existingUserVO.setUserName(userInfo.get("name"));
+				existingUserVO.setPhoneNumber(userInfo.get("phoneNumber"));
+				existingUserVO.setUserEmail(userInfo.get("email"));
+				UsersOauthVO usersOauthVO = new UsersOauthVO();
+		        usersOauthVO.setImageUrl(viewPage);
+		        usersOauthVO.setAccessToken(accessToken);
+		        usersOauthVO.setRefreshToken(refreshToken);
+		        usersOauthVO.setImageUrl(userInfo.get("picture"));
+		        usersOauthVO.setUserSeq(existingUserVO.getUserSeq());
+		        System.out.println(viewPage);
+		        System.out.println(accessToken);
+		        System.out.println(refreshToken);
+		        System.out.println(existingUserVO.getUserSeq());
+		        existingUserVO.setUsersOauthVO(usersOauthVO);
+		        
+				request.getSession().setAttribute("SESS_USERVO"			, existingUserVO);
 				request.getSession().setAttribute("SESS_ACCESS_TOKEN"	, accessToken); 
 				request.getSession().setAttribute("SESS_REFRESH_TOKEN"	, refreshToken); 
-				viewPage = "lec14_auth/oauth_join_page";
+				viewPage = "redirect: /common/registerm";
 			} else {
 				//OAuth :: 기존 회원일 경우 -- 토큰만 다시 저장(변경이 있을 수 있으므로) : 세션에 담고 마이페이지로 이동
 				//토큰정보	        
 		        UsersOauthVO usersOauthVO = new UsersOauthVO();
 		        usersOauthVO.setImageUrl(viewPage);
 		        usersOauthVO.setAccessToken(accessToken);
+		        usersOauthVO.setImageUrl(userInfo.get("picture"));
 		        usersOauthVO.setRefreshToken(refreshToken);
 		        usersOauthVO.setUserSeq(existingUserVO.getUserSeq());
-		        System.out.println(viewPage);
+		        
+		        System.out.println(existingUserVO.getProvider());
 		        System.out.println(accessToken);
 		        System.out.println(refreshToken);
 		        System.out.println(existingUserVO.getUserSeq());
-		        oauthService.svcUpdateToken(usersOauthVO);
-		        UserVO userVO = oauthService.svcCheckExistUser(userInfo.get("email"));
-		        userVO.setUsersOauthVO(usersOauthVO);
-		        System.out.println(userVO.getUserSeq());
-		        System.out.println(userVO.getAddress());
-		        System.out.println(userVO.getPhoneNumber());
-		        System.out.println(userVO.getUserName());
-		        request.getSession().setAttribute("SESS_USERVO"			, userVO);
-		        request.getSession().setAttribute("SESS_EMAIL"			, userInfo.get("email"));
-				request.getSession().setAttribute("SESS_PROVIDER"		, socialType);
-				request.getSession().setAttribute("SESS_PICTURE"		, userInfo.get("picture"));
+
+		        if(existingUserVO.getProvider().equals("LOCAL"))
+		        {
+		        	existingUserVO.setUsersOauthVO(usersOauthVO);
+		        	existingUserVO.setProvider(socialType.toString());
+		        	userService.svcUserUpdate(existingUserVO);
+		        	oauthService.svcInsertToken(usersOauthVO);
+		        }
 				request.getSession().setAttribute("SESS_ACCESS_TOKEN"	, accessToken); 
-				request.getSession().setAttribute("SESS_REFRESH_TOKEN"	, refreshToken);
-				request.getSession().setAttribute("SESS_GUBUN"			, 'u');
-				request.getSession().setAttribute("SESS_USERNAME"		, existingUserVO.getUserName());
-				
-				viewPage = "redirect: /mypage";
+				request.getSession().setAttribute("SESS_REFRESH_TOKEN"	, refreshToken); 
+				request.getSession().setAttribute("SESS_USERVO"			, existingUserVO);
+				request.getSession().setAttribute("userSeq", existingUserVO.getUserSeq());
+				viewPage = "redirect: /common/indexm";
 			}
 		} 
 		return viewPage;
@@ -205,7 +222,7 @@ public class OauthController {
 		usersTblVO.setProvider(request.getSession().getAttribute("SESS_PROVIDER").toString());
 		usersTblVO.setUsersOauthVO(usersOauthVO);
 		
-        int insertUserSeq = oauthService.svcInsertToken(usersTblVO);
+        int insertUserSeq = oauthService.svcInsertUserToken(usersTblVO);
         
         String viewPage = "redirect: /login_page";
         if (insertUserSeq <0) {

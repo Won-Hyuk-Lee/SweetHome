@@ -23,9 +23,22 @@ public class CommonController {
 		session.setAttribute("userSeq", seq);
 		return "jsp/index";
 	}
+	@RequestMapping(value = "/indexm", method = RequestMethod.GET)
+	public String ctlMove(HttpSession session) {
+		return "jsp/index";
+	}
+	@RequestMapping(value = "/registerm", method = RequestMethod.GET)
+	public String ctlRegisterm(HttpSession session) {
+		return "/jsp/register";
+	}
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
 	public String ctlLogOut(HttpSession session) {
 		session.invalidate(); // 세션 무효화
 		return "jsp/index";
+	}
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String ctlRegister(HttpSession session) {
+		session.invalidate(); // 세션 무효화
+		return "/jsp/register";
 	}
 }

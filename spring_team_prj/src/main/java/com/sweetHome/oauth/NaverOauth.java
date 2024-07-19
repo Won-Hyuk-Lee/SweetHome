@@ -103,7 +103,6 @@ public class NaverOauth implements Oauth {
 		result.put("access_token", accessToken);
 		result.put("email", (String) responseBody.get("email"));
 		result.put("name", (String) responseBody.get("name"));
-		result.put("nickname", (String) responseBody.get("nickname"));
 		result.put("picture", (String) responseBody.get("profile_image"));
 		result.put("phone", (String) responseBody.get("mobile"));
 

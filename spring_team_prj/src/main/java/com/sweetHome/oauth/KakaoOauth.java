@@ -101,7 +101,7 @@ public class KakaoOauth implements Oauth {
 	    Map<String, String> result = new HashMap<>();
 	    result.put("access_token", accessToken);
 	    result.put("email", (String) kakaoAccount.get("email"));
-	    result.put("nickname", (String) profile.get("nickname"));
+	    result.put("name", (String) profile.get("nickname"));
 	    result.put("picture", (String) profile.get("profile_image_url"));
 	    return result;
 	}
