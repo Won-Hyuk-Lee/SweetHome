@@ -15,9 +15,14 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	BoardMapper boardMapper;
 	
+	
+	public int svcBoardCount(int communitySeq) {
+		return boardMapper.boardCount(communitySeq);
+	}
+	
 	// 커뮤니티 시퀀스를 기반으로 게시글 목록을 가져오는 메서드
-    public List<BoardVO> svcBoardList(int communitySeq){
-        List<BoardVO> blist = boardMapper.boardList(communitySeq);
+    public List<BoardVO> svcBoardList(BoardVO boardVO){
+        List<BoardVO> blist = boardMapper.boardList(boardVO);
         for (BoardVO bvo : blist) {
             bvo.setRecommend(boardMapper.boardRecommend(bvo.getBoardSeq()));
         }

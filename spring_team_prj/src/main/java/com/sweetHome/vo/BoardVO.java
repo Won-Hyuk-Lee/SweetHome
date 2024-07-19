@@ -22,4 +22,8 @@ public class BoardVO {
 	private List<ReplyVO> reply;	
 	private List<BoardImagesVO> boardImages;
 	private int recommend;
+	private int startSeq = 1;
+	private int endSeq = 1;
+	private int currentPage = 1;
+	private int rnum;
 }

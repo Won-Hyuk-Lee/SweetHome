@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sweetHome.common.PagingUtil;
 import com.sweetHome.svc.BoardService;
 import com.sweetHome.vo.BoardVO;
 
@@ -23,12 +24,33 @@ public class BoardController {
 	@Autowired
 	BoardService boardService;
 	
-	// 게시글 전체 조회
-	@RequestMapping(value = "/board_list", method=RequestMethod.GET)
-	public String ctlBoardList(@RequestParam("communitySeq") int communitySeq, Model model){
-	    List<BoardVO> boardList = boardService.svcBoardList(communitySeq);
-	    model.addAttribute("KEY_BOARDLIST", boardList);
-	    return "jsp/board";
+//	// 게시글 전체 조회
+//	@RequestMapping(value = "/board_list", method=RequestMethod.GET)
+//	public String ctlBoardList(@RequestParam("communitySeq") int communitySeq, Model model){
+//	    List<BoardVO> boardList = boardService.svcBoardList(communitySeq);
+//	    model.addAttribute("KEY_BOARDLIST", boardList);
+//	    return "jsp/board";
+//	}
+	
+	@RequestMapping(value = "/board_list")
+	public String ctlBoardList(Model model, @RequestParam("communitySeq") int communitySeq
+			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage 
+			) {
+		//페이징
+		int listCount = boardService.svcBoardCount(communitySeq);
+		PagingUtil page = new PagingUtil("/board/board_list?communitySeq="+communitySeq, currentPage, listCount, 4, 5);
+		String pageHtmlStr = page.getPagingHtml().toString();
+		
+		BoardVO boardVO = new BoardVO();
+		boardVO.setCommunitySeq(communitySeq);
+		boardVO.setStartSeq(page.getStartSeq());
+		boardVO.setEndSeq(page.getEndSeq());
+		
+		List<BoardVO> list = boardService.svcBoardList(boardVO);
+		System.out.println(list.toString());
+		model.addAttribute("KEY_BOARDLIST", list);
+		model.addAttribute("KEY_PAGEING_HTML", pageHtmlStr);
+		return "jsp/board";     				//   /  lec05_board/board_list  .jsp  
 	}
 
 	// 게시글 상세 정보 조회

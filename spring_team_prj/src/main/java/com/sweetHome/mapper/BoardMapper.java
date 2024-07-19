@@ -8,8 +8,10 @@ import com.sweetHome.vo.BoardVO;
 public interface BoardMapper {
 	
 	// 게시글 목록 조회
-	List<BoardVO> boardList(int CommunitySeq);
+	List<BoardVO> boardList(BoardVO boardVO);
 
+	int boardCount(int communitySeq); //총게시물수
+	
 	// 게시글 상세 정보조회
 	BoardVO boardDetail(int boardSeq);
 

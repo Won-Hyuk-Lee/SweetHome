@@ -432,15 +432,6 @@
 							
 								<div id="replyListDiv"></div>
 								
-								<div class="mt-5 text-center">
-									<button id="loadOnClick"
-										class="btn btn-primary btn-loading-overlay mr-2 mb-2">
-										<span class="spinner"><span
-											class="spinner-border spinner-border-sm" role="status"
-											aria-hidden="true"></span> </span><span class="ml-1 btn-inner-text">댓글 더보기</span>
-									</button>
-									<p id="allLoadedText" style="display: none;">더 이상 불러올 댓글이 없습니다!</p>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -605,7 +596,6 @@
                         	} else {
                         		alert("댓글을 입력해 주세요!");
                         	}
-                        	
                         }
                     });
                 } else {
@@ -683,23 +673,7 @@
 	<script src="../resources/spaces/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
 	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
-	<script src="../resources/spaces/assets/js/spaces.js"></script>
-	<script>// here you should load content from an Ajax request and when it
-        // loads you can disable the button from loading
-        $('#loadOnClick').click(function() {
-            $button = $(this);
-            $loadContent = $('#extraContent');
-            $allLoaded = $('#allLoadedText');
-            $button.addClass('btn-loading');
-            $button.attr('disabled', true);
-
-            setTimeout(function() {
-                $loadContent.show();
-                $button.hide();
-                $allLoaded.show();
-            }, 1500);
-        });
-	</script>
+	<script src="../resources/spaces/assets/js/spaces.js"></script>S
 	<!-- <script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
