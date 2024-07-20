@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweetHome.mapper.RecommendMapper">
+    <select id="getDataByDistrict" resultType="com.sweetHome.vo.RecommendationDataVO">
+        SELECT * FROM some_table WHERE district = #{district}
+    </select>
+</mapper>
