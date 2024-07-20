@@ -611,6 +611,32 @@ html, body {
         alert('현재 서비스는 서울시에 한정하여 제공됩니다.');
         return;
     }
+    
+    function getRecommendations() {
+        var distanceImportance = document.querySelector('input[name="distance"]:checked').value;
+        var facilitiesImportance = document.querySelector('input[name="facilities"]:checked').value;
+        var costImportance = document.querySelector('input[name="cost"]:checked').value;
+
+        $.ajax({
+            url: '/map/recommend',
+            type: 'POST',
+            data: {
+                district: selectedDestination.address.split(' ')[1], // 구 이름 추출
+                latitude: selectedDestination.lat,
+                longitude: selectedDestination.lng,
+                distanceImportance: distanceImportance,
+                facilitiesImportance: facilitiesImportance,
+                costImportance: costImportance
+            },
+            success: function(response) {
+                // 추천 결과 표시
+                alert('추천 결과: ' + response);
+            },
+            error: function(xhr, status, error) {
+                alert('추천 서비스 오류: ' + error);
+            }
+        });
+    }
 
     // 추천 탭 표시
     document.getElementById('recommendTab').style.display = 'block';
