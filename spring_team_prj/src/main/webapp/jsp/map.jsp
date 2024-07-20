@@ -11,6 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>지도 서비스</title>
 
+<!-- CSS 파일 링크 -->
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link type="text/css"
@@ -30,6 +31,7 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
+/* 전체 페이지 스타일 */
 html, body {
 	width: 100%;
 	height: 100%;
@@ -37,8 +39,9 @@ html, body {
 	padding: 0;
 }
 
+/* 지도 컨테이너 스타일 */
 #map {
-	width: calc(100% - 300px);
+	width: calc(100% - 600px); /* recommend tab을 위해 너비 조정 */
 	height: calc(100% - 80px);
 	position: absolute;
 	top: 100px;
@@ -46,6 +49,7 @@ html, body {
 	z-index: 1;
 }
 
+/* 좌측 탭 스타일 */
 #leftTab {
 	width: 300px;
 	height: calc(100% - 80px);
@@ -60,6 +64,23 @@ html, body {
 	border-right: 1px solid #ccc;
 }
 
+/* 추천 탭 스타일 */
+#recommendTab {
+	width: 300px;
+	height: calc(100% - 80px);
+	position: absolute;
+	top: 80px;
+	left: 300px;
+	background: rgba(255, 255, 255, 0.9);
+	padding: 20px;
+	box-sizing: border-box;
+	overflow-y: auto;
+	z-index: 2;
+	border-right: 1px solid #ccc;
+	display: none; /* 초기에는 숨김 */
+}
+
+/* 기타 UI 요소 스타일 */
 #crosshair, #info, .context-menu {
 	z-index: 3;
 }
@@ -123,6 +144,23 @@ html, body {
 	background-color: #f0f0f0;
 }
 
+/* 추천서비스 버튼 스타일 */
+#recommendButton {
+	margin-top: 20px;
+	padding: 10px;
+	background-color: #008CBA;
+	color: white;
+	border: none;
+	cursor: pointer;
+	border-radius: 4px;
+	width: 100%;
+}
+
+#recommendButton:hover {
+	background-color: #007B9A;
+}
+
+/* 컨텍스트 메뉴 스타일 */
 .context-menu {
 	display: none;
 	position: absolute;
@@ -158,18 +196,55 @@ html, body {
 	box-shadow: 0 0 24px rgba(154, 205, 50, .04), 0 44px 74px
 		rgba(154, 205, 50, .06);
 }
+
+.recommendation-factors {
+	margin-top: 20px;
+}
+
+.factor {
+	margin-bottom: 15px;
+}
+
+.radio-group {
+	display: flex;
+	justify-content: space-between;
+	max-width: 250px;
+}
+
+.radio-group input[type="radio"] {
+	display: none;
+}
+
+.radio-group label {
+	display: inline-block;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	border: 1px solid #ddd;
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+.radio-group input[type="radio"]:checked+label {
+	background-color: #4CAF50;
+	color: white;
+}
 </style>
 </head>
 <body>
+	<!-- 구글 태그 매니저 (noscript) -->
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
 
+	<!-- 헤더 및 네비게이션 바 -->
 	<header class="header-global">
 		<nav id="navbar-main"
 			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
 			<div class="container">
+				<!-- 로고 -->
 				<a class="navbar-brand" href="/jsp/index.jsp"> <img
 					class="navbar-brand-dark common"
 					src="../resources/spaces/assets/img/brand/light.svg" height="35"
@@ -178,6 +253,7 @@ html, body {
 					alt="Logo dark">
 				</a>
 
+				<!-- 네비게이션 메뉴 -->
 				<div class="navbar-collapse collapse" id="navbar_global">
 					<div class="navbar-collapse-header">
 						<div class="row">
@@ -196,11 +272,13 @@ html, body {
 						</div>
 					</div>
 					<ul class="navbar-nav navbar-nav-hover justify-content-center">
+						<!-- 지도 메뉴 -->
 						<li class="nav-item dropdown"><a href="#"
 							id="mainPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"> <span
 								class="nav-link-inner-text mr-1">지도</span>
 						</a></li>
+						<!-- 커뮤니티 메뉴 -->
 						<li class="nav-item dropdown"><a href="/community/list"
 							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"> <span
@@ -208,7 +286,10 @@ html, body {
 								class="fas fa-angle-down nav-link-arrow"></i>
 						</a>
 							<div class="dropdown-menu dropdown-megamenu-sm p-3 p-lg-4"
-								aria-labelledby="dashboardPagesDropdown"></div></li>
+								aria-labelledby="dashboardPagesDropdown">
+								<!-- 드롭다운 메뉴 내용 -->
+							</div></li>
+						<!-- 내 정보 메뉴 -->
 						<li class="nav-item dropdown"><a href="#"
 							id="mainPagesDropdown" class="nav-link dropdown-toggle"
 							aria-expanded="false" data-toggle="dropdown"> <span
@@ -217,6 +298,7 @@ html, body {
 					</ul>
 				</div>
 
+				<!-- 로그인/로그아웃 버튼 -->
 				<div class="d-none d-lg-block">
 					<c:choose>
 						<c:when test="${not empty userSeq}">
@@ -235,6 +317,7 @@ html, body {
 					</c:choose>
 				</div>
 
+				<!-- 모바일 메뉴 토글 버튼 -->
 				<div class="d-flex d-lg-none align-items-center">
 					<button class="navbar-toggler" type="button" data-toggle="collapse"
 						data-target="#navbar_global" aria-controls="navbar_global"
@@ -246,19 +329,31 @@ html, body {
 		</nav>
 	</header>
 
+	<!-- 메인 콘텐츠 -->
 	<main>
+		<!-- 좌측 탭 -->
 		<div id="leftTab">
 			<h2>목적지 검색</h2>
 			<input type="text" id="destinationSearch" placeholder="목적지 입력">
 			<button id="destinationSearchButton" onclick="searchDestination()">검색</button>
 			<div id="searchResults"></div>
+			<button id="recommendButton" onclick="useRecommendService()">추천서비스
+				이용</button>
 		</div>
 
+		<!-- 추천 탭 -->
+		<div id="recommendTab">
+			<h2>추천 서비스</h2>
+			<!-- 추천 서비스 내용은 여기에 추가 -->
+		</div>
+
+		<!-- 지도 컨테이너 -->
 		<div id="map">
 			<div id="crosshair">+</div>
 			<div id="info"></div>
 		</div>
 
+		<!-- 컨텍스트 메뉴 (우클릭 시 표시) -->
 		<div id="context-menu" class="context-menu">
 			<ul>
 				<li onclick="zoomIn()">확대</li>
@@ -271,6 +366,7 @@ html, body {
 		</div>
 	</main>
 
+	<!-- 스크립트 파일 로드 -->
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
@@ -305,6 +401,7 @@ html, body {
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
 
 	<%
+	// 카카오 맵 API 키 로드
 	String apiKey = null;
 	Properties prop = new Properties();
 	String propFileName = "api/kakaoDeveloperJavaScriptAPI.properties";
@@ -327,174 +424,233 @@ html, body {
 	}
 	%>
 
+	<!-- 카카오 맵 API 스크립트 로드 -->
 	<script type="text/javascript"
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=<%=apiKey%>&libraries=services,clusterer,drawing"></script>
 
 	<script>
-		function openNaver(lat, lng) {
-			var url = 'https://new.land.naver.com/rooms?ms='
-					+ encodeURIComponent(lat)
-					+ ','
-					+ encodeURIComponent(lng)
-					+ ',16&a=APT:OPST:ABYG:OBYG:GM:OR:VL:DDDGG:JWJT:SGJT:HOJT&e=RETAIL&aa=SMALLSPCRENT';
-			window.open(url, '_blank');
-		}
+        // 전역 변수 선언
+        var map;
+        var ps;
+        var infowindow;
+        var selectedDestination = null;
 
-		function openDaum(lat, lng) {
-			var url = 'https://realty.daum.net/home/oneroom/map?latitude='
-					+ encodeURIComponent(lat) + '&longitude='
-					+ encodeURIComponent(lng) + '&zoom=3';
-			window.open(url, '_blank');
-		}
+        // 외부 부동산 사이트 열기 함수
+        function openNaver(lat, lng) {
+            var url = 'https://new.land.naver.com/rooms?ms=' + encodeURIComponent(lat) + ',' + encodeURIComponent(lng) + ',16&a=APT:OPST:ABYG:OBYG:GM:OR:VL:DDDGG:JWJT:SGJT:HOJT&e=RETAIL&aa=SMALLSPCRENT';
+            window.open(url, '_blank');
+        }
 
-		function openZigbang(lat, lng) {
-			var url = 'https://www.zigbang.com/home/oneroom/map?latitude='
-					+ encodeURIComponent(lat) + '&longitude='
-					+ encodeURIComponent(lng) + '&zoom=3';
-			window.open(url, '_blank');
-		}
+        function openDaum(lat, lng) {
+            var url = 'https://realty.daum.net/home/oneroom/map?latitude=' + encodeURIComponent(lat) + '&longitude=' + encodeURIComponent(lng) + '&zoom=3';
+            window.open(url, '_blank');
+        }
 
-		window.onload = function() {
-			var container = document.getElementById('map');
-			container.style.width = 'calc(100% - 300px)';
-			container.style.height = 'calc(100vh - 80px)';
+        function openZigbang(lat, lng) {
+            var url = 'https://www.zigbang.com/home/oneroom/map?latitude=' + encodeURIComponent(lat) + '&longitude=' + encodeURIComponent(lng) + '&zoom=3';
+            window.open(url, '_blank');
+        }
 
-			var options = {
-				center : new kakao.maps.LatLng(37.566826, 126.9786567),
-				level : 8
-			};
+        // 페이지 로드 시 실행되는 함수
+        window.onload = function() {
+            // 지도 컨테이너 설정
+            var container = document.getElementById('map');
+            container.style.width = 'calc(100% - 600px)';
+            container.style.height = 'calc(100vh - 80px)';
+            
+            // 지도 옵션 설정
+            var options = {
+                center: new kakao.maps.LatLng(37.566826, 126.9786567), // 서울 시청 좌표
+                level: 8 // 초기 줌 레벨
+            };
 
-			var map = new kakao.maps.Map(container, options);
+            // 지도 생성
+            map = new kakao.maps.Map(container, options);
 
-			var zoomControl = new kakao.maps.ZoomControl();
-			map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+            // 줌 컨트롤 추가
+            var zoomControl = new kakao.maps.ZoomControl();
+            map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-			var mapTypeControl = new kakao.maps.MapTypeControl();
-			map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
+            // 지도 타입 컨트롤 추가
+            var mapTypeControl = new kakao.maps.MapTypeControl();
+            map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
 
-			var infoDiv = document.getElementById('info');
-			kakao.maps.event.addListener(map, 'center_changed', function() {
-				var center = map.getCenter();
-				infoDiv.innerHTML = '중심 좌표: 위도 ' + center.getLat().toFixed(6)
-						+ ', 경도 ' + center.getLng().toFixed(6);
-			});
+            // 중심 좌표 변경 시 이벤트 처리
+            var infoDiv = document.getElementById('info');
+            kakao.maps.event.addListener(map, 'center_changed', function() {
+                var center = map.getCenter();
+                infoDiv.innerHTML = '중심 좌표: 위도 ' + center.getLat().toFixed(6) + ', 경도 ' + center.getLng().toFixed(6);
+            });
 
-			var clusterer = new kakao.maps.MarkerClusterer({
-				map : map,
-				averageCenter : true,
-				minLevel : 5
-			});
+            // 마커 클러스터러 생성
+            var clusterer = new kakao.maps.MarkerClusterer({
+                map: map,
+                averageCenter: true,
+                minLevel: 5
+            });
 
-			var ps = new kakao.maps.services.Places();
+            // 장소 검색 객체 생성
+            ps = new kakao.maps.services.Places();
 
-			var infowindow = new kakao.maps.InfoWindow({
-				zIndex : 1
-			});
+            // 인포윈도우 생성
+            infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
-			function placesSearchCB(data, status, pagination) {
-			    if (status === kakao.maps.services.Status.OK) {
-			        var bounds = new kakao.maps.LatLngBounds();
-			        var searchResults = document.getElementById('searchResults');
-			        searchResults.innerHTML = '';
-			        
-			        for (var i = 0; i < Math.min(data.length, 5); i++) {
-			            displayMarker(data[i]);
-			            bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
-			            
-			            var place = data[i];
-			            var div = document.createElement('div');
-			            
-			            var address = place.address_name ? place.address_name : "주소 정보 없음";
-			            var addressParts = address.split(' ');
-			            var shortAddress = addressParts.slice(0, 3).join(' ');
-			            
-			            div.innerHTML = '<div class="place-info">' +
-			                                '<strong>' + place.place_name + '</strong><br>' +
-			                                '<small>(' + shortAddress + ')</small>' +
-			                            '</div>' +
-			                            '<button class="select-btn" onclick="selectLocation(' + place.y + ', ' + place.x + ')">선택</button>';
-			            searchResults.appendChild(div);
-			        }
+            // 우클릭 이벤트 처리
+            kakao.maps.event.addListener(map, 'rightclick', function(mouseEvent) {
+                var latlng = mouseEvent.latLng;
+                var content = '<div class="context-menu">' +
+                              '<ul>' +
+                              '<li onclick="openNaver(' + latlng.getLat() + ', ' + latlng.getLng() + ')">네이버 부동산</li>' +
+                              '<li onclick="openDaum(' + latlng.getLat() + ', ' + latlng.getLng() + ')">다음 부동산</li>' +
+                              '<li onclick="openZigbang(' + latlng.getLat() + ', ' + latlng.getLng() + ')">직방</li>' +
+                              '</ul>' +
+                              '</div>';
 
-			        map.setBounds(bounds);
-			    }
-			}
+                var contextMenu = document.getElementById('context-menu');
+                contextMenu.innerHTML = content;
+                contextMenu.style.display = 'block';
+                contextMenu.style.left = mouseEvent.clientX + 'px';
+                contextMenu.style.top = mouseEvent.clientY + 'px';
+            });
 
+            // 컨텍스트 메뉴 닫기
+            document.addEventListener('click', function(event) {
+                var contextMenu = document.getElementById('context-menu');
+                if (contextMenu.style.display === 'block') {
+                    contextMenu.style.display = 'none';
+                }
+            });
+        }
 
-			function selectLocation(lat, lng) {
-				var moveLatLng = new kakao.maps.LatLng(lat, lng);
-				map.setCenter(moveLatLng);
-				map.setLevel(3); // 확대 레벨 설정 (1~14, 숫자가 작을수록 더 확대됨)
-			}
+        // 장소 검색 콜백 함수
+        function placesSearchCB(data, status, pagination) {
+            if (status === kakao.maps.services.Status.OK) {
+                var bounds = new kakao.maps.LatLngBounds();
+                var searchResults = document.getElementById('searchResults');
+                searchResults.innerHTML = '';
+                
+                for (var i = 0; i < Math.min(data.length, 5); i++) {
+                    displayMarker(data[i]);
+                    bounds.extend(new kakao.maps.LatLng(data[i].y, data[i].x));
+                    
+                    var place = data[i];
+                    var div = document.createElement('div');
+                    
+                    var address = place.address_name ? place.address_name : "주소 정보 없음";
+                    var addressParts = address.split(' ');
+                    var shortAddress = addressParts.slice(0, 3).join(' ');
+                    
+                    div.innerHTML = '<div class="place-info">' +
+                                        '<strong>' + place.place_name + '</strong><br>' +
+                                        '<small>(' + shortAddress + ')</small>' +
+                                    '</div>' +
+                                    '<button class="select-btn" onclick="selectLocation(' + place.y + ', ' + place.x + ', \'' + place.place_name + '\', \'' + shortAddress + '\')">선택</button>';
+                    searchResults.appendChild(div);
+                }
 
-			function displayMarker(place) {
-				var marker = new kakao.maps.Marker({
-					map : map,
-					position : new kakao.maps.LatLng(place.y, place.x)
-				});
+                map.setBounds(bounds);
+            }
+        }
 
-				kakao.maps.event.addListener(marker, 'click', function() {
-					var address = place.address_name ? place.address_name
-							: "주소 정보 없음";
-					var addressParts = address.split(' ');
-					var shortAddress = addressParts.slice(0, 3).join(' '); // 시/도, 구/군, 동까지만 표시
+        // 마커 표시 함수
+        function displayMarker(place) {
+            var marker = new kakao.maps.Marker({
+                map: map,
+                position: new kakao.maps.LatLng(place.y, place.x) 
+            });
 
-					var content = '<div style="padding:5px;font-size:12px;">'
-							+ '<strong>' + place.place_name + '</strong><br>'
-							+ '<small>' + shortAddress + '</small><br>'
-							+ '<button onclick="openNaver(' + place.y + ', '
-							+ place.x + ')">네이버 부동산</button> '
-							+ '<button onclick="openDaum(' + place.y + ', '
-							+ place.x + ')">다음 부동산</button> '
-							+ '<button onclick="openZigbang(' + place.y + ', '
-							+ place.x + ')">직방</button>' + '</div>';
-					infowindow.setContent(content);
-					infowindow.open(map, marker);
-				});
-			}
+            kakao.maps.event.addListener(marker, 'click', function() {
+                var address = place.address_name ? place.address_name : "주소 정보 없음";
+                var addressParts = address.split(' ');
+                var shortAddress = addressParts.slice(0, 3).join(' ');
 
-			function searchDestination() {
-				var keyword = document.getElementById('destinationSearch').value;
-				if (!keyword.trim()) {
-					alert('목적지를 입력해주세요!');
-					return false;
-				}
-				ps.keywordSearch(keyword, placesSearchCB);
-			}
+                var content = '<div style="padding:5px;font-size:12px;">' + 
+                              '<strong>' + place.place_name + '</strong><br>' +
+                              '<small>' + shortAddress + '</small><br>' +
+                              '<button onclick="openNaver(' + place.y + ', ' + place.x + ')">네이버 부동산</button> ' +
+                              '<button onclick="openDaum(' + place.y + ', ' + place.x + ')">다음 부동산</button> ' +
+                              '<button onclick="openZigbang(' + place.y + ', ' + place.x + ')">직방</button>' +
+                              '</div>';
+                infowindow.setContent(content);
+                infowindow.open(map, marker);
+            });
+        }
 
-			kakao.maps.event.addListener(map, 'rightclick',
-					function(mouseEvent) {
-						var latlng = mouseEvent.latLng;
-						var content = '<div class="context-menu">' + '<ul>'
-								+ '<li onclick="openNaver(' + latlng.getLat()
-								+ ', ' + latlng.getLng() + ')">네이버 부동산보기</li>'
-								+ '<li onclick="openDaum(' + latlng.getLat()
-								+ ', ' + latlng.getLng() + ')">다음 부동산보기</li>'
-								+ '<li onclick="openZigbang(' + latlng.getLat()
-								+ ', ' + latlng.getLng() + ')">직방보기</li>'
-								+ '</ul>' + '</div>';
+        // 장소 검색 함수
+        function searchDestination() {
+            var keyword = document.getElementById('destinationSearch').value;
+            if (!keyword.trim()) {
+                alert('목적지를 입력해주세요!');
+                return false;
+            }
+            ps.keywordSearch(keyword, placesSearchCB);
+        }
 
-						var contextMenu = document
-								.getElementById('context-menu');
-						contextMenu.innerHTML = content;
-						contextMenu.style.display = 'block';
-						contextMenu.style.left = mouseEvent.clientX + 'px';
-						contextMenu.style.top = mouseEvent.clientY + 'px';
-					});
+        // 목적지 선택 함수
+        function selectLocation(lat, lng, placeName, address) {
+            var moveLatLng = new kakao.maps.LatLng(lat, lng);
+            map.setCenter(moveLatLng);
+            map.setLevel(3);
+            selectedDestination = {
+                lat: lat,
+                lng: lng,
+                name: placeName,
+                address: address
+            };
+            alert(placeName + '을(를) 목적지로 선택했습니다.');
+        }
 
-			document.addEventListener('click', function(event) {
-				var contextMenu = document.getElementById('context-menu');
-				if (contextMenu.style.display === 'block') {
-					contextMenu.style.display = 'none';
-				}
-			});
+        // 추천 서비스 이용 함수
+        function useRecommendService() {
+    if (!selectedDestination) {
+        alert('목적지를 먼저 선택해주세요.');
+        return;
+    }
 
-			window.searchDestination = searchDestination;
-			window.openNaver = openNaver;
-			window.openDaum = openDaum;
-			window.openZigbang = openZigbang;
-			window.selectLocation = selectLocation;
-		}
-	</script>
+    if (!selectedDestination.address.startsWith('서울')) {
+        alert('현재 서비스는 서울시에 한정하여 제공됩니다.');
+        return;
+    }
+
+    // 추천 탭 표시
+    document.getElementById('recommendTab').style.display = 'block';
+    // 지도 크기 조정
+    document.getElementById('map').style.width = 'calc(100% - 600px)';
+
+    // 추천 서비스 내용 업데이트
+    document.getElementById('recommendTab').innerHTML = `
+        <h2>추천 서비스</h2>
+        <p>선택한 목적지: ${selectedDestination.name}</p>
+        <p>주소: ${selectedDestination.address}</p>
+        <p>숫자가 높을수록 중요도가 높다는 뜻입니다.</p>
+        <div class="recommendation-factors">
+            <div class="factor">
+                <p>이동거리</p>
+                <div class="radio-group">
+                    <input type="radio" id="distance1" name="distance" value="1">
+                    <label for="distance1">1</label>
+                    <input type="radio" id="distance2" name="distance" value="2">
+                    <label for="distance2">2</label>
+                    <input type="radio" id="distance3" name="distance" value="3">
+                    <label for="distance3">3</label>
+                    <input type="radio" id="distance4" name="distance" value="4">
+                    <label for="distance4">4</label>
+                    <input type="radio" id="distance5" name="distance" value="5">
+                    <label for="distance5">5</label>
+                </div>
+            </div>
+            
+        <button onclick="getRecommendations()">추천 받기</button>
+    `;
+}
+
+        // 전역 함수로 등록
+        window.searchDestination = searchDestination;
+        window.selectLocation = selectLocation;
+        window.useRecommendService = useRecommendService;
+        window.openNaver = openNaver;
+        window.openDaum = openDaum;
+        window.openZigbang = openZigbang;
+    </script>
 </body>
 </html>
