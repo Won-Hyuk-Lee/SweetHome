@@ -1,75 +1,89 @@
 package com.sweetHome.svc;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.sweetHome.mapper.RecommendMapper;
 import com.sweetHome.vo.DistrictVO;
-import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
 
 @Service
 public class RecommendServiceImpl implements RecommendService {
-    
     @Autowired
     private RecommendMapper recommendMapper;
-
+    @Autowired
+    private DataFetchService dataFetchService;
+    
     // 지구반지름(km)
-    private static final double EARTH_RADIUS = 6371; 
+    private static final double EARTH_RADIUS = 6371;
 
-    /**
-     * 주어진 목적지 좌표로부터 모든 자치구까지의 거리를 계산
-     *
-     * @param destLatitude 목적지의 위도
-     * @param destLongitude 목적지의 경도
-     * @return 각 자치구 이름과 그 거리를 포함하는 Map
-     */
     @Override
-    public Map<String, Double> calculateDistancesToDistricts(double destLatitude, double destLongitude) {
-        List<DistrictVO> districts = recommendMapper.getAllDistricts();
+    public List<String> getRecommendations(String districtName, double latitude, double longitude, int distanceImportance) {
+        System.out.println("getRecommendations called with: district=" + districtName + ", lat=" + latitude + ", lon=" + longitude + ", importance=" + distanceImportance);
         
-        Map<String, Double> distanceMap = new HashMap<>();
-
-        // 각 자치구에 대해 거리 계산
-        for (DistrictVO district : districts) {
-            // 하버사인 공식을 사용하여 목적지와 자치구 중심 간의 거리 계산
-            double distance = calculateHaversineDistance(destLatitude, destLongitude, 
-                                                         district.getLatitude(), district.getLongitude());
-            
-            // 계산된 거리를 Map에 저장 (키: 자치구 이름, 값: 거리)
-            distanceMap.put(district.getDistrictName(), distance);
+        List<DistrictVO> allDistricts = dataFetchService.getAllDistrictsFromDB();
+        System.out.println("Fetched " + allDistricts.size() + " districts from DB");
+        
+        // 각 지구의 정보 출력
+        for (DistrictVO district : allDistricts) {
+            System.out.println("District: " + district.getDistrictName() + ", Lat: " + district.getLatitude() + ", Lon: " + district.getLongitude());
         }
 
-        // 계산된 거리 Map 반환
+        Map<String, Double> distanceMap = calculateDistancesToDistricts(latitude, longitude, allDistricts);
+        System.out.println("Distance Map: " + distanceMap);
+        
+        // 거리가 가장 가까운 5개 자치구 이름 반환 (Java 7 compatible)
+        List<Map.Entry<String, Double>> sortedEntries = new ArrayList<>(distanceMap.entrySet());
+        Collections.sort(sortedEntries, new Comparator<Map.Entry<String, Double>>() {
+            @Override
+            public int compare(Map.Entry<String, Double> e1, Map.Entry<String, Double> e2) {
+                return e1.getValue().compareTo(e2.getValue());
+            }
+        });
+
+        List<String> recommendations = new ArrayList<>();
+        for (int i = 0; i < Math.min(5, sortedEntries.size()); i++) {
+            recommendations.add(sortedEntries.get(i).getKey());
+        }
+
+        System.out.println("Recommendations: " + recommendations);
+        return recommendations;
+    }
+
+    @Override
+    public Map<String, Double> calculateDistancesToDistricts(double destLatitude, double destLongitude, List<DistrictVO> allDistricts) {
+        Map<String, Double> distanceMap = new HashMap<>();
+        for (DistrictVO district : allDistricts) {
+            try {
+                double distance = calculateHaversineDistance(destLatitude, destLongitude, district.getLatitude(), district.getLongitude());
+                System.out.println("Calculated distance to " + district.getDistrictName() + ": " + distance);
+                distanceMap.put(district.getDistrictName(), distance);
+            } catch (Exception e) {
+                System.err.println("Error calculating distance for " + district.getDistrictName() + ": " + e.getMessage());
+                e.printStackTrace();
+            }
+        }
         return distanceMap;
     }
 
-    /**
-     * 두 지점 간의 거리를 하버사인 공식을 사용하여 계산합니다.
-     *
-     * @param lat1 첫 번째 지점의 위도
-     * @param lon1 첫 번째 지점의 경도
-     * @param lat2 두 번째 지점의 위도
-     * @param lon2 두 번째 지점의 경도
-     * @return 두 지점 간의 거리 (단위: km)
-     */
     private double calculateHaversineDistance(double lat1, double lon1, double lat2, double lon2) {
-    	// 하버사인 공식이란 지구를 완벽한 구체라고 가정하고 위도와 경도를 가지고 계산하는 공식으로
-    	// 중위도이고 평지가 많은 한국에서 사용하기 적합하며 서울로 한정할경우 남산을 제외하고는 오차가 거의 없다.
-        // 위도와 경도의 차이를 라디안으로 변환
+        System.out.println("Calculating distance between (" + lat1 + "," + lon1 + ") and (" + lat2 + "," + lon2 + ")");
+        
         double dLat = Math.toRadians(lat2 - lat1);
         double dLon = Math.toRadians(lon2 - lon1);
-        
-        // 위도를 라디안으로 변환
         lat1 = Math.toRadians(lat1);
         lat2 = Math.toRadians(lat2);
-
-        // 하버사인 공식
-        double a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                   Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
         
-        // 최종 거리
-        return EARTH_RADIUS * c;
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2)
+                + Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        
+        double distance = EARTH_RADIUS * c;
+        System.out.println("Calculated distance: " + distance + " km");
+        return distance;
     }
 }

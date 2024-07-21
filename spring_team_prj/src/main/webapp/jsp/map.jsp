@@ -41,10 +41,10 @@ html, body {
 
 /* 지도 컨테이너 스타일 */
 #map {
-	width: calc(100% - 600px); /* recommend tab을 위해 너비 조정 */
+	width: calc(100% - 300px); /* recommend tab을 위해 너비 조정 */
 	height: calc(100% - 80px);
 	position: absolute;
-	top: 100px;
+	top: 80px;
 	right: 0;
 	z-index: 1;
 }
@@ -56,7 +56,7 @@ html, body {
 	position: absolute;
 	top: 80px;
 	left: 0;
-	background: rgba(255, 255, 255, 0.9);
+	background: rgba(255, 255, 255, 1);
 	padding: 20px;
 	box-sizing: border-box;
 	overflow-y: auto;
@@ -71,7 +71,7 @@ html, body {
 	position: absolute;
 	top: 80px;
 	left: 300px;
-	background: rgba(255, 255, 255, 0.9);
+	background: rgba(255, 255, 255, 1);
 	padding: 20px;
 	box-sizing: border-box;
 	overflow-y: auto;
@@ -83,6 +83,13 @@ html, body {
 /* 기타 UI 요소 스타일 */
 #crosshair, #info, .context-menu {
 	z-index: 3;
+}
+
+/* 드롭다운 스타일 */
+.dropdown {
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 10px;
 }
 
 #crosshair {
@@ -205,30 +212,9 @@ html, body {
 	margin-bottom: 15px;
 }
 
-.radio-group {
-	display: flex;
-	justify-content: space-between;
-	max-width: 250px;
-}
-
-.radio-group input[type="radio"] {
-	display: none;
-}
-
-.radio-group label {
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	text-align: center;
-	line-height: 30px;
-	border: 1px solid #ddd;
-	border-radius: 50%;
-	cursor: pointer;
-}
-
-.radio-group input[type="radio"]:checked+label {
-	background-color: #4CAF50;
-	color: white;
+.navbar-main {
+	height: 80px;
+	z-index: 1000;
 }
 </style>
 </head>
@@ -455,7 +441,7 @@ html, body {
         window.onload = function() {
             // 지도 컨테이너 설정
             var container = document.getElementById('map');
-            container.style.width = 'calc(100% - 600px)';
+            container.style.width = 'calc(100% - 300px)';
             container.style.height = 'calc(100vh - 80px)';
             
             // 지도 옵션 설정
@@ -586,7 +572,7 @@ html, body {
             ps.keywordSearch(keyword, placesSearchCB);
         }
 
-        // 목적지 선택 함수
+     // 목적지 선택 함수
         function selectLocation(lat, lng, placeName, address) {
             var moveLatLng = new kakao.maps.LatLng(lat, lng);
             map.setCenter(moveLatLng);
@@ -598,76 +584,96 @@ html, body {
                 address: address
             };
             alert(placeName + '을(를) 목적지로 선택했습니다.');
+            
+            // 서울 주소인 경우에만 추천 서비스 버튼 활성화
+            var recommendButton = document.getElementById('recommendButton');
+            if (address.startsWith('서울')) {
+                recommendButton.disabled = false;
+                recommendButton.style.opacity = 1;
+            } else {
+                recommendButton.disabled = true;
+                recommendButton.style.opacity = 0.5;
+            }
         }
 
-        // 추천 서비스 이용 함수
-        function useRecommendService() {
+     // 추천 서비스 이용 함수
+        	function useRecommendService() {
     if (!selectedDestination) {
         alert('목적지를 먼저 선택해주세요.');
         return;
     }
-
+    //서울시 한정
     if (!selectedDestination.address.startsWith('서울')) {
         alert('현재 서비스는 서울시에 한정하여 제공됩니다.');
         return;
     }
     
-    function getRecommendations() {
-        var distanceImportance = document.querySelector('input[name="distance"]:checked').value;
-        var facilitiesImportance = document.querySelector('input[name="facilities"]:checked').value;
-        var costImportance = document.querySelector('input[name="cost"]:checked').value;
-
-        $.ajax({
-            url: '/map/recommend',
-            type: 'POST',
-            data: {
-                district: selectedDestination.address.split(' ')[1], // 구 이름 추출
-                latitude: selectedDestination.lat,
-                longitude: selectedDestination.lng,
-                distanceImportance: distanceImportance,
-                facilitiesImportance: facilitiesImportance,
-                costImportance: costImportance
-            },
-            success: function(response) {
-                // 추천 결과 표시
-                alert('추천 결과: ' + response);
-            },
-            error: function(xhr, status, error) {
-                alert('추천 서비스 오류: ' + error);
-            }
-        });
-    }
-
     // 추천 탭 표시
-    document.getElementById('recommendTab').style.display = 'block';
+    var recommendTab = document.getElementById('recommendTab');
+    recommendTab.style.display = 'block';
     // 지도 크기 조정
     document.getElementById('map').style.width = 'calc(100% - 600px)';
 
     // 추천 서비스 내용 업데이트
-    document.getElementById('recommendTab').innerHTML = `
+    recommendTab.innerHTML = `
         <h2>추천 서비스</h2>
-        <p>선택한 목적지: ${selectedDestination.name}</p>
-        <p>주소: ${selectedDestination.address}</p>
-        <p>숫자가 높을수록 중요도가 높다는 뜻입니다.</p>
         <div class="recommendation-factors">
             <div class="factor">
                 <p>이동거리</p>
-                <div class="radio-group">
-                    <input type="radio" id="distance1" name="distance" value="1">
-                    <label for="distance1">1</label>
-                    <input type="radio" id="distance2" name="distance" value="2">
-                    <label for="distance2">2</label>
-                    <input type="radio" id="distance3" name="distance" value="3">
-                    <label for="distance3">3</label>
-                    <input type="radio" id="distance4" name="distance" value="4">
-                    <label for="distance4">4</label>
-                    <input type="radio" id="distance5" name="distance" value="5">
-                    <label for="distance5">5</label>
-                </div>
+                <select id="distanceImportance" class="dropdown">
+                    <option value="1">서울전체</option>
+                    <option value="2">대중교통 1시간 이내</option>
+                    <option value="3">대중교통 30분 이내</option>
+                    <option value="4">대중교통 10분 이내</option>
+                    <option value="5">도보 10분 이내</option>
+                </select>
             </div>
-            
+        </div>
         <button onclick="getRecommendations()">추천 받기</button>
+        <div id="recommendations"></div>
     `;
+}		
+    
+     // 추천 받기 함수
+        function getRecommendations() {
+    var distanceImportance = document.getElementById('distanceImportance').value;
+
+    $.ajax({
+        url: '/map/recommend',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            district: selectedDestination.address.split(' ')[1],
+            latitude: selectedDestination.lat,
+            longitude: selectedDestination.lng,
+            distanceImportance: distanceImportance
+        },
+        success: function(response) {
+            console.log('Success:', response);
+            if (response && response.length > 0) {
+                alert('추천 자치구 5개: ' + response.join(', '));
+                updateRecommendations(response);
+            } else {
+                alert('추천 결과가 없습니다.');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', xhr.responseText);
+            alert('추천 서비스 오류: ' + xhr.responseText);
+        }
+    });
+}
+
+function updateRecommendations(recommendations) {
+    var recommendationsDiv = document.getElementById('recommendations');
+    recommendationsDiv.innerHTML = '<h3>추천 자치구</h3>';
+    var ul = document.createElement('ul');
+    recommendations.forEach(function(district) {
+        var li = document.createElement('li');
+        li.textContent = district;
+        ul.appendChild(li);
+    });
+    recommendationsDiv.appendChild(ul);
 }
 
         // 전역 함수로 등록
