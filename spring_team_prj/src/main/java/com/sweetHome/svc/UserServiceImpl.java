@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sweetHome.mapper.UserMapper;
 import com.sweetHome.vo.BoardVO;
+import com.sweetHome.vo.ReplyVO;
 import com.sweetHome.vo.UserVO;
 import com.sweetHome.vo.UsersOauthVO;
 
@@ -39,14 +40,9 @@ public class UserServiceImpl implements UserService {
         return blist;
     }
 
-    @Override
-    public List<UserVO> svcUserReplies(int UserSeq) {
-        // 사용자 댓글 목록 로직 구현 필요
-        // 임시로 빈 목록 반환
-    	UserVO UserVO = new UserVO();
-        return new ArrayList<UserVO>();
+    public List<ReplyVO> svcUserReplies(int boardSeq){
+        return UserMapper.userReplies(boardSeq);
     }
-    
     
     @Override
     public void svcUserJoin(UserVO UserVO) {

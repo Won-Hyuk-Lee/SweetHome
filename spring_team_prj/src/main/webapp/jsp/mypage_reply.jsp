@@ -114,15 +114,15 @@
 								<h2 class="h5 font-weight-normal text-center mt-3 mb-0">${KEY_USERVO.userNickname}</h2>
 								<div class="list-group dashboard-menu list-group-sm mt-4">
 									<a href="/user/detail_update?seq=${sessionScope.userSeq}"
-										class="d-flex list-group-item list-group-item-action">내 정보 수정
+										class="d-flex list-group-item list-group-item-action"style="font-size: 1.5rem;">내 정보 수정
 										<span class="icon icon-xs ml-auto"><span
 											class="fas fa-chevron-right"></span></span>
 									</a><a href="/user/board_list?userSeq=${sessionScope.userSeq}"
-										class="d-flex list-group-item list-group-item-action active">내가 쓴 게시글<span
+										class="d-flex list-group-item list-group-item-action"style="font-size: 1.5rem;">내가 쓴 게시글<span
 										class="icon icon-xs ml-auto"><span
 											class="fas fa-chevron-right"></span></span>
-									</a><a href="./my-items.html"
-										class="d-flex list-group-item list-group-item-action">내가 쓴 댓글<span class="icon icon-xs ml-auto"><span
+									</a><a href="/user/detail_reply?seq=${sessionScope.userSeq}"
+										class="d-flex list-group-item list-group-item-action active"style="font-size: 1.5rem;">내가 쓴 댓글<span class="icon icon-xs ml-auto"><span
 											class="fas fa-chevron-right"></span></span>
 									</a>
 								</div>
@@ -131,81 +131,93 @@
 					</div>
 
 					<div class="col-12 col-lg-8">
-						<div class="row">
-							<div class="col-lg-12">
-								<div class="card card-body bg-white border-light mb-4">
-    <h2 class="h5 mb-4" style="font-size: 2.5rem;">내가 쓴 게시글</h2>
-    <form id="userForm" action="/user/update" method="post">
+							
         <input type="hidden" id="userSeq" name="userSeq" value="${sessionScope.userSeq}">
 
 
 
         <!-- 리스트 상단의 열 제목 -->
-        <table class="table table-bordered mb-2">
-            <thead class="table-header">
-                <tr>
-                    <th scope="col" style="width: 10%;">게시글 번호</th>
-                    <th scope="col" style="width: 40%;">글 제목</th>
-                    <th scope="col" style="width: 20%;">작성자</th>
-                    <th scope="col" style="width: 10%;">수정일</th>
-                    <th scope="col" style="width: 10%;">추천</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- forEach 구문을 통해 게시글 목록을 출력 -->
-                <c:forEach var="board" items="${KEY_BOARDLIST}">
-                    <tr>
-                        <td>${board.boardSeq}</td>
-                        <td>
-                            <a href="/board/board_detail?boardSeq=${board.boardSeq}">
-                                <h4>${board.boardTitle}</h4>
-                            </a>
-                            <p class="lead text-gray mb-4">${board.boardContents}</p>
-                        </td>
-                        <td>${board.user.userNickname}</td>
-                        <!-- 수정일 셀 -->
-                        <td class="updated-date">
-			            	<fmt:formatDate value="${board.updatedDate}" pattern="MM-dd HH:MM"/>
-						</td>
-                        <td>${board.recommend}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
-        
-        ${KEY_PAGEING_HTML}
-        <!--  검색 
-		<div class="row mt-3 search-container justify-content-center">
-		    <form id="searchForm" action="/board/board_searchByTitle" method="get" class="form-inline my-2 my-lg-0 w-100">
-		        <div class="col-lg-6 pr-lg-2 order-lg-2">
-		            <div class="input-group">
-		                <input class="form-control" type="search" placeholder="검색어를 입력하세요" aria-label="검색어 입력" name="searchStr">
-		                <input type="hidden" name="communitySeq" value="${KEY_BOARDLIST[0].communitySeq}">
-		                <div class="input-group-append">
-		                    <button id="search-button" class="btn btn-outline-success" type="submit">검색</button>
-		                </div>
-		            </div>
-		        </div>
-		        -->
-		       <!--  
-		        <div class="col-lg-3 pl-lg-2 order-lg-1">
-		            <select class="form-control w-50" name="searchType">
-		                <option value="all">제목 + 내용</option>
-		                <option value="title">제목</option>
-		                <option value="content">내용</option>
-		            </select>
-		        </div>
-		         -->
-		         
-		    </form>
-		</div>
-    </div>
-    
-    					
+        <div
+			class="section section-md bg-white text-black pt-0 line-bottom-light">
+			<div class="container2">
+				<div class="row justify-content-center">
+					<div class="col-12">
+						<div class="card bg-soft border-light rounded p-4 mb-4">
+						<form name="replyForm" id="replyForm" action="${pageContext.request.contextPath}/reply/reply_insert" method="post">
+							 <h2 class="h5 mb-4" style="font-size: 2.5rem;">내가 쓴 댓글</h2>
+							<div class="mt-5">
+							
+								<div id="replyListDiv"></div>
+								
+							</div>
+							<div class="d-flex justify-content-between mt-3">
+								<small class="font-weight-light text-dark"><span
+									id="charactersRemaining"></span> characters remaining</small>
+							</div>
+						</form>
+		
+						</div>
+					</div>
 				</div>
 			</div>
-		</section>
-	<!-- 게시글 조회 끝 -->
+		</div>
+		</div>
+		
+<!-- 댓글 조회 -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+    // 문서가 준비된 후 실행되는 함수
+    $(document).ready(function() {
+        // 댓글 리스트 생성
+        makeReplyList();
+    });
+    
+    // 댓글 삭제 버튼
+    // Delete Button Click Event
+    $(document).on('click', '.reply-delete-button', function() {
+        var replyCard = $(this).closest('.card');
+        var replySeq = replyCard.data('reply-seq'); // 댓글 ID 추출
+
+        $.ajax({
+            method: "POST",
+            url: "${pageContext.request.contextPath}/reply/reply_delete", // 서버의 댓글 삭제 URL
+            data: {replySeq:replySeq},
+            error: function(myval) {
+                console.log("에러:" + myval);
+            },
+            success: function(myval) {
+                makeReplyList(); // 댓글 리스트 갱신
+            }
+        });
+    });
+    // 댓글 리스트 생성 함수
+    function makeReplyList() {
+        var userSeq = '${sessionScope.userSeq}'; // JSP 표현식에서 변수 가져오기
+
+        $.ajax({
+            method: "POST",
+            url: "${pageContext.request.contextPath}/user/reply_list",
+            data: { userSeq: userSeq },
+            error: function(myval) {
+                console.log("에러:" + myval);
+            },
+            success: function(myval) {
+                let htmlStr = ""; // HTML 문자열 초기화
+                $.each(myval, function(MYidx, MYval) {
+                    htmlStr += "<div class='card bg-soft border-light rounded p-4 mb-4' data-reply-seq='" + MYval.replySeq + "'>";
+                    htmlStr += "<div class='d-flex justify-content-between mb-4'>";
+                    htmlStr += "<span class='font-small'><span class='font-weight-bold'>" + MYval.user.userNickname + "</span>";
+                    htmlStr += "<span class='ml-2'>" + MYval.createdDate + "</span></span>";
+                    htmlStr += "<div><button class='reply-delete-button' aria-label='delete button'>[X]</button></div></div>";
+                    htmlStr += "<p class='m-0'>" + MYval.reply + "</p></div>";
+                });
+                $("#replyListDiv").empty();
+                $("#replyListDiv").html(htmlStr);
+            }
+        });
+    }
+</script>
+
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
 		<div class="container">

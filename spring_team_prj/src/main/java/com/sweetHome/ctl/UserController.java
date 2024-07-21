@@ -4,10 +4,11 @@ package com.sweetHome.ctl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sweetHome.common.PagingUtil;
 import com.sweetHome.svc.UserService;
 import com.sweetHome.vo.BoardVO;
+import com.sweetHome.vo.ReplyVO;
 import com.sweetHome.vo.UserVO;
 
 @Controller
@@ -64,6 +66,12 @@ public class UserController {
 		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(Usereq));
 		return "jsp/mypage";
 	}
+	@RequestMapping(value = "/detail_reply", method = RequestMethod.GET)
+	public String ctlUserDetailReply(@RequestParam("seq") int Usereq, Model model) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail(Usereq));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(Usereq));
+		return "jsp/mypage_reply";
+	}
 	@RequestMapping(value = "/detail_update", method = RequestMethod.GET)
 	public String ctlUserDetailUpdate(@RequestParam("seq") int Usereq, Model model) {
 		model.addAttribute("KEY_USERVO", userService.svcUserDetail(Usereq));
@@ -105,10 +113,13 @@ public class UserController {
 		return "jsp/mypage_board";     				//   /  lec05_board/board_list  .jsp  
 	}
 
-	@RequestMapping(value = "/replies", method = RequestMethod.POST)
-	public List<UserVO> ctlUserReplies(@RequestParam int Usereq) {
-		return userService.svcUserReplies(Usereq);
+	@RequestMapping(value = "/reply_list", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<List<ReplyVO>>  ctlUserReplies(@RequestParam("userSeq") int userSeq) {
+		List<ReplyVO> rlist = userService.svcUserReplies(userSeq);
+		return new ResponseEntity<List<ReplyVO>> (rlist, HttpStatus.OK);
 	}
+
 
 
 }
