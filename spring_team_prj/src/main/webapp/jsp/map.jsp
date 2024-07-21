@@ -616,7 +616,7 @@ html, body {
 
     // 추천 서비스 내용 업데이트
     recommendTab.innerHTML = `
-        <h2>추천 서비스</h2>
+    	<h2>추천 서비스</h2>
         <div class="recommendation-factors">
             <div class="factor">
                 <p>이동거리</p>
@@ -628,6 +628,16 @@ html, body {
                     <option value="5">도보 10분 이내</option>
                 </select>
             </div>
+            <div class="factor">
+                <p>치안수준</p>
+                <select id="safetyImportance" class="dropdown">
+                    <option value="1">상관없음</option>
+                    <option value="2">약간 중요함</option>
+                    <option value="3">보통</option>
+                    <option value="4">중요함</option>
+                    <option value="5">매우 중요함</option>
+                </select>
+            </div>
         </div>
         <button onclick="getRecommendations()">추천 받기</button>
         <div id="recommendations"></div>
@@ -637,6 +647,7 @@ html, body {
      // 추천 받기 함수
         function getRecommendations() {
     var distanceImportance = document.getElementById('distanceImportance').value;
+    var safetyImportance = document.getElementById('safetyImportance').value;
 
     $.ajax({
         url: '/map/recommend',
@@ -646,12 +657,13 @@ html, body {
             district: selectedDestination.address.split(' ')[1],
             latitude: selectedDestination.lat,
             longitude: selectedDestination.lng,
-            distanceImportance: distanceImportance
+            distanceImportance: distanceImportance,
+            safetyImportance: safetyImportance
         },
         success: function(response) {
             console.log('Success:', response);
             if (response && response.length > 0) {
-                alert('추천 자치구 5개: ' + response.join(', '));
+                alert('추천 자치구: ' + response.join(', '));
                 updateRecommendations(response);
             } else {
                 alert('추천 결과가 없습니다.');
