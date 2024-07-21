@@ -381,12 +381,10 @@
 													aria-label="Address" maxlength="66" required readonly>
 
 											</div>
-												<input class="form-control form-control-lg" id="sample6_extraAddress"
-													name="sample6_extraAddress" placeholder="" type="text"
-													aria-label="Address" maxlength="66" required readonly>
-												<input class="form-control form-control-lg" id="sample6_postcode"
-													name="sample6_extraAddress" placeholder="" type="text"
-													aria-label="Address" maxlength="66" required readonly>
+												<input type="hidden" id="sample6_extraAddress"
+												>
+												<input type="hidden" id="sample6_postcode"
+													>
 										</div>
 									</div>
 									<div class="col-md-6">

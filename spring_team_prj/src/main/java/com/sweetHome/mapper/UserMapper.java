@@ -11,9 +11,10 @@ import com.sweetHome.vo.UsersOauthVO;
 @Mapper
 public interface UserMapper {
     void insertUser(UserVO userVO);
-    UserVO selectUser(int usereq);
+    UserVO selectUser(int userSeq);
+    UsersOauthVO selectUserOauth(int userSeq);
     List<UserVO> selectAllUser();
-    void updateUser(UserVO userVO);
+    void userUpdate(UserVO userVO);
     void deleteUser(int userSeq);
     UserVO selectUserByEmail(String userEmail);
     public void insertUsersOauthTbl(UsersOauthVO userVO);

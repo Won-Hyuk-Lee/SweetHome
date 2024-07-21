@@ -20,7 +20,7 @@
 			<id property="userSeq" column="USER_SEQ" />
 			<result property="accessToken" column="ACCESS_TOKEN" />
 			<result property="refreshToken" column="REFRESH_TOKEN" />
-			<result property="imageURL" column="IMAGE_URL" />
+			<result property="imageUrl" column="IMAGE_URL" />
 			<result property="updatedDate" column="UPDATED_DATE" />
         </association>
     </resultMap>

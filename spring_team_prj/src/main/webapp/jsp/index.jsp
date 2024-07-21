@@ -71,6 +71,21 @@
 		j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 		f.parentNode.insertBefore(j, f);
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
+
+	function myPageMove(event) {
+	    event.preventDefault(); // 링크의 기본 동작(페이지 이동) 방지
+
+	    // sessionStorage에서 userSeq 값을 가져옴
+	   var userSeq = '${userSeq}';
+		console.log("seq="+userSeq);
+	    // userSeq 값이 존재하면 mypage로 이동
+	    if (userSeq) {
+	        window.location.href = '/user/detail?seq='+userSeq; // userSeq가 있을 때 이동할 페이지
+	    } else {
+	        window.location.href = '/jsp/login.jsp'; // userSeq가 없을 때 이동할 페이지
+	    }
+	}
+
 </script>
 </head>
 <body>
@@ -127,10 +142,15 @@
 						    	<span class="nav-link-inner-text mr-1">커뮤니티</span>
 							</a>
 						</li>
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">내 정보</span></a></li>
+						<li class="nav-item dropdown">
+						    <a id="mainPagesDropdown" 
+						       class="nav-link dropdown-toggle"
+						       aria-expanded="false" 
+						       data-toggle="dropdown"
+						       onclick="myPageMove(event)">
+						        <span class="nav-link-inner-text mr-1">내 정보</span>
+						    </a>
+						</li>
 					</ul>
 				</div>
 				<div class="d-none d-lg-block @@cta_button_classes">

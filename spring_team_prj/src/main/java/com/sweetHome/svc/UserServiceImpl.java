@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.sweetHome.mapper.UserMapper;
 import com.sweetHome.vo.UserVO;
+import com.sweetHome.vo.UsersOauthVO;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -22,7 +23,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void svcUserUpdate(UserVO UserVO) {
-        UserMapper.updateUser(UserVO);
+        UserMapper.userUpdate(UserVO);
     }
 
     @Override
@@ -53,5 +54,10 @@ public class UserServiceImpl implements UserService {
 
         return false;
     }
+
+	@Override
+	public UsersOauthVO svcUserOauth(int userSeq) {
+		return 	UserMapper.selectUserOauth(userSeq);
+	}
     
 }

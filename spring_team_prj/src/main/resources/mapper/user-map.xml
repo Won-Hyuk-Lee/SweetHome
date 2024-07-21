@@ -20,9 +20,16 @@
 			<id property="userSeq" column="USER_SEQ" />
 			<result property="accessToken" column="ACCESS_TOKEN" />
 			<result property="refreshToken" column="REFRESH_TOKEN" />
-			<result property="imageURL" column="IMAGE_URL" />
+			<result property="imageUrl" column="IMAGE_URL" />
 			<result property="updatedDate" column="UPDATED_DATE" />
         </association>
+    </resultMap>
+    <resultMap id="userOauthResultMap" type="com.sweetHome.vo.UsersOauthVO">
+			<id property="userSeq" column="USER_SEQ" />
+			<result property="accessToken" column="ACCESS_TOKEN" />
+			<result property="refreshToken" column="REFRESH_TOKEN" />
+			<result property="imageUrl" column="IMAGE_URL" />
+			<result property="updatedDate" column="UPDATED_DATE" />
     </resultMap>
 
     <insert id="insertUser" parameterType="com.sweetHome.vo.UserVO">
@@ -41,20 +48,19 @@
     <select id="selectUserByEmail" parameterType="String" resultMap="userResultMap">
         SELECT * FROM Users WHERE user_email = #{userEmail}
     </select>
+    <select id="selectUserOauth" parameterType="int" resultMap="userOauthResultMap">
+        select *
+from users_oauth 
+where user_seq=#{userSeq}
+    </select>
     
-    <update id="updateUser" parameterType="com.sweetHome.vo.UserVO">
+    <update id="userUpdate" parameterType="com.sweetHome.vo.UserVO">
         UPDATE Users SET
-            user_email = #{userEmail},
-            user_pw = #{userPw},
             user_nickname = #{userNickname},
             phone_number = #{phoneNumber},
-            user_name = #{userName},
             address = #{address},
             address_detail = #{addressDetail},
-            provider = #{provider},
-            created_date = #{createdDate},
-            updated_date = #{updatedDate},
-            user_role = #{userRole}
+            updated_date = sysdate
         WHERE user_seq = #{userSeq}
     </update>
 

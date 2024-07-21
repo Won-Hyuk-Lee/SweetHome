@@ -4,17 +4,19 @@ package com.sweetHome.ctl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sweetHome.svc.UserService;
 import com.sweetHome.vo.UserVO;
 
-@RestController
+@Controller
 @RequestMapping(value = "/user")
 public class UserController {
 	@Autowired
@@ -41,6 +43,7 @@ public class UserController {
 	//str --- str
 	//dataType : "텍스트...., data는 쿼리스트링(?key=v&ke=vv)
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
+	@ResponseBody
 	public String ctlUserJoin(@ModelAttribute UserVO userVO) {
 		System.out.println(userVO.getAddress());
 		System.out.println(userVO.getAddressDetail());
@@ -53,23 +56,38 @@ public class UserController {
 	}
 
 
-	@RequestMapping(value = "/User_detail", method = RequestMethod.POST)
-	public UserVO ctlUserDetail(@RequestParam int Usereq) {
-		return UserService.svcUserDetail(Usereq);
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String ctlUserDetail(@RequestParam("seq") int Usereq, Model model) {
+		model.addAttribute("KEY_USERVO", UserService.svcUserDetail(Usereq));
+		model.addAttribute("KEY_USEROAUTHVO", UserService.svcUserOauth(Usereq));
+		return "jsp/mypage";
+	}
+	@RequestMapping(value = "/detail_update", method = RequestMethod.GET)
+	public String ctlUserDetailUpdate(@RequestParam("seq") int Usereq, Model model) {
+		model.addAttribute("KEY_USERVO", UserService.svcUserDetail(Usereq));
+		model.addAttribute("KEY_USEROAUTHVO", UserService.svcUserOauth(Usereq));
+		return "jsp/mypage_update";
 	}
 
-	@RequestMapping(value = "/User_update", method = RequestMethod.POST)
-	public String ctlUserUpdate(@RequestBody UserVO user) {
-		UserService.svcUserUpdate(user);
-		return "User updated successfully";
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String ctlUserUpdate(@ModelAttribute UserVO userVO) {
+		System.out.println(userVO.getAddress());
+		System.out.println(userVO.getAddressDetail());
+		System.out.println(userVO.getUserEmail());
+		System.out.println(userVO.getUserPw());
+		System.out.println(userVO.getUserNickname());
+		System.out.println(userVO.getPhoneNumber());
+		UserService.svcUserUpdate(userVO);
+		return "성공";
 	}
 
-	@RequestMapping(value = "/User_board_list", method = RequestMethod.POST)
+	@RequestMapping(value = "/board_list", method = RequestMethod.POST)
 	public List<UserVO> ctlUserBoardList(@RequestParam int Usereq) {
 		return UserService.svcUserBoardList(Usereq);
 	}
 
-	@RequestMapping(value = "/User_replies", method = RequestMethod.POST)
+	@RequestMapping(value = "/replies", method = RequestMethod.POST)
 	public List<UserVO> ctlUserReplies(@RequestParam int Usereq) {
 		return UserService.svcUserReplies(Usereq);
 	}
