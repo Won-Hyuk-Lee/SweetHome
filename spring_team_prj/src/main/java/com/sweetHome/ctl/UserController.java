@@ -13,14 +13,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sweetHome.common.PagingUtil;
 import com.sweetHome.svc.UserService;
+import com.sweetHome.vo.BoardVO;
 import com.sweetHome.vo.UserVO;
 
 @Controller
 @RequestMapping(value = "/user")
 public class UserController {
 	@Autowired
-	private UserService UserService;
+	private UserService userService;
 
 	//json - json
 	//dataType : json
@@ -51,24 +53,23 @@ public class UserController {
 		System.out.println(userVO.getUserPw());
 		System.out.println(userVO.getUserNickname());
 		System.out.println(userVO.getPhoneNumber());
-		UserService.svcUserJoin(userVO);
+		userService.svcUserJoin(userVO);
 		return "텍스트 리턴";
 	}
 
 
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
 	public String ctlUserDetail(@RequestParam("seq") int Usereq, Model model) {
-		model.addAttribute("KEY_USERVO", UserService.svcUserDetail(Usereq));
-		model.addAttribute("KEY_USEROAUTHVO", UserService.svcUserOauth(Usereq));
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail(Usereq));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(Usereq));
 		return "jsp/mypage";
 	}
 	@RequestMapping(value = "/detail_update", method = RequestMethod.GET)
 	public String ctlUserDetailUpdate(@RequestParam("seq") int Usereq, Model model) {
-		model.addAttribute("KEY_USERVO", UserService.svcUserDetail(Usereq));
-		model.addAttribute("KEY_USEROAUTHVO", UserService.svcUserOauth(Usereq));
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail(Usereq));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(Usereq));
 		return "jsp/mypage_update";
 	}
-
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public String ctlUserUpdate(@ModelAttribute UserVO userVO) {
@@ -78,26 +79,36 @@ public class UserController {
 		System.out.println(userVO.getUserPw());
 		System.out.println(userVO.getUserNickname());
 		System.out.println(userVO.getPhoneNumber());
-		UserService.svcUserUpdate(userVO);
+		userService.svcUserUpdate(userVO);
 		return "성공";
 	}
 
-	@RequestMapping(value = "/board_list", method = RequestMethod.POST)
-	public List<UserVO> ctlUserBoardList(@RequestParam int Usereq) {
-		return UserService.svcUserBoardList(Usereq);
+	@RequestMapping(value = "/board_list")
+	public String ctlBoardList(Model model, @RequestParam("userSeq") int userSeq
+			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage 
+			) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail(userSeq));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(userSeq));
+		//페이징
+		int listCount = userService.svcBoardCount(userSeq);
+		PagingUtil page = new PagingUtil("/user/board_list?userSeq="+userSeq, currentPage, listCount, 4, 5);
+		String pageHtmlStr = page.getPagingHtml().toString();
+		
+		BoardVO boardVO = new BoardVO();
+		boardVO.setUserSeq(userSeq);
+		boardVO.setStartSeq(page.getStartSeq());
+		boardVO.setEndSeq(page.getEndSeq());
+		
+		List<BoardVO> list = userService.svcUserBoardList(boardVO);
+		model.addAttribute("KEY_BOARDLIST", list);
+		model.addAttribute("KEY_PAGEING_HTML", pageHtmlStr);
+		return "jsp/mypage_board";     				//   /  lec05_board/board_list  .jsp  
 	}
 
 	@RequestMapping(value = "/replies", method = RequestMethod.POST)
 	public List<UserVO> ctlUserReplies(@RequestParam int Usereq) {
-		return UserService.svcUserReplies(Usereq);
+		return userService.svcUserReplies(Usereq);
 	}
 
-
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String ctlUserLogin(@RequestBody UserVO UserVO) {
-		boolean isAuthenticated = UserService.svcUserLogin(UserVO);
-		return isAuthenticated ? "Login successful" : "Login failed";
-	}
 
 }

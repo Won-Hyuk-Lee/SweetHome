@@ -129,7 +129,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="card card-body bg-white border-light mb-4">
-    <h2 class="h5 mb-4">내 정보</h2>
+     <h2 class="h5 mb-4" style="font-size: 2.5rem;">내 정보 수정</h2>
     <form id="userForm" action="/user/update" method="post">
         <input type="hidden" id="userSeq" name="userSeq" value="${sessionScope.userSeq}">
   <div class="row">

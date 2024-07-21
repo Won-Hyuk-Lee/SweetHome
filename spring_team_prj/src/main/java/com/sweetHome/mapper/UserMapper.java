@@ -5,15 +5,21 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.sweetHome.vo.BoardVO;
 import com.sweetHome.vo.UserVO;
 import com.sweetHome.vo.UsersOauthVO;
 @Repository
 @Mapper
 public interface UserMapper {
+	
+	List<BoardVO> boardList(BoardVO bvo);
+	int boardRecommend(int boardSeq);
+	
     void insertUser(UserVO userVO);
     UserVO selectUser(int userSeq);
     UsersOauthVO selectUserOauth(int userSeq);
     List<UserVO> selectAllUser();
+    int boardCount(int userSeq); //총게시물수
     void userUpdate(UserVO userVO);
     void deleteUser(int userSeq);
     UserVO selectUserByEmail(String userEmail);

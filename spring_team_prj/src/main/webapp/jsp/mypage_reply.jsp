@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,184 +134,78 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<div class="card card-body bg-white border-light mb-4">
-     <h2 class="h5 mb-4" style="font-size: 2.5rem;">내 정보</h2>
+    <h2 class="h5 mb-4" style="font-size: 2.5rem;">내가 쓴 게시글</h2>
     <form id="userForm" action="/user/update" method="post">
         <input type="hidden" id="userSeq" name="userSeq" value="${sessionScope.userSeq}">
-  <div class="row">
-    <div class="col-md-6 mb-3">
-        <div class="form-group">
-		    <label for="first_name">이름</label>
-		    <div class="input-group">
-		        <!-- 아이콘을 입력 필드의 왼쪽에 배치 -->
-		        <div class="input-group-prepend">
-		            <span class="input-group-text">
-		                <span class="fas fa-user"></span>
-		            </span>
-		        </div>
-		        <!-- 입력 필드 -->
-		        <input class="form-control" id="first_name" type="text"
-		               value="${KEY_USERVO.userName}"
-		               placeholder="${KEY_USERVO.userName}" readonly>
-		    </div>
-		</div>
-    </div>
-    <div class="col-md-6 mb-3">
-        <div class="form-group">
-		    <label for="nickname">닉네임</label>
-		    <div class="input-group">
-		        <!-- 아이콘을 입력 필드의 왼쪽에 배치 -->
-		        <div class="input-group-prepend">
-		            <span class="input-group-text">
-		                <span class="fas fa-user"></span>
-		            </span>
-		        </div>
-		        <!-- 입력 필드와 중복 확인 버튼을 포함 -->
-		        <input class="form-control" id="nickname" name="nickname" type="text"
-		               value="${KEY_USERVO.userNickname}" readonly
-		               placeholder="${KEY_USERVO.userNickname}" >
-		        
-		    </div>
-		</div>
-    </div>
-</div>
-   
 
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <div class="input-group mb-4">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><span
-								class="fas fa-envelope"></span></span>
-						</div>
-		                   <input class="form-control" id="email" type="email"
-		                          value="${KEY_USERVO.userEmail}"
-		                          placeholder="${KEY_USERVO.userEmail}" readonly>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-				<div class="form-group">
-					<label for="phone">전화번호</label>
-					<div class="input-group mb-4">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><span
-								class="fas fa-phone"></span></span>
-						</div>
-						<input class="form-control" id="phone" name="phone"
-							value="${KEY_USERVO.phoneNumber}"
-                           placeholder="${KEY_USERVO.phoneNumber}" readonly type="tel"
-							aria-label="Phone number" 
-							pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}" required>
-					</div>
+
+
+        <!-- 리스트 상단의 열 제목 -->
+        <table class="table table-bordered mb-2">
+            <thead class="table-header">
+                <tr>
+                    <th scope="col" style="width: 10%;">게시글 번호</th>
+                    <th scope="col" style="width: 40%;">글 제목</th>
+                    <th scope="col" style="width: 20%;">작성자</th>
+                    <th scope="col" style="width: 10%;">수정일</th>
+                    <th scope="col" style="width: 10%;">추천</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- forEach 구문을 통해 게시글 목록을 출력 -->
+                <c:forEach var="board" items="${KEY_BOARDLIST}">
+                    <tr>
+                        <td>${board.boardSeq}</td>
+                        <td>
+                            <a href="/board/board_detail?boardSeq=${board.boardSeq}">
+                                <h4>${board.boardTitle}</h4>
+                            </a>
+                            <p class="lead text-gray mb-4">${board.boardContents}</p>
+                        </td>
+                        <td>${board.user.userNickname}</td>
+                        <!-- 수정일 셀 -->
+                        <td class="updated-date">
+			            	<fmt:formatDate value="${board.updatedDate}" pattern="MM-dd HH:MM"/>
+						</td>
+                        <td>${board.recommend}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+        
+        ${KEY_PAGEING_HTML}
+        <!--  검색 
+		<div class="row mt-3 search-container justify-content-center">
+		    <form id="searchForm" action="/board/board_searchByTitle" method="get" class="form-inline my-2 my-lg-0 w-100">
+		        <div class="col-lg-6 pr-lg-2 order-lg-2">
+		            <div class="input-group">
+		                <input class="form-control" type="search" placeholder="검색어를 입력하세요" aria-label="검색어 입력" name="searchStr">
+		                <input type="hidden" name="communitySeq" value="${KEY_BOARDLIST[0].communitySeq}">
+		                <div class="input-group-append">
+		                    <button id="search-button" class="btn btn-outline-success" type="submit">검색</button>
+		                </div>
+		            </div>
+		        </div>
+		        -->
+		       <!--  
+		        <div class="col-lg-3 pl-lg-2 order-lg-1">
+		            <select class="form-control w-50" name="searchType">
+		                <option value="all">제목 + 내용</option>
+		                <option value="title">제목</option>
+		                <option value="content">내용</option>
+		            </select>
+		        </div>
+		         -->
+		         
+		    </form>
+		</div>
+    </div>
+    
+    					
 				</div>
 			</div>
-        </div>
-
-<h2 class="h5 my-4">주소</h2>
-<div class="row">
-    <div class="col-sm-9 mb-3">
-        <div class="form-group">
-            <div class="input-group">
-                <!-- 아이콘을 입력 필드의 왼쪽에 배치 -->
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <span class="fas fa-map-marker-alt"></span> <!-- 주소에 적합한 아이콘 사용 -->
-                    </span>
-                </div>
-                <input class="form-control" id="sample6_address" name="sample6_address" type="text"
-                       value="${KEY_USERVO.address}"
-                       placeholder="${KEY_USERVO.address}" readonly>
-                
-            </div>
-        </div>
-    </div>
-</div>
-
-<h2 class="h5 my-4">상세 주소</h2>
-<div class="row">
-    <div class="col-sm-9 mb-3">
-        <div class="form-group">
-            <div class="input-group">
-                <!-- 아이콘을 입력 필드의 왼쪽에 배치 -->
-                <div class="input-group-prepend">
-                    <span class="input-group-text">
-                        <span class="fas fa-home"></span> <!-- 상세 주소에 적합한 아이콘 사용 -->
-                    </span>
-                </div>
-                <input class="form-control" id="sample6_detailAddress" name="sample6_detailAddress" type="text"
-                       value="${KEY_USERVO.addressDetail}"
-                       placeholder="${KEY_USERVO.addressDetail}" readonly>
-            </div>
-        </div>
-    </div>
-</div>
-
-<input type="hidden" id="sample6_extraAddress">
-<input type="hidden" id="sample6_postcode">
-
-								<div class="card card-body bg-white border-light">
-									<h2 class="h5 mb-4">소셜 로그인 연동상태</h2>
-									
-<c:choose>
-    <c:when test="${KEY_USERVO.provider eq 'KAKAO'}">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex align-items-center pl-0 border-bottom">
-                <div class="d-flex align-items-center">
-                    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Kakao.png"
-                        style="border: 1px solid #bbbbbb; border-radius: 15%; width: 50px;">
-                    <div class="ml-2">
-                        <h3 class="h6 mb-1"> Kakao</h3>
-                        <span class="small">카카오 계정으로 ${KEY_USERVO.createdDate}날에 이 홈페이지에 회원가입 하였습니다.</span>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </c:when>
-    <c:when test="${KEY_USERVO.provider eq 'NAVER'}">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex align-items-center pl-0 border-bottom">
-                <div class="d-flex align-items-center">
-                    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Naver.png"
-                        style="border: 1px solid #bbbbbb; border-radius: 15%; width: 50px;">
-                    <div class="ml-2">
-                        <h3 class="h6 mb-1"> Naver</h3>
-                        <span class="small">네이버 계정으로 ${KEY_USERVO.createdDate}날에 이 홈페이지에 회원가입 하였습니다.</span>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </c:when>
-    <c:when test="${KEY_USERVO.provider eq 'GOOGLE'}">
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item d-flex align-items-center pl-0 border-bottom">
-                <div class="d-flex align-items-center">
-                    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/logo/Google.png"
-                        style="border: 1px solid #bbbbbb; border-radius: 15%; width: 50px;">
-                    <div class="ml-2">
-                        <h3 class="h6 mb-1"> Google</h3>
-                        <span class="small">구글 계정으로 ${KEY_USERVO.createdDate}날에 이 홈페이지에 회원가입 하였습니다.</span>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </c:when>
-    <c:otherwise>
-        <p>연동중인 소셜 계정이 없는 기본 회원입니다.</p>
-    </c:otherwise>
-</c:choose>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
-		</div>
-		
-		
+		</section>
+	<!-- 게시글 조회 끝 -->
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
 		<div class="container">
