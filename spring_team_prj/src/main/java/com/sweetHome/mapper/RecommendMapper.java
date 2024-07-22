@@ -1,5 +1,4 @@
 package com.sweetHome.mapper;
-
 import org.apache.ibatis.annotations.Mapper;
 import com.sweetHome.vo.DistrictVO;
 import java.util.List;
@@ -9,7 +8,7 @@ import java.util.Map;
 public interface RecommendMapper {
     List<DistrictVO> getAllDistricts();
     DistrictVO getDistrictByCode(String districtCode);
-    Map<String, Object> getCrimeTotalByDistrict();
-    Map<String, Object> getCCTVDensityByDistrict();
-    Map<String, Object> getPopulationByDistrict();
+    List<Map<String, Object>> getCrimeTotalByDistrict();
+    List<Map<String, Object>> getCCTVDensityByDistrict();
+    List<Map<String, Object>> getPopulationByDistrict();
 }

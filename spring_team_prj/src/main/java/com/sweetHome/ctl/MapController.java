@@ -28,10 +28,8 @@ public class MapController {
 	@ResponseBody
 	public List<String> getRecommendations(@RequestParam String district, @RequestParam double latitude,
 			@RequestParam double longitude, @RequestParam int distanceImportance, @RequestParam int safetyImportance) {
-		System.out.println("Recommendation request received for district: " + district);
 		List<String> recommendations = recommendService.getRecommendations(district, latitude, longitude,
 				distanceImportance, safetyImportance);
-		System.out.println("Controller sending recommendations: " + recommendations);
 		return recommendations;
 	}
 }
