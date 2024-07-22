@@ -73,18 +73,27 @@
 		f.parentNode.insertBefore(j, f);
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
 </script>
-<%@ include file = "/jsp/header.jsp"%>
+<%@ include file="/jsp/header.jsp"%>
 </head>
- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-  <style>
-    .wrong_text{font-size:1rem;color:#f44e38;letter-spacing:-.2px;font-weight:300;margin:8px 0 2px;line-height:1em;display:none}
-  </style>
-  <head>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-    <!-- jquery -->
-    <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
-    <script src="/javascript/popup_2.js"></script>
-  </head>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+.wrong_text {
+	font-size: 1rem;
+	color: #f44e38;
+	letter-spacing: -.2px;
+	font-weight: 300;
+	margin: 8px 0 2px;
+	line-height: 1em;
+	display: none
+}
+</style>
+<head>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<!-- jquery -->
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script src="/javascript/popup_2.js"></script>
+</head>
 <body>
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
@@ -103,8 +112,7 @@
 		</div>
 		<!-- 회원 가입 폼 시작 -->
 		<section
-			class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark py-5 py-lg-0"
-			>
+			class="min-vh-100 d-flex align-items-center section-image overlay-soft-dark py-5 py-lg-0">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-12">
@@ -129,9 +137,11 @@
 												<!-- 이메일 입력 필드 -->
 												<input class="form-control form-control-lg" id="email"
 													name="email" placeholder="example@naver.com" type="email"
-													aria-label="email address" maxlength="50" oninput="changeNickname()" required>
+													aria-label="email address" maxlength="50"
+													oninput="changeNickname()" required>
 												<div class="input-group-append">
-													<button type="button" id = "btn321"class="btn btn-secondary btn-sm"
+													<button type="button" id="btn321"
+														class="btn btn-secondary btn-sm"
 														onclick="sendVerificationEmail()">인증</button>
 												</div>
 											</div>
@@ -158,14 +168,15 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<div id="password_fo" class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label for="password">비밀번호 설정</label>
 											<div class="input-group mb-4">
 												<div class="input-group-prepend">
-													<span class="input-group-text"><span
-														class="fas fa-unlock-alt"></span></span>
+													<span class="input-group-text"> <span
+														class="fas fa-unlock-alt"></span>
+													</span>
 												</div>
 												<input class="form-control" id="password" name="password"
 													placeholder="Password" type="password"
@@ -178,8 +189,9 @@
 											<label for="password_confirm">비밀번호 확인</label>
 											<div class="input-group mb-4">
 												<div class="input-group-prepend">
-													<span class="input-group-text"><span
-														class="fas fa-unlock-alt"></span></span>
+													<span class="input-group-text"> <span
+														class="fas fa-unlock-alt"></span>
+													</span>
 												</div>
 												<input class="form-control" id="password_confirm"
 													name="password_confirm" placeholder="Confirm password"
@@ -199,7 +211,8 @@
 												</div>
 												<input class="form-control form-control-lg" id="nickname"
 													name="nickname" placeholder="닉네임" type="text"
-													aria-label="Nickname" maxlength="24" oninput="changeNickname()" required>
+													aria-label="Nickname" maxlength="24"
+													oninput="changeNickname()" required>
 											</div>
 										</div>
 									</div>
@@ -255,15 +268,14 @@
 														class="fas fa-map-marker-alt"></span></span>
 												</div>
 												<!-- 주소 입력 필드 -->
-												<input class="form-control form-control-lg" id="sample6_address"
-													name="sample6_address" placeholder="주소" type="text"
-													aria-label="Address" maxlength="66" required readonly>
+												<input class="form-control form-control-lg"
+													id="sample6_address" name="sample6_address"
+													placeholder="주소" type="text" aria-label="Address"
+													maxlength="66" required readonly>
 
 											</div>
-												<input type="hidden" id="sample6_extraAddress"
-												>
-												<input type="hidden" id="sample6_postcode"
-													>
+											<input type="hidden" id="sample6_extraAddress">
+											<input type="hidden" id="sample6_postcode">
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -294,19 +306,17 @@
 							<div class="mt-3 mb-4 text-center">
 								<span class="font-weight-normal">or</span>
 							</div>
-								<a href="/login/GOOGLE">
-    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/logo/Google.png" 
-         style="border: 1px solid #bbbbbb; border-radius: 15%; width: 36px; height: auto; margin-left: 380px;">
-</a>
-<a href="/login/KAKAO">
-    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Kakao.png" 
-         width="36" height="auto" style="margin-left: 10px;">
-</a>
-<a href="/login/NAVER">
-    <img src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Naver.png" 
-         width="36" height="auto" style="margin-left: 10px;">
-</a>
-<br><p>
+							<a href="/login/GOOGLE"> <img
+								src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/logo/Google.png"
+								style="border: 1px solid #bbbbbb; border-radius: 15%; width: 36px; height: auto; margin-left: 380px;">
+							</a> <a href="/login/KAKAO"> <img
+								src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Kakao.png"
+								width="36" height="auto" style="margin-left: 10px;">
+							</a> <a href="/login/NAVER"> <img
+								src="https://test.codemshop.com/wp-content/plugins/mshop-mcommerce-premium-s2/lib/mshop-members-s2/assets/images/social/icon_1/Naver.png"
+								width="36" height="auto" style="margin-left: 10px;">
+							</a> <br>
+							<p>
 							<div
 								class="d-block d-sm-flex justify-content-center align-items-center mt-4">
 								<span class="font-weight-normal">회원정보가 있으신가요? <a
@@ -314,228 +324,246 @@
 								</span>
 							</div>
 	</main>
-	
-<input type="hidden" id="uuserEmail"name="uuserEmail" value="${sessionScope.SESS_USERVO.userEmail}">
-<input type="hidden" id="uuserName"name="uuserName" value="${sessionScope.SESS_USERVO.userName}">
-<input type="hidden" id="uuserNickName"name="uuserNickName" value="${sessionScope.SESS_USERVO.userNickname}">
-<input type="hidden" id="pphoneNumber"name="pphoneNumber" value="${sessionScope.SESS_USERVO.phoneNumber}">
-<input type="hidden" id="pprovider"name="pprovider" value="${sessionScope.SESS_USERVO.provider}">
-<input type="hidden" id="iimageUrl"name="iimageUrl" value="${sessionScope.SESS_USERVO.usersOauthVO.imageUrl}">
-<input type="hidden" id="accessToken"name="accessToken" value="${sessionScope.SESS_ACCESS_TOKEN}">
-<input type="hidden" id="refreshToken"name="refreshToken" value="${sessionScope.SESS_REFRESH_TOKEN}">
- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+	<input type="hidden" id="uuserEmail" name="uuserEmail"
+		value="${sessionScope.SESS_USERVO.userEmail}">
+	<input type="hidden" id="uuserName" name="uuserName"
+		value="${sessionScope.SESS_USERVO.userName}">
+	<input type="hidden" id="uuserNickName" name="uuserNickName"
+		value="${sessionScope.SESS_USERVO.userNickname}">
+	<input type="hidden" id="pphoneNumber" name="pphoneNumber"
+		value="${sessionScope.SESS_USERVO.phoneNumber}">
+	<input type="hidden" id="pprovider" name="pprovider"
+		value="${sessionScope.SESS_USERVO.provider}">
+	<input type="hidden" id="iimageUrl" name="iimageUrl"
+		value="${sessionScope.SESS_USERVO.usersOauthVO.imageUrl}">
+	<input type="hidden" id="accessToken" name="accessToken"
+		value="${sessionScope.SESS_ACCESS_TOKEN}">
+	<input type="hidden" id="refreshToken" name="refreshToken"
+		value="${sessionScope.SESS_REFRESH_TOKEN}">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-	// 확인후 변경시 상태확인
-	function changeNickname() {
-		 nicknameChecked = false;
-		 if(uuserEmail!=null) verificationCodeSent=true;//인증 불리언 트루
-		 else verificationCodeSent = false;
-	}
-	//오쓰 로그인시 기본회원 정보 적기
-	$(document).ready(function() {
-	var uuserEmail = $('#uuserEmail').val();
-	if(uuserEmail!='')
-		{
-		var uuserName = $('#uuserName').val();
-		var pprovider = $('#pprovider').val(); // 요소의 값(value)을 가져옵니다.
-		var iimageUrl = $('#iimageUrl').val();
-		console.log('User Email:', uuserEmail);
-	    console.log('User Name:', uuserName);
-	    console.log('Provider:', pprovider);
-	    console.log('Image URL:', iimageUrl);
-		$('#email').val(uuserEmail);
-		if(uuserEmail!=null) verificationCodeSent=true;//인증 불리언 트루
-		$('#btn321').remove();//인증버튼삭제
-	    
-	    $('#name').val(uuserName);
-	    $('#email').val(uuserEmail).prop('readonly', true);
-	    $('#name').val(uuserName).prop('readonly', true);
+		// 확인후 변경시 상태확인
+		function changeNickname() {
+			nicknameChecked = false;
+			if (uuserEmail != null)
+				verificationCodeSent = true;//인증 불리언 트루
+			else
+				verificationCodeSent = false;
 		}
-	});
+			var passwordChecked = false;
+		//오쓰 로그인시 기본회원 정보 적기
+		$(document).ready(function() {
+			var uuserEmail = $('#uuserEmail').val();
+			if (uuserEmail != '') {
+				var uuserName = $('#uuserName').val();
+				var pprovider = $('#pprovider').val(); // 요소의 값(value)을 가져옵니다.
+				var iimageUrl = $('#iimageUrl').val();
+				console.log('User Email:', uuserEmail);
+				console.log('User Name:', uuserName);
+				console.log('Provider:', pprovider);
+				console.log('Image URL:', iimageUrl);
+				$('#email').val(uuserEmail);
+				if (uuserEmail != null)
+					verificationCodeSent = true;//인증 불리언 트루
+				$('#btn321').remove();//인증버튼삭제
+				$('#password_fo').remove();//패스워드_확인 삭제
+				passwordChecked = true;
+				$('#name').val(uuserName);
+				$('#email').val(uuserEmail).prop('readonly', true);
+				$('#name').val(uuserName).prop('readonly', true);
+			}
+		});
 		// 폼 유효성 검사
-	function validateForm() {
-    var userEmail = document.getElementById('email').value;
+		function validateForm() {
+			var userEmail = document.getElementById('email').value;
 
-    // 이메일 유효성 검사
-    var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(userEmail)) {
-        alert('ID는 이메일형식으로 최대30자로 알파벳 대소문자와 숫자로 구성');
-        return false;
-    }
+			// 이메일 유효성 검사
+			var emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+			if (!emailRegex.test(userEmail)) {
+				alert('ID는 이메일형식으로 최대30자로 알파벳 대소문자와 숫자로 구성');
+				return false;
+			}
 
-    if (!verificationCodeSent) {
-        alert('먼저 이메일 인증을 진행해주세요.');
-        return false;
-    }
+			if (!verificationCodeSent) {
+				alert('먼저 이메일 인증을 진행해주세요.');
+				return false;
+			}
 
-    // 비밀번호 유효성 검사
-    var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
-    var userPw = document.getElementById('password').value;
-    if (!passwordRegex.test(userPw)) {
-        alert('비밀번호는 8자~16자이며 영어 대소문자, 특수문자, 숫자를 필수로 포함');
-        return false;
-    }
+			if (!passwordChecked) {// 오쓰로그인시 비밀번호 유효성검사 제거
+				// 비밀번호 유효성 검사
+				var passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
+				var userPw = document.getElementById('password').value;
+				if (!passwordRegex.test(userPw)) {
+					alert('비밀번호는 8자~16자이며 영어 대소문자, 특수문자, 숫자를 필수로 포함');
+					return false;
+				}
 
-    // 비밀번호 일치 여부 확인
-    var password_confirm = document.getElementById('password_confirm').value;
-    if (userPw !== password_confirm) {
-        alert('비밀번호가 일치하지 않습니다');
-        return false;
-    }
+				// 비밀번호 일치 여부 확인
+				var password_confirm = document
+						.getElementById('password_confirm').value;
+				if (userPw !== password_confirm) {
+					alert('비밀번호가 일치하지 않습니다');
+					return false;
+				}
+			}
+			// 닉네임 중복 체크 여부 확인
+			var userNickname = document.getElementById('nickname').value;
+			if (!userNickname || userNickname.trim() === ""
+					|| userNickname === "닉네임") {
+				alert('닉네임을 적어주세요');
+				return false;
+			}
+			if (!nicknameChecked) {
+				alert('닉네임 중복체크를 진행해주세요');
+				return false;
+			}
+			// 이름 여부 확인
+			var userName = document.getElementById('name').value;
+			if (userName == "이름") {
+				alert('이름을 적어주세요.');
+				return false;
+			}
+			// 전화번호 유효성 검사
+			var phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
+			var phoneNumber = document.getElementById('phone').value;
+			if (!phoneRegex.test(phoneNumber)) {
+				alert('전화번호의 입력형식이 올바르지 않습니다');
+				return false;
+			}
 
-    // 닉네임 중복 체크 여부 확인
-    var userNickname = document.getElementById('nickname').value;
-    if (!userNickname || userNickname.trim() === "" || userNickname === "닉네임") {
-        alert('닉네임을 적어주세요');
-        return false;
-    }
-    if (!nicknameChecked) {
-        alert('닉네임 중복체크를 진행해주세요');
-        return false;
-    }
- // 이름 여부 확인
-    var userName = document.getElementById('name').value;
-    if (userName == "이름") {
-        alert('이름을 적어주세요.');
-        return false;
-    }
-    // 전화번호 유효성 검사
-    var phoneRegex = /^\d{3}-\d{4}-\d{4}$/;
-    var phoneNumber = document.getElementById('phone').value;
-    if (!phoneRegex.test(phoneNumber)) {
-        alert('전화번호의 입력형식이 올바르지 않습니다');
-        return false;
-    }
+			// 주소 유효성 검사
+			var sample6_address = document.getElementById('sample6_address').value;
+			if (sample6_address == "주소") {
+				alert('주소를 입력해주세요.');
+				return false;
+			}
+			// 상세주소 유효성 검사
+			var sample6_detailAddress = document
+					.getElementById('sample6_detailAddress').value;
+			if (sample6_detailAddress == "상세주소" || !sample6_detailAddress
+					|| sample6_detailAddress.trim() === "") {
+				alert('상세주소를 입력해주세요.' + sample6_detailAddress);
+				return false;
+			}
+			var pprovider = $('#pprovider').val();
+			var refreshToken = $('#refreshToken').val(); // 요소의 값(value)을 가져옵니다.
+			var accessToken = $('#accessToken').val(); // 요소의 값(value)을 가져옵니다.
+			var imageUrl = $('#iimageUrl').val(); // 요소의 값(value)을 가져옵니다.
+			// FormData 객체 생성
+			var formData = new FormData();
+			var formData2 = new FormData();
+			formData.append('userEmail', userEmail);
+			if (!passwordChecked)
+				formData.append('userPw', userPw);
+			else formData.append('userPw', 2122141);
+			formData.append('provider', pprovider);
+			formData.append('userName', userName);
+			formData.append('phoneNumber', phoneNumber);
+			formData.append('address', sample6_address);
+			formData.append('addressDetail', sample6_detailAddress);
+			formData.append('userNickname', userNickname);
+			formData.append('accessToken', accessToken);
+			formData.append('refreshToken', refreshToken);
+			formData.append('imageUrl', imageUrl);
+			// AJAX를 이용한 서버 전송
+			$.ajax({
+				method : "POST",
+				url : "${pageContext.request.contextPath}/user/insert",
+				data : formData,
+				contentType : false, // 필수
+				processData : false, // 필수
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log("에러:", textStatus, errorThrown);
+					alert('회원 가입 실패');
+				},
+				success : function(response) {
+					console.log("RestController Spring 응답:", response);
+					alert('회원 가입 성공');
+					window.location.href = '/jsp/index.jsp'; // 또는 원하는 페이지 URL로 변경
 
-    // 주소 유효성 검사
-    var sample6_address = document.getElementById('sample6_address').value;
-   if (sample6_address == "주소") {
-        alert('주소를 입력해주세요.');
-        return false;
-    }
-    // 상세주소 유효성 검사
-    var sample6_detailAddress = document.getElementById('sample6_detailAddress').value;
-    if (sample6_detailAddress == "상세주소"||!sample6_detailAddress || sample6_detailAddress.trim() === "" ) {
-        alert('상세주소를 입력해주세요.'+sample6_detailAddress);
-        return false;
-    }
-    var pprovider = $('#pprovider').val();
-    var refreshToken = $('#refreshToken').val(); // 요소의 값(value)을 가져옵니다.
-    var accessToken = $('#accessToken').val(); // 요소의 값(value)을 가져옵니다.
-    var imageUrl = $('#iimageUrl').val(); // 요소의 값(value)을 가져옵니다.
-    // FormData 객체 생성
-    var formData = new FormData();
-    var formData2 = new FormData();
-    formData.append('userEmail', userEmail);
-    formData.append('userPw', userPw);
-    formData.append('provider', pprovider);
-    formData.append('userName', userName);
-    formData.append('phoneNumber', phoneNumber);
-    formData.append('address', sample6_address);
-    formData.append('addressDetail', sample6_detailAddress);
-    formData.append('userNickname', userNickname);
-    formData.append('accessToken', accessToken);
-    formData.append('refreshToken', refreshToken);
-    formData.append('imageUrl', imageUrl);
-    // AJAX를 이용한 서버 전송
-    $.ajax({
-        method: "POST",
-        url: "${pageContext.request.contextPath}/user/insert",
-        data: formData,
-        contentType: false,  // 필수
-        processData: false,  // 필수
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log("에러:", textStatus, errorThrown);
-            alert('회원 가입 실패');
-        },
-        success: function(response) {
-            console.log("RestController Spring 응답:", response);
-            alert('회원 가입 성공');
-            window.location.href = '/jsp/index.jsp'; // 또는 원하는 페이지 URL로 변경
-           
-        }
-    });
+				}
+			});
 
-    return false; // 폼 전송 방지
-}
+			return false; // 폼 전송 방지
+		}
 
 		// 닉네임 중복 확인 상태
 		var nicknameChecked = false;
 
 		// 닉네임 중복 확인 함수
 		function checkNickname() {
-			 // 닉네임 중복 체크 여부 확인
+			// 닉네임 중복 체크 여부 확인
 			userNickname = document.getElementById('nickname').value;
-		    if (!userNickname || userNickname.trim() === "" || userNickname === "닉네임") {
-		        alert('닉네임을 적어주세요');
-		        return false;
-		    }
+			if (!userNickname || userNickname.trim() === ""
+					|| userNickname === "닉네임") {
+				alert('닉네임을 적어주세요');
+				return false;
+			}
 			alert(userNickname);
 			$.ajax({
-        method: "POST",
-        url: "${pageContext.request.contextPath}/auth/nick_check",
-        data: {
-        	userNickname: userNickname,
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log("에러:", textStatus, errorThrown);
-			alert('닉네임 체크 에러');
-        },
-        success: function(response) {
-            console.log("RestController Spring 응답:", response);
-            if(response==0){
-					alert('닉네임 중복 체크가 완료되었습니다.');
-		            nicknameChecked = true;
-            	}
-            else{
-        	    	alert('이미 존재하는 닉네임입니다.');
-        	    	nicknameChecked = false;
-            }
-        }
-    });
+				method : "POST",
+				url : "${pageContext.request.contextPath}/auth/nick_check",
+				data : {
+					userNickname : userNickname,
+				},
+				error : function(jqXHR, textStatus, errorThrown) {
+					console.log("에러:", textStatus, errorThrown);
+					alert('닉네임 체크 에러');
+				},
+				success : function(response) {
+					console.log("RestController Spring 응답:", response);
+					if (response == 0) {
+						alert('닉네임 중복 체크가 완료되었습니다.');
+						nicknameChecked = true;
+					} else {
+						alert('이미 존재하는 닉네임입니다.');
+						nicknameChecked = false;
+					}
+				}
+			});
 		}
 
 		// 이메일 인증번호 전송 함수
 		var num = 0;
-	function sendVerificationEmail() {
-    // 6자리 랜덤 숫자 생성
-    num = Math.floor(100000 + Math.random() * 900000);
-    console.log("Generated verification code: " + num);
+		function sendVerificationEmail() {
+			// 6자리 랜덤 숫자 생성
+			num = Math.floor(100000 + Math.random() * 900000);
+			console.log("Generated verification code: " + num);
 
-    var userEmail = document.getElementById('email').value;
-    // 이메일 형식 검증
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!emailRegex.test(userEmail)) {
-        alert('올바른 이메일 형식이 아닙니다');
-        return;
-    }
+			var userEmail = document.getElementById('email').value;
+			// 이메일 형식 검증
+			const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+			if (!emailRegex.test(userEmail)) {
+				alert('올바른 이메일 형식이 아닙니다');
+				return;
+			}
 
-    // 여기에 실제 이메일 전송 로직 추가
-    // 예: AJAX 요청을 서버로 보내 이메일 전송
- /*   $.ajax({
-        method: "POST",
-        url: "${pageContext.request.contextPath}/auth/email_send",
-        data: {
-            email: email,
-            num: num
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.log("에러:", textStatus, errorThrown);
-        },
-        success: function(response) {
-            console.log("RestController Spring 응답:", response);
-        }
-    });*/
-    alert('입력하신 이메일로 인증번호를 발송했습니다. 확인 후 인증을 완료해주세요.');
-    document.getElementById('verificationCodeRow').style.display = 'block';
-}
-
+			// 여기에 실제 이메일 전송 로직 추가
+			// 예: AJAX 요청을 서버로 보내 이메일 전송
+			/*   $.ajax({
+			       method: "POST",
+			       url: "${pageContext.request.contextPath}/auth/email_send",
+			       data: {
+			           email: email,
+			           num: num
+			       },
+			       error: function(jqXHR, textStatus, errorThrown) {
+			           console.log("에러:", textStatus, errorThrown);
+			       },
+			       success: function(response) {
+			           console.log("RestController Spring 응답:", response);
+			       }
+			   });*/
+			alert('입력하신 이메일로 인증번호를 발송했습니다. 확인 후 인증을 완료해주세요.');
+			document.getElementById('verificationCodeRow').style.display = 'block';
+		}
 
 		// 인증번호 확인 함수
 		function verifyCode() {
 			var code = $('#verificationCode').val();
 			if (code.toString() != num.toString()) {
-				alert('인증번호가 일치하지 않습니다.'+code+"그리고 "+num);
+				alert('인증번호가 일치하지 않습니다.' + code + "그리고 " + num);
 				return;
 			}
 
@@ -549,51 +577,57 @@
 
 		// 주소 검색 함수 (카카오 API 등으로 실제 구현 필요)
 		function searchAddress() {
-			 new daum.Postcode({
-			        oncomplete: function(data) {
-			            // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+			new daum.Postcode(
+					{
+						oncomplete : function(data) {
+							// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-			            // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-			            // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-			            var addr = ''; // 주소 변수
-			            var extraAddr = ''; // 참고항목 변수
+							// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+							// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+							var addr = ''; // 주소 변수
+							var extraAddr = ''; // 참고항목 변수
 
-			            //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-			            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-			                addr = data.roadAddress;
-			            } else { // 사용자가 지번 주소를 선택했을 경우(J)
-			                addr = data.jibunAddress;
-			            }
+							//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+							if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+								addr = data.roadAddress;
+							} else { // 사용자가 지번 주소를 선택했을 경우(J)
+								addr = data.jibunAddress;
+							}
 
-			            // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-			            if(data.userSelectedType === 'R'){
-			                // 법정동명이 있을 경우 추가한다. (법정리는 제외)
-			                // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-			                if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-			                    extraAddr += data.bname;
-			                }
-			                // 건물명이 있고, 공동주택일 경우 추가한다.
-			                if(data.buildingName !== '' && data.apartment === 'Y'){
-			                    extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-			                }
-			                // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-			                if(extraAddr !== ''){
-			                    extraAddr = ' (' + extraAddr + ')';
-			                }
-			                // 조합된 참고항목을 해당 필드에 넣는다.
-			                document.getElementById("sample6_extraAddress").value = extraAddr;
-			            
-			            } else {
-			                document.getElementById("sample6_extraAddress").value = '';
-			            }
+							// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+							if (data.userSelectedType === 'R') {
+								// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+								// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+								if (data.bname !== ''
+										&& /[동|로|가]$/g.test(data.bname)) {
+									extraAddr += data.bname;
+								}
+								// 건물명이 있고, 공동주택일 경우 추가한다.
+								if (data.buildingName !== ''
+										&& data.apartment === 'Y') {
+									extraAddr += (extraAddr !== '' ? ', '
+											+ data.buildingName
+											: data.buildingName);
+								}
+								// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+								if (extraAddr !== '') {
+									extraAddr = ' (' + extraAddr + ')';
+								}
+								// 조합된 참고항목을 해당 필드에 넣는다.
+								document.getElementById("sample6_extraAddress").value = extraAddr;
 
-			            // 우편번호와 주소 정보를 해당 필드에 넣는다.
-			            document.getElementById('sample6_postcode').value = data.zonecode;
-			            document.getElementById("sample6_address").value = addr;
-			            // 커서를 상세주소 필드로 이동한다.
-			            document.getElementById("sample6_detailAddress").focus();
-			        }
-			    }).open();
+							} else {
+								document.getElementById("sample6_extraAddress").value = '';
+							}
+
+							// 우편번호와 주소 정보를 해당 필드에 넣는다.
+							document.getElementById('sample6_postcode').value = data.zonecode;
+							document.getElementById("sample6_address").value = addr;
+							// 커서를 상세주소 필드로 이동한다.
+							document.getElementById("sample6_detailAddress")
+									.focus();
+						}
+					}).open();
 		}
 	</script>
 	<style>

@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void svcUserJoin(UserVO UserVO) {
         UserMapper.insertUser(UserVO);
-        if(UserVO.getUsersOauthVO()!=null)
+        if(!UserVO.getUsersOauthVO().getAccessToken().isEmpty())
         {
         	//방금회원가입한 유저 이메일로 nextval 유저 seq찾아옴
         	UserVO uvo = UserMapper.selectUserByEmail(UserVO.getUserEmail());
