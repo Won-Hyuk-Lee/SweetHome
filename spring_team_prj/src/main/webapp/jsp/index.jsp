@@ -127,10 +127,11 @@
 						    	<span class="nav-link-inner-text mr-1">커뮤니티</span>
 							</a>
 						</li>
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">내 정보</span></a></li>
+						<li class="nav-item">
+							<a href="${pageContext.request.contextPath}/admin/all_board_list" class="nav-link">
+								<span class="nav-link-inner-text mr-1">내 정보</span>
+							</a>
+						</li>
 					</ul>
 				</div>
 				<div class="d-none d-lg-block @@cta_button_classes">

@@ -75,7 +75,7 @@
 	</select>
 	
     <select id="boardDetail" resultMap="boardResultMap" parameterType="int">
-        select b.board_seq, b.board_title, b.board_contents, b.updated_date, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname
+        select b.board_seq, b.board_title, b.board_contents, b.updated_date, b.user_seq, i.board_image_seq, i.board_seq, i.oname, i.sname, i.fsize, i.fpath, c.community_seq, c.community_name, u.user_nickname
 		from board b, board_images i, community c, users u
 		where b.board_seq = i.board_seq(+)
 		and b.community_seq = c.community_seq

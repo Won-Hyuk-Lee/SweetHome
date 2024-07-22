@@ -426,20 +426,48 @@
         
         
         // 수정 버튼
+/*         
         $(document).ready(function() {
 	        $(".update-button").click(function() {
 	        	window.location.href = "${pageContext.request.contextPath}/board/board_update_move?boardSeq=" + ${KEY_BOARDVO.boardSeq};
 	        });
         });
+*/
+
+		$(document).ready(function() {
+		    <c:choose>
+		        <c:when test="${sessionScope.userSeq == KEY_BOARDVO.userSeq}">
+		            $(".update-button").click(function() {
+		                window.location.href = "${pageContext.request.contextPath}/board/board_update_move?boardSeq=" + ${KEY_BOARDVO.boardSeq};
+		            });
+		        </c:when>
+		        <c:otherwise>
+		            $(".update-button").click(function() {
+		                alert("자신의 게시물만 수정할 수 있습니다.");
+		            });
+		        </c:otherwise>
+		    </c:choose>
+		});
+        
 
         // 삭제 버튼
-        $(document).ready(function() {
-	        $(".delete-button").click(function() {
-	            if(confirm("정말로 삭제하시겠습니까?")) {
-	            	window.location.href = "${pageContext.request.contextPath}/board/board_delete?communitySeq=" + ${KEY_BOARDVO.community.communitySeq} + "&boardSeq=" + ${KEY_BOARDVO.boardSeq};
-	            }
-	        });
-        });
+		$(document).ready(function() {
+		    <c:choose>
+		        <c:when test="${sessionScope.userSeq == KEY_BOARDVO.userSeq}">
+		            $(".delete-button").click(function() {
+		            	 if(confirm("정말로 삭제하시겠습니까?")) {
+		 	            	window.location.href = "${pageContext.request.contextPath}/board/board_delete?communitySeq=" + ${KEY_BOARDVO.community.communitySeq} + "&boardSeq=" + ${KEY_BOARDVO.boardSeq};
+		 	            }
+	            	 });
+		        </c:when>
+		        <c:otherwise>
+		            $(".delete-button").click(function() {
+		                alert("자신의 게시물만 삭제할 수 있습니다.");
+		            });
+		        </c:otherwise>
+		    </c:choose>
+		});
+		
         // 목록 버튼
         $(document).ready(function() {
             $(".list-button").click(function() {
@@ -481,23 +509,34 @@
             });
             
             // 댓글 삭제 버튼
-            // Delete Button Click Event
-	        $(document).on('click', '.reply-delete-button', function() {
-	            var replyCard = $(this).closest('.card');
-	            var replySeq = replyCard.data('reply-seq'); // 댓글 ID 추출
-	
-	            $.ajax({
-	                method: "POST",
-	                url: "${pageContext.request.contextPath}/reply/reply_delete", // 서버의 댓글 삭제 URL
-	                data: {replySeq:replySeq},
-	                error: function(myval) {
-	                    console.log("에러:" + myval);
-	                },
-	                success: function(myval) {
-	                    makeReplyList(); // 댓글 리스트 갱신
-	                }
-	            });
-	        });
+            $(document).ready(function() {
+                // userSeq를 JSP에서 JavaScript 변수로 할당
+                var currentUserSeq = ${sessionScope.userSeq};
+
+                // 댓글 생성 및 삭제 버튼의 동작 정의
+                $(document).on('click', '.reply-delete-button', function() {
+                    var replyCard = $(this).closest('.card');
+                    var replySeq = replyCard.data('reply-seq'); // 댓글 ID 추출
+                    var userSeq = $(this).data('user-seq'); // 유저 ID 추출
+
+                    // 현재 사용자와 댓글 작성자가 같은 경우에만 삭제
+                    if (currentUserSeq == userSeq) {
+                        $.ajax({
+                            method: "POST",
+                            url: "${pageContext.request.contextPath}/reply/reply_delete", // 서버의 댓글 삭제 URL
+                            data: { replySeq: replySeq },
+                            error: function(myval) {
+                                console.log("에러:" + myval);
+                            },
+                            success: function(myval) {
+                                makeReplyList(); // 댓글 리스트 갱신
+                            }
+                        });
+                    } else {
+                        alert("본인의 댓글만 지울 수 있습니다.");
+                    }
+                });
+            });
             
         });
 
@@ -517,7 +556,7 @@
                         htmlStr += "<div class='d-flex justify-content-between mb-4'>";
                         htmlStr += "<span class='font-small'><span class='font-weight-bold'>" + MYval.user.userNickname + "</span>";
                         htmlStr += "<span class='ml-2'>" + MYval.createdDate + "</span></span>";
-                        htmlStr += "<div><button class='reply-delete-button' aria-label='delete button'>[X]</button></div></div>";
+                        htmlStr += "<div><button class='reply-delete-button' aria-label='delete button' data-user-seq='" + MYval.userSeq + "'>[X]</button></div></div>";
                         htmlStr += "<p class='m-0'>" + MYval.reply + "</p></div>";
                     });
                     $("#replyListDiv").empty();
