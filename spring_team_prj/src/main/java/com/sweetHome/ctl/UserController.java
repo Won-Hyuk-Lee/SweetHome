@@ -50,17 +50,8 @@ public class UserController {
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
 	public String ctlUserJoin(@ModelAttribute UserVO userVO,@ModelAttribute UsersOauthVO userOauthVO) {
-		System.out.println("받은 vo"+userVO.getAddress());
-		System.out.println("받은 vo"+userVO.getAddressDetail());
-		System.out.println("받은 vo"+userVO.getUserEmail());
-		System.out.println("받은 vo"+userVO.getUserPw());
-		System.out.println("받은 vo"+userVO.getUserNickname());
-		System.out.println("받은 vo"+userVO.getProvider());
-		System.out.println("받은 vo"+userVO.getPhoneNumber());
+	
 		userVO.setUsersOauthVO(userOauthVO);
-		System.out.println("받은 token"+userVO.getUsersOauthVO().getAccessToken());
-		System.out.println("받은 token"+userVO.getUsersOauthVO().getRefreshToken());
-		System.out.println("받은 token"+userVO.getUsersOauthVO().getImageUrl());
 		userService.svcUserJoin(userVO);
 		return "텍스트 리턴";
 	}
@@ -87,12 +78,7 @@ public class UserController {
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
 	@ResponseBody
 	public String ctlUserUpdate(@ModelAttribute UserVO userVO) {
-		System.out.println(userVO.getAddress());
-		System.out.println(userVO.getAddressDetail());
-		System.out.println(userVO.getUserEmail());
-		System.out.println(userVO.getUserPw());
-		System.out.println(userVO.getUserNickname());
-		System.out.println(userVO.getPhoneNumber());
+
 		userService.svcUserUpdate(userVO);
 		return "성공";
 	}

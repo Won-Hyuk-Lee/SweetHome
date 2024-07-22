@@ -32,5 +32,7 @@
     select user_seq from users where user_email = #{userEmail} AND user_pw = #{userPw}
     
 </select>
-
+ <select id="findUserRole" parameterType="int" resultType="String"> 
+    select user_role from users where user_seq = #{userSeq}
+</select>
 </mapper>

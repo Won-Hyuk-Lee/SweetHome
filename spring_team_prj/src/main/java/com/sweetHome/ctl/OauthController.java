@@ -194,8 +194,7 @@ public class OauthController {
 				request.getSession().setAttribute("SESS_ACCESS_TOKEN"	, accessToken); 
 				request.getSession().setAttribute("SESS_REFRESH_TOKEN"	, refreshToken); 
 				request.getSession().setAttribute("SESS_USERVO"			, existingUserVO);
-				request.getSession().setAttribute("userSeq", existingUserVO.getUserSeq());
-				viewPage = "redirect: /common/indexm";
+				viewPage = "redirect: /common/index?seq="+existingUserVO.getUserSeq();
 			}
 		} 
 		return viewPage;
