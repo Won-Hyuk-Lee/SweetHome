@@ -19,6 +19,7 @@ import com.sweetHome.svc.UserService;
 import com.sweetHome.vo.BoardVO;
 import com.sweetHome.vo.ReplyVO;
 import com.sweetHome.vo.UserVO;
+import com.sweetHome.vo.UsersOauthVO;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -48,13 +49,18 @@ public class UserController {
 	//dataType : "텍스트...., data는 쿼리스트링(?key=v&ke=vv)
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
 	@ResponseBody
-	public String ctlUserJoin(@ModelAttribute UserVO userVO) {
-		System.out.println(userVO.getAddress());
-		System.out.println(userVO.getAddressDetail());
-		System.out.println(userVO.getUserEmail());
-		System.out.println(userVO.getUserPw());
-		System.out.println(userVO.getUserNickname());
-		System.out.println(userVO.getPhoneNumber());
+	public String ctlUserJoin(@ModelAttribute UserVO userVO,@ModelAttribute UsersOauthVO userOauthVO) {
+		System.out.println("받은 vo"+userVO.getAddress());
+		System.out.println("받은 vo"+userVO.getAddressDetail());
+		System.out.println("받은 vo"+userVO.getUserEmail());
+		System.out.println("받은 vo"+userVO.getUserPw());
+		System.out.println("받은 vo"+userVO.getUserNickname());
+		System.out.println("받은 vo"+userVO.getProvider());
+		System.out.println("받은 vo"+userVO.getPhoneNumber());
+		userVO.setUsersOauthVO(userOauthVO);
+		System.out.println("받은 token"+userVO.getUsersOauthVO().getAccessToken());
+		System.out.println("받은 token"+userVO.getUsersOauthVO().getRefreshToken());
+		System.out.println("받은 token"+userVO.getUsersOauthVO().getImageUrl());
 		userService.svcUserJoin(userVO);
 		return "텍스트 리턴";
 	}
