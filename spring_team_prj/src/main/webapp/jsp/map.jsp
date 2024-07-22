@@ -616,7 +616,7 @@ html, body {
 
     // 추천 서비스 내용 업데이트
     recommendTab.innerHTML = `
-        <h2>추천 서비스</h2>
+    	<h2>추천 서비스</h2>
         <div class="recommendation-factors">
             <div class="factor">
                 <p>이동거리</p>
@@ -646,12 +646,12 @@ html, body {
             district: selectedDestination.address.split(' ')[1],
             latitude: selectedDestination.lat,
             longitude: selectedDestination.lng,
-            distanceImportance: distanceImportance
+            distanceImportance: distanceImportance,
         },
         success: function(response) {
             console.log('Success:', response);
             if (response && response.length > 0) {
-                alert('추천 자치구 5개: ' + response.join(', '));
+                alert('추천 자치구: ' + response.join(', '));
                 updateRecommendations(response);
             } else {
                 alert('추천 결과가 없습니다.');
