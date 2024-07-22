@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,22 +41,27 @@
 	href="../resources/spaces/assets/img/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../resources/spaces/assets/img/favicon/favicon-16x16.png">
-<link rel="manifest" href="../resources/spaces/assets/img/favicon/site.webmanifest">
-<link rel="mask-icon" href="../resources/spaces/assets/img/favicon/safari-pinned-tab.svg"
+<link rel="manifest"
+	href="../resources/spaces/assets/img/favicon/site.webmanifest">
+<link rel="mask-icon"
+	href="../resources/spaces/assets/img/favicon/safari-pinned-tab.svg"
 	color="#ffffff">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
 <link type="text/css"
 	href="../resources/spaces/vendor/@fortawesome/fontawesome-free/css/all.min.css"
 	rel="stylesheet">
-<link type="text/css" href="../resources/spaces/vendor/leaflet/dist/leaflet.css"
+<link type="text/css"
+	href="../resources/spaces/vendor/leaflet/dist/leaflet.css"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
-<link rel="stylesheet" href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
+<link rel="stylesheet"
+	href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link type="text/css" href="../resources/spaces/css/spaces.css" rel="stylesheet">
+<link type="text/css" href="../resources/spaces/css/spaces.css"
+	rel="stylesheet">
 <script>
 	(function(w, d, s, l, i) {
 		w[l] = w[l] || [];
@@ -79,17 +84,19 @@
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
 	<style>
-	.bg-primary2 {
-    background-color: yellowgreen !important;
-	}
- </style>
-	<%@ include file = "/jsp/header.jsp"%>
+.bg-primary2 {
+	background-color: yellowgreen !important;
+}
+</style>
+	<%@ include file="/jsp/header.jsp"%>
 	<main>
 		<div
 			class="preloader bg-dark flex-column justify-content-center align-items-center">
 			<div class="position-relative">
-				<img src="../resources/spaces/assets/img/brand/light-without-letter.svg"
-					alt="Logo loader"> <img src="../resources/spaces/assets/img/brand/letter.svg"
+				<img
+					src="../resources/spaces/assets/img/brand/light-without-letter.svg"
+					alt="Logo loader"> <img
+					src="../resources/spaces/assets/img/brand/letter.svg"
 					class="rotate-letter" alt="Letter loader">
 			</div>
 		</div>
@@ -97,13 +104,14 @@
 			<div class="container">
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-5 order-lg-1">
-						<h1 class="display-3 lh-100 font-weight-bold mb-0">어디 동네로 갈까요.</h1>
+						<h1 class="display-3 lh-100 font-weight-bold mb-0">서울 자취 동네
+							추천 서비스</h1>
 						<p class="lead my-4">
-							<span class="font-weight-bold">12,000+</span> 서울에서 살고 싶은 동네를 검색 해보세요.<span class="font-weight-bold"></span>
-							 
+							<span class="font-weight-bold"></span> 목적지(학교, 학원, 회사, 기타)를
+							입력하세요.<span class="font-weight-bold"></span>
+
 						</p>
-						<form autocomplete="off" class="row" method="get"
-							action="./all-spaces.html">
+						<form id="searchForm" onsubmit="return submitForm(event)">
 							<div class="col-12 mb-3 mb-lg-4">
 								<div class="form-group form-group-lg mb-0">
 									<div class="input-group">
@@ -111,51 +119,43 @@
 											<span class="input-group-text"><span
 												class="fas fa-map-marker-alt"></span></span>
 										</div>
-										<input id="search-location" type="text"
+										<input id="search-location" name="destination" type="text"
 											class="form-control autocomplete"
 											placeholder="Search location" required>
 									</div>
 								</div>
 							</div>
-							<div class="col-12 col-lg-6 mb-3 mb-lg-4">
-								<div class="input-group input-group-lg">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><span
-											class="fas fa-sliders-h"></span></span>
-									</div>
-									<select class="custom-select" id="exampleFormControlSelect1"><option>Type</option>
-										<option>On-Demand Meeting Spaces</option>
-										<option>Office Space</option></select>
-								</div>
-							</div>
-							<div class="col-12 col-lg-6">
-								<div class="input-group input-group-lg">
-									<div class="input-group-prepend">
-										<span class="input-group-text"><span
-											class="far fa-user-circle"></span></span>
-									</div>
-									<select class="custom-select" id="exampleFormControlSelect3"><option>Team
-											Size</option>
-										<option>Any</option>
-										<option>1-20</option>
-										<option>21-50</option>
-										<option>51-100</option></select>
-								</div>
-							</div>
 							<div class="col-12 mt-4">
-								<button class="btn btn-lg btn-primary btn-block animate-up-2"
-									type="submit">Find a desk</button>
+								<button type="submit"
+									class="btn btn-lg btn-primary btn-block animate-up-2">지도로
+									이동</button>
 							</div>
 						</form>
+
+						<script>
+							function submitForm(event) {
+								event.preventDefault(); // 기본 폼 제출 동작 방지
+								var destination = document
+										.getElementById('search-location').value;
+								if (destination) {
+									window.location.href = '${pageContext.request.contextPath}/jsp/map.jsp?destination='
+											+ encodeURIComponent(destination);
+								} else {
+									alert('목적지를 입력해주세요.');
+								}
+								return false;
+							}
+						</script>
 					</div>
 					<div class="col-12 col-md-7 order-lg-2 d-none d-md-block">
-						<img src="../resources/spaces/assets/img/illustrations/maintenance.svg" class="img-fluid"
-							alt="Forest Illustration">
+						<img
+							src="../resources/spaces/assets/img/illustrations/maintenance.svg"
+							class="img-fluid" alt="Forest Illustration">
 					</div>
 				</div>
 			</div>
 		</section>
-		
+
 		<section class="section section-lg pt-0">
 			<div class="container">
 				<div class="row">
@@ -337,8 +337,9 @@
 												<li class="list-group-item text-gray p-0 mb-2"><a
 													href="#"><span class="fas fa-map-marker-alt mr-2"></span>London</a></li>
 												<li class="list-group-item p-0"><a
-													href="../resources/spaces/html/all-spaces.html">All cities<span
-														class="fas fa-arrow-right fa-xs ml-2"></span></a></li>
+													href="../resources/spaces/html/all-spaces.html">All
+														cities<span class="fas fa-arrow-right fa-xs ml-2"></span>
+												</a></li>
 											</ul>
 										</div>
 									</div>
@@ -348,7 +349,9 @@
 								</div>
 								<div
 									class="col-12 col-md-7 mt-5 mt-md-0 text-md-right d-none d-sm-block">
-									<img src="../resources/spaces/assets/img/illustrations/world-map.svg" alt>
+									<img
+										src="../resources/spaces/assets/img/illustrations/world-map.svg"
+										alt>
 								</div>
 							</div>
 						</div>
@@ -361,8 +364,8 @@
 		<div class="container">
 			<div class="row mt-6">
 				<div class="col-xl-3 mb-3 mb-xl-0">
-					<img src="../resources/spaces/assets/img/brand/light.svg" height="30" class="mb-3"
-						alt="Spaces logo">
+					<img src="../resources/spaces/assets/img/brand/light.svg"
+						height="30" class="mb-3" alt="Spaces logo">
 					<p>Premium Bootstrap Directory Listing Template</p>
 				</div>
 				<div class="col-6 col-xl-2 mb-5 mb-xl-0">
@@ -415,8 +418,8 @@
 				<div class="col mb-md-0">
 					<a href="https://themesberg.com" target="_blank"
 						class="d-flex justify-content-center"><img
-						src="../resources/spaces/assets/img/themesberg.svg" height="25" class="mb-3"
-						alt="Themesberg Logo"></a>
+						src="../resources/spaces/assets/img/themesberg.svg" height="25"
+						class="mb-3" alt="Themesberg Logo"></a>
 					<div
 						class="d-flex text-center justify-content-center align-items-center"
 						role="contentinfo">
@@ -430,25 +433,35 @@
 		</div>
 	</footer>
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
-	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
-	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="../resources/spaces/vendor/headroom.js/dist/headroom.min.js"></script>
-	<script src="../resources/spaces/vendor/onscreen/dist/on-screen.umd.min.js"></script>
-	<script src="../resources/spaces/vendor/nouislider/distribute/nouislider.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/headroom.js/dist/headroom.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/nouislider/distribute/nouislider.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-	<script src="../resources/spaces/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-	<script src="../resources/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-	<script src="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
-	<script src="../resources/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
 	<script src="../resources/spaces/vendor/leaflet/dist/leaflet.js"></script>
 	<script src="../resources/spaces/vendor/chartist/dist/chartist.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
 	<script src="../resources/spaces/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
-	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
+	<script
+		src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
 </body>

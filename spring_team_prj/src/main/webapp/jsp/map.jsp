@@ -226,82 +226,7 @@ html, body {
 	</noscript>
 
 	<!-- 헤더 및 네비게이션 바 -->
-	<header class="header-global">
-		<nav id="navbar-main"
-			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
-			<div class="container">
-				<!-- 로고 -->
-				<a class="navbar-brand" href="/jsp/index.jsp"> <img
-					class="navbar-brand-dark common"
-					src="../resources/spaces/assets/img/brand/light.svg" height="35"
-					alt="Logo light"> <img class="navbar-brand-light common"
-					src="../resources/spaces/assets/img/brand/dark.svg" height="35"
-					alt="Logo dark">
-				</a>
-
-				<!-- 네비게이션 메뉴 -->
-				<div class="navbar-collapse collapse" id="navbar_global">
-					<div class="navbar-collapse-header">
-						<div class="row">
-							<div class="col-6 collapse-brand">
-								<a href="/jsp/index.jsp"> <img
-									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
-									alt="Logo Impact">
-								</a>
-							</div>
-							<div class="col-6 collapse-close">
-								<a href="#navbar_global" role="button" class="fas fa-times"
-									data-toggle="collapse" data-target="#navbar_global"
-									aria-controls="navbar_global" aria-expanded="false"
-									aria-label="Toggle navigation"></a>
-							</div>
-						</div>
-					</div>
-					<ul class="navbar-nav navbar-nav-hover justify-content-center">
-						<!-- 지도 메뉴 -->
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"> <span
-								class="nav-link-inner-text mr-1">지도</span>
-						</a></li>
-						<!-- 커뮤니티 메뉴 -->
-						<li class="nav-item dropdown"><a href="/community/list"
-							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"> <span
-								class="nav-link-inner-text mr-1">커뮤니티</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i>
-						</a>
-							<div class="dropdown-menu dropdown-megamenu-sm p-3 p-lg-4"
-								aria-labelledby="dashboardPagesDropdown">
-								<!-- 드롭다운 메뉴 내용 -->
-							</div></li>
-						<!-- 내 정보 메뉴 -->
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"> <span
-								class="nav-link-inner-text mr-1">내 정보</span>
-						</a></li>
-					</ul>
-				</div>
-
-				<!-- 로그인/로그아웃 버튼 -->
-				<div class="d-none d-lg-block">
-					<c:choose>
-						<c:when test="${not empty userSeq}">
-							<a href="/common/logout"
-								class="btn btn-md btn-secondary animate-up-2"> <i
-								class="fas fa-sign-out-alt mr-2"></i> 로그아웃
-							</a>
-						</c:when>
-						<c:otherwise>
-							<a href="/jsp/login.jsp"
-								class="btn btn-md btn-outline-white animate-up-2 mr-3"> <i
-								class="fas fa-sign-in-alt mr-2"></i> <span
-								class="d-none d-md-inline">로그인</span>
-							</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
+	<%@ include file = "/jsp/header.jsp"%>
 
 				<!-- 모바일 메뉴 토글 버튼 -->
 				<div class="d-flex d-lg-none align-items-center">
@@ -539,6 +464,18 @@ html, body {
 
             map.setBounds(bounds);
         }
+    }
+    
+ 	// Index.jsp에서 목적지 정보 가져오기
+    var urlParams = new URLSearchParams(window.location.search);
+    var destination = urlParams.get('destination');
+    
+    if (destination) {
+        // 검색창에 목적지 입력
+        document.getElementById('destinationSearch').value = destination;
+        
+        // 자동으로 검색 수행
+        searchDestination();
     }
 
     // 마커 표시 함수

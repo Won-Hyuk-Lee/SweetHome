@@ -25,8 +25,8 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public void sendEmail(String to,String num) {
-		System.out.println(emailUsername);
-		System.out.println(to);
+		//System.out.println(emailUsername);
+		//System.out.println(to);
 	    MimeMessage message = mailSender.createMimeMessage();
 	    MimeMessageHelper helper;
 	    StringBuilder sb;
