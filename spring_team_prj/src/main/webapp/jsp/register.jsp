@@ -250,7 +250,7 @@
 												<!-- 이메일 입력 필드 -->
 												<input class="form-control form-control-lg" id="email"
 													name="email" placeholder="example@naver.com" type="email"
-													aria-label="email address" maxlength="50" required>
+													aria-label="email address" maxlength="50" oninput="changeNickname()" required>
 												<div class="input-group-append">
 													<button type="button" id = "btn321"class="btn btn-secondary btn-sm"
 														onclick="sendVerificationEmail()">인증</button>
@@ -320,7 +320,7 @@
 												</div>
 												<input class="form-control form-control-lg" id="nickname"
 													name="nickname" placeholder="닉네임" type="text"
-													aria-label="Nickname" maxlength="24" required>
+													aria-label="Nickname" maxlength="24" oninput="changeNickname()" required>
 											</div>
 										</div>
 									</div>
@@ -381,12 +381,10 @@
 													aria-label="Address" maxlength="66" required readonly>
 
 											</div>
-												<input class="form-control form-control-lg" id="sample6_extraAddress"
-													name="sample6_extraAddress" placeholder="" type="text"
-													aria-label="Address" maxlength="66" required readonly>
-												<input class="form-control form-control-lg" id="sample6_postcode"
-													name="sample6_extraAddress" placeholder="" type="text"
-													aria-label="Address" maxlength="66" required readonly>
+												<input type="hidden" id="sample6_extraAddress"
+												>
+												<input type="hidden" id="sample6_postcode"
+													>
 										</div>
 									</div>
 									<div class="col-md-6">
@@ -444,28 +442,35 @@
 <input type="hidden" id="pphoneNumber"name="pphoneNumber" value="${sessionScope.SESS_USERVO.phoneNumber}">
 <input type="hidden" id="pprovider"name="pprovider" value="${sessionScope.SESS_USERVO.provider}">
 <input type="hidden" id="iimageUrl"name="iimageUrl" value="${sessionScope.SESS_USERVO.usersOauthVO.imageUrl}">
+<input type="hidden" id="accessToken"name="accessToken" value="${sessionScope.SESS_ACCESS_TOKEN}">
+<input type="hidden" id="refreshToken"name="refreshToken" value="${sessionScope.SESS_REFRESH_TOKEN}">
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script>
-	
+	// 확인후 변경시 상태확인
+	function changeNickname() {
+		 nicknameChecked = false;
+		 if(uuserEmail!=null) verificationCodeSent=true;//인증 불리언 트루
+		 else verificationCodeSent = false;
+	}
 	//오쓰 로그인시 기본회원 정보 적기
 	$(document).ready(function() {
 	var uuserEmail = $('#uuserEmail').val();
 	if(uuserEmail!='')
 		{
-	var uuserName = $('#uuserName').val();
-	var pprovider = $('#pprovider').val();
-	var iimageUrl = $('#iimageUrl').val();
-	console.log('User Email:', uuserEmail);
-    console.log('User Name:', uuserName);
-    console.log('Provider:', pprovider);
-    console.log('Image URL:', iimageUrl);
-	$('#email').val(uuserEmail);
-	if(uuserEmail!=null) verificationCodeSent=true;//인증 불리언 트루
-	$('#btn321').remove();//인증버튼삭제
-    
-    $('#name').val(uuserName);
-    $('#email').val(uuserEmail).prop('readonly', true);
-    $('#name').val(uuserName).prop('readonly', true);
+		var uuserName = $('#uuserName').val();
+		var pprovider = $('#pprovider').val(); // 요소의 값(value)을 가져옵니다.
+		var iimageUrl = $('#iimageUrl').val();
+		console.log('User Email:', uuserEmail);
+	    console.log('User Name:', uuserName);
+	    console.log('Provider:', pprovider);
+	    console.log('Image URL:', iimageUrl);
+		$('#email').val(uuserEmail);
+		if(uuserEmail!=null) verificationCodeSent=true;//인증 불리언 트루
+		$('#btn321').remove();//인증버튼삭제
+	    
+	    $('#name').val(uuserName);
+	    $('#email').val(uuserEmail).prop('readonly', true);
+	    $('#name').val(uuserName).prop('readonly', true);
 		}
 	});
 		// 폼 유효성 검사
@@ -535,17 +540,24 @@
         alert('상세주소를 입력해주세요.'+sample6_detailAddress);
         return false;
     }
-
+    var pprovider = $('#pprovider').val();
+    var refreshToken = $('#refreshToken').val(); // 요소의 값(value)을 가져옵니다.
+    var accessToken = $('#accessToken').val(); // 요소의 값(value)을 가져옵니다.
+    var imageUrl = $('#iimageUrl').val(); // 요소의 값(value)을 가져옵니다.
     // FormData 객체 생성
     var formData = new FormData();
+    var formData2 = new FormData();
     formData.append('userEmail', userEmail);
     formData.append('userPw', userPw);
+    formData.append('provider', pprovider);
     formData.append('userName', userName);
     formData.append('phoneNumber', phoneNumber);
     formData.append('address', sample6_address);
     formData.append('addressDetail', sample6_detailAddress);
     formData.append('userNickname', userNickname);
-
+    formData.append('accessToken', accessToken);
+    formData.append('refreshToken', refreshToken);
+    formData.append('imageUrl', imageUrl);
     // AJAX를 이용한 서버 전송
     $.ajax({
         method: "POST",

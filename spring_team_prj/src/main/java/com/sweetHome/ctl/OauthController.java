@@ -142,7 +142,6 @@ public class OauthController {
 		//userinfo :: {id=111108297176061140644, email=opencv.korea@gmail.com, verified_email=true, name=OPENCV KOREA, given_name=OPENCV, family_name=KOREA, picture=https://lh3.googleusercontent.com/a/ACg8ocI1r5lwhcKMlKu4FmZQYTsh5Se3b56jPD0WFmn3XrvMWLJ2_pY=s96-c}
 		
 		String viewPage = "jsp/login";
-		System.out.println(viewPage+" 어디고");
 		if (userInfo != null) {
 			//------------------------------------------------------------
 			//userInfo.get("email")을 사용해 DB조회(기존회원 & 신규회원)
@@ -156,12 +155,11 @@ public class OauthController {
 				existingUserVO.setPhoneNumber(userInfo.get("phoneNumber"));
 				existingUserVO.setUserEmail(userInfo.get("email"));
 				UsersOauthVO usersOauthVO = new UsersOauthVO();
-		        usersOauthVO.setImageUrl(viewPage);
 		        usersOauthVO.setAccessToken(accessToken);
 		        usersOauthVO.setRefreshToken(refreshToken);
 		        usersOauthVO.setImageUrl(userInfo.get("picture"));
 		        usersOauthVO.setUserSeq(existingUserVO.getUserSeq());
-		        System.out.println(viewPage);
+		        System.out.println("이거입니다: "+existingUserVO.getProvider());
 		        System.out.println(accessToken);
 		        System.out.println(refreshToken);
 		        System.out.println(existingUserVO.getUserSeq());
@@ -196,8 +194,7 @@ public class OauthController {
 				request.getSession().setAttribute("SESS_ACCESS_TOKEN"	, accessToken); 
 				request.getSession().setAttribute("SESS_REFRESH_TOKEN"	, refreshToken); 
 				request.getSession().setAttribute("SESS_USERVO"			, existingUserVO);
-				request.getSession().setAttribute("userSeq", existingUserVO.getUserSeq());
-				viewPage = "redirect: /common/indexm";
+				viewPage = "redirect: /common/index?seq="+existingUserVO.getUserSeq();
 			}
 		} 
 		return viewPage;

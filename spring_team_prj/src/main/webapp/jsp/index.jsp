@@ -71,6 +71,20 @@
 		j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 		f.parentNode.insertBefore(j, f);
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
+
+	function myPageMove(event) {
+	    event.preventDefault(); // 링크의 기본 동작(페이지 이동) 방지
+
+	    // sessionStorage에서 userSeq 값을 가져옴
+	   var userSeq = '${userSeq}';
+	    // userSeq 값이 존재하면 mypage로 이동
+	    if (userSeq) {
+	        window.location.href = '/user/detail?seq='+userSeq; // userSeq가 있을 때 이동할 페이지
+	    } else {
+	        window.location.href = '/jsp/login.jsp'; // userSeq가 없을 때 이동할 페이지
+	    }
+	}
+
 </script>
 </head>
 <body>
@@ -118,20 +132,34 @@
 						</div>
 					</div>
 					<ul class="navbar-nav navbar-nav-hover justify-content-center">
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
+						<li class="nav-item"><a href="#"
+							id="mainPagesDropdown" class="nav-link"><span
 								class="nav-link-inner-text mr-1">지도</span></a></li>
 						<li class="nav-item">
 							<a href="/community/list" class="nav-link">
 						    	<span class="nav-link-inner-text mr-1">커뮤니티</span>
 							</a>
 						</li>
-						<li class="nav-item">
-							<a href="${pageContext.request.contextPath}/admin/all_board_list" class="nav-link">
-								<span class="nav-link-inner-text mr-1">내 정보</span>
-							</a>
+<c:choose>
+    <c:when test="${sessionScope.userRole eq 'A'}">
+        				<li class="nav-item ">
+						    <a id="mainPagesDropdown" class="nav-link"
+						       href = "${pageContext.request.contextPath}/admin/all_board_list"	>
+						        <span class="nav-link-inner-text mr-1">관리자 메뉴</span>
+						    </a>
 						</li>
+    </c:when>
+    <c:otherwise>
+						<li class="nav-item ">
+						    <a id="mainPagesDropdown" 
+						       class="nav-link"
+						       onclick="myPageMove(event)">
+						        <span class="nav-link-inner-text mr-1">내 정보</span>
+						    </a>
+						</li>
+	</c:otherwise>
+    </c:choose>
+						
 					</ul>
 				</div>
 				<div class="d-none d-lg-block @@cta_button_classes">
