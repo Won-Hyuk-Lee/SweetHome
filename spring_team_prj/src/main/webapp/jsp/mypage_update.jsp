@@ -79,6 +79,8 @@
     <script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
     <script src="/javascript/popup_2.js"></script>
   </head>
+  <%@ include file = "/jsp/header.jsp"%>
+  
 <body>
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"

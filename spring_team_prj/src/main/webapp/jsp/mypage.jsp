@@ -82,7 +82,7 @@
 	}
 </script>
 </head>
-
+<%@ include file = "/jsp/header.jsp"%>
 <body>
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
