@@ -14,6 +14,10 @@
         .card {
             cursor: pointer; /* 마우스 포인터를 손가락 모양으로 변경 */
         }
+        .card-img-top {
+	    width: 100%;
+	    height: 300px; /* 원하는 높이로 설정 */
+		}
     </style>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -122,13 +126,13 @@
 <!-- 리스트 시작~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~	 -->
 					<div class="col-lg-12 mb-5"></div>
 					<div id="communityList" class="row">
-         <c:forEach items="${KEY_COMMUNITYLIST}" var="community">
+         <c:forEach items="${KEY_COMMUNITYLIST}" var="community" varStatus="status">
         <div class="col-12 col-md-6 col-lg-4 mb-4 mb-lg-5">
             <div class="card bg-white border-light p-3 rounded" data-community-seq="${community.communitySeq}">
                 <c:choose>
                     <c:when test="${not empty community.image}">
 
-                            <img src="${community.image.fpath}${community.image.sname}" class="card-img-top rounded" alt="community image">
+                            <img src="/resources/img/${status.index + 1}.jpg" class="card-img-top rounded" alt="community image">
 
                     </c:when>
                     <c:otherwise>

@@ -86,7 +86,36 @@
         f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
     
-  
+ // 로그인 함수
+    function login() {
+        var userEmail = document.getElementById('email').value;
+        var userPw = document.getElementById('password').value;
+
+        $.ajax({
+            method: "POST",
+            url: "/auth/login", // 수정: ${pageContext.request.contextPath} 대신 실제 URL을 사용
+            data: {
+                userEmail: userEmail,
+                userPw: userPw
+            },
+            dataType: "text", // 응답을 text로 받음
+            error: function(jqXHR, textStatus, errorThrown) {
+                console.log("에러:", textStatus, errorThrown);
+                alert('로그인 에러');
+            },
+            success: function(response) {
+                if(response!="로그인 실패"){
+                alert('로그인 성공');
+                window.location.href = "${pageContext.request.contextPath}/common/index?seq="+response; 
+                }
+                else {
+
+                alert('로그인 실패');
+                }
+                // 로그인 성공 후 추가적으로 할 작업을 여기에 작성
+            }
+        });
+    }
 </script>
 </head>
 <body>
