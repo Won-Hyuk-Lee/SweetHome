@@ -15,12 +15,14 @@ import com.sweetHome.svc.AuthService;
 @RequestMapping(value = "/common")
 public class CommonController {
 	@Autowired
-	private AuthService AuthService;
+	private AuthService authService;
 
 	@RequestMapping(value = "/index", method = RequestMethod.GET)
 	public String ctlEmailRequest(@RequestParam("seq") int seq,HttpSession session) {
 		System.out.println("받은seq값"+seq);
 		session.setAttribute("userSeq", seq);
+		System.out.println( authService.svcFindUserRole(seq));
+		session.setAttribute("userRole", authService.svcFindUserRole(seq));
 		return "jsp/index";
 	}
 	@RequestMapping(value = "/indexm", method = RequestMethod.GET)
