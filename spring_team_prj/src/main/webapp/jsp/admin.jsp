@@ -24,6 +24,15 @@
 <head>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<style>
+       .reply-delete-button {
+	      background: none;
+	      border: none;
+	      color: #dc3545; /* Bootstrap danger color */
+	      cursor: pointer;
+	      font-size: 1em;
+	    }
+	</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Spaces - My Account</title>
 <meta name="viewport"
@@ -85,6 +94,7 @@
 		j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 		f.parentNode.insertBefore(j, f);
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
+	
 </script>
 </head>
 <body>
@@ -114,33 +124,21 @@
 										class="card-img-top rounded-circle border-white"
 										alt="Joseph Portrait">
 								</div>
-								<h2 class="h5 font-weight-normal text-center mt-3 mb-0">Neil
-									Sims</h2>
+								<h2 class="h5 font-weight-normal text-center mt-3 mb-0">관리자</h2>
 								<div class="list-group dashboard-menu list-group-sm mt-4">
-									<a href="./account.html"
-										class="d-flex list-group-item list-group-item-action active">Overview
+									<a href="#"
+										class="d-flex list-group-item list-group-item-action active">게시글 관리
 										<span class="icon icon-xs ml-auto"><span
 											class="fas fa-chevron-right"></span></span>
-									</a><a href="./settings.html"
-										class="d-flex list-group-item list-group-item-action">Settings<span
+									</a><a href="#"
+										class="d-flex list-group-item list-group-item-action">유저 관리<span
 										class="icon icon-xs ml-auto"><span
 											class="fas fa-chevron-right"></span></span>
-									</a><a href="./my-items.html"
-										class="d-flex list-group-item list-group-item-action">My
-										Items<span class="icon icon-xs ml-auto"><span
+									</a><a href="#"
+										class="d-flex list-group-item list-group-item-action">커뮤니티 관리
+										<span class="icon icon-xs ml-auto"><span
 											class="fas fa-chevron-right"></span></span>
-									</a><a href="./security.html"
-										class="d-flex list-group-item list-group-item-action">Security<span
-										class="icon icon-xs ml-auto"><span
-											class="fas fa-chevron-right"></span></span>
-									</a><a href="./billing.html"
-										class="d-flex list-group-item list-group-item-action">Billing<span
-										class="icon icon-xs ml-auto"><span
-											class="fas fa-chevron-right"></span></span>
-									</a><a href="./messages.html"
-										class="d-flex list-group-item list-group-item-action border-0">Messages<span
-										class="icon icon-xs ml-auto"><span
-											class="fas fa-chevron-right"></span></span></a>
+									</a>
 								</div>
 							</div>
 						</div>
