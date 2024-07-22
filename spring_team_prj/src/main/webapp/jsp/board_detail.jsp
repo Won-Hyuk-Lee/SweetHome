@@ -160,88 +160,7 @@
     background-color: yellowgreen !important;
 	}
  </style>
-	<!-- 상단 탭 시작 -->
-	<style>
-        .btn-primary {
-            color: #fff; /* 텍스트 색상: 흰색 */
-            background-color: yellowgreen; /* 배경색: yellowgreen */
-            border-color: black; /* 테두리 색상: yellowgreen */
-            box-shadow: 0 0 24px rgba(154, 205, 50, .04), 0 44px 74px rgba(154, 205, 50, .06); /* 그림자 색상 변경 */
-        }
-    </style>
-	<header class="header-global">
-		<nav id="navbar-main"
-			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
-			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="/jsp/index.jsp"><img
-					class="navbar-brand-dark common"
-					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
-					<img class="navbar-brand-light common"
-					src="../resources/spaces/assets/img/brand/dark.svg" height="35" alt="Logo dark"></a>
-				<div class="navbar-collapse collapse" id="navbar_global">
-					<div class="navbar-collapse-header">
-						<div class="row">
-							<div class="col-6 collapse-brand">
-								<a href="/jsp/index.jsp"><img
-									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
-									alt="Logo Impact"></a>
-							</div>
-							<div class="col-6 collapse-close">
-								<a href="#navbar_global" role="button" class="fas fa-times"
-									data-toggle="collapse" data-target="#navbar_global"
-									aria-controls="navbar_global" aria-expanded="false"
-									aria-label="Toggle navigation"></a>
-							</div>
-						</div>
-					</div>
-					<ul class="navbar-nav navbar-nav-hover justify-content-center">
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">지도</span></a></li>
-						<li class="nav-item">
-							<a href="/community/list" class="nav-link">
-						    	<span class="nav-link-inner-text mr-1">커뮤니티</span>
-							</a>
-						</li>
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">내 정보</span></a></li>
-					</ul>
-				</div>
-				<div class="d-none d-lg-block @@cta_button_classes">
-				<c:choose>
-            <c:when test="${not empty userSeq}">
-                <!-- userSeq가 존재하는 경우 로그아웃 버튼 생성 -->
-                <a href="/common/logout"
-                   target="_blank" class="btn btn-md btn-secondary animate-up-2">
-                    <i class="fas fa-shopping-bag mr-2"></i> 로그아웃
-                </a>
-            </c:when>
-            <c:otherwise>
-                <!-- userSeq가 존재하지 않는 경우 로그인 버튼 생성 -->
-                <a href="/jsp/login.jsp"
-                   target="_blank" class="btn btn-md btn-outline-white animate-up-2 mr-3">
-                    <i class="fas fa-book mr-1"></i>
-                    <span class="d-xl-none">Docs</span>
-                    <span class="d-none d-xl-inline">로그인</span>
-                </a>
-            </c:otherwise>
-        </c:choose>
-				</div>
-				<div class="d-flex d-lg-none align-items-center">
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbar_global" aria-controls="navbar_global"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</div>
-			</div>
-		</nav>
-	</header>
-	
-	<!-- 상단 탭 끝 -->
+<%@ include file = "/jsp/header.jsp"%>
 	<main>
 		<div
 			class="preloader bg-dark flex-column justify-content-center align-items-center">
@@ -426,20 +345,48 @@
         
         
         // 수정 버튼
+/*         
         $(document).ready(function() {
 	        $(".update-button").click(function() {
 	        	window.location.href = "${pageContext.request.contextPath}/board/board_update_move?boardSeq=" + ${KEY_BOARDVO.boardSeq};
 	        });
         });
+*/
+
+		$(document).ready(function() {
+		    <c:choose>
+		        <c:when test="${sessionScope.userSeq == KEY_BOARDVO.userSeq}">
+		            $(".update-button").click(function() {
+		                window.location.href = "${pageContext.request.contextPath}/board/board_update_move?boardSeq=" + ${KEY_BOARDVO.boardSeq};
+		            });
+		        </c:when>
+		        <c:otherwise>
+		            $(".update-button").click(function() {
+		                alert("자신의 게시물만 수정할 수 있습니다.");
+		            });
+		        </c:otherwise>
+		    </c:choose>
+		});
+        
 
         // 삭제 버튼
-        $(document).ready(function() {
-	        $(".delete-button").click(function() {
-	            if(confirm("정말로 삭제하시겠습니까?")) {
-	            	window.location.href = "${pageContext.request.contextPath}/board/board_delete?communitySeq=" + ${KEY_BOARDVO.community.communitySeq} + "&boardSeq=" + ${KEY_BOARDVO.boardSeq};
-	            }
-	        });
-        });
+		$(document).ready(function() {
+		    <c:choose>
+		        <c:when test="${sessionScope.userSeq == KEY_BOARDVO.userSeq}">
+		            $(".delete-button").click(function() {
+		            	 if(confirm("정말로 삭제하시겠습니까?")) {
+		 	            	window.location.href = "${pageContext.request.contextPath}/board/board_delete?communitySeq=" + ${KEY_BOARDVO.community.communitySeq} + "&boardSeq=" + ${KEY_BOARDVO.boardSeq};
+		 	            }
+	            	 });
+		        </c:when>
+		        <c:otherwise>
+		            $(".delete-button").click(function() {
+		                alert("자신의 게시물만 삭제할 수 있습니다.");
+		            });
+		        </c:otherwise>
+		    </c:choose>
+		});
+		
         // 목록 버튼
         $(document).ready(function() {
             $(".list-button").click(function() {
@@ -481,23 +428,34 @@
             });
             
             // 댓글 삭제 버튼
-            // Delete Button Click Event
-	        $(document).on('click', '.reply-delete-button', function() {
-	            var replyCard = $(this).closest('.card');
-	            var replySeq = replyCard.data('reply-seq'); // 댓글 ID 추출
-	
-	            $.ajax({
-	                method: "POST",
-	                url: "${pageContext.request.contextPath}/reply/reply_delete", // 서버의 댓글 삭제 URL
-	                data: {replySeq:replySeq},
-	                error: function(myval) {
-	                    console.log("에러:" + myval);
-	                },
-	                success: function(myval) {
-	                    makeReplyList(); // 댓글 리스트 갱신
-	                }
-	            });
-	        });
+            $(document).ready(function() {
+                // userSeq를 JSP에서 JavaScript 변수로 할당
+                var currentUserSeq = ${sessionScope.userSeq};
+
+                // 댓글 생성 및 삭제 버튼의 동작 정의
+                $(document).on('click', '.reply-delete-button', function() {
+                    var replyCard = $(this).closest('.card');
+                    var replySeq = replyCard.data('reply-seq'); // 댓글 ID 추출
+                    var userSeq = $(this).data('user-seq'); // 유저 ID 추출
+
+                    // 현재 사용자와 댓글 작성자가 같은 경우에만 삭제
+                    if (currentUserSeq == userSeq) {
+                        $.ajax({
+                            method: "POST",
+                            url: "${pageContext.request.contextPath}/reply/reply_delete", // 서버의 댓글 삭제 URL
+                            data: { replySeq: replySeq },
+                            error: function(myval) {
+                                console.log("에러:" + myval);
+                            },
+                            success: function(myval) {
+                                makeReplyList(); // 댓글 리스트 갱신
+                            }
+                        });
+                    } else {
+                        alert("본인의 댓글만 지울 수 있습니다.");
+                    }
+                });
+            });
             
         });
 
@@ -517,7 +475,7 @@
                         htmlStr += "<div class='d-flex justify-content-between mb-4'>";
                         htmlStr += "<span class='font-small'><span class='font-weight-bold'>" + MYval.user.userNickname + "</span>";
                         htmlStr += "<span class='ml-2'>" + MYval.createdDate + "</span></span>";
-                        htmlStr += "<div><button class='reply-delete-button' aria-label='delete button'>[X]</button></div></div>";
+                        htmlStr += "<div><button class='reply-delete-button' aria-label='delete button' data-user-seq='" + MYval.userSeq + "'>[X]</button></div></div>";
                         htmlStr += "<p class='m-0'>" + MYval.reply + "</p></div>";
                     });
                     $("#replyListDiv").empty();

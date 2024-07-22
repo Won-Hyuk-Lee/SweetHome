@@ -63,8 +63,12 @@ public class BoardServiceImpl implements BoardService {
         else return "check";
     } // (게시글 추천 삽입)
     
-	public List<BoardVO> svcBoardSearchByTitle(BoardVO bvo){
-		
-		return boardMapper.boardSearchByTitle(bvo);
+	public List<BoardVO> svcBoardSearchByTitle(BoardVO boardVO){
+        List<BoardVO> blist = boardMapper.boardSearchByTitle(boardVO);
+        for (BoardVO bvo : blist) {
+            bvo.setRecommend(boardMapper.boardRecommend(bvo.getBoardSeq()));
+        }
+        
+		return boardMapper.boardSearchByTitle(boardVO);
 	} // 제목
 }

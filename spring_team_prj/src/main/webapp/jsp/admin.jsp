@@ -22,70 +22,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Board List</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <style>
-        .mb-3 {
-            margin-bottom: 1rem !important;
-        }
-        .card-body {
-            padding: 1.5rem !important;
-        }
-        .shadow-soft {
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-        }
-        .avatar-lg {
-            width: 50px;
-            height: 50px;
-        }
-        .avatar-lg img {
-            width: 100%;
-            height: 100%;
-        }
-        .text-gray {
-            color: #6c757d !important;
-        }
-        .search-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-        .search-input {
-            width: 50%;
-        }
-        .table-header {
-            background-color: #f8f9fa;
-            font-weight: bold;
-        }
-        /* 추가된 스타일 */
-        table {
-            border-collapse: collapse;
-            width: 100%;
-        }
-        th, td {
-            text-align: center;
-            vertical-align: middle;
-            border: none;
-            padding: 10px;
-        }
-        td.updated-date {
-            font-size: 14px;
-        }
-        
-        .form-inline {
-		    display: flex;
-		    justify-content: center; /* 수평 가운데 정렬 */
-		    width: 100%;
-		}
-    </style>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+	<style>
+       .reply-delete-button {
+	      background: none;
+	      border: none;
+	      color: #dc3545; /* Bootstrap danger color */
+	      cursor: pointer;
+	      font-size: 1em;
+	    }
+	</style>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Spaces - Support</title>
+<title>Spaces - My Account</title>
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name="title" content="Spaces - Support">
+<meta name="title" content="Spaces - My Account">
 <meta name="author" content="Themesberg">
 <meta name="description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
@@ -95,7 +47,7 @@
 	href="https://themesberg.com/product/bootstrap/spaces-bootstrap-directory-listing-template">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://demo.themesberg.com/pixel-pro">
-<meta property="og:title" content="Spaces - Support">
+<meta property="og:title" content="Spaces - My Account">
 <meta property="og:description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
 <meta property="og:image"
@@ -103,7 +55,7 @@
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url"
 	content="https://demo.themesberg.com/pixel-pro">
-<meta property="twitter:title" content="Spaces - Support">
+<meta property="twitter:title" content="Spaces - My Account">
 <meta property="twitter:description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
 <meta property="twitter:image"
@@ -115,8 +67,8 @@
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../resources/spaces/assets/img/favicon/favicon-16x16.png">
 <link rel="manifest" href="../resources/spaces/assets/img/favicon/site.webmanifest">
-<link rel="mask-icon" href="../resources/spaces/assets/img/favicon/safari-pinned-tab.svg"
-	color="#ffffff">
+<link rel="mask-icon"
+	href="../resources/spaces/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
 <link type="text/css"
@@ -142,6 +94,7 @@
 		j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 		f.parentNode.insertBefore(j, f);
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
+	
 </script>
 </head>
 <body>
@@ -149,53 +102,112 @@
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
-	<%@ include file = "/jsp/header.jsp"%>
+<%@ include file = "/jsp/header.jsp"%>
 	<main>
 		<div
 			class="preloader bg-dark flex-column justify-content-center align-items-center">
 			<div class="position-relative">
 				<img src="../resources/spaces/assets/img/brand/light-without-letter.svg"
-					alt="Logo loader"> <img src="../resources/spaces/assets/img/brand/letter.svg"
-					class="rotate-letter" alt="Letter loader">
+					alt="Logo loader"> <img
+					src="../resources/spaces/assets/img/brand/letter.svg" class="rotate-letter"
+					alt="Letter loader">
 			</div>
 		</div>
-		
-		
-<!-- 상단 탭 구역 -->		
-<!-- 	
-		<section class="section-header bg-primary pb-9 pb-lg-10 text-white">
+		<div class="section section-lg bg-soft">
 			<div class="container">
-			</div>
-		</section>
--->
-
-
-<!-- board list 시작~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-		<section class="section section-md bg-white">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-lg-10 mb-3">
-						<h5><br><br>${KEY_BOARDLIST[0].community.communityName}</h5>
+				<div class="row pt-5 pt-md-0">
+					<div class="col-12 col-md-3 d-none d-lg-block">
+						<div class="card border-light p-2">
+							<div class="card-body p-2">
+								<div class="profile-thumbnail small-thumbnail mx-auto">
+									<img src="../resources/spaces/assets/img/team/profile-picture-4.jpg"
+										class="card-img-top rounded-circle border-white"
+										alt="Joseph Portrait">
+								</div>
+								<h2 class="h5 font-weight-normal text-center mt-3 mb-0">관리자</h2>
+								<div class="list-group dashboard-menu list-group-sm mt-4">
+									<a href="#"
+										class="d-flex list-group-item list-group-item-action active">게시글 관리
+										<span class="icon icon-xs ml-auto"><span
+											class="fas fa-chevron-right"></span></span>
+									</a><a href="#"
+										class="d-flex list-group-item list-group-item-action">유저 관리<span
+										class="icon icon-xs ml-auto"><span
+											class="fas fa-chevron-right"></span></span>
+									</a><a href="#"
+										class="d-flex list-group-item list-group-item-action">커뮤니티 관리
+										<span class="icon icon-xs ml-auto"><span
+											class="fas fa-chevron-right"></span></span>
+									</a>
+								</div>
+							</div>
+						</div>
 					</div>
-			
-			
-					
- <div class="container mt-5">
+					<div class="col-12 d-lg-none">
+						<div class="card bg-white border-light mb-4 mb-lg-5">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-10 d-flex">
+										<a href="./account.html"
+											class="list-group-item list-group-item-action border-0 active">Overview</a>
+										<a href="./settings.html"
+											class="list-group-item list-group-item-action border-0">Settings</a>
+										<a href="./my-items.html"
+											class="list-group-item list-group-item-action d-none d-sm-block border-0">My
+											Items</a> <a href="./security.html"
+											class="list-group-item list-group-item-action d-none d-md-block border-0">Security</a>
+									</div>
+									<div class="col-2 d-flex justify-content-center">
+										<div class="btn-group dropleft">
+											<button
+												class="btn btn-link dropdown-toggle dropdown-toggle-split mr-2 m-0 p-0"
+												data-toggle="dropdown" aria-haspopup="true"
+												aria-expanded="false">
+												<span class="icon icon-sm"><span
+													class="fas fa-ellipsis-h icon-secondary fa-lg"></span> </span><span
+													class="sr-only">Toggle Dropdown</span>
+											</button>
+											<div class="dropdown-menu">
+												<a href="./my-items.html"
+													class="list-group-item list-group-item-action d-sm-none border-0">My
+													Items</a> <a href="./security.html"
+													class="list-group-item list-group-item-action d-md-none border-0">Security</a>
+												<a href="./billing.html"
+													class="list-group-item list-group-item-action border-0">Billing</a>
+												<a href="./messages.html"
+													class="list-group-item list-group-item-action border-0">Messages</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-12 col-lg-8">
+						<div class="row">
+							<div class="col-12">
+								<div class="card border-light">
+									<div class="card-body d-flex justify-content-between align-items-center flex-0 border-bottom">
+										
+	<div class="container mt-5">
         <!-- 리스트 상단의 열 제목 -->
         <table class="table table-bordered mb-2">
             <thead class="table-header">
                 <tr>
-                    <th scope="col" style="width: 10%;">게시글 번호</th>
+               		<th scope="col" style="width: 10%;">게시판 이름</th>
+                    <th scope="col" style="width: 10%;">글 번호</th>
                     <th scope="col" style="width: 40%;">글 제목</th>
-                    <th scope="col" style="width: 20%;">작성자</th>
+                    <th scope="col" style="width: 10%;">작성자</th>
                     <th scope="col" style="width: 10%;">수정일</th>
                     <th scope="col" style="width: 10%;">추천</th>
+                    <th scope="col" style="width: 10%;">삭제</th>
                 </tr>
             </thead>
             <tbody>
                 <!-- forEach 구문을 통해 게시글 목록을 출력 -->
                 <c:forEach var="board" items="${KEY_BOARDLIST}">
                     <tr>
+                    	<td>${board.community.communityName}</td>
                         <td>${board.boardSeq}</td>
                         <td>
                             <a href="/board/board_detail?boardSeq=${board.boardSeq}">
@@ -204,79 +216,35 @@
                             <p class="lead text-gray mb-4">${board.boardContents}</p>
                         </td>
                         <td>${board.user.userNickname}</td>
-                        <!-- 수정일 셀 -->
                         <td class="updated-date">
 			            	<fmt:formatDate value="${board.updatedDate}" pattern="MM-dd HH:MM"/>
 						</td>
                         <td>${board.recommend}</td>
+                        <td><button class='reply-delete-button' aria-label='delete button' data-board-seq="${board.boardSeq}">[X]</button></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
         
         ${KEY_PAGEING_HTML}
-        <div class="row mt-5">
-            <div class="col-lg-6 text-left">
-                <button class="btn btn-primary">전체 글</button>
-                <button class="btn btn-secondary">인기 글</button>
-            </div>
-            <div class="col-lg-6 text-right">
-                <button id="writeButton" class="btn btn-success" data-community-seq="${KEY_BOARDLIST[0].communitySeq}" data-community-name="${KEY_BOARDLIST[0].community.communityName}">글 쓰기</button>
-            </div>
-        </div>
-		<div class="row mt-3 search-container justify-content-center">
-		    <form id="searchForm" action="/board/board_searchByTitle" method="get" class="form-inline my-2 my-lg-0 w-100">
-		        <div class="col-lg-6 pr-lg-2 order-lg-2">
-		            <div class="input-group">
-		                <input class="form-control" type="search" placeholder="검색어를 입력하세요" aria-label="검색어 입력" name="searchStr">
-		                <input type="hidden" name="communitySeq" value="${KEY_BOARDLIST[0].communitySeq}">
-		                <div class="input-group-append">
-		                    <button id="search-button" class="btn btn-outline-success" type="submit">검색</button>
-		                </div>
-		            </div>
-		        </div>
-		        
-		       <!--  
-		        <div class="col-lg-3 pl-lg-2 order-lg-1">
-		            <select class="form-control w-50" name="searchType">
-		                <option value="all">제목 + 내용</option>
-		                <option value="title">제목</option>
-		                <option value="content">내용</option>
-		            </select>
-		        </div>
-		         -->
-		         
-		    </form>
-		</div>
-    </div>
-    
-    					
-				</div>
-			</div>
-		</section>
-		<section class="section section-md bg-soft">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col">
-						<div class="text-center">
-							<h3 class="mb-4">Can't find what you are looking for? Let us
-								know!</h3>
-							<a class="text-secondary font-weight-normal h4"
-								href="./contact.html">Drop us a line <span
-								class="icon icon-sm icon-primary ml-1"><i
-									class="fas fa-arrow-right"></i></span></a>
+										
+										
+										
+										
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</section>
+		</div>
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-3 mb-3 mb-xl-0">
-					<img src="../resources/spaces/assets/img/brand/light.svg" height="30" class="mb-3"
-						alt="Spaces logo">
+					<img src="../resources/spaces/assets/img/brand/light.svg" height="30"
+						class="mb-3" alt="Spaces logo">
 					<p>Premium Bootstrap Directory Listing Template</p>
 				</div>
 				<div class="col-6 col-xl-2 mb-5 mb-xl-0">
@@ -341,85 +309,15 @@
 		</div>
 	</footer>
 	
-	<!-- 
-	<div class="row justify-content-center">
-					<div class="col-12 col-md-10 text-center">
-						<h1 class="mb-3">Advice and answers from our team</h1>
-						<p class="lead px-lg-5 mb-5">Get account assistance, technical
-							support, or help with any other issues.</p>
-						<form action="#">
-							<div
-								class="form-group bg-white shadow-soft rounded-pill mb-4 px-3 py-2">
-								<div class="row align-items-center">
-									<div class="col">
-										<div class="input-group input-group-merge shadow-none">
-											<div class="input-group-prepend">
-												<span class="input-group-text bg-transparent border-0"><i
-													class="fas fa-search"></i></span>
-											</div>
-											<input type="text"
-												class="form-control border-0 form-control-flush shadow-none pb-2"
-												placeholder="Search for answers..." required>
-										</div>
-									</div>
-									<div class="col-auto">
-										<button type="submit"
-											class="btn btn-block btn-primary rounded-pill">Search</button>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				</div>	
-	 -->
-	
 	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 	<script>
-		document.addEventListener('DOMContentLoaded', function() {
-		    var writeButton = document.getElementById('writeButton');
-		    if (writeButton) {
-		        writeButton.addEventListener('click', function() {
-		            var communitySeq = this.getAttribute('data-community-seq');
-		            var communityName = this.getAttribute('data-community-name');
-		            goToBoardInsert(communitySeq, communityName);
-		        });
-		    }
-		});
-	
-		function goToBoardInsert(communitySeq, communityName) {
-		    window.location.href = '/jsp/board_insert.jsp?communitySeq=' + communitySeq + '&communityName=' + communityName;
-		}
-		
-		
-		document.getElementById('search-button').addEventListener('click', function(event) {
-			console.log('버튼 클릭');
-		    // 이벤트 리스너가 폼 제출을 방지하지 않는지 확인하세요
-		    var form = document.getElementById('searchForm');
-		    if (form.checkValidity()) {
-		        form.submit();
-		    } else {
-		        event.preventDefault();
-		        alert('모든 필드를 올바르게 입력해 주세요.');
-		    }
-		});
-</script>
-<!-- 	
-	<script>
-    $(document).ready(function() {
-        $.ajax({
-            method: "POST",
-            url: "${pageContext.request.contextPath}/board/board_list",
-            data: "communitySeq=",
-            error: function(xhr, status, error) {
-                console.log("에러:" + error);
-            },
-            success: function(myval) {
-                console.log(myval)
-            }
-        });
-    });
-    </script>
-     -->
+	    $(".reply-delete-button").click(function() {
+	    	var boardSeq = $(this).data("board-seq");
+		   	 if(confirm("정말로 삭제하시겠습니까?")) {
+		     	window.location.href = "${pageContext.request.contextPath}/admin/board_delete?boardSeq="+boardSeq;
+		     }
+	  	 });
+	</script>
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
 	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -432,7 +330,8 @@
 	<script src="../resources/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-	<script src="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
 	<script src="../resources/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
 	<script src="../resources/spaces/vendor/leaflet/dist/leaflet.js"></script>
 	<script src="../resources/spaces/vendor/chartist/dist/chartist.min.js"></script>
@@ -442,10 +341,10 @@
 	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
-<!-- <script defer
+	<script defer
 		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
 		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-		data-cf-beacon='{"rayId":"89fe6da49a557c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
-		crossorigin="anonymous"></script> -->
+		data-cf-beacon='{"rayId":"89fe6db6dac77c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
+		crossorigin="anonymous"></script>
 </body>
 </html>

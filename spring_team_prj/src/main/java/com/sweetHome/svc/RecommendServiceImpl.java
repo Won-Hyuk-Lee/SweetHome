@@ -19,7 +19,8 @@ public class RecommendServiceImpl implements RecommendService {
 	private RecommendMapper recommendMapper;
 	@Autowired
 	private DataFetchService dataFetchService;
-
+	
+	//지구의 반지름(km)
 	private static final double EARTH_RADIUS = 6371;
 
 	@Override

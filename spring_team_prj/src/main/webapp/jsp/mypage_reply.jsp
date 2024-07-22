@@ -1,44 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>${KEY_UPDATE_DATA.community.communityName} 게시판</title>
-    <style>
-        .container { width: 80%; margin: 0 auto; }
-        .tabs { /* 탭 스타일 */ }
-        .gallery-name { font-size: 24px; margin: 20px 0; }
-        .form-group { margin-bottom: 15px; }
-        .form-group label { display: block; margin-bottom: 5px; }
-        .form-group input[type="text"], .form-group textarea { width: 100%; padding: 8px; }
-        .button-group { text-align: right; margin-top: 20px; }
-        .button-group button { padding: 10px 20px; margin-left: 10px; }
-        
-        .action-button {
-        display: inline-block;
-        padding: 5px 10px;
-        color: white;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 14px;
-        transition: background-color 0.3s;
-        }
-        .action-button:hover {
-            background-color: #0056b3; /* 호버 시 색상 변경 */
-        }
-        .update-button { background-color: #6A94D4; }
-        .cancel-button { background-color: #4A90E2; }
-    </style>
-    
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>Spaces - Directory Listing Landing page 2</title>
+<title>Spaces - Settings</title>
 <meta name="viewport"
 	content="width=device-width,initial-scale=1,shrink-to-fit=no">
-<meta name="title" content="Spaces - Directory Listing Landing page 2">
+<meta name="title" content="Spaces - Settings">
 <meta name="author" content="Themesberg">
 <meta name="description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
@@ -48,8 +21,7 @@
 	href="https://themesberg.com/product/bootstrap/spaces-bootstrap-directory-listing-template">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://demo.themesberg.com/pixel-pro">
-<meta property="og:title"
-	content="Spaces - Directory Listing Landing page 2">
+<meta property="og:title" content="Spaces - Settings">
 <meta property="og:description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
 <meta property="og:image"
@@ -57,8 +29,7 @@
 <meta property="twitter:card" content="summary_large_image">
 <meta property="twitter:url"
 	content="https://demo.themesberg.com/pixel-pro">
-<meta property="twitter:title"
-	content="Spaces - Directory Listing Landing page 2">
+<meta property="twitter:title" content="Spaces - Settings">
 <meta property="twitter:description"
 	content="Premium Directory Listing Bootstrap 4 Template featuring 37 hand-crafted pages, a dashboard an Mapbox integration. Spaces also comes with a complete UI Kit featuring over 700 components by Themesberg.">
 <meta property="twitter:image"
@@ -70,8 +41,8 @@
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../resources/spaces/assets/img/favicon/favicon-16x16.png">
 <link rel="manifest" href="../resources/spaces/assets/img/favicon/site.webmanifest">
-<link rel="mask-icon" href="../resources/spaces/assets/img/favicon/safari-pinned-tab.svg"
-	color="#ffffff">
+<link rel="mask-icon"
+	href="../resources/spaces/assets/img/favicon/safari-pinned-tab.svg" color="#ffffff">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
 <link type="text/css"
@@ -82,8 +53,6 @@
 <link rel="stylesheet"
 	href="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
 <link rel="stylesheet" href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 <link type="text/css" href="../resources/spaces/css/spaces.css" rel="stylesheet">
 <script>
 	(function(w, d, s, l, i) {
@@ -101,59 +70,148 @@
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
 </script>
 </head>
+<%@ include file = "/jsp/header.jsp"%>
 <body>
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
-<%@ include file = "/jsp/header.jsp"%>
+
 	<main>
 		<div
 			class="preloader bg-dark flex-column justify-content-center align-items-center">
 			<div class="position-relative">
 				<img src="../resources/spaces/assets/img/brand/light-without-letter.svg"
-					alt="Logo loader"> <img src="../resources/spaces/assets/img/brand/letter.svg"
-					class="rotate-letter" alt="Letter loader">
+					alt="Logo loader"> <img
+					src="../resources/spaces/assets/img/brand/letter.svg" class="rotate-letter"
+					alt="Letter loader">
 			</div>
 		</div>
-		<!-- 상단 탭 위치하는 곳~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-		<section class="section-header pb-0 bg-primary2 text-white">
-		</section>
+		<div class="section section-lg bg-soft">
+			<div class="container">
+				<div class="row pt-5 pt-md-0">
+					<div class="col-12 col-md-4 d-none d-lg-block">
+						<div class="card border-light p-2">
+							<div class="card-body p-2">
+								<div class="profile-thumbnail small-thumbnail mx-auto">
+									<img src="${KEY_USEROAUTHVO.imageUrl}"
+										class="card-img-top rounded-circle border-white"
+										alt="Joseph Portrait">
+								</div>
+								<h2 class="h5 font-weight-normal text-center mt-3 mb-0">${KEY_USERVO.userNickname}</h2>
+								<div class="list-group dashboard-menu list-group-sm mt-4">
+									<a href="/user/detail_update?seq=${sessionScope.userSeq}"
+										class="d-flex list-group-item list-group-item-action"style="font-size: 1.5rem;">내 정보 수정
+										<span class="icon icon-xs ml-auto"><span
+											class="fas fa-chevron-right"></span></span>
+									</a><a href="/user/board_list?userSeq=${sessionScope.userSeq}"
+										class="d-flex list-group-item list-group-item-action"style="font-size: 1.5rem;">내가 쓴 게시글<span
+										class="icon icon-xs ml-auto"><span
+											class="fas fa-chevron-right"></span></span>
+									</a><a href="/user/detail_reply?seq=${sessionScope.userSeq}"
+										class="d-flex list-group-item list-group-item-action active"style="font-size: 1.5rem;">내가 쓴 댓글<span class="icon icon-xs ml-auto"><span
+											class="fas fa-chevron-right"></span></span>
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-12 col-lg-8">
+							
+        <input type="hidden" id="userSeq" name="userSeq" value="${sessionScope.userSeq}">
+
+
+
+        <!-- 리스트 상단의 열 제목 -->
+        <div
+			class="section section-md bg-white text-black pt-0 line-bottom-light">
+			<div class="container2">
+				<div class="row justify-content-center">
+					<div class="col-12">
+						<div class="card bg-soft border-light rounded p-4 mb-4">
+						<form name="replyForm" id="replyForm" action="${pageContext.request.contextPath}/reply/reply_insert" method="post">
+							 <h2 class="h5 mb-4" style="font-size: 2.5rem;">내가 쓴 댓글</h2>
+							<div class="mt-5">
+							
+								<div id="replyListDiv"></div>
+								
+							</div>
+							<div class="d-flex justify-content-between mt-3">
+								<small class="font-weight-light text-dark"><span
+									id="charactersRemaining"></span> characters remaining</small>
+							</div>
+						</form>
 		
-    <div class="container">
-        
-        <h1 class="gallery-name">${KEY_UPDATE_DATA.community.communityName} 게시판</h1>
-        
-        <form id="boardForm" action="${pageContext.request.contextPath}/board/board_update" method="post">
-            <input type="hidden" name="boardSeq" value="${KEY_UPDATE_DATA.boardSeq}">
-            <div class="form-group">
-                <p>제목</p>
-                <input type="text" name="boardTitle" value="${KEY_UPDATE_DATA.boardTitle}" required>
-            </div>
-            
-            <div class="form-group">
-                <p>본문 내용</p>
-                <textarea name="boardContents" rows="10" required>${KEY_UPDATE_DATA.boardContents}</textarea>
-            </div>
-<!--             
-            <div class="form-group">
-                <p>첨부 파일</p>
-                <input type="file" name="boardImages" multiple>
-            </div>
--->
-			<div class="button-group">
-			    <button type="button" id="cancel-button" class="action-button cancel-button" onclick="history.back()">취소</button>
-			    <button type="submit" id="update-button" class="action-button update-button">수정</button>
+						</div>
+					</div>
+				</div>
 			</div>
-        </form>
-    </div>
+		</div>
+		</div>
+		
+<!-- 댓글 조회 -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script>
+    // 문서가 준비된 후 실행되는 함수
+    $(document).ready(function() {
+        // 댓글 리스트 생성
+        makeReplyList();
+    });
+    
+    // 댓글 삭제 버튼
+    // Delete Button Click Event
+    $(document).on('click', '.reply-delete-button', function() {
+        var replyCard = $(this).closest('.card');
+        var replySeq = replyCard.data('reply-seq'); // 댓글 ID 추출
+
+        $.ajax({
+            method: "POST",
+            url: "${pageContext.request.contextPath}/reply/reply_delete", // 서버의 댓글 삭제 URL
+            data: {replySeq:replySeq},
+            error: function(myval) {
+                console.log("에러:" + myval);
+            },
+            success: function(myval) {
+                makeReplyList(); // 댓글 리스트 갱신
+            }
+        });
+    });
+    // 댓글 리스트 생성 함수
+    function makeReplyList() {
+        var userSeq = '${sessionScope.userSeq}'; // JSP 표현식에서 변수 가져오기
+
+        $.ajax({
+            method: "POST",
+            url: "${pageContext.request.contextPath}/user/reply_list",
+            data: { userSeq: userSeq },
+            error: function(myval) {
+                console.log("에러:" + myval);
+            },
+            success: function(myval) {
+                let htmlStr = ""; // HTML 문자열 초기화
+                $.each(myval, function(MYidx, MYval) {
+                    htmlStr += "<div class='card bg-soft border-light rounded p-4 mb-4' data-reply-seq='" + MYval.replySeq + "'>";
+                    htmlStr += "<div class='d-flex justify-content-between mb-4'>";
+                    htmlStr += "<span class='font-small'><span class='font-weight-bold'>" + MYval.user.userNickname + "</span>";
+                    htmlStr += "<span class='ml-2'>" + MYval.createdDate + "</span></span>";
+                    htmlStr += "<div><button class='reply-delete-button' aria-label='delete button'>[X]</button></div></div>";
+                    htmlStr += "<p class='m-0'>" + MYval.reply + "</p></div>";
+                });
+                $("#replyListDiv").empty();
+                $("#replyListDiv").html(htmlStr);
+            }
+        });
+    }
+</script>
+
 	</main>
 	<footer class="footer py-6 bg-primary text-white">
 		<div class="container">
 			<div class="row">
 				<div class="col-xl-3 mb-3 mb-xl-0">
-					<img src="../resources/spaces/assets/img/brand/light.svg" height="30" class="mb-3"
-						alt="Spaces logo">
+					<img src="../resources/spaces/assets/img/brand/light.svg" height="30"
+						class="mb-3" alt="Spaces logo">
 					<p>Premium Bootstrap Directory Listing Template</p>
 				</div>
 				<div class="col-6 col-xl-2 mb-5 mb-xl-0">
@@ -217,8 +275,6 @@
 			</div>
 		</div>
 	</footer>
-	<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
 	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
 	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -227,10 +283,12 @@
 	<script src="../resources/spaces/vendor/nouislider/distribute/nouislider.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+	<script src="../resources/spaces/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
 	<script src="../resources/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-	<script src="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+	<script
+		src="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
 	<script src="../resources/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
 	<script src="../resources/spaces/vendor/leaflet/dist/leaflet.js"></script>
 	<script src="../resources/spaces/vendor/chartist/dist/chartist.min.js"></script>
@@ -240,39 +298,6 @@
 	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
-	<script>
-		// here you should load content from an Ajax request and when it
-		// loads you can disable the button from loading
-		$('#loadOnClick').click(function() {
-			$button = $(this);
-			$loadContent = $('#extraContent');
-			$allLoaded = $('#allLoadedText');
-			$button.addClass('btn-loading');
-			$button.attr('disabled', true);
 
-			setTimeout(function() {
-				$loadContent.show();
-				$button.hide();
-				$allLoaded.show();
-			}, 1500);
-		});
-		
-		document.getElementById('update-button').addEventListener('click', function(event) {
-			console.log('버튼 클릭');
-		    // 이벤트 리스너가 폼 제출을 방지하지 않는지 확인하세요
-		    var form = document.getElementById('boardForm');
-		    if (form.checkValidity()) {
-		        form.submit();
-		    } else {
-		        event.preventDefault();
-		        alert('모든 필드를 올바르게 입력해 주세요.');
-		    }
-		});
-	</script>
-<!-- 	<script defer
-		src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
-		integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
-		data-cf-beacon='{"rayId":"89fe6da8ddf07c30","version":"2024.4.1","r":1,"token":"3a2c60bab7654724a0f7e5946db4ea5a","b":1}'
-		crossorigin="anonymous"></script> -->
 </body>
 </html>

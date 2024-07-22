@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -41,27 +41,22 @@
 	href="../resources/spaces/assets/img/favicon/favicon-32x32.png">
 <link rel="icon" type="image/png" sizes="16x16"
 	href="../resources/spaces/assets/img/favicon/favicon-16x16.png">
-<link rel="manifest"
-	href="../resources/spaces/assets/img/favicon/site.webmanifest">
-<link rel="mask-icon"
-	href="../resources/spaces/assets/img/favicon/safari-pinned-tab.svg"
+<link rel="manifest" href="../resources/spaces/assets/img/favicon/site.webmanifest">
+<link rel="mask-icon" href="../resources/spaces/assets/img/favicon/safari-pinned-tab.svg"
 	color="#ffffff">
 <meta name="msapplication-TileColor" content="#ffffff">
 <meta name="theme-color" content="#ffffff">
 <link type="text/css"
 	href="../resources/spaces/vendor/@fortawesome/fontawesome-free/css/all.min.css"
 	rel="stylesheet">
-<link type="text/css"
-	href="../resources/spaces/vendor/leaflet/dist/leaflet.css"
+<link type="text/css" href="../resources/spaces/vendor/leaflet/dist/leaflet.css"
 	rel="stylesheet">
 <link rel="stylesheet"
 	href="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.css">
-<link rel="stylesheet"
-	href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
+<link rel="stylesheet" href="../resources/spaces/vendor/jqvmap/dist/jqvmap.min.css">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-<link type="text/css" href="../resources/spaces/css/spaces.css"
-	rel="stylesheet">
+<link type="text/css" href="../resources/spaces/css/spaces.css" rel="stylesheet">
 <script>
 	(function(w, d, s, l, i) {
 		w[l] = w[l] || [];
@@ -84,99 +79,17 @@
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
 	<style>
-.bg-primary2 {
-	background-color: yellowgreen !important;
-}
-</style>
-	<!-- 상단 탭 시작 -->
-	<style>
-.btn-primary {
-	color: #fff; /* 텍스트 색상: 흰색 */
-	background-color: yellowgreen; /* 배경색: yellowgreen */
-	border-color: black; /* 테두리 색상: yellowgreen */
-	box-shadow: 0 0 24px rgba(154, 205, 50, .04), 0 44px 74px
-		rgba(154, 205, 50, .06); /* 그림자 색상 변경 */
-}
-</style>
-	<header class="header-global">
-		<nav id="navbar-main"
-			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
-			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="/jsp/index.jsp"><img
-					class="navbar-brand-dark common"
-					src="../resources/spaces/assets/img/brand/light.svg" height="35"
-					alt="Logo light"> <img class="navbar-brand-light common"
-					src="../resources/spaces/assets/img/brand/dark.svg" height="35"
-					alt="Logo dark"></a>
-				<div class="navbar-collapse collapse" id="navbar_global">
-					<div class="navbar-collapse-header">
-						<div class="row">
-							<div class="col-6 collapse-brand">
-								<a href="/jsp/index.jsp"><img
-									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
-									alt="Logo Impact"></a>
-							</div>
-							<div class="col-6 collapse-close">
-								<a href="#navbar_global" role="button" class="fas fa-times"
-									data-toggle="collapse" data-target="#navbar_global"
-									aria-controls="navbar_global" aria-expanded="false"
-									aria-label="Toggle navigation"></a>
-							</div>
-						</div>
-					</div>
-					<ul class="navbar-nav navbar-nav-hover justify-content-center">
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">지도</span></a></li>
-						<li class="nav-item"><a href="/community/list"
-							class="nav-link"> <span class="nav-link-inner-text mr-1">커뮤니티</span>
-						</a></li>
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">내 정보</span></a></li>
-					</ul>
-				</div>
-				<div class="d-none d-lg-block @@cta_button_classes">
-					<c:choose>
-						<c:when test="${not empty userSeq}">
-							<!-- userSeq가 존재하는 경우 로그아웃 버튼 생성 -->
-							<a href="/common/logout"
-								class="btn btn-md btn-secondary animate-up-2"> <i
-								class="fas fa-shopping-bag mr-2"></i> 로그아웃
-							</a>
-						</c:when>
-						<c:otherwise>
-							<!-- userSeq가 존재하지 않는 경우 로그인 버튼 생성 -->
-							<a href="/jsp/login.jsp"
-								class="btn btn-md btn-outline-white animate-up-2 mr-3"> <i
-								class="fas fa-book mr-1"></i> <span class="d-xl-none">Docs</span>
-								<span class="d-none d-xl-inline">로그인</span>
-							</a>
-						</c:otherwise>
-					</c:choose>
-				</div>
-				<div class="d-flex d-lg-none align-items-center">
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbar_global" aria-controls="navbar_global"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</div>
-			</div>
-		</nav>
-	</header>
-
-	<!-- 상단 탭 끝 -->
+	.bg-primary2 {
+    background-color: yellowgreen !important;
+	}
+ </style>
+	<%@ include file = "/jsp/header.jsp"%>
 	<main>
 		<div
 			class="preloader bg-dark flex-column justify-content-center align-items-center">
 			<div class="position-relative">
-				<img
-					src="../resources/spaces/assets/img/brand/light-without-letter.svg"
-					alt="Logo loader"> <img
-					src="../resources/spaces/assets/img/brand/letter.svg"
+				<img src="../resources/spaces/assets/img/brand/light-without-letter.svg"
+					alt="Logo loader"> <img src="../resources/spaces/assets/img/brand/letter.svg"
 					class="rotate-letter" alt="Letter loader">
 			</div>
 		</div>
@@ -184,12 +97,10 @@
 			<div class="container">
 				<div class="row justify-content-between align-items-center">
 					<div class="col-12 col-md-5 order-lg-1">
-						<h1 class="display-3 lh-100 font-weight-bold mb-0">어디 동네로
-							갈까요.</h1>
+						<h1 class="display-3 lh-100 font-weight-bold mb-0">어디 동네로 갈까요.</h1>
 						<p class="lead my-4">
-							<span class="font-weight-bold">12,000+</span> 서울에서 살고 싶은 동네를 검색
-							해보세요.<span class="font-weight-bold"></span>
-
+							<span class="font-weight-bold">12,000+</span> 서울에서 살고 싶은 동네를 검색 해보세요.<span class="font-weight-bold"></span>
+							 
 						</p>
 						<form autocomplete="off" class="row" method="get"
 							action="./all-spaces.html">
@@ -238,14 +149,13 @@
 						</form>
 					</div>
 					<div class="col-12 col-md-7 order-lg-2 d-none d-md-block">
-						<img
-							src="../resources/spaces/assets/img/illustrations/maintenance.svg"
-							class="img-fluid" alt="Forest Illustration">
+						<img src="../resources/spaces/assets/img/illustrations/maintenance.svg" class="img-fluid"
+							alt="Forest Illustration">
 					</div>
 				</div>
 			</div>
 		</section>
-
+		
 		<section class="section section-lg pt-0">
 			<div class="container">
 				<div class="row">
@@ -427,9 +337,8 @@
 												<li class="list-group-item text-gray p-0 mb-2"><a
 													href="#"><span class="fas fa-map-marker-alt mr-2"></span>London</a></li>
 												<li class="list-group-item p-0"><a
-													href="../resources/spaces/html/all-spaces.html">All
-														cities<span class="fas fa-arrow-right fa-xs ml-2"></span>
-												</a></li>
+													href="../resources/spaces/html/all-spaces.html">All cities<span
+														class="fas fa-arrow-right fa-xs ml-2"></span></a></li>
 											</ul>
 										</div>
 									</div>
@@ -439,9 +348,7 @@
 								</div>
 								<div
 									class="col-12 col-md-7 mt-5 mt-md-0 text-md-right d-none d-sm-block">
-									<img
-										src="../resources/spaces/assets/img/illustrations/world-map.svg"
-										alt>
+									<img src="../resources/spaces/assets/img/illustrations/world-map.svg" alt>
 								</div>
 							</div>
 						</div>
@@ -454,8 +361,8 @@
 		<div class="container">
 			<div class="row mt-6">
 				<div class="col-xl-3 mb-3 mb-xl-0">
-					<img src="../resources/spaces/assets/img/brand/light.svg"
-						height="30" class="mb-3" alt="Spaces logo">
+					<img src="../resources/spaces/assets/img/brand/light.svg" height="30" class="mb-3"
+						alt="Spaces logo">
 					<p>Premium Bootstrap Directory Listing Template</p>
 				</div>
 				<div class="col-6 col-xl-2 mb-5 mb-xl-0">
@@ -508,8 +415,8 @@
 				<div class="col mb-md-0">
 					<a href="https://themesberg.com" target="_blank"
 						class="d-flex justify-content-center"><img
-						src="../resources/spaces/assets/img/themesberg.svg" height="25"
-						class="mb-3" alt="Themesberg Logo"></a>
+						src="../resources/spaces/assets/img/themesberg.svg" height="25" class="mb-3"
+						alt="Themesberg Logo"></a>
 					<div
 						class="d-flex text-center justify-content-center align-items-center"
 						role="contentinfo">
@@ -523,35 +430,25 @@
 		</div>
 	</footer>
 	<script src="../resources/spaces/vendor/jquery/dist/jquery.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/headroom.js/dist/headroom.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/onscreen/dist/on-screen.umd.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/nouislider/distribute/nouislider.min.js"></script>
+	<script src="../resources/spaces/vendor/popper.js/dist/umd/popper.min.js"></script>
+	<script src="../resources/spaces/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="../resources/spaces/vendor/headroom.js/dist/headroom.min.js"></script>
+	<script src="../resources/spaces/vendor/onscreen/dist/on-screen.umd.min.js"></script>
+	<script src="../resources/spaces/vendor/nouislider/distribute/nouislider.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
+	<script src="../resources/spaces/vendor/waypoints/lib/jquery.waypoints.min.js"></script>
+	<script src="../resources/spaces/vendor/owl.carousel/dist/owl.carousel.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/smooth-scroll/dist/smooth-scroll.polyfills.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
+	<script src="../resources/spaces/vendor/@fancyapps/fancybox/dist/jquery.fancybox.min.js"></script>
+	<script src="../resources/spaces/vendor/sticky-sidebar/dist/sticky-sidebar.min.js"></script>
 	<script src="../resources/spaces/vendor/leaflet/dist/leaflet.js"></script>
 	<script src="../resources/spaces/vendor/chartist/dist/chartist.min.js"></script>
 	<script
 		src="../resources/spaces/vendor/chartist-plugin-tooltips/dist/chartist-plugin-tooltip.min.js"></script>
 	<script src="../resources/spaces/vendor/jqvmap/dist/jquery.vmap.min.js"></script>
-	<script
-		src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
+	<script src="../resources/spaces/vendor/jqvmap/dist/maps/jquery.vmap.usa.js"></script>
 	<script src="../resources/spaces/assets/js/jquery.slideform.js"></script>
 	<script src="../resources/spaces/assets/js/spaces.js"></script>
 </body>

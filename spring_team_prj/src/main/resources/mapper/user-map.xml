@@ -20,14 +20,82 @@
 			<id property="userSeq" column="USER_SEQ" />
 			<result property="accessToken" column="ACCESS_TOKEN" />
 			<result property="refreshToken" column="REFRESH_TOKEN" />
-			<result property="imageURL" column="IMAGE_URL" />
+			<result property="imageUrl" column="IMAGE_URL" />
 			<result property="updatedDate" column="UPDATED_DATE" />
         </association>
     </resultMap>
+    <resultMap id="userOauthResultMap" type="com.sweetHome.vo.UsersOauthVO">
+			<id property="userSeq" column="USER_SEQ" />
+			<result property="accessToken" column="ACCESS_TOKEN" />
+			<result property="refreshToken" column="REFRESH_TOKEN" />
+			<result property="imageUrl" column="IMAGE_URL" />
+			<result property="updatedDate" column="UPDATED_DATE" />
+    </resultMap>
+
+  <resultMap id="boardResultMap" type="com.sweetHome.vo.BoardVO">
+        <id property="boardSeq" column="board_seq" />
+        <result property="boardTitle" column="board_title" />
+        <result property="boardContents" column="board_contents" />
+        <result property="createdDate" column="created_date" />
+        <result property="updatedDate" column="updated_date" />
+        <result property="userSeq" column="user_seq" />
+        <result property="communitySeq" column="community_seq" />
+        <result property="rnum" column="rnum" />
+        <association property="community" javaType="com.sweetHome.vo.CommunityVO">
+			<id property="communitySeq" column="community_seq" />
+			<result property="communityName" column="community_name" />
+			<result property="communityDescription" column="community_description" />
+			<result property="createdDate" column="created_date" />
+        </association>
+        <association property="user" javaType="com.sweetHome.vo.UserVO">
+			<id property="userSeq" column="user_seq" />
+			<result property="userEmail" column="user_email" />
+			<result property="userPw" column="user_pw" />
+			<result property="userNickname" column="user_nickname" />
+			<result property="phoneNumber" column="phone_number" />
+			<result property="userName" column="user_name" />
+			<result property="address" column="address" />
+			<result property="addressDetail" column="address_detail" />
+			<result property="provider" column="provider" />
+			<result property="createdDate" column="created_date" />
+			<result property="updatedDate" column="updated_date" />
+			<result property="userRole" column="user_role" />
+        </association>
+        <collection property="boardImages" ofType="com.sweetHome.vo.BoardImagesVO">
+        	<id property="boardImageSeq" column="board_image_seq" />
+        	<result property="boardSeq" column="board_seq" />
+        	<result property="oname" column="oname" />
+        	<result property="sname" column="sname" />
+        	<result property="fsize" column="fsize" />
+        	<result property="fpath" column="fpath" />
+        </collection>
+    </resultMap>
+ <resultMap id="replyResultMap" type="com.sweetHome.vo.ReplyVO">
+        <id property="replySeq" column="reply_seq" />
+        <result property="boardSeq" column="board_seq" />
+        <result property="userSeq" column="user_seq" />
+        <result property="reply" column="reply" />
+        <result property="createdDate" column="created_date" />
+        <association property="user" javaType="com.sweetHome.vo.UserVO">
+			<id property="userSeq" column="user_seq" />
+			<result property="userEmail" column="user_email" />
+			<result property="userPw" column="user_pw" />
+			<result property="userNickname" column="user_nickname" />
+			<result property="phoneNumber" column="phone_number" />
+			<result property="userName" column="user_name" />
+			<result property="address" column="address" />
+			<result property="addressDetail" column="address_detail" />
+			<result property="provider" column="provider" />
+			<result property="createdDate" column="created_date" />
+			<result property="updatedDate" column="updated_date" />
+			<result property="userRole" column="user_role" />
+        </association>
+    </resultMap>
+
 
     <insert id="insertUser" parameterType="com.sweetHome.vo.UserVO">
-        INSERT INTO Users (user_seq, user_email, user_pw, user_nickname, phone_number, user_name, address, address_detail)
-        VALUES (users_seq.NEXTVAL, #{userEmail}, #{userPw}, #{userNickname}, #{phoneNumber}, #{userName}, #{address}, #{addressDetail})
+        INSERT INTO Users (user_seq, user_email, user_pw, user_nickname, phone_number, user_name,provider, address, address_detail)
+        VALUES (users_seq.NEXTVAL, #{userEmail}, #{userPw}, #{userNickname}, #{phoneNumber}, #{userName},#{provider}, #{address}, #{addressDetail})
     </insert>
 
     <select id="selectUser" parameterType="int" resultMap="userResultMap">
@@ -41,20 +109,25 @@
     <select id="selectUserByEmail" parameterType="String" resultMap="userResultMap">
         SELECT * FROM Users WHERE user_email = #{userEmail}
     </select>
+    <select id="selectUserOauth" parameterType="int" resultMap="userOauthResultMap">
+        select *
+from users_oauth 
+where user_seq=#{userSeq}
+    </select>
     
-    <update id="updateUser" parameterType="com.sweetHome.vo.UserVO">
+    <select id="boardCount" parameterType="int" resultType="int">
+		select count(1) as cnt
+		from board
+		where user_seq=#{userSeq}
+	</select>
+    
+    <update id="userUpdate" parameterType="com.sweetHome.vo.UserVO">
         UPDATE Users SET
-            user_email = #{userEmail},
-            user_pw = #{userPw},
             user_nickname = #{userNickname},
             phone_number = #{phoneNumber},
-            user_name = #{userName},
             address = #{address},
             address_detail = #{addressDetail},
-            provider = #{provider},
-            created_date = #{createdDate},
-            updated_date = #{updatedDate},
-            user_role = #{userRole}
+            updated_date = sysdate
         WHERE user_seq = #{userSeq}
     </update>
 
@@ -77,4 +150,32 @@
 		WHERE user_seq = #{userSeq} 
 	</update>
 
+
+
+<select id="boardRecommend" resultType="int" parameterType="com.sweetHome.vo.RecommendVO">
+		select count(user_seq)
+		from recommend
+		where board_seq = #{boardSeq}
+	</select>
+	
+<select id="boardList"  parameterType="com.sweetHome.vo.BoardVO" resultMap="boardResultMap">
+	select s.*
+	from  (
+			select b.board_seq, b.board_title, u.user_nickname, b.updated_date, (ROW_NUMBER() OVER(order by b.board_seq desc)) rnum
+			from board b, users u
+			where b.user_seq = u.user_seq
+			and u.user_seq = #{userSeq}
+			order by b.board_seq desc 
+	      )  s
+	where rnum between #{startSeq} and #{endSeq}
+</select>
+
+<select id="userReplies" resultMap="replyResultMap" parameterType="int">
+		select r.reply_seq, r.board_seq, r.user_seq, r.reply, r.created_date, u.user_nickname
+		from reply r, users u
+		where r.user_seq = u.user_seq
+		and r.user_seq= #{userSeq}
+		order by r.reply_seq desc
+	</select>
+	
 </mapper>

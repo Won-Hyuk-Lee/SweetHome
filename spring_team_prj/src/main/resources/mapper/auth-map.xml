@@ -20,7 +20,7 @@
 			<id property="userSeq" column="USER_SEQ" />
 			<result property="accessToken" column="ACCESS_TOKEN" />
 			<result property="refreshToken" column="REFRESH_TOKEN" />
-			<result property="imageURL" column="IMAGE_URL" />
+			<result property="imageUrl" column="IMAGE_URL" />
 			<result property="updatedDate" column="UPDATED_DATE" />
         </association>
     </resultMap>
@@ -32,5 +32,7 @@
     select user_seq from users where user_email = #{userEmail} AND user_pw = #{userPw}
     
 </select>
-
+ <select id="findUserRole" parameterType="int" resultType="String"> 
+    select user_role from users where user_seq = #{userSeq}
+</select>
 </mapper>
