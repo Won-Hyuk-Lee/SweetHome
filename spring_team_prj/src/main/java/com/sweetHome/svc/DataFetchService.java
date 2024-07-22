@@ -1,10 +1,16 @@
 package com.sweetHome.svc;
 
 import com.sweetHome.vo.DistrictVO;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public interface DataFetchService {
     List<DistrictVO> getAllDistrictsFromDB();
     DistrictVO getDistrictFromDB(String districtCode);
-    // String getDataFromAPI(String apiUrl);  // 필요할 때 주석 해제하여 사용
+    Map<String, BigDecimal> getCrimeTotalByDistrict();
+    Map<String, BigDecimal> getCCTVDensityByDistrict();
+    Map<String, BigDecimal> getPopulationByDistrict();
+    Map<String, String> getDistrictCodeToNameMap();
 }
+

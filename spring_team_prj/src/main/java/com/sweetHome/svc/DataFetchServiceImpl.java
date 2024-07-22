@@ -1,37 +1,78 @@
 package com.sweetHome.svc;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.sweetHome.mapper.RecommendMapper;
 import com.sweetHome.vo.DistrictVO;
-import java.util.List;
 
 @Service
 public class DataFetchServiceImpl implements DataFetchService {
-    
-    @Autowired
-    private RecommendMapper recommendMapper;
+	private final RecommendMapper recommendMapper;
 
-    @Override
-    public List<DistrictVO> getAllDistrictsFromDB() {
-        // MyBatis mapper를 사용하여 DB에서 모든 자치구 데이터 가져오기
-        return recommendMapper.getAllDistricts();
-    }
+	@Autowired
+	public DataFetchServiceImpl(RecommendMapper recommendMapper) {
+		this.recommendMapper = recommendMapper;
+	}
 
-    @Override
-    public DistrictVO getDistrictFromDB(String districtCode) {
-        // MyBatis mapper를 사용하여 DB에서 특정 자치구 데이터 가져오기
-        return recommendMapper.getDistrictByCode(districtCode);
-    }
+	@Override
+	public List<DistrictVO> getAllDistrictsFromDB() {
+		List<DistrictVO> districts = recommendMapper.getAllDistricts();
+		return districts != null ? districts : new ArrayList<DistrictVO>();
+	}
 
-    // API 호출 메서드는 주석 처리합니다. 필요할 때 구현할 수 있습니다.
-    /*
-    @Override
-    public String getDataFromAPI(String apiUrl) {
-        // RestTemplate 또는 다른 HTTP 클라이언트를 사용하여 API 호출
-        // 결과 반환
-        // 주의: 실제 구현 시 적절한 HTTP 클라이언트 라이브러리를 사용해야 합니다.
-        return "API 호출 결과: " + apiUrl + "에서 가져온 데이터";
-    }
-    */
+	@Override
+	public DistrictVO getDistrictFromDB(String districtCode) {
+		DistrictVO district = recommendMapper.getDistrictByCode(districtCode);
+		return district;
+	}
+
+	@Override
+	public Map<String, BigDecimal> getCrimeTotalByDistrict() {
+		List<Map<String, Object>> crimeList = recommendMapper.getCrimeTotalByDistrict();
+		return convertListToMap(crimeList, "districtCode", "crimeTotal", String.class, BigDecimal.class);
+	}
+
+	@Override
+	public Map<String, BigDecimal> getCCTVDensityByDistrict() {
+		List<Map<String, Object>> cctvList = recommendMapper.getCCTVDensityByDistrict();
+		return convertListToMap(cctvList, "districtCode", "cctvDensity", String.class, BigDecimal.class);
+	}
+
+	@Override
+	public Map<String, BigDecimal> getPopulationByDistrict() {
+		List<Map<String, Object>> populationList = recommendMapper.getPopulationByDistrict();
+		return convertListToMap(populationList, "districtCode", "population", String.class, BigDecimal.class);
+	}
+
+	private <K, V> Map<K, V> convertListToMap(List<Map<String, Object>> list, String keyField, String valueField,
+			Class<K> keyClass, Class<V> valueClass) {
+		Map<K, V> resultMap = new HashMap<K, V>();
+		if (list != null) {
+			for (Map<String, Object> map : list) {
+				K key = keyClass.cast(map.get(keyField));
+				Object value = map.get(valueField);
+				if (key != null && value != null) {
+					resultMap.put(key, valueClass.cast(value));
+				}
+			}
+		}
+		return resultMap;
+	}
+
+	@Override
+	public Map<String, String> getDistrictCodeToNameMap() {
+		List<DistrictVO> districts = getAllDistrictsFromDB();
+		Map<String, String> codeToNameMap = new HashMap<String, String>();
+		for (DistrictVO district : districts) {
+			codeToNameMap.put(district.getDistrictCode(), district.getDistrictName());
+		}
+		return codeToNameMap;
+	}
 }
