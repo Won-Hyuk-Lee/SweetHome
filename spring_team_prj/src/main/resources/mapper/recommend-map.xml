@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sweetHome.mapper.RecommendMapper">
+	<resultMap id="districtResultMap" type="com.sweetHome.vo.DistrictVO">
+    <id property="districtCode" column="district_code"/>
+    <result property="districtName" column="district_name"/>
+    <result property="latitude" column="latitude"/>
+    <result property="longitude" column="longitude"/>
+</resultMap>
+
+<select id="getAllDistricts" resultMap="districtResultMap">
+    SELECT district_code, district_name, latitude, longitude
+    FROM district
+</select>
+</mapper>

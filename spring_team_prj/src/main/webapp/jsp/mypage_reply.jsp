@@ -68,22 +68,9 @@
 		j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
 		f.parentNode.insertBefore(j, f);
 	})(window, document, 'script', 'dataLayer', 'GTM-THQTXJ7');
-	function myPageMove(event) {
-	    event.preventDefault(); // 링크의 기본 동작(페이지 이동) 방지
-
-	    // sessionStorage에서 userSeq 값을 가져옴
-	   var userSeq = '${userSeq}';
-		console.log("seq="+userSeq);
-	    // userSeq 값이 존재하면 mypage로 이동
-	    if (userSeq) {
-	        window.location.href = '/user/detail?seq='+userSeq; // userSeq가 있을 때 이동할 페이지
-	    } else {
-	        window.location.href = 'login.jsp'; // userSeq가 없을 때 이동할 페이지
-	    }
-	}
 </script>
 </head>
-
+<%@ include file = "/jsp/header.jsp"%>
 <body>
 	<noscript>
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"

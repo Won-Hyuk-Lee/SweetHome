@@ -93,3 +93,4 @@ mvn-eclipse/
 
 # API키 프로퍼티 관리
 src/main/resources/api/
+src/main/resources/lec14-oauth.properties
