@@ -3,6 +3,8 @@ package com.sweetHome.ctl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -58,21 +60,21 @@ public class UserController {
 
 
 	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-	public String ctlUserDetail(@RequestParam("seq") int Usereq, Model model) {
-		model.addAttribute("KEY_USERVO", userService.svcUserDetail(Usereq));
-		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(Usereq));
+	public String ctlUserDetail(Model model,HttpSession session) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail((int)session.getAttribute("userSeq")));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth((int)session.getAttribute("userSeq")));
 		return "jsp/mypage";
 	}
 	@RequestMapping(value = "/detail_reply", method = RequestMethod.GET)
-	public String ctlUserDetailReply(@RequestParam("seq") int Usereq, Model model) {
-		model.addAttribute("KEY_USERVO", userService.svcUserDetail(Usereq));
-		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(Usereq));
+	public String ctlUserDetailReply(Model model,HttpSession session) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail((int)session.getAttribute("userSeq")));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth((int)session.getAttribute("userSeq")));
 		return "jsp/mypage_reply";
 	}
 	@RequestMapping(value = "/detail_update", method = RequestMethod.GET)
-	public String ctlUserDetailUpdate(@RequestParam("seq") int Usereq, Model model) {
-		model.addAttribute("KEY_USERVO", userService.svcUserDetail(Usereq));
-		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(Usereq));
+	public String ctlUserDetailUpdate(Model model,HttpSession session) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail((int)session.getAttribute("userSeq")));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth((int)session.getAttribute("userSeq")));
 		return "jsp/mypage_update";
 	}
 	@RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -84,18 +86,18 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/board_list")
-	public String ctlBoardList(Model model, @RequestParam("userSeq") int userSeq
+	public String ctlBoardList(Model model,HttpSession session
 			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage 
 			) {
-		model.addAttribute("KEY_USERVO", userService.svcUserDetail(userSeq));
-		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth(userSeq));
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail((int)session.getAttribute("userSeq")));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth((int)session.getAttribute("userSeq")));
 		//페이징
-		int listCount = userService.svcBoardCount(userSeq);
-		PagingUtil page = new PagingUtil("/user/board_list?userSeq="+userSeq, currentPage, listCount, 4, 5);
+		int listCount = userService.svcBoardCount((int)session.getAttribute("userSeq"));
+		PagingUtil page = new PagingUtil("/user/board_list?userSeq="+(int)session.getAttribute("userSeq"), currentPage, listCount, 4, 5);
 		String pageHtmlStr = page.getPagingHtml().toString();
 		
 		BoardVO boardVO = new BoardVO();
-		boardVO.setUserSeq(userSeq);
+		boardVO.setUserSeq((int)session.getAttribute("userSeq"));
 		boardVO.setStartSeq(page.getStartSeq());
 		boardVO.setEndSeq(page.getEndSeq());
 		

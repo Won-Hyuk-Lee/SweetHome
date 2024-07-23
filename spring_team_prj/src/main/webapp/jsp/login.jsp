@@ -106,7 +106,7 @@
             success: function(response) {
                 if(response!="로그인 실패"){
                 alert('로그인 성공');
-                window.location.href = "${pageContext.request.contextPath}/common/index?seq="+response; 
+                window.location.href = "${pageContext.request.contextPath}/common/indexm";
                 }
                 else {
 

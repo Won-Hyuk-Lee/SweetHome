@@ -16,7 +16,7 @@
 	   var userSeq = '${userSeq}';
 	    // userSeq 값이 존재하면 mypage로 이동
 	    if (userSeq) {
-	        window.location.href = '/user/detail?seq='+userSeq; // userSeq가 있을 때 이동할 페이지
+	        window.location.href = '/user/detail'; // userSeq가 있을 때 이동할 페이지
 	    } else {
 	        window.location.href = '/jsp/login.jsp'; // userSeq가 없을 때 이동할 페이지
 	    }
