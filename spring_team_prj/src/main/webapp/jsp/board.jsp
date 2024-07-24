@@ -72,6 +72,12 @@
         td.updated-date {
             font-size: 14px;
         }
+        
+        .form-inline {
+		    display: flex;
+		    justify-content: center; /* 수평 가운데 정렬 */
+		    width: 100%;
+		}
     </style>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -143,220 +149,7 @@
 		<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-THQTXJ7"
 			height="0" width="0" style="display: none; visibility: hidden"></iframe>
 	</noscript>
-	<header class="header-global">
-		<nav id="navbar-main"
-			class="navbar navbar-main navbar-theme-primary navbar-expand-lg headroom py-lg-3 px-lg-6 navbar-dark navbar-transparent navbar-theme-primary">
-			<div class="container">
-				<a class="navbar-brand @@logo_classes" href="${pageContext.request.contextPath}/community/list"><img
-					class="navbar-brand-dark common"
-					src="../resources/spaces/assets/img/brand/light.svg" height="35" alt="Logo light">
-					<img class="navbar-brand-light common"
-					src="../resources/spaces/assets/img/brand/dark.svg" height="35" alt="Logo dark"></a>
-				<div class="navbar-collapse collapse" id="navbar_global">
-					<div class="navbar-collapse-header">
-						<div class="row">
-							<div class="col-6 collapse-brand">
-								<a href="../resources/spaces/index.html"><img
-									src="../resources/spaces/assets/img/brand/dark.svg" height="35"
-									alt="Logo Impact"></a>
-							</div>
-							<div class="col-6 collapse-close">
-								<a href="#navbar_global" role="button" class="fas fa-times"
-									data-toggle="collapse" data-target="#navbar_global"
-									aria-controls="navbar_global" aria-expanded="false"
-									aria-label="Toggle navigation"></a>
-							</div>
-						</div>
-					</div>
-					<ul class="navbar-nav navbar-nav-hover justify-content-center">
-						<li class="nav-item dropdown"><a href="#"
-							id="mainPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Front pages</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-megamenu p-3 p-lg-4"
-								aria-labelledby="mainPagesDropdown">
-								<div class="row">
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">Main pages</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index.html">Landing</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index-2.html">Landing 2</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/index-3.html">Landing 3</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/about.html">About</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/pricing.html">Pricing</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/team.html">Team</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/contact.html">Contact</a></li>
-										</ul>
-										<h6 class="d-block text-primary">Legal</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/legal.html">Legal center</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/terms.html">Terms & agreement</a></li>
-										</ul>
-									</div>
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">Listing</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces.html">All spaces</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces-map.html">Map view</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/all-spaces-sidebar.html">All spaces
-													sidebar</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/single-space.html">Space details</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/profile.html">Profile</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Support</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/support.html">Support center</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/support-topic.html">Support topic</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Blog</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blog.html">Blog</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blog-post.html">Blog post</a></li>
-										</ul>
-									</div>
-									<div class="col-6 col-lg-4">
-										<h6 class="d-block mb-3 text-primary">User</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/sign-in.html">Sign in</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/sign-up.html">Sign up</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/forgot-password.html">Forgot password</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/reset-password.html">Reset password</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Special</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/404.html">404 Not Found</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/500.html">500 Server Error</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/maintenance.html">Maintenance</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/coming-soon.html">Coming soon</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/blank.html">Blank page</a></li>
-										</ul>
-									</div>
-								</div>
-							</div></li>
-						<li class="nav-item dropdown"><a href="#"
-							id="dashboardPagesDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Dashboard</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-megamenu-sm p-3 p-lg-4"
-								aria-labelledby="dashboardPagesDropdown">
-								<div class="row">
-									<div class="col-6">
-										<h6 class="d-block mb-3 text-primary">User dashboard</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/account.html">My account</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/settings.html">Settings</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/security.html">Security</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Items</h6>
-										<ul class="list-style-none">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/my-items.html">My items</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/edit-item.html">Edit item</a></li>
-										</ul>
-									</div>
-									<div class="col-6">
-										<h6 class="d-block mb-3 text-primary">Messaging</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/messages.html">Messages</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/single-message.html">Chat</a></li>
-										</ul>
-										<h6 class="d-block mb-3 text-primary">Billing</h6>
-										<ul class="list-style-none mb-4">
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/billing.html">Billing details</a></li>
-											<li class="mb-2 megamenu-item"><a class="megamenu-link"
-												href="../resources/spaces/html/dashboard/invoice.html">Invoice</a></li>
-										</ul>
-									</div>
-								</div>
-							</div></li>
-						<li class="nav-item dropdown"><a href="#"
-							id="supportDropdown" class="nav-link dropdown-toggle"
-							aria-expanded="false" data-toggle="dropdown"><span
-								class="nav-link-inner-text mr-1">Support</span> <i
-								class="fas fa-angle-down nav-link-arrow"></i></a>
-						<div class="dropdown-menu dropdown-menu-lg"
-								aria-labelledby="supportDropdown">
-								<div class="col-auto px-0">
-									<div class="list-group list-group-flush">
-										<a
-											href="https://themesberg.com/docs/spaces/getting-started/quick-start/"
-											target="_blank"
-											class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4"><span
-											class="icon icon-md icon-secondary"><i
-												class="fas fa-file-alt"></i></span>
-										<div class="ml-4">
-												<span class="text-dark d-block">Documentation<span
-													class="badge badge-sm badge-secondary ml-2">v3.0</span></span> <span
-													class="small">Examples and guides</span>
-											</div></a><a href="https://themesberg.com/contact" target="_blank"
-											class="list-group-item list-group-item-action d-flex align-items-center p-0 py-3 px-lg-4"><span
-											class="icon icon-md icon-primary"><i
-												class="fas fa-microphone-alt"></i></span>
-										<div class="ml-4">
-												<span class="text-dark d-block">Support</span> <span
-													class="small">Looking for answers?</span>
-											</div></a>
-									</div>
-								</div>
-							</div></li>
-					</ul>
-				</div>
-				<div class="d-none d-lg-block @@cta_button_classes">
-					<a href="https://themesberg.com/docs/spaces/components/buttons/"
-						target="_blank"
-						class="btn btn-md btn-outline-white animate-up-2 mr-3"><i
-						class="fas fa-book mr-1"></i> <span class="d-xl-none">Docs</span>
-						<span class="d-none d-xl-inline">Components</span></a> <a
-						href="https://themes.getbootstrap.com/product/spaces/"
-						target="_blank" class="btn btn-md btn-secondary animate-up-2"><i
-						class="fas fa-shopping-bag mr-2"></i> Buy now</a>
-				</div>
-				<div class="d-flex d-lg-none align-items-center">
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbar_global" aria-controls="navbar_global"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</div>
-			</div>
-		</nav>
-	</header>
+	<%@ include file = "/jsp/header.jsp"%>
 	<main>
 		<div
 			class="preloader bg-dark flex-column justify-content-center align-items-center">
@@ -382,7 +175,7 @@
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-lg-10 mb-3">
-						<h5>${KEY_BOARDLIST[0].community.communityName}</h5>
+						<h5><br><br>${KEY_BOARDLIST[0].community.communityName}</h5>
 					</div>
 			
 			
@@ -393,7 +186,7 @@
             <thead class="table-header">
                 <tr>
                     <th scope="col" style="width: 10%;">게시글 번호</th>
-                    <th scope="col" style="width: 40%;">글 내용</th>
+                    <th scope="col" style="width: 40%;">글 제목</th>
                     <th scope="col" style="width: 20%;">작성자</th>
                     <th scope="col" style="width: 10%;">수정일</th>
                     <th scope="col" style="width: 10%;">추천</th>
@@ -415,30 +208,35 @@
                         <td class="updated-date">
 			            	<fmt:formatDate value="${board.updatedDate}" pattern="MM-dd HH:MM"/>
 						</td>
-                        <td>${board.recommend.size()}</td>
+                        <td>${board.recommend}</td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
+        
+        ${KEY_PAGEING_HTML}
         <div class="row mt-5">
             <div class="col-lg-6 text-left">
                 <button class="btn btn-primary">전체 글</button>
-                <button class="btn btn-secondary">개념 글</button>
+                <button class="btn btn-secondary">인기 글</button>
             </div>
             <div class="col-lg-6 text-right">
                 <button id="writeButton" class="btn btn-success" data-community-seq="${KEY_BOARDLIST[0].communitySeq}" data-community-name="${KEY_BOARDLIST[0].community.communityName}">글 쓰기</button>
             </div>
         </div>
 		<div class="row mt-3 search-container justify-content-center">
-		    <form action="/board/search" method="get" class="form-inline my-2 my-lg-0 w-100">
+		    <form id="searchForm" action="/board/board_searchByTitle" method="get" class="form-inline my-2 my-lg-0 w-100">
 		        <div class="col-lg-6 pr-lg-2 order-lg-2">
 		            <div class="input-group">
-		                <input class="form-control" type="search" placeholder="검색어를 입력하세요" aria-label="검색어 입력" name="query">
+		                <input class="form-control" type="search" placeholder="검색어를 입력하세요" aria-label="검색어 입력" name="searchStr">
+		                <input type="hidden" name="communitySeq" value="${KEY_BOARDLIST[0].communitySeq}">
 		                <div class="input-group-append">
-		                    <button class="btn btn-outline-success" type="submit">검색</button>
+		                    <button id="search-button" class="btn btn-outline-success" type="submit">검색</button>
 		                </div>
 		            </div>
 		        </div>
+		        
+		       <!--  
 		        <div class="col-lg-3 pl-lg-2 order-lg-1">
 		            <select class="form-control w-50" name="searchType">
 		                <option value="all">제목 + 내용</option>
@@ -446,83 +244,13 @@
 		                <option value="content">내용</option>
 		            </select>
 		        </div>
+		         -->
+		         
 		    </form>
 		</div>
     </div>
-<!-- 한 구역 끝 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->					
-					
-					<div class="col-lg-10 mb-3">
-						<a href="./support-topic.html"
-							class="card border-light animate-up-3 shadow-soft p-0 p-lg-4"><div
-								class="card-body">
-								<h4>Creating and managing projects: Project Dashboard</h4>
-								<p class="lead text-gray mb-4">Hot to create a new project
-									and manage its settings on the project dashboard</p>
-								<div class="d-flex align-items-center">
-									<div class="avatar-lg">
-										<img class="rounded-circle"
-											src="../resources/spaces/assets/img/team/profile-picture-2.jpg" alt="avatar">
-									</div>
-									<div class="small text-gray ml-3">
-										<div>
-											<span>Updated over a week ago</span>
-										</div>
-										<div>
-											Written by&nbsp;<strong>Richard Thomas</strong>
-										</div>
-									</div>
-								</div>
-							</div></a>
-					</div>
-					<div class="col-md-10 mt-5 mb-3">
-						<h5>Adding & Styling Elements</h5>
-					</div>
-					<div class="col-lg-10 mb-3">
-						<a href="./support-topic.html"
-							class="card border-light animate-up-3 shadow-soft p-0 p-lg-4"><div
-								class="card-body">
-								<h4>Add & style boxes &amp; other elements</h4>
-								<p class="lead text-gray mb-4">Hot to create a new project
-									and manage its settings on the project dashboard</p>
-								<div class="d-flex align-items-center">
-									<div class="avatar-lg">
-										<img class="rounded-circle"
-											src="../resources/spaces/assets/img/team/profile-picture-3.jpg" alt="avatar">
-									</div>
-									<div class="small text-gray ml-3">
-										<div>
-											<span>Updated over a week ago</span>
-										</div>
-										<div>
-											Written by&nbsp;<strong>Richard Thomas</strong>
-										</div>
-									</div>
-								</div>
-							</div></a>
-					</div>
-					<div class="col-lg-10 mb-3">
-						<a href="./support-topic.html"
-							class="card border-light animate-up-3 shadow-soft p-0 p-lg-4"><div
-								class="card-body">
-								<h4>Add &amp; style images</h4>
-								<p class="lead text-gray mb-4">Hot to create a new project
-									and manage its settings on the project dashboard</p>
-								<div class="d-flex align-items-center">
-									<div class="avatar-lg">
-										<img class="rounded-circle"
-											src="../resources/spaces/assets/img/team/profile-picture-4.jpg" alt="avatar">
-									</div>
-									<div class="small text-gray ml-3">
-										<div>
-											<span>Updated over a week ago</span>
-										</div>
-										<div>
-											Written by&nbsp;<strong>Richard Thomas</strong>
-										</div>
-									</div>
-								</div>
-							</div></a>
-					</div>
+    
+    					
 				</div>
 			</div>
 		</section>
@@ -661,6 +389,19 @@
 		function goToBoardInsert(communitySeq, communityName) {
 		    window.location.href = '/jsp/board_insert.jsp?communitySeq=' + communitySeq + '&communityName=' + communityName;
 		}
+		
+		
+		document.getElementById('search-button').addEventListener('click', function(event) {
+			console.log('버튼 클릭');
+		    // 이벤트 리스너가 폼 제출을 방지하지 않는지 확인하세요
+		    var form = document.getElementById('searchForm');
+		    if (form.checkValidity()) {
+		        form.submit();
+		    } else {
+		        event.preventDefault();
+		        alert('모든 필드를 올바르게 입력해 주세요.');
+		    }
+		});
 </script>
 <!-- 	
 	<script>

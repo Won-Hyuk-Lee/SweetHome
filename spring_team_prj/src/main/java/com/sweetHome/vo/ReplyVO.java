@@ -13,6 +13,6 @@ public class ReplyVO {
 	private int boardSeq;
 	private int userSeq;
 	private String reply;
-	private Date createdDate;
+	private String createdDate;
 	private UserVO user;
 }

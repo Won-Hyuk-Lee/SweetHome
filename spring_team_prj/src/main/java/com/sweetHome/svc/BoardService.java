@@ -6,15 +6,28 @@ import com.sweetHome.vo.BoardImagesVO;
 import com.sweetHome.vo.BoardVO;
 
 public interface BoardService {
-	List<BoardVO> svcBoardList(int communitySeq);
-	BoardVO svcBoardDetail(int boardSeq); //(°Ô½Ã±Û »ó¼¼ Á¤º¸Á¶È¸)
-//	void svcBoardInsert(BoardVO bvo, List<BoardImagesVO> flist);// (°Ô½Ã±Û +ÀÌ¹ÌÁö Ãß°¡)
-	void svcBoardInsert(BoardVO bvo);
-	void svcBoardUpdate(BoardVO bvo); //(°Ô½Ã±Û ¼öÁ¤)
-	void svcBoardDelete(BoardVO bvo); //(°Ô½Ã±Û »èÁ¦)
-	void svcBoardRecommend(int boardSeq, int userSeq); //(°Ô½Ã±Û ÃßÃµ)
-//	svcBoardSearch (°Ô½Ã±Û Á¦¸ñ °Ë»ö)
-//	svcBoardSearch (°Ô½Ã±Û ³»¿ë °Ë»ö)
-//	svcBoardSearch (°Ô½Ã±Û Á¦¸ñ+³»¿ë °Ë»ö)
-//	svcBoardSearch (Æ¯Á¤ À¯Àú °Ô½Ã±Û °Ë»ö)
+	
+	
+	
+	int svcBoardCount(int communitySeq);
+	
+    // ì»¤ë®¤ë‹ˆí‹° ì‹œí€€ìŠ¤ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ê²Œì‹œê¸€ ëª©ë¡ì„ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ
+    List<BoardVO> svcBoardList(BoardVO boardVO);    
+
+    // ê²Œì‹œê¸€ ì‹œí€€ìŠ¤ë¥¼ ê¸°ë°˜ìœ¼ë¡œ ê²Œì‹œê¸€ ì„¸ë¶€ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ
+    BoardVO svcBoardDetail(int boardSeq);            
+
+    // ê²Œì‹œê¸€ì„ ì‚½ì…í•˜ëŠ” ë©”ì„œë“œ
+    void svcBoardInsert(BoardVO bvo);
+
+    // ê²Œì‹œê¸€ì„ ì—…ë°ì´íŠ¸í•˜ëŠ” ë©”ì„œë“œ
+    void svcBoardUpdate(BoardVO bvo);                
+
+    // ê²Œì‹œê¸€ì„ ì‚­ì œí•˜ëŠ” ë©”ì„œë“œ
+    void svcBoardDelete(BoardVO bvo);                
+
+    // ê²Œì‹œê¸€ ì¶”ì²œì„ ì‚½ì…í•˜ëŠ” ë©”ì„œë“œ
+    String svcBoardRecommendInsert(BoardVO bvo);    
+    
+	List<BoardVO> svcBoardSearchByTitle(BoardVO bvo); // ì œëª©
 }

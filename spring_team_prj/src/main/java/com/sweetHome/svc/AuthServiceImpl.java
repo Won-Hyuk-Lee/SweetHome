@@ -25,8 +25,8 @@ public class AuthServiceImpl implements AuthService {
 
 	@Override
 	public void sendEmail(String to,String num) {
-		System.out.println(emailUsername);
-		System.out.println(to);
+		//System.out.println(emailUsername);
+		//System.out.println(to);
 	    MimeMessage message = mailSender.createMimeMessage();
 	    MimeMessageHelper helper;
 	    StringBuilder sb;
@@ -55,24 +55,6 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public void svcLoginOauth() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void svcLogOut() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void svcRegister() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
 	public void svcEmailCheck() {
 		// TODO Auto-generated method stub
 		
@@ -93,5 +75,9 @@ public class AuthServiceImpl implements AuthService {
 	public void svcPasswordUpdate() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public String svcFindUserRole(int userSeq) {
+		return authMapper.findUserRole(userSeq);
 	}
 }

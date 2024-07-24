@@ -3,22 +3,31 @@ package com.sweetHome.ctl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sweetHome.common.PagingUtil;
 import com.sweetHome.svc.UserService;
+import com.sweetHome.vo.BoardVO;
+import com.sweetHome.vo.ReplyVO;
 import com.sweetHome.vo.UserVO;
+import com.sweetHome.vo.UsersOauthVO;
 
-@RestController
+@Controller
 @RequestMapping(value = "/user")
 public class UserController {
 	@Autowired
-	private UserService UserService;
+	private UserService userService;
 
 	//json - json
 	//dataType : json
@@ -41,45 +50,70 @@ public class UserController {
 	//str --- str
 	//dataType : "텍스트...., data는 쿼리스트링(?key=v&ke=vv)
 	@RequestMapping(value = "/insert", method = RequestMethod.POST)
-	public String ctlUserJoin(@ModelAttribute UserVO userVO) {
-		System.out.println(userVO.getAddress());
-		System.out.println(userVO.getAddressDetail());
-		System.out.println(userVO.getUserEmail());
-		System.out.println(userVO.getUserPw());
-		System.out.println(userVO.getUserNickname());
-		System.out.println(userVO.getPhoneNumber());
-		UserService.svcUserJoin(userVO);
+	@ResponseBody
+	public String ctlUserJoin(@ModelAttribute UserVO userVO,@ModelAttribute UsersOauthVO userOauthVO) {
+	
+		userVO.setUsersOauthVO(userOauthVO);
+		userService.svcUserJoin(userVO);
 		return "텍스트 리턴";
 	}
 
 
-	@RequestMapping(value = "/User_detail", method = RequestMethod.POST)
-	public UserVO ctlUserDetail(@RequestParam int Usereq) {
-		return UserService.svcUserDetail(Usereq);
+	@RequestMapping(value = "/detail", method = RequestMethod.GET)
+	public String ctlUserDetail(Model model,HttpSession session) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail((int)session.getAttribute("userSeq")));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth((int)session.getAttribute("userSeq")));
+		return "jsp/mypage";
+	}
+	@RequestMapping(value = "/detail_reply", method = RequestMethod.GET)
+	public String ctlUserDetailReply(Model model,HttpSession session) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail((int)session.getAttribute("userSeq")));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth((int)session.getAttribute("userSeq")));
+		return "jsp/mypage_reply";
+	}
+	@RequestMapping(value = "/detail_update", method = RequestMethod.GET)
+	public String ctlUserDetailUpdate(Model model,HttpSession session) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail((int)session.getAttribute("userSeq")));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth((int)session.getAttribute("userSeq")));
+		return "jsp/mypage_update";
+	}
+	@RequestMapping(value = "/update", method = RequestMethod.POST)
+	@ResponseBody
+	public String ctlUserUpdate(@ModelAttribute UserVO userVO) {
+
+		userService.svcUserUpdate(userVO);
+		return "성공";
 	}
 
-	@RequestMapping(value = "/User_update", method = RequestMethod.POST)
-	public String ctlUserUpdate(@RequestBody UserVO user) {
-		UserService.svcUserUpdate(user);
-		return "User updated successfully";
+	@RequestMapping(value = "/board_list")
+	public String ctlBoardList(Model model,HttpSession session
+			, @RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage 
+			) {
+		model.addAttribute("KEY_USERVO", userService.svcUserDetail((int)session.getAttribute("userSeq")));
+		model.addAttribute("KEY_USEROAUTHVO", userService.svcUserOauth((int)session.getAttribute("userSeq")));
+		//페이징
+		int listCount = userService.svcBoardCount((int)session.getAttribute("userSeq"));
+		PagingUtil page = new PagingUtil("/user/board_list?userSeq="+(int)session.getAttribute("userSeq"), currentPage, listCount, 4, 5);
+		String pageHtmlStr = page.getPagingHtml().toString();
+		
+		BoardVO boardVO = new BoardVO();
+		boardVO.setUserSeq((int)session.getAttribute("userSeq"));
+		boardVO.setStartSeq(page.getStartSeq());
+		boardVO.setEndSeq(page.getEndSeq());
+		
+		List<BoardVO> list = userService.svcUserBoardList(boardVO);
+		model.addAttribute("KEY_BOARDLIST", list);
+		model.addAttribute("KEY_PAGEING_HTML", pageHtmlStr);
+		return "jsp/mypage_board";     				//   /  lec05_board/board_list  .jsp  
 	}
 
-	@RequestMapping(value = "/User_board_list", method = RequestMethod.POST)
-	public List<UserVO> ctlUserBoardList(@RequestParam int Usereq) {
-		return UserService.svcUserBoardList(Usereq);
-	}
-
-	@RequestMapping(value = "/User_replies", method = RequestMethod.POST)
-	public List<UserVO> ctlUserReplies(@RequestParam int Usereq) {
-		return UserService.svcUserReplies(Usereq);
+	@RequestMapping(value = "/reply_list", method = RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<List<ReplyVO>>  ctlUserReplies(@RequestParam("userSeq") int userSeq) {
+		List<ReplyVO> rlist = userService.svcUserReplies(userSeq);
+		return new ResponseEntity<List<ReplyVO>> (rlist, HttpStatus.OK);
 	}
 
 
-
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String ctlUserLogin(@RequestBody UserVO UserVO) {
-		boolean isAuthenticated = UserService.svcUserLogin(UserVO);
-		return isAuthenticated ? "Login successful" : "Login failed";
-	}
 
 }

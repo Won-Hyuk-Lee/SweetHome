@@ -13,4 +13,6 @@ public interface AuthMapper {
 	int nicknameCheck(String userNickname); //(닉네임 중복체크)
 	void findPassword(); //(비밀번호 찾기)
 	void passwordUpdate(); //(비밀번호 수정)
+	String findUserRole(int userSeq);
+
 }
