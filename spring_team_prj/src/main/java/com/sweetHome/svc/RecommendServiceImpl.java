@@ -26,22 +26,22 @@ public class RecommendServiceImpl implements RecommendService {
 	@Override
 	public List<String> getRecommendations(String districtName, double latitude, double longitude,
 			int distanceImportance, int safetyImportance) {
-		// 자치구 정보 조회
+		//자치구 정보 조회
 		List<DistrictVO> allDistricts = dataFetchService.getAllDistrictsFromDB();
 
-		// 목적지와 각 자치구의 중심 거리 계산
+		//목적지와 각 자치구의 중심 거리 계산
 		Map<String, BigDecimal> distanceMap = calculateDistancesToDistricts(latitude, longitude, allDistricts);
 		
-		// 거리 중요도에 따라 필터링
+		//거리 중요도에 따라 필터링
 		Map<String, BigDecimal> filteredDistanceMap = filterDistanceMap(distanceMap, distanceImportance);
 
-		// 필터링 지역들만 점수 계산
+		//필터링 지역들만 점수 계산
 		Map<String, BigDecimal> scoreMap = calculateScores(filteredDistanceMap, safetyImportance);
 
-		// 추천 지역 목록 생성
+		//추천 지역 목록 생성
 		List<String> recommendations = getRecommendationsFromScoreMap(scoreMap);
 
-		// 추천 지역이 없을 경우 원래 지역을 반환
+		//추천 지역이 없을 경우 원래 지역을 반환
 		if (recommendations.isEmpty()) {
 			recommendations.add(districtName);
 		}
@@ -49,9 +49,12 @@ public class RecommendServiceImpl implements RecommendService {
 		return recommendations;
 	}
 	
-	//점수계산 메서드
+	//점수계산 메서드부분
+	//BigDecimal 클래스 사용 이유는 Double은 이진부동소수점으로 64비트이므로 0.1을 double로 표현하면 약간의 오차들이 발생한다.
+	//BigDecimal 클래스는 십진부동소수점을 사용(우리가 사용하는 십진수)하므로 계산의 오차가 거의 없다. 객체 기반으로 연산하기 때문에 double형에 비해 느릴수 있다.
+	//아마 추후에 큰 데이터(수십만건 이상)를 다루게 된다면 성능을 위해 double형으로 변환 후 오차를 테스트해서 오차범위를 보고 리팩토링을 진행해야한다. 
 	private Map<String, BigDecimal> calculateScores(Map<String, BigDecimal> filteredDistanceMap, int safetyImportance) {
-		// 각 자치구 5대 범죄 총합, 단위면적당 CCTV설치량, 인구 데이터를 가져옴
+		//각 자치구 5대 범죄 총합, 단위면적당 CCTV설치량, 인구 데이터를 가져옴
 		Map<String, BigDecimal> crimeMap = dataFetchService.getCrimeTotalByDistrict();
 		Map<String, BigDecimal> cctvMap = dataFetchService.getCCTVDensityByDistrict();
 		Map<String, BigDecimal> populationMap = dataFetchService.getPopulationByDistrict();
@@ -59,7 +62,7 @@ public class RecommendServiceImpl implements RecommendService {
 		Map<String, BigDecimal> crimeRateMap = new HashMap<>();
 		Map<String, BigDecimal> cctvDensityMap = new HashMap<>();
 
-		// 각 지역의 단위 인구당 범죄율과 단위 면적당 CCTV수 계산
+		//각 지역의 단위 인구당 범죄율과 단위 면적당 CCTV수 계산
 		for (String districtCode : filteredDistanceMap.keySet()) {
 			BigDecimal crimeTotal = crimeMap.get(districtCode);
 			BigDecimal cctvDensity = cctvMap.get(districtCode);
@@ -75,7 +78,7 @@ public class RecommendServiceImpl implements RecommendService {
 			cctvDensityMap.put(districtCode, cctvDensity);
 		}
 
-		// 범죄율이 낮은 순으로, CCTV 밀도가 낮은 순으로 지역 순위를 매김
+		//범죄율이 낮은 순으로, CCTV 밀도가 낮은 순으로 지역 순위를 매김
 		//CCTV의 숫자와 단위인구당 범죄 발생을 분석한결과 범죄가 많이 일어나는 지역일수록,
 		//사람이 많은지역일수록 cctv 설치 대수가 많음.
 		//그러므로 범죄율이 낮고 단위면적당 cctv 설치가 적은거에 가산점을 줌
@@ -89,7 +92,7 @@ public class RecommendServiceImpl implements RecommendService {
 			BigDecimal crimeRateScore = calculateRankScore(crimeRateRank);
 			BigDecimal cctvDensityScore = calculateRankScore(cctvDensityRank);
 
-			// 안전 중요도(선택사항)에 따른 배율 적용
+			//안전 중요도(선택사항)에 따른 배율 적용
 			BigDecimal safetyMultiplier = getSafetyMultiplier(safetyImportance);
 
 			BigDecimal totalScore = (crimeRateScore.add(cctvDensityScore))
@@ -99,7 +102,7 @@ public class RecommendServiceImpl implements RecommendService {
 		return scoreMap;
 	}
 
-	// 안전 중요도에 따른 배율 미리 지정 반환하는 메서드
+	//안전 중요도에 따른 배율 미리 지정 반환하는 메서드
 	//이게 하나의 요인에서 너무 높은 배율를 받아버리면 다른 점수와 상관없이 집계되는 경우가 생겨서 조정함 
 	private BigDecimal getSafetyMultiplier(int safetyImportance) {
 		switch (safetyImportance) {
@@ -118,7 +121,7 @@ public class RecommendServiceImpl implements RecommendService {
 		}
 	}
 
-	// 지역 순위별 정렬
+	//지역 순위별 정렬
 	private List<String> rankDistricts(Map<String, BigDecimal> dataMap, boolean ascending) {
 		List<Map.Entry<String, BigDecimal>> list = new ArrayList<>(dataMap.entrySet());
 		if (ascending) {
@@ -133,12 +136,12 @@ public class RecommendServiceImpl implements RecommendService {
 		return result;
 	}
 
-	// 순위에 따른 점수 계산
+	//순위에 따른 점수 계산
 	private BigDecimal calculateRankScore(int rank) {
 		return BigDecimal.valueOf(26 - rank);
 	}
 
-	// 점수 상위 5개 지역
+	//점수 상위 5개 지역
 	private List<String> getRecommendationsFromScoreMap(Map<String, BigDecimal> scoreMap) {
 		Map<String, String> districtCodeToNameMap = dataFetchService.getDistrictCodeToNameMap();
 
@@ -153,7 +156,7 @@ public class RecommendServiceImpl implements RecommendService {
 		return recommendations;
 	}
 
-	// 거리 중요도에 따라 필터링
+	//거리 중요도에 따라 필터링
 	private Map<String, BigDecimal> filterDistanceMap(Map<String, BigDecimal> distanceMap, int distanceImportance) {
 		BigDecimal maxDistance;
 		switch (distanceImportance) {
@@ -182,7 +185,7 @@ public class RecommendServiceImpl implements RecommendService {
 		return filteredMap;
 	}
 
-	// 입력된 위치와 각 지역 간의 거리를 계산하는 메서드
+	//입력된 위치와 각 지역 간의 거리를 계산하는 메서드
 	private Map<String, BigDecimal> calculateDistancesToDistricts(double destLatitude, double destLongitude,
 			List<DistrictVO> allDistricts) {
 		Map<String, BigDecimal> distanceMap = new HashMap<>();
@@ -200,7 +203,7 @@ public class RecommendServiceImpl implements RecommendService {
 		return distanceMap;
 	}
 
-	// 두 지점 간의 거리를 계산하는 하버사인 공식 메서드
+	//두 지점 간의 거리를 계산하는 하버사인 공식 메서드
 	//하버사인 공식이란 지구를 완벽한 구라고 가정하고 계산하는 방식으로
 	//중위도의 지역일수록, 지역의 높이 편차가 크지 않을수록 정확해진다.
 	//한국은 중위도 구역이고 남산을 제외하고는 서울은 거의 평지이므로 오차범위가 수 미터 이하로 예상됨
