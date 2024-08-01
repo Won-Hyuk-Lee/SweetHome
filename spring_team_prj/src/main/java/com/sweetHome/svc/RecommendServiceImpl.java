@@ -1,7 +1,5 @@
 package com.sweetHome.svc;
 
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,13 +42,13 @@ public class RecommendServiceImpl implements RecommendService {
         List<DistrictVO> allDistricts = dataFetchService.getAllDistrictsFromDB();
 
         //목적지와 각 자치구의 중심 거리 계산
-        Map<String, BigDecimal> distanceMap = calculateDistancesToDistricts(latitude, longitude, allDistricts);
+        Map<String, Double> distanceMap = calculateDistancesToDistricts(latitude, longitude, allDistricts);
         
         //거리 중요도에 따라 필터링
-        Map<String, BigDecimal> filteredDistanceMap = filterDistanceMap(distanceMap, distanceImportance);
+        Map<String, Double> filteredDistanceMap = filterDistanceMap(distanceMap, distanceImportance);
 
         //필터링된 지역들의 점수 계산
-        Map<String, BigDecimal> scoreMap = calculateScores(filteredDistanceMap, safetyImportance);
+        Map<String, Double> scoreMap = calculateScores(filteredDistanceMap, safetyImportance);
 
         //추천 지역 목록 생성
         List<String> recommendations = getRecommendationsFromScoreMap(scoreMap);
@@ -71,16 +69,16 @@ public class RecommendServiceImpl implements RecommendService {
      * @param safetyImportance 안전 중요도
      * @return 각 자치구의 최종 점수 맵
      */
-    private Map<String, BigDecimal> calculateScores(Map<String, BigDecimal> filteredDistanceMap, int safetyImportance) {
-        Map<String, BigDecimal> safetyScores = calculateSafetyScores(filteredDistanceMap);
+    private Map<String, Double> calculateScores(Map<String, Double> filteredDistanceMap, int safetyImportance) {
+        Map<String, Double> safetyScores = calculateSafetyScores(filteredDistanceMap);
         
-        Map<String, BigDecimal> totalScoreMap = new HashMap<>();
+        Map<String, Double> totalScoreMap = new HashMap<>();
         for (String districtCode : filteredDistanceMap.keySet()) {
-            BigDecimal safetyScore = safetyScores.getOrDefault(districtCode, BigDecimal.ZERO);
+            double safetyScore = safetyScores.getOrDefault(districtCode, 0.0);
             
-            BigDecimal safetyMultiplier = getSafetyMultiplier(safetyImportance);
+            double safetyMultiplier = getSafetyMultiplier(safetyImportance);
             
-            BigDecimal totalScore = safetyScore.multiply(safetyMultiplier);
+            double totalScore = safetyScore * safetyMultiplier;
             
             totalScoreMap.put(districtCode, totalScore);
         }
@@ -94,27 +92,26 @@ public class RecommendServiceImpl implements RecommendService {
      * @param filteredDistanceMap 거리로 필터링된 자치구 맵
      * @return 각 자치구의 안전 점수 맵
      */
-    private Map<String, BigDecimal> calculateSafetyScores(Map<String, BigDecimal> filteredDistanceMap) {
+    private Map<String, Double> calculateSafetyScores(Map<String, Double> filteredDistanceMap) {
         //각 자치구 5대 범죄 총합, 단위면적당 CCTV설치, 인구 데이터를 가져옴
-        Map<String, BigDecimal> crimeMap = dataFetchService.getCrimeTotalByDistrict();
-        Map<String, BigDecimal> cctvMap = dataFetchService.getCCTVDensityByDistrict();
-        Map<String, BigDecimal> populationMap = dataFetchService.getPopulationByDistrict();
+        Map<String, Double> crimeMap = dataFetchService.getCrimeTotalByDistrict();
+        Map<String, Double> cctvMap = dataFetchService.getCCTVDensityByDistrict();
+        Map<String, Double> populationMap = dataFetchService.getPopulationByDistrict();
 
-        Map<String, BigDecimal> crimeRateMap = new HashMap<>();
-        Map<String, BigDecimal> cctvDensityMap = new HashMap<>();
+        Map<String, Double> crimeRateMap = new HashMap<>();
+        Map<String, Double> cctvDensityMap = new HashMap<>();
 
         //각 지역의 단위 인구당 범죄율과 단위 면적당 CCTV수 계산
         for (String districtCode : filteredDistanceMap.keySet()) {
-            BigDecimal crimeTotal = crimeMap.get(districtCode);
-            BigDecimal cctvDensity = cctvMap.get(districtCode);
-            BigDecimal population = populationMap.get(districtCode);
+            Double crimeTotal = crimeMap.get(districtCode);
+            Double cctvDensity = cctvMap.get(districtCode);
+            Double population = populationMap.get(districtCode);
 
-            if (crimeTotal == null || cctvDensity == null || population == null
-                    || population.compareTo(BigDecimal.ZERO) == 0) {
+            if (crimeTotal == null || cctvDensity == null || population == null || population == 0) {
                 continue;
             }
 
-            BigDecimal crimeRate = crimeTotal.divide(population, 10, RoundingMode.HALF_UP);
+            double crimeRate = crimeTotal / population;
             crimeRateMap.put(districtCode, crimeRate);
             cctvDensityMap.put(districtCode, cctvDensity);
         }
@@ -124,15 +121,14 @@ public class RecommendServiceImpl implements RecommendService {
         List<String> crimeRateRanking = rankDistricts(crimeRateMap, false);
         List<String> cctvDensityRanking = rankDistricts(cctvDensityMap, true);
 
-        Map<String, BigDecimal> safetyScoreMap = new HashMap<>();
+        Map<String, Double> safetyScoreMap = new HashMap<>();
         for (String districtCode : filteredDistanceMap.keySet()) {
             int crimeRateRank = crimeRateRanking.indexOf(districtCode) + 1;
             int cctvDensityRank = cctvDensityRanking.indexOf(districtCode) + 1;
-            BigDecimal crimeRateScore = calculateRankScore(crimeRateRank);
-            BigDecimal cctvDensityScore = calculateRankScore(cctvDensityRank);
+            double crimeRateScore = calculateRankScore(crimeRateRank);
+            double cctvDensityScore = calculateRankScore(cctvDensityRank);
 
-            BigDecimal safetyScore = (crimeRateScore.add(cctvDensityScore))
-                    .divide(BigDecimal.valueOf(2), 10, RoundingMode.HALF_UP);
+            double safetyScore = (crimeRateScore + cctvDensityScore) / 2;
             safetyScoreMap.put(districtCode, safetyScore);
         }
 
@@ -145,20 +141,20 @@ public class RecommendServiceImpl implements RecommendService {
      * @param safetyImportance 안전 중요도 (1-5)
      * @return 안전 중요도에 따른 배율
      */
-    private BigDecimal getSafetyMultiplier(int safetyImportance) {
+    private double getSafetyMultiplier(int safetyImportance) {
         switch (safetyImportance) {
         case 1:
-            return BigDecimal.valueOf(0.3);
+            return 0.3;
         case 2:
-            return BigDecimal.valueOf(0.5);
+            return 0.5;
         case 3:
-            return BigDecimal.valueOf(1.0);
+            return 1.0;
         case 4:
-            return BigDecimal.valueOf(1.2);
+            return 1.2;
         case 5:
-            return BigDecimal.valueOf(1.5);
+            return 1.5;
         default:
-            return BigDecimal.valueOf(1.0);
+            return 1.0;
         }
     }
 
@@ -169,15 +165,15 @@ public class RecommendServiceImpl implements RecommendService {
      * @param ascending true일 경우 오름차순, false일 경우 내림차순으로 정렬
      * @return 순위가 매겨진 지역 코드 리스트
      */
-    private List<String> rankDistricts(Map<String, BigDecimal> dataMap, boolean ascending) {
-        List<Map.Entry<String, BigDecimal>> list = new ArrayList<>(dataMap.entrySet());
+    private List<String> rankDistricts(Map<String, Double> dataMap, boolean ascending) {
+        List<Map.Entry<String, Double>> list = new ArrayList<>(dataMap.entrySet());
         if (ascending) {
             list.sort(Map.Entry.comparingByValue());
         } else {
             list.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
         }
         List<String> result = new ArrayList<>();
-        for (Map.Entry<String, BigDecimal> entry : list) {
+        for (Map.Entry<String, Double> entry : list) {
             result.add(entry.getKey());
         }
         return result;
@@ -190,8 +186,8 @@ public class RecommendServiceImpl implements RecommendService {
      * @param rank 순위
      * @return 계산된 점수
      */
-    private BigDecimal calculateRankScore(int rank) {
-        return BigDecimal.valueOf(26 - rank);
+    private double calculateRankScore(int rank) {
+        return 26 - rank;
     }
 
     /**
@@ -200,10 +196,10 @@ public class RecommendServiceImpl implements RecommendService {
      * @param scoreMap 각 지역의 점수 맵
      * @return 추천된 지역 이름 리스트
      */
-    private List<String> getRecommendationsFromScoreMap(Map<String, BigDecimal> scoreMap) {
+    private List<String> getRecommendationsFromScoreMap(Map<String, Double> scoreMap) {
         Map<String, String> districtCodeToNameMap = dataFetchService.getDistrictCodeToNameMap();
 
-        List<Map.Entry<String, BigDecimal>> sortedEntries = new ArrayList<>(scoreMap.entrySet());
+        List<Map.Entry<String, Double>> sortedEntries = new ArrayList<>(scoreMap.entrySet());
         sortedEntries.sort((e1, e2) -> e2.getValue().compareTo(e1.getValue()));
 
         List<String> recommendations = new ArrayList<>();
@@ -221,28 +217,28 @@ public class RecommendServiceImpl implements RecommendService {
      * @param distanceImportance 거리 중요도 (1-5)
      * @return 필터링된 거리 맵
      */
-    private Map<String, BigDecimal> filterDistanceMap(Map<String, BigDecimal> distanceMap, int distanceImportance) {
-        BigDecimal maxDistance;
+    private Map<String, Double> filterDistanceMap(Map<String, Double> distanceMap, int distanceImportance) {
+        double maxDistance;
         switch (distanceImportance) {
         case 5:
-            maxDistance = BigDecimal.valueOf(1.5); //도보 10분 이내
+            maxDistance = 1.5; //도보 10분 이내
             break;
         case 4:
-            maxDistance = BigDecimal.valueOf(3.0); //대중교통 10분 이내
+            maxDistance = 3.0; //대중교통 10분 이내
             break;
         case 3:
-            maxDistance = BigDecimal.valueOf(5.0); //대중교통 30분 이내
+            maxDistance = 5.0; //대중교통 30분 이내
             break;
         case 2:
-            maxDistance = BigDecimal.valueOf(15.0); //대중교통 1시간 이내
+            maxDistance = 15.0; //대중교통 1시간 이내
             break;
         default:
             return distanceMap; //그외
         }
 
-        Map<String, BigDecimal> filteredMap = new HashMap<>();
-        for (Map.Entry<String, BigDecimal> entry : distanceMap.entrySet()) {
-            if (entry.getValue().compareTo(maxDistance) <= 0) {
+        Map<String, Double> filteredMap = new HashMap<>();
+        for (Map.Entry<String, Double> entry : distanceMap.entrySet()) {
+            if (entry.getValue() <= maxDistance) {
                 filteredMap.put(entry.getKey(), entry.getValue());
             }
         }
@@ -257,12 +253,12 @@ public class RecommendServiceImpl implements RecommendService {
      * @param allDistricts 모든 자치구 정보 리스트
      * @return 각 지역까지의 거리 맵
      */
-    private Map<String, BigDecimal> calculateDistancesToDistricts(double destLatitude, double destLongitude,
+    private Map<String, Double> calculateDistancesToDistricts(double destLatitude, double destLongitude,
             List<DistrictVO> allDistricts) {
-        Map<String, BigDecimal> distanceMap = new HashMap<>();
+        Map<String, Double> distanceMap = new HashMap<>();
         for (DistrictVO district : allDistricts) {
             try {
-                BigDecimal distance = calculateHaversineDistance(destLatitude, destLongitude, district.getLatitude(),
+                double distance = calculateHaversineDistance(destLatitude, destLongitude, district.getLatitude(),
                         district.getLongitude());
                 distanceMap.put(district.getDistrictCode(), distance);
             } catch (Exception e) {
@@ -286,16 +282,14 @@ public class RecommendServiceImpl implements RecommendService {
      * @param lon2 도착점 경도
      * @return 두 지점 간의 거리 (km)
      */
-    private BigDecimal calculateHaversineDistance(double lat1, double lon1, double lat2, double lon2) {
-        BigDecimal dLat = BigDecimal.valueOf(Math.toRadians(lat2 - lat1));
-        BigDecimal dLon = BigDecimal.valueOf(Math.toRadians(lon2 - lon1));
-        BigDecimal a = BigDecimal.valueOf(Math.sin(dLat.doubleValue() / 2)).pow(2)
-                .add(BigDecimal.valueOf(Math.cos(Math.toRadians(lat1)))
-                        .multiply(BigDecimal.valueOf(Math.cos(Math.toRadians(lat2))))
-                        .multiply(BigDecimal.valueOf(Math.sin(dLon.doubleValue() / 2)).pow(2)));
-        BigDecimal c = BigDecimal.valueOf(2)
-                .multiply(BigDecimal.valueOf(Math.atan2(Math.sqrt(a.doubleValue()), Math.sqrt(1 - a.doubleValue()))));
+    private double calculateHaversineDistance(double lat1, double lon1, double lat2, double lon2) {
+        double dLat = Math.toRadians(lat2 - lat1);
+        double dLon = Math.toRadians(lon2 - lon1);
+        double a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                   Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) *
+                   Math.sin(dLon / 2) * Math.sin(dLon / 2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return BigDecimal.valueOf(EARTH_RADIUS).multiply(c);
+        return EARTH_RADIUS * c;
     }
 }
