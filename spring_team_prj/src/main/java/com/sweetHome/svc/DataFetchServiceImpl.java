@@ -1,12 +1,13 @@
 package com.sweetHome.svc;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.sweetHome.mapper.RecommendMapper;
 import com.sweetHome.vo.DistrictVO;
 
@@ -15,7 +16,6 @@ import com.sweetHome.vo.DistrictVO;
  */
 @Service
 public class DataFetchServiceImpl implements DataFetchService {
-
 	private final RecommendMapper recommendMapper;
 
 	@Autowired
@@ -52,9 +52,9 @@ public class DataFetchServiceImpl implements DataFetchService {
 	 * @return 자치구 코드 = key, 범죄 총합 = value인 Map
 	 */
 	@Override
-	public Map<String, BigDecimal> getCrimeTotalByDistrict() {
+	public Map<String, Double> getCrimeTotalByDistrict() {
 		List<Map<String, Object>> crimeList = recommendMapper.getCrimeTotalByDistrict();
-		return convertListToMap(crimeList, "districtCode", "crimeTotal", String.class, BigDecimal.class);
+		return convertListToMap(crimeList, "districtCode", "crimeTotal", String.class, Double.class);
 	}
 
 	/**
@@ -63,9 +63,9 @@ public class DataFetchServiceImpl implements DataFetchService {
 	 * @return 자치구 코드를 키로, CCTV 밀도를 값으로 하는 Map
 	 */
 	@Override
-	public Map<String, BigDecimal> getCCTVDensityByDistrict() {
+	public Map<String, Double> getCCTVDensityByDistrict() {
 		List<Map<String, Object>> cctvList = recommendMapper.getCCTVDensityByDistrict();
-		return convertListToMap(cctvList, "districtCode", "cctvDensity", String.class, BigDecimal.class);
+		return convertListToMap(cctvList, "districtCode", "cctvDensity", String.class, Double.class);
 	}
 
 	/**
@@ -74,9 +74,9 @@ public class DataFetchServiceImpl implements DataFetchService {
 	 * @return 자치구 코드를 키로, 인구수를 값으로 하는 Map
 	 */
 	@Override
-	public Map<String, BigDecimal> getPopulationByDistrict() {
+	public Map<String, Double> getPopulationByDistrict() {
 		List<Map<String, Object>> populationList = recommendMapper.getPopulationByDistrict();
-		return convertListToMap(populationList, "districtCode", "population", String.class, BigDecimal.class);
+		return convertListToMap(populationList, "districtCode", "population", String.class, Double.class);
 	}
 
 	/**
