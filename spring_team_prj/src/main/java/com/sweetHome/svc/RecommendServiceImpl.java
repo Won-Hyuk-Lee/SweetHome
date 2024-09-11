@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.sweetHome.mapper.RecommendMapper;
 import com.sweetHome.vo.DistrictVO;
 
+
 /**
  * 추천 서비스 구현 클래스
  * 사용자의 선택을 바탕으로 적합한 자치구를 추천하는 로직구현부

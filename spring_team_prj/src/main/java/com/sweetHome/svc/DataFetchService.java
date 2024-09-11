@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.sweetHome.vo.DistrictVO;
+import com.sweetHome.vo.RealEstateData;
 
 public interface DataFetchService {
 	List<DistrictVO> getAllDistrictsFromDB();
@@ -17,4 +18,8 @@ public interface DataFetchService {
 	Map<String, Double> getPopulationByDistrict();
 
 	Map<String, String> getDistrictCodeToNameMap();
+
+	List<RealEstateData> fetchRealEstateData();
+
+	Map<String, Double> getRealEstateAveragePrices();
 }
