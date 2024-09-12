@@ -27,9 +27,9 @@ public class MapController {
 	@RequestMapping(value = "/recommend", method = RequestMethod.POST)
 	@ResponseBody
 	public List<String> getRecommendations(@RequestParam String district, @RequestParam double latitude,
-			@RequestParam double longitude, @RequestParam int distanceImportance, @RequestParam int safetyImportance) {
-		List<String> recommendations = recommendService.getRecommendations(district, latitude, longitude,
-				distanceImportance, safetyImportance);
-		return recommendations;
+			@RequestParam double longitude, @RequestParam int distanceImportance, @RequestParam int safetyImportance,
+			@RequestParam int realEstateImportance) {
+		return recommendService.getRecommendations(district, latitude, longitude, distanceImportance, safetyImportance,
+				realEstateImportance);
 	}
 }

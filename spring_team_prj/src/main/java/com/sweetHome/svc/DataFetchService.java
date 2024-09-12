@@ -19,6 +19,8 @@ public interface DataFetchService {
 
 	Map<String, String> getDistrictCodeToNameMap();
 
+	Map<String, String> getDistrictNameToCodeMap();
+
 	List<RealEstateData> fetchRealEstateData();
 
 	Map<String, Double> getRealEstateAveragePrices();

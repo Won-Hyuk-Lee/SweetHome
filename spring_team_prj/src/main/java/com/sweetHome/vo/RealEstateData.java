@@ -1,31 +1,15 @@
 package com.sweetHome.vo;
 
+import org.springframework.stereotype.Component;
+
+import lombok.Data;
+
+@Component
+@Data
 public class RealEstateData {
 	private String district;
 	private double price;
 	private double area;
+	private double pricePerArea;
 
-	public String getDistrict() {
-		return district;
-	}
-
-	public void setDistrict(String district) {
-		this.district = district;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public double getArea() {
-		return area;
-	}
-
-	public void setArea(double area) {
-		this.area = area;
-	}
 }

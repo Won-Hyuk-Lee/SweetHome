@@ -226,18 +226,18 @@ html, body {
 	</noscript>
 
 	<!-- 헤더 및 네비게이션 바 -->
-	<%@ include file = "/jsp/header.jsp"%>
+	<%@ include file="/jsp/header.jsp"%>
 
-				<!-- 모바일 메뉴 토글 버튼 -->
-				<div class="d-flex d-lg-none align-items-center">
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbar_global" aria-controls="navbar_global"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</div>
-			</div>
-		</nav>
+	<!-- 모바일 메뉴 토글 버튼 -->
+	<div class="d-flex d-lg-none align-items-center">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbar_global" aria-controls="navbar_global"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+	</div>
+	</nav>
 	</header>
 
 	<!-- 메인 콘텐츠 -->
@@ -595,6 +595,15 @@ html, body {
                         <option value="5">매우 중요함</option>
                     </select>
                 </div>
+                <div class="factor">
+                	<p>부동산 가격 중요도</p>
+                	<select id="realEstateImportance" class="dropdown">
+                    	<option value="1">상관없음</option>
+                    	<option value="2">약간 중요함</option>
+                    	<option value="3">보통</option>
+                    	<option value="4">중요함</option>
+                    	<option value="5">매우 중요함</option>
+                </select>
             </div>
             <button onclick="getRecommendations()">추천 받기</button>
             <div id="recommendations"></div>
@@ -605,6 +614,7 @@ html, body {
     function getRecommendations() {
         var distanceImportance = document.getElementById('distanceImportance').value;
         var safetyImportance = document.getElementById('safetyImportance').value;
+        var realEstateImportance = document.getElementById('realEstateImportance').value;
 
         $.ajax({
             url: '/map/recommend',
@@ -615,7 +625,8 @@ html, body {
                 latitude: selectedDestination.lat,
                 longitude: selectedDestination.lng,
                 distanceImportance: distanceImportance,
-                safetyImportance: safetyImportance
+                safetyImportance: safetyImportance,
+                realEstateImportance: realEstateImportance
             },
             success: function(response) {
                 console.log('Success:', response);
