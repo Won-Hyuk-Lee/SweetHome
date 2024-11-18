@@ -216,6 +216,26 @@ html, body {
 	height: 80px;
 	z-index: 1000;
 }
+
+#progressContainer {
+        width: 100%;
+        background-color: #f3f3f3;
+        padding: 5px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+    #progressBar {
+        height: 20px;
+        background-color: #4CAF50;
+        width: 0%;
+        border-radius: 3px;
+        transition: width 0.5s ease-in-out;
+    }
+    #progressText {
+        text-align: center;
+        padding-top: 5px;
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
@@ -226,18 +246,18 @@ html, body {
 	</noscript>
 
 	<!-- 헤더 및 네비게이션 바 -->
-	<%@ include file = "/jsp/header.jsp"%>
+	<%@ include file="/jsp/header.jsp"%>
 
-				<!-- 모바일 메뉴 토글 버튼 -->
-				<div class="d-flex d-lg-none align-items-center">
-					<button class="navbar-toggler" type="button" data-toggle="collapse"
-						data-target="#navbar_global" aria-controls="navbar_global"
-						aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-				</div>
-			</div>
-		</nav>
+	<!-- 모바일 메뉴 토글 버튼 -->
+	<div class="d-flex d-lg-none align-items-center">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbar_global" aria-controls="navbar_global"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+	</div>
+	</div>
+	</nav>
 	</header>
 
 	<!-- 메인 콘텐츠 -->
@@ -595,45 +615,89 @@ html, body {
                         <option value="5">매우 중요함</option>
                     </select>
                 </div>
+                <div class="factor">
+                	<p>부동산 가격 중요도</p>
+                	<select id="realEstateImportance" class="dropdown">
+                    	<option value="1">상관없음</option>
+                    	<option value="2">약간 중요함</option>
+                    	<option value="3">보통</option>
+                    	<option value="4">중요함</option>
+                    	<option value="5">매우 중요함</option>
+                </select>
             </div>
             <button onclick="getRecommendations()">추천 받기</button>
             <div id="recommendations"></div>
+            
+            <div id="progressContainer" style="display: none;">
+            <div id="progressBar" style="width: 0%; height: 20px; background-color: #4CAF50;"></div>
+            <div id="progressText">0%</div>
+        </div>
         `;
     }       
         
  // 추천 받기 함수
     function getRecommendations() {
-        var distanceImportance = document.getElementById('distanceImportance').value;
-        var safetyImportance = document.getElementById('safetyImportance').value;
+    var distanceImportance = document.getElementById('distanceImportance').value;
+    var safetyImportance = document.getElementById('safetyImportance').value;
+    var realEstateImportance = document.getElementById('realEstateImportance').value;
 
-        $.ajax({
-            url: '/map/recommend',
-            type: 'POST',
-            dataType: 'json',
-            data: {
-                district: selectedDestination.address.split(' ')[1],
-                latitude: selectedDestination.lat,
-                longitude: selectedDestination.lng,
-                distanceImportance: distanceImportance,
-                safetyImportance: safetyImportance
-            },
-            success: function(response) {
-                console.log('Success:', response);
-                if (response && response.length > 0) {
-                    alert('추천 자치구: ' + response.join(', '));
-                    recommendedDistricts = response; // 추천 결과 저장
-                    updateRecommendations(response);
-                    displayRecommendedMarkers(response); // 추천 지역에 마커 표시
-                } else {
-                    alert('추천 결과가 없습니다.');
-                }
-            },
-            error: function(xhr, status, error) {
-                console.error('Error:', xhr.responseText);
-                alert('추천 서비스 오류: ' + xhr.responseText);
+    // 진행 상황 표시 초기화
+    var progressContainer = document.getElementById('progressContainer');
+    var progressBar = document.getElementById('progressBar');
+    var progressText = document.getElementById('progressText');
+    progressContainer.style.display = 'block';
+    progressBar.style.width = '0%';
+    progressText.innerText = '0%';
+
+    var progress = 0;
+    var progressInterval = setInterval(function() {
+        progress += 10;
+        if (progress > 90) {
+            clearInterval(progressInterval);
+        }
+        progressBar.style.width = progress + '%';
+        progressText.innerText = progress + '%';
+    }, 500);
+
+    $.ajax({
+        url: '/map/recommend',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            district: selectedDestination.address.split(' ')[1],
+            latitude: selectedDestination.lat,
+            longitude: selectedDestination.lng,
+            distanceImportance: distanceImportance,
+            safetyImportance: safetyImportance,
+            realEstateImportance: realEstateImportance
+        },
+        success: function(response) {
+            clearInterval(progressInterval);
+            progressBar.style.width = '100%';
+            progressText.innerText = '100%';
+
+            console.log('Success:', response);
+            if (response && response.length > 0) {
+                alert('추천 자치구: ' + response.join(', '));
+                recommendedDistricts = response;
+                updateRecommendations(response);
+                displayRecommendedMarkers(response);
+            } else {
+                alert('추천 결과가 없습니다.');
             }
-        });
-    }
+
+            setTimeout(function() {
+                progressContainer.style.display = 'none';
+            }, 1000);
+        },
+        error: function(xhr, status, error) {
+            clearInterval(progressInterval);
+            progressContainer.style.display = 'none';
+            console.error('Error:', xhr.responseText);
+            alert('추천 서비스 오류: ' + xhr.responseText);
+        }
+    });
+}
 
     // 추천 결과 업데이트 함수
     function updateRecommendations(recommendations) {
