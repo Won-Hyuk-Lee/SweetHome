@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sweetHome.mapper.RecommendMapper">
+    <!-- 자치구 정보를 매핑하는 resultMap -->
     <resultMap id="districtResultMap" type="com.sweetHome.vo.DistrictVO">
         <id property="districtCode" column="district_code" />
         <result property="districtName" column="district_name" />
@@ -8,29 +9,44 @@
         <result property="longitude" column="longitude" />
     </resultMap>
     
+    <!-- 모든 자치구 정보 조회 -->
     <select id="getAllDistricts" resultMap="districtResultMap">
         SELECT district_code, district_name, latitude, longitude
         FROM district
     </select>
     
+    <!-- 특정 자치구 코드에 해당하는 자치구 정보 조회 -->
     <select id="getDistrictByCode" resultMap="districtResultMap">
         SELECT district_code, district_name, latitude, longitude
         FROM district
         WHERE district_code = #{districtCode}
     </select>
     
+    <!-- 이 밑에 있는 3개의 data에서 double형으로 명시적으로 캐스팅을 하지 않게 되면 mybatis에서 가져올때 
+    	 Bigdecimal 클래스로 가져와 져서 처음에는 Bigdecimal 클래스를 이용해서 계산을 했었는데 성능적으로
+    	 최적화를 위해서 가져온다음 double로 캐스팅하거나 받아올때 명시적으로 double 캐스팅중 후자를 선택
+    	 추후 db가 바뀌거나 할 경우에는 명령어가 불가능해질 가능성이 존재하므로 전자의 방식(db에서 받아온 이후 캐스팅)
+    	 으로 변경할 수도 있지만 현재의 단계에서는 건들 필요는 없을 것으로 보임    
+     -->
+    
+    <!-- 각 자치구별 범죄 총합 조회 -->
     <select id="getCrimeTotalByDistrict" resultType="java.util.HashMap">
-        SELECT district_code as "districtCode", crime_total as "crimeTotal"
+        SELECT district_code as "districtCode", 
+               CAST(crime_total AS DOUBLE PRECISION) as "crimeTotal"
         FROM crime
     </select>
     
+    <!-- 각 자치구별 단위 면적당 CCTV 설치량 조회 -->
     <select id="getCCTVDensityByDistrict" resultType="java.util.HashMap">
-        SELECT district_code as "districtCode", cctv_density as "cctvDensity"
+        SELECT district_code as "districtCode", 
+               CAST(cctv_density AS DOUBLE PRECISION) as "cctvDensity"
         FROM CCTV
     </select>
     
+    <!-- 각 자치구별 인구수 조회 -->
     <select id="getPopulationByDistrict" resultType="java.util.HashMap">
-        SELECT district_code as "districtCode", population as "population"
+        SELECT district_code as "districtCode", 
+               CAST(population AS DOUBLE PRECISION) as "population"
         FROM population
     </select>
 </mapper>
